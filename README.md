@@ -27,11 +27,11 @@ Rust is a new language that already has good textbooks. But sometimes its textbo
 
 Rust is a language that is quite new, but already very popular. It's popular because it gives you the speed and control of C or C++ but also the memory safety of other newer languages like Python. It does this with some new ideas that are sometimes different from other languages. That means that there are some new things to learn, and you can't just "figure it out as you go along". Rust is a language that you have to think about for a while to understand. But it still looks pretty familiar if you know another language and it is made to help you write good code.
 
-## Who am I?
+## Men kimman?
 
 I am a Canadian who lives in Korea, and I wrote Easy Rust while thinking of how to make it easy for companies here to start using it. I hope that other countries that don't use English as a first language can use it too.
 
-## Writing Rust in Easy English
+## Rustning Oson Ingiliz tilida yozilishi
 
 *Rust in Easy English* was written from July to August 2020, and is over 400 pages long. You can contact me here or [on LinkedIn](https://www.linkedin.com/in/davemacleod) or [on Twitter](https://twitter.com/mithridates) if you have any questions. If you see anything wrong or have a pull request to make, go ahead. Over 20 people have already helped out by fixing typos and problems in the code, so you can too. I'm not the world's best Rust expert so I always like to hear new ideas or see where I can make the book better.
 
@@ -151,7 +151,7 @@ I am a Canadian who lives in Korea, and I wrote Easy Rust while thinking of how 
   - [Cargo doc](#cargo-doc)
   - [The end?](#the-end)
 
-# Part 1 - Rust in your browser
+# 1-bob Rust sizning brauzeringizda
 
 This book has two parts. In Part 1, you will learn as much Rust as you can just in your browser. You can actually learn almost everything you need to know without installing Rust, so Part 1 is very long. Then at the end is Part 2. It is much shorter, and is about Rust on your computer. That's where you will learn everything else you need to know that you can only do outside of a browser. Some examples are: working with files, taking user input, graphics, and personal settings. Hopefully, by the end of Part 1 you will like Rust enough that you will install it. And if you don't, no problem - Part 1 teaches you so much that you won't mind.
 
@@ -171,11 +171,11 @@ Here are some tips when using the Rust Playground:
 
 If you want to install Rust, go here [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install) and follow the instructions. Usually you will use `rustup` to install and update Rust.
 
-## 🚧 and ⚠️
+## 🚧 va ⚠️
 
 Sometimes the code examples in the book don't work. If an example doesn't work, it will have a 🚧 or a ⚠️ in it. 🚧 is like "under construction": it means that the code is not complete. Rust needs a `fn main()` (a main function) to run, but sometimes we just want to look at small pieces of code so it won't have a `fn main()`. Those examples are correct, but need a `fn main()` for you to run them. And some code examples show you a problem that we will fix. Those ones might have a `fn main()` but generate an error, and so they will have a ⚠️.
 
-## Comments
+## Kommentlar
 **[See this chapter on YouTube](https://youtu.be/fJ7jBZG_Rpo)**
 
 Comments are made for programmers to read, not the computer. It's good to write comments to help other people understand your code.  It's also good to help you understand your code later.  (Many people write good code but then forget why they wrote it.) To write comments in Rust you usually use `//`:
@@ -216,11 +216,11 @@ fn main() {
 }
 ```
 
-## Types
+## Turlar (Types)
 
 Rust has many types that let you work with numbers, characters, and so on. Some are simple, others are more complicated, and you can even create your own.
 
-### Primitive types
+### Primtive turlar
 **[See this chapter on YouTube](https://youtu.be/OxTPU5UGMhs)**
 
 Rust has simple types that are called **primitive types** (primitive = very basic). We will start with integers and `char` (characters). Integers are whole numbers with no decimal point. There are two types of integers:
@@ -376,7 +376,7 @@ Slice is 6 bytes and also 6 characters.
 Slice2 is 7 bytes but only 3 characters.
 ```
 
-## Type inference
+## Tur interfacelari
 **[See this chapter on YouTube](https://youtu.be/q1D2vpy3kEI)**
 
 Type inference means that if you don't tell the compiler the type, but it can decide by itself, it will decide. The compiler always needs to know the type of the variables, but you don’t always need to tell it. Actually, usually you don't need to tell it. For example, for `let my_number = 8`, `my_number` will be an `i32`. That is because the compiler chooses i32 for integers if you don't tell it. But if you say `let my_number: u8 = 8`, it will make `my_number` a `u8`, because you told it `u8`.
@@ -423,7 +423,7 @@ fn main() {
 
 This prints `0, 1624`.
 
-### Floats
+### Floatlar
 
 Floats are numbers with decimal points. 5.5 is a float, and 6 is an integer. 5.0 is also a float, and even 5. is a float.
 
@@ -502,7 +502,7 @@ fn main() {
 }
 ```
 
-## Printing 'hello, world!'
+## 'Salom, Dunyo! chop etish'
 **See this chapter on YouTube: [Video 1](https://youtu.be/yYlPHRl2geQ), [Video 2](https://youtu.be/DTCSfBJJZb8)**
 
 When you start a new Rust program, it always has this code:
@@ -614,7 +614,7 @@ fn main() {
 }
 ```
 
-### Declaring variables and code blocks
+### O'zgaruvchilar va kod bloklarni elon qilish
 
 Use `let` to declare a variable (declare a variable = tell Rust to make a variable).
 
@@ -670,7 +670,7 @@ fn main() {
 
 So why did we write `{:?}` and not `{}`? We will talk about that now.
 
-## Display and debug
+## Display va debug
 **[See this chapter on YouTube](https://youtu.be/jd3pC248c0o)**
 
 Simple variables in Rust can be printed with `{}` inside `println!`. But some variables can't, and you need to **debug print**. Debug print is printing for the programmer, because it usually shows more information. Debug sometimes doesn't look pretty, because it has extra information to help you.
@@ -714,7 +714,7 @@ fn main() {
 
 This prints `This will not print a new line so this will be on the same line`.
 
-### Smallest and largest numbers
+### Eng kichkina va katta raqamlar
 
 If you want to see the smallest and biggest numbers, you can use MIN and MAX after the name of the type:
 
@@ -749,7 +749,7 @@ The smallest i128 is -170141183460469231731687303715884105728 and the biggest i1
 The smallest u128 is 0 and the biggest u128 is 340282366920938463463374607431768211455.
 ```
 
-## Mutability (changing)
+## Mutability (o'zgartirish)
 **[See this chapter on YouTube](https://youtu.be/Nyyd6qn7dZY)**
 
 When you declare a variable with `let`, it is immutable (cannot be changed).
@@ -864,7 +864,7 @@ fn main() {
 
 In general, you see shadowing in Rust in this case. It happens where you want to quickly take variable, do something to it, and do something else again. And you usually use it for quick variables that you don't care too much about.
 
-## The stack, the heap, and pointers
+## Stek, heap, va pointerlar
 
 The stack, the heap, and pointers are very important in Rust.
 
@@ -913,7 +913,7 @@ fn main() {
 
 These are all different types, just in the same way that "a friend of a friend" is different from "a friend".
 
-## More about printing
+## Chop etish haqida ko'proq
 
 In Rust you can print things in almost any way you want. Here are some more things to know about printing.
 
@@ -1217,7 +1217,7 @@ It prints:
 SEOUL--------------------TOKYO
 ```
 
-## Strings
+## Stringlar
 **[See this chapter on YouTube](https://youtu.be/pSyaGzGg26o)**
 
 Rust has two main types of strings: `String` and `&str`. What is the difference?
@@ -1327,7 +1327,7 @@ fn main() {
 
 And now you get a String.
 
-## const and static
+## const va static
 **[See this chapter on YouTube](https://youtu.be/Ky3HqkWUcI0)**
 
 There are two other ways to declare values, not just with `let`. These are `const` and `static`. Also, Rust won't use type inference: you need to write the type for them. These are for values that don't change (`const` means constant). The difference is that:
@@ -1341,7 +1341,7 @@ You write them with ALL CAPITAL LETTERS, and usually outside of `main` so that t
 
 Two examples are: `const NUMBER_OF_MONTHS: u32 = 12;` and `static SEASONS: [&str; 4] = ["Spring", "Summer", "Fall", "Winter"];`
 
-## More on references
+## Referencelar haqida ko'proq
 **[See this chapter on YouTube](https://youtu.be/R13sQ8SNoEQ)**
 
 References are very important in Rust. Rust uses references to make sure that all memory access is safe. We know that we use `&` to create a reference:
@@ -1378,7 +1378,7 @@ The function `return_str()` creates a String, then it creates a reference to the
 
 This is the important part about the "owned" type that we talked about above. Because you own a `String`, you can pass it around. But a `&String` will die if its `String` dies, so you don't pass around "ownership" with it.
 
-## Mutable references
+## Mutable referencelar
 **[See this chapter on YouTube](https://youtu.be/G48z6Rv76vc)**
 
 If you want to use a reference to change data, you can use a mutable reference. For a mutable reference, you write `&mut` instead of `&`.
@@ -1481,7 +1481,7 @@ It prints `20` with no problem. It works because the compiler is smart enough to
 
 Earlier in Rust this kind of code actually generated an error, but the compiler is smarter now. It can understand not just what we type, but how we use everything.
 
-### Shadowing again
+### Yana shadowing
 
 Remember when we said that shadowing doesn't **destroy** a value but **blocks** it? Now we can use references to see this.
 
@@ -1505,7 +1505,7 @@ fn main() {
 }
 ```
 
-## Giving references to functions
+## Funksiyalarga referencelar berish
 **See this chapter on YouTube: [immutable references](https://youtu.be/mKWXt9YTavc) and [mutable references](https://youtu.be/kJV1wIvAbyk)**
 
 References are very useful for functions. The rule in Rust on values is: a value can only have one owner.
@@ -1608,7 +1608,7 @@ How is this possible? It is because `mut country` is not a reference: `adds_hung
 
 Remember our employee Powerpoint and manager situation above? In this situation it is like the employee just giving his whole computer to the manager. The employee won't ever touch it again, so the manager can do anything he wants to it.
 
-## Copy types
+## Nusxa ko'chirish turlari
 
 Some types in Rust are very simple. They are called **copy types**. These simple types are all on the stack, and the compiler knows their size. That means that they are very easy to copy, so the compiler always copies when you send it to a function. It always copies because they are so small and easy that there is no reason not to copy. So you don't need to worry about ownership for these types.
 
@@ -1732,7 +1732,7 @@ Instead of 50 clones, it's zero.
 
 
 
-### Variables without values
+### Qiymatsiz o'zgaruchilar
 
 A variable without a value is called an "uninitialized" variable. Uninitialized means "hasn't started yet". They are simple: just write `let` and the variable name:
 
@@ -1799,11 +1799,11 @@ So it's almost like saying `let my_number = { 100 };`.
 
 Also note that `my_number` is not `mut`. It didn't get a value until it got 100, so it never changed its value. In the end, the real code for `my_number` is just `let my_number = 100;`.
 
-## Collection types
+## Toplam turlari
 
 Rust has a lot of types for making a collection. Collections are for when you need more than one value in one spot. For example, you could have information on all the cities in your country inside one variable. We will start with arrays, which are fastest but also have the least functionality. They are kind of like `&str` in that way.
 
-### Arrays
+### Arraylar
 
 An array is data inside square brackets: `[]`. Arrays:
 
@@ -1898,7 +1898,7 @@ So `[0..2]` means the first index and the second index (0 and 1). Or you can cal
 
 You can also have an **inclusive** range, which means it includes the last number too. To do this, add `=` to write `..=` instead of `..`. So instead of `[0..2]` you can write `[0..=2]` if you want the first, second, and third item.
 
-## Vectors
+## Vectorlar
 **[See this chapter on YouTube](https://youtu.be/Eh-DsRnDKmw)**
 
 In the same way that we have `&str` and `String`, we have arrays and vectors. Arrays are faster with less functionality, and vectors are slower with more functionality. (Of course, Rust is always very fast so vectors are not slow, just slow*er* than arrays.) The type is written `Vec`, and you can also just call it a "vec".
@@ -2020,7 +2020,7 @@ fn main() {
 }
 ```
 
-## Tuples
+## Tuplelar
 **[See this chapter on YouTube](https://youtu.be/U67Diy6SlTg)**
 
 Tuples in Rust use `()`. We have seen many empty tuples already, because *nothing* in a function actually means an empty tuple:
@@ -2116,7 +2116,7 @@ Now it only creates a variable called `variable` but doesn't make a variable for
 
 There are many more collection types, and many more ways to use arrays, vecs, and tuples. We will learn more about them too, but first we will learn control flow.
 
-## Control flow
+## Nazorat oqimi (Control flow)
 **See this chapter on YouTube: [Part 1](https://youtu.be/UAymDOpv_us) and [Part 2](https://youtu.be/eqysTfiiQZs)**
 
 Control flow means telling your code what to do in different situations. The simplest control flow is `if`.
@@ -2377,7 +2377,7 @@ Looks like a normal number
 4 is an unlucky number in China (sounds close to 死)!
 ```
 
-## Structs
+## Structlar
 **See this chapter on YouTube: [Part 1](https://youtu.be/W23uQghBOFk) and [Part 2](https://youtu.be/GSVhrjLCuNA)**
 
 With structs, you can create your own type. You will use structs all the time in Rust because they are so convenient. Structs are created with the keyword `struct`. The name of a struct should be in UpperCamelCase (capital letter for each word, no spaces). If you write a struct in all lowercase, the compiler will tell you.
@@ -2506,7 +2506,7 @@ fn main() {
 }
 ```
 
-## Enums
+## Enumlar
 **See this chapter on YouTube: [Part 1](https://youtu.be/SRnqNTJUgjs), [Part 2](https://youtu.be/F_EcbWM63lk), [Part 3](https://youtu.be/2uh64U9JesA) and [Part 4](https://youtu.be/LOHVUYTc5Us)**
 
 An `enum` is short for enumerations. They look very similar to a struct, but are different. Here is the difference:
@@ -2714,7 +2714,7 @@ What about DeadStar? It's the number 1001.
 
 `DeadStar` would have been number 4, but now it's 1001.
 
-### Enums to use multiple types
+### Enumlarni bir necha turlar bilan ishlatish
 
 You know that items in a `Vec`, array, etc. all need the same type (only tuples are different). But you can actually use an enum to put different types in. Imagine we want to have a `Vec` with `u32`s or `i32`s. Of course, you can make a `Vec<(u32, i32)>` (a vec with `(u32, i32)` tuples) but we only want one each time. So here you can use an enum. Here is a simple example:
 
@@ -2768,7 +2768,7 @@ It's a u32 with the value 8
 ```
 
 
-## Loops
+## Sikllar
 
 With loops you can tell Rust to continue something until you want it to stop. You use `loop` to start a loop that does not stop, unless you tell it when to `break`.
 
@@ -3001,7 +3001,7 @@ Comparing a colour with 200 red, 50 blue, and 0 green:
 Not much green.
 ```
 
-## Implementing structs and enums
+## Struct va enumlarni qo'llash
 
 This is where you can start to give your structs and enums some real power. To call functions on a `struct` or an `enum`, use an `impl` block. These functions are called **methods**. There are two kinds of methods in an `impl` block.
 
@@ -3115,7 +3115,7 @@ fn main() {
 
 This prints `Need sleep NOW`.
 
-## Destructuring
+## Buzish
 
 Let's look at some more destructuring. You can get the values from a struct or enum by using `let` backwards. We learned that this is  `destructuring`, because you get variables that are not part of a structure. Now you have the values separately. First a simple example:
 
@@ -3194,7 +3194,7 @@ fn main() {
 This prints `The city's two names are ["Tallinn", "Reval"]`.
 
 
-## References and the dot operator
+## Referencelar va nuqta operatori
 
 We learned that when you have a reference, you need to use `*` to get to the value. A reference is a different type, so this won't work:
 
@@ -3293,7 +3293,7 @@ So just remember: when you use the `.` operator, you don't need to worry about `
 
 
 
-## Generics
+## Genericlar
 
 In functions, you write what type to take as input:
 
@@ -3502,13 +3502,13 @@ I have two things to say: Hello there! and I hate sand.
 I have two things to say: Where is Padme? and Is she all right?
 ```
 
-## Option and Result
+## Variant va Natija
 
 We understand enums and generics now, so we can understand `Option` and `Result`. Rust uses these two enums to make code safer.
 
 We will start with `Option`.
 
-### Option
+### Variant
 
 You use `Option` when you have a value that might exist, or might not exist. When a value exists it is `Some(value)` and when it doesn't it's just `None`, Here is an example of bad code that can be improved with `Option`.
 
@@ -3679,7 +3679,7 @@ We got nothing.
 We got: 5
 ```
 
-### Result
+### Natija
 
 Result is similar to Option, but here is the difference:
 
@@ -3911,11 +3911,11 @@ The number is: 10
 The number is: 20
 ```
 
-## Other collections
+## Boshqa toplamlar
 
 Rust has many more types of collections. You can see them at https://doc.rust-lang.org/beta/std/collections/ in the standard library. That page has good explanations for why to use one type, so go there if you don't know what type you want. These collections are all inside `std::collections` in the standard library. The best way to use them is with a `use` statement, like we did with our `enums`. We will start with `HashMap`, which is very common.
 
-### HashMap (and BTreeMap)
+### HashMap (va BTreeMap)
 
 A HashMap is a collection made out of *keys* and *values*. You use the key to look up the value that matches the key. You can create a new `HashMap` with just `HashMap::new()` and use `.insert(key, value)` to insert items.
 
@@ -4204,7 +4204,7 @@ This prints:
 
 The important line is: `survey_hash.entry(item.0).or_insert(Vec::new()).push(item.1);` So if it sees "female" it will check to see if there is "female" already in the `HashMap`. If not, it will insert a `Vec::new()`, then push the number in. If it sees "female" already in the `HashMap`, it will not insert a new Vec, and will just push the number into it.
 
-### HashSet and BTreeSet
+### HashSet va BTreeSet
 
 A `HashSet` is actually a `HashMap` that only has keys. On [the page for HashSet](https://doc.rust-lang.org/std/collections/struct.HashSet.html) it explains this on the top:
 
@@ -4465,7 +4465,7 @@ You must: phone Loki back
 ("add new product to list", true) ("send email to customer", true) ("phone Loki back", false)
 ```
 
-## The ? operator
+## ? operatori
 
 There is an even shorter way to deal with `Result` (and `Option`), shorter than `match` and even shorter than `if let`. It is called the "question mark operator", and is just `?`. After a function that returns a result, you can add `?`. This will:
 
@@ -4562,7 +4562,7 @@ This prints the same thing, but this time we handled three `Result`s in a single
 
 Imagine the following: you want to open a file, write to it, and close it. First you need to successfully find the file (that's a `Result`). Then you need to successfully write to it (that's a `Result`). With `?` you can do that on one line.
 
-### When panic and unwrap are good
+### Qachon panic va unwrap lar yaxshi
 
 Rust has a `panic!` macro that you can use to make it panic. It is easy to use:
 
@@ -4798,7 +4798,7 @@ fn main() {
 
 This prints `0` because `.unwrap_or(&0)` gives a 0 even if it is a `None`.
 
-## Traits
+## Traitlar
 
 We have seen traits before: `Debug`, `Copy`, `Clone` are all traits. To give a type a trait, you have to implement it. Because `Debug` and the others are so common, we have attributes that automatically do it. That's what happens when you write `#[derive(Debug)]`: you are automatically implementing `Debug`.
 
@@ -5335,7 +5335,7 @@ So you can see there are many ways to do the same thing when you use traits. It 
 
 Now let's look at how to implement some of the main traits you will use in Rust.
 
-### The From trait
+### From traiti
 
 *From* is a very convenient trait to use, and you know this because you have seen it so much already. With *From* you can make a `String` from a `&str`, but you can make many types from many other types. For example, Vec uses *From* for the following:
 
@@ -5488,7 +5488,7 @@ Odd numbers: [7, -1, 3, 9787, -47, 77, 55, 7]
 
 A type like `EvenOddVec` is probably better as a generic `T` so we can use many number types. You can try to make the example generic if you want for practice.
 
-### Taking a String and a &str in a function
+### String olish va &str funksiyalarda
 
 Sometimes you want a function that can take both a `String` and a `&str`. You can do this with generics and the `AsRef` trait. `AsRef` is used to give a reference from one type to another type. If you look at the documentation for `String`, you can see that it has `AsRef` for many types:
 
@@ -5587,7 +5587,7 @@ fn main() {
 }
 ```
 
-## Chaining methods
+## Zanjirlash methodlarni 
 
 Rust is a systems programming language like C and C++, and its code can be written as separate commands in separate lines, but it also has a functional style. Both styles are okay, but functional style is usually shorter. Here is an example of the non-functional style (called "imperative style") to make a `Vec` from 1 to 10:
 
@@ -5650,7 +5650,7 @@ fn main() {
 
 You can use this functional style best when you understand closures and iterators. So we will learn them next.
 
-## Iterators
+## Iteratorlar
 
 An iterator is a construct that can give you the items in the collection, one at a time. Actually, we have already used iterators a lot: the `for` loop gives you an iterator. When you want to use an iterator other times, you have to choose what kind:
 
@@ -5696,7 +5696,7 @@ Then we used `into_iter` to get an iterator by value from `vector1`. This destro
 Finally we used `.iter_mut()` for `vector2`. It is mutable, so we don't need to use `.collect()` to create a new Vec. Instead, we change the values in the same Vec with mutable references. So `vector2` is still there. Because we don't need a new Vec, we use `for_each`: it's just like a `for` loop.
 
 
-### How an iterator works
+### Iteratorlar qanday ishlaydi
 
 An iterator works by using a method called `.next()`, which gives an `Option`. When you use an iterator, Rust calls `next()` over and over again. If it gets `Some`, it keeps going. If it gets `None`, it stops.
 
@@ -5873,7 +5873,7 @@ Demian - die Geschichte einer Jugend is found!
 The Doom of the Darksword is found!
 ```
 
-## Closures
+## Closurelar
 
 Closures are like quick functions that don't need a name. Sometimes they are called lambdas. Closures are easy to find because they use `||` instead of `()`. They are very common in Rust, and once you learn to use them you will wonder how you lived without them.
 
@@ -6123,7 +6123,7 @@ fn main() {
 This prints `140     399     923     481     800     622     623     218     009     598    281`.
 
 
-### |_| in a closure
+### |_| closureda
 
 Sometimes you see `|_|` in a closure. This means that the closure needs an argument (like `x`), but you don't want to use it. So `|_|` means "Okay, this closure takes an argument but I won't give it a name because I don't care about it".
 
@@ -6159,7 +6159,7 @@ help: consider changing the closure to take and ignore the expected argument
 
 This is good advice. If you change `||` to `|_|` then it will work.
 
-### Helpful methods for closures and iterators
+###  Closurelar va iteratorlar uchun foydali methodlar
 
 Rust becomes a very fun to language once you become comfortable with closures. With closures you can *chain* methods to each other and do a lot of things with very little code. Here are some closures and methods used with closures that we didn't see yet.
 
@@ -6851,7 +6851,7 @@ Names { one_word: ["Caesar", "Data"], two_words: ["Frodo Baggins", "Bilbo Baggin
 ```
 
 
-## The dbg! macro and .inspect
+## dbg! macro va .inspect
 
 `dbg!` is a very useful macro that prints quick information. It is a good alternative to `println!` because it is faster to type and gives more information:
 
@@ -7028,7 +7028,7 @@ fn main() {
 
 So what is a lifetime? We will learn that now.
 
-## Lifetimes
+## Umrlar
 
 A lifetime means "how long the variable lives". You only need to think about lifetimes with references. This is because references can't live longer than the object they come from. For example, this function does not work:
 
@@ -7431,7 +7431,7 @@ Billy has 99980 hit points left!
 
 So you can see that lifetimes are often just the compiler wanting to make sure. And it is usually smart enough to almost guess at what lifetimes you want, and just needs you to tell it so it can be certain.
 
-## Interior mutability
+## Ichki o'zgaruvchanlik
 
 ### Cell
 
@@ -7856,7 +7856,7 @@ This prints:
 
 `Cow` has some other methods like `into_owned` or `into_borrowed` so you can change it if you need to.
 
-## Type aliases
+## Aliaselar turlari
 
 A type alias means "giving a new name to another type". Type aliases are very easy. Usually you use them when you have a very long type and don't want to write it every time. It is also good when you want to give a type a better name that is easy to remember. Here are two examples of type aliases.
 
@@ -7964,7 +7964,7 @@ struct File(String);
 
 So when you use the `File` type here you can clone it and Debug print it, but it doesn't have the traits of String unless you use `.0` to get to the String inside it. But in other people's code you can only use `.0` if it's marked `pub` for public. And that's why these sorts of types use the `Deref` trait a lot. We will learn about both `pub` and `Deref` later.
 
-### Importing and renaming inside a function
+### Funksiyani import qilish va nomini o'zgartirish
 
 Usually you write `use` at the top of the program, like this:
 
@@ -8074,7 +8074,7 @@ fn main() {}
 
 So now you can write `OtherDirectory` instead of `FileState::SimilarFileNameInNextDirectory`.
 
-## The todo! macro
+## todo! macrosi
 
 Sometimes you want to write code in general to help you imagine your project. For example, imagine a simple project to do something with books. Here's what you think as you write it:
 
@@ -8319,7 +8319,7 @@ This prints `2`. And `new_owner` is now an `Rc<String>`. Now if we use `println!
 
 So if there are strong pointers, are there weak pointers? Yes, there are. Weak pointers are useful because if two `Rc`s point at each other, they can't die. This is called a "reference cycle". If item 1 has an Rc to item 2, and item 2 has an Rc to item 1, they can't get to 0. In this case you want to use weak references. Then `Rc` will count the references, but if it only has weak references then it can die. You use `Rc::downgrade(&item)` instead of `Rc::clone(&item)` to make weak references. Also, you use `Rc::weak_count(&item)` to see the weak count.
 
-## Multiple threads
+## Bir nechta threadlar
 
 If you use multiple threads, you can do many things at the same time. Modern computers have more than one core so they can do more than one thing at the same time, and Rust lets you use them. Rust uses threads that are called "OS threads". OS thread means the operating system creates the thread on a different core. (Some other languages use "green threads", which are less powerful)
 
@@ -8564,7 +8564,7 @@ So just remember: if you need a value in a thread from outside the thread, you n
 
 
 
-## Closures in functions
+## Funksiyalarda Clouserlar
 
 Closures are great. So how do we put them into our own functions?
 
@@ -9108,7 +9108,7 @@ fn main() {
 }
 ```
 
-## Channels
+## Kanallar
 
 A channel is an easy way to use many threads that send to one place. They are fairly popular because they are pretty simple to put together. You can create a channel in Rust with `std::sync::mpsc`. `mpsc` means "multiple producer, single consumer", so "many threads sending to one place". To start a channel, you use `channel()`. This creates a `Sender` and a `Receiver` that are tied together. You can see this in the function signature:
 
@@ -9310,7 +9310,7 @@ fn main() {
 }
 ```
 
-## Reading Rust documentation
+## Rust dokumentatsiyasini o'qish
 
 It's important to know how to read documentation in Rust so you can understand what other people wrote. Here are some things to know in Rust documentation:
 
@@ -9382,11 +9382,11 @@ fn main() {
 }
 ```
 
-### Searching
+### Qidirish
 
 The top bar of a Rust document is the search bar. It shows you results as you type. When you go down a page you can't see the search bar anymore, but if you press the **s** key on the keyboard you can search again. So pressing **s** anywhere lets you search right away.
 
-### [src] button
+### [src] knopkasi
 
 Usually the code for a method, struct, etc. will not be complete. This is because you don't usually need to see the full source to know how it works, and the full code can be confusing. But if you want to know more, you can click on [src] and see everything. For example, on the page for `String` you can see this signature for `.with_capacity()`:
 
@@ -9406,11 +9406,11 @@ pub fn with_capacity(capacity: usize) -> String {
 
 Interesting! Now you can see that a String is a kind of `Vec`. And actually a `String` is a vector of `u8` bytes, which is interesting to know. You didn't need to know that to use the `with_capacity` method so you only see it if you click [src]. So clicking on [src] is a good idea if the document doesn't have much detail and you want to know more.
 
-### Information on traits
+### Traitlar haqida malumotlar
 
 The important part of the documentation for a trait is "Required Methods" on the left. If you see Required Methods, it probably means that you have to write the method yourself. For example, for `Iterator` you need to write the `.next()` method. And for `From` you need to write the `.from()` method. But some traits can be implemented with just an **attribute**, like we see in `#[derive(Debug)]`. `Debug` needs the `.fmt()` method, but usually you just use `#[derive(Debug)]` unless you want to do it yourself. That's why the page on `std::fmt::Debug` says that "Generally speaking, you should just derive a Debug implementation."
 
-## Attributes
+## Attributelar
 
 You have seen code like `#[derive(Debug)]` before: this type of code is called an *attribute*. These attributes are small pieces of code that give information to the compiler. They are not easy to create, but they are very easy to use. If you write an attribute with just `#` then it will affect the code on the next line. But if you write it with `#!` then it will affect everything in its own space.
 
@@ -9640,7 +9640,7 @@ Even without data it is a bit complicated, and Rust does not use this type of pa
 
 A `Box` also lets you use `std::mem::drop` on it, because it's on the heap. That can be convenient sometimes.
 
-## Box around traits
+## Traitlar atrofida Box
 
 `Box` is very useful for returning traits. You know that you can write traits in generic functions like in this example:
 
@@ -9834,7 +9834,7 @@ It will tell you:
 
 This is not surprising, because we know that a trait can work on many things, and they each have different sizes.
 
-## Default and the builder pattern
+## Standart va bulder patterni
 
 You can implement the `Default` trait to give values to a `struct` or `enum` that you think will be most common. The builder pattern works nicely with this to let users easily make changes when they want. First let's look at `Default`. Actually, most general types in Rust already have `Default`. They are not surprising: 0, "" (empty strings), `false`, etc.
 
@@ -10280,7 +10280,7 @@ Character { name: "Billybrobby", age: 15, height: 180, weight: 100, lifestate: A
 
 
 
-## Deref and DerefMut
+## Deref va DerefMut
 
 `Deref` is the trait that lets you use `*` to dereference something. We saw the word `Deref` before when using a tuple struct to make a new type, and now it's time to learn it.
 
@@ -10605,7 +10605,7 @@ Of course, it is not illegal to write `hit_points_vec.push(*billy)`, but it make
 
 
 
-## Crates and modules
+## Cratelar va modulelar
 
 Every time you write code in Rust, you are writing it in a `crate`. A `crate` is the file, or files, that go together for your code. Inside the file you write you can also make a `mod`. A `mod` is a space for functions, structs, etc. and is used for a few reasons:
 
@@ -10823,7 +10823,7 @@ fn main() {
 
 
 
-## Testing
+## Test qilish
 
 Testing is a good subject to learn now that we understand modules. Testing your code is very easy in Rust, because you can write tests right next to your code.
 
@@ -11561,7 +11561,7 @@ This is probably good enough for now. We could write more methods but lines like
 
 
 
-## External crates
+## Tashqi cratelar
 
 An external crate means "someone else's crate".
 
@@ -11834,7 +11834,7 @@ The [regex](https://crates.io/crates/regex) crate lets you search through text u
 [chrono](https://crates.io/crates/chrono) is the main crate for people who need more functionality for time. We will look at the standard library now which has functions for time, but if you need more then this is a good crate to use.
 
 
-## A tour of the standard library
+## Standart kutubxonalarga sayohat
 
 Now that you know a lot of Rust, you will be able to understand most things inside the standard library. The code inside it isn't so scary anymore. Let's take a look at some of the parts in it that we haven't learned yet. This tour will go over most parts of the standard library that you don't need to install Rust for. We will revisit a lot of items we already know so we can learn them with greater understanding.
 
@@ -12399,7 +12399,7 @@ This prints:
 ```
 
 
-### OsString and CString
+### OsString va CString
 
 `std::ffi` is the part of `std` that helps you use Rust with other languages or operating systems. It has types like `OsString` and `CString`, which are like `String` for the operating system or `String` for the language C. They each have their own `&str` type too: `OsStr` and `CStr`. `ffi` means "foreign function interface".
 
@@ -12918,7 +12918,7 @@ Did I miss anything?
 but the thread will do nothing for three seconds. You usually use `.sleep()` when you have many threads that need to try something a lot, like connecting. You don't want the thread to use your processor to try 100,000 times in a second when you just want it to check sometimes. So then you can set a `Duration`, and it will try to do its task every time it wakes up.
 
 
-### Other macros
+### Boshqa macrolar
 
 
 Let's take a look at some other macros.
@@ -13121,7 +13121,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 
 
-## Writing macros
+## Macrolar yozish
 
 Writing macros can be very complicated. You almost never need to write one, but sometimes you might want to because they are very convenient. Writing macros is interesting because they are almost a different language. To write one, you actually use another macro called `macro_rules!`. Then you add your macro name and open a `{}` block. Inside is sort of like a `match` statement.
 
@@ -13526,7 +13526,7 @@ And for the rest of it it just calls `dbg!` on itself even if you put in an extr
 As you can see, macros are very complicated! Usually you only want a macro to automatically do something that a simple function can't do very well. The best way to learn about macros is to look at other macro examples. Not many people can quickly write macros without problems. So don't think that you need to know everything about macros to know how to write in Rust. But if you read other macros, and change them a little, you can easily borrow their power. Then you might start to get comfortable with writing your own.
 
 
-# Part 2 - Rust on your computer
+# 2-bob Rust sizning kompiyuteringizda
 
 You saw that we can learn almost anything in Rust just using the Playground. But if you learned everything so far, you will probably want Rust on your computer now. There are always things that you can't do with the Playground like using files or code in more than just one file. Some other things you need Rust on your computer for are input and flags. But most important is that with Rust on your computer you can use crates. We already learned about crates, but in the Playground you could only use the most popular ones. But with Rust on your computer you can use any crate in your program.
 
@@ -13604,7 +13604,7 @@ Some other things you need to know are:
 One more thing about the compiler: it only takes the most time when you use `cargo build` or `cargo run` the first time. After that it will remember, and it will compile fast again. But if you use `cargo clean` and then run `cargo build`, it will have to compile slowly one more time.
 
 
-## Taking user input
+## Foydalanuvchidan malumot olish
 
 One easy way to take input from the user is with `std::io::stdin`. This means "standard in", which is the input from the keyboard. With `stdin()` you can get user input, but then you will want to put it in a `&mut String` with `.read_line()`. Here is a simple example of that, but it both works and doesn't work:
 
@@ -13918,7 +13918,7 @@ So `option_env!` is always going to be the safer macro. `env!` is better if you 
 
 
 
-## Using files
+## Filelardan foydalanish
 
 Now that we are using Rust on the computer, we can start working with files. You will notice that now we will start to see more and more `Result`s in our code. That is because once you start working with files and similar things, many things can go wrong. A file might not be there, or maybe the computer can't read it.
 
@@ -14335,6 +14335,6 @@ main
 
 `cargo doc` is very nice when you use a lot of other people's crates. Because these crates are all on different websites, it can take some time to search them all. But if you use `cargo doc`, you will have them all in the same place on your hard drive.
 
-## The end?
+## Tugadimi?
 
 This is the end of Rust in Easy English. But I am still here, and you can let me know if you have any questions. Feel free to [contact me on Twitter](https://twitter.com/mithridates) or add a pull request, issue, etc. You can also tell me if some parts weren't easy to understand. Rust in Easy English needs to be very easy to understand, so please let me know where the English is too difficult. Of course, Rust itself can be difficult to understand, but we can at least make sure that the English is easy.
