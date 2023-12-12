@@ -1,27 +1,27 @@
-## Updates
-![example workflow name](https://github.com/Dhghomon/easy_rust/workflows/github%20pages/badge.svg)
+## Yangilanishlar
+![example workflow name](https://github.com/alshrv/easy-rust-uz/workflows/github%20pages/badge.svg)
 
-19 January 2023: [Learn Rust in a Month of Lunches](https://www.manning.com/books/learn-rust-in-a-month-of-lunches) is now available for purchase on Manning. Rust in a Month of Lunches is based on the content in the original Easy Rust but updated, improved with reader feedback and expanded (about twice the size).
+19 January 2023: [Learn Rust in a Month of Lunches](https://www.manning.com/books/learn-rust-in-a-month-of-lunches) Endi Manningda sotib olish mumkin. Rust in a Month of Lunches malumotlari Oson rustga asoslangan lekin yangilangan, kitobxonlarning fikr-mulohazalari bilan yaxshilandi va kengaytirildi (taxminan ikki baravarga kattaroq).
 
 ![](Learn_Rust_in_a_Month_of_Lunches.png)
 
-31 October 2022: [Now available in Spanish](https://www.jmgaguilera.com/rust_facil/)
+31 October 2022: [Endi Ispan tilida mavjud](https://www.jmgaguilera.com/rust_facil/)
 
-23 May 2021: [Now available in Indonesian](https://github.com/ariandy/easy-rust-indonesia) thanks to [Ariandy](https://github.com/ariandy)/[1kb](https://1kilobyte.github.io/).
+23 May 2021: [Endi Indonez tilida mavjud](https://github.com/ariandy/easy-rust-indonesia) [Ariandy](https://github.com/ariandy)/[1kb](https://1kilobyte.github.io/)ga rahmat.
 
-2 April 2021: [Added BuyMeACoffee link](https://www.buymeacoffee.com/mithridates) for those who would like to buy me a coffee.
+2 April 2021: [BuyMeACoffee havolasi qoshildi](https://www.buymeacoffee.com/mithridates) menga kofe olib bermoqchilar uchun.
 
-1 February 2021: [Now available on YouTube!](https://www.youtube.com/playlist?list=PLfllocyHVgsRwLkTAhG0E-2QxCf-ozBkk) Two months later: all done as of 1 April 2021 for 186 videos in total (slightly over 23 hours).
+1 February 2021: [Now available on YouTube!](https://www.youtube.com/playlist?list=PLfllocyHVgsRwLkTAhG0E-2QxCf-ozBkk) Ikki oydan so'ng: 1-aprel 2021 gacha 186ta video tayorlandi (23 soatdan ko'proq).
 
-22 December 2020: mdBook can be found [here](https://dhghomon.github.io/easy_rust).
+22 December 2020: mdBook [bu](https://dhghomon.github.io/easy_rust)yerdan topishingiz mumkin.
 
-28 November 2020: [Now also available in simplified Chinese](https://github.com/kumakichi/easy_rust_chs) thanks to [kumakichi](https://github.com/kumakichi)!
+28 November 2020: [kumakichi](https://github.com/kumakichi) tufayli [endi osonlartirilgan Xitoy tilida ham mavjud](https://github.com/kumakichi/easy_rust_chs)
 
-27 November 2021: [Videos for Easy Rust are now being recorded in Korean!](https://www.youtube.com/watch?v=W9DO6m8JSSs&list=PLfllocyHVgsSJf1zO6k6o3SX2mbZjAqYE) 한국어판 비디오도 녹화 시작!
+27 November 2021: [Oson Rust uchun videolar endi Koreys tilida yozilmoqda](https://www.youtube.com/watch?v=W9DO6m8JSSs&list=PLfllocyHVgsSJf1zO6k6o3SX2mbZjAqYE) 한국어판 비디오도 녹화 시작!
 
 ![](Easy_Rust_sample_image.png)
 
-## Introduction
+## Kirish
 
 Rust is a new language that already has good textbooks. But sometimes its textbooks are difficult because they are for native English speakers. Many companies and people now learn Rust, and they could learn faster with a book that has easy English. This textbook is for these companies and people to learn Rust with simple English.
 
