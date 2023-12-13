@@ -27,9 +27,13 @@ Rust bu yangi va allaqachon yaxshi qollanmaga ega dasturlash tili. Lekin bir xil
 
 Rust yangi til bo'lishiga qaramay allaqachon mashxur tildir. U sizga C yoki C++ dagi tezlik va boshqaruvni shu bilan birga Pyhon kabi yangi tillarning xotira hafvsizligi bilan sizni taminlagani uchun mashxur. Buni ba'zan boshqa tillardan farq qiladigan ba'zi yangi g'oyalar bilan amalga oshiradi. Bu shuni anglatadiki, o'rganish kerak bo'lgan ba'zi yangi narsalar bor va si ularni shunchaki "yo'l davomida tushuna olmaysiz". Rust - bu tilni tushunish uchun biroz vaqt o'ylab ko'rishingiz kerak. Shunga qaramay agar siz boshqa dasturlash tillari bilan tanish bo'lsangiz bu sizga yaxshi kod yozishingiz uchun yordam beradi.
 
-## Men kimman?
+## Muallif kim?
 
-I am a Canadian who lives in Korea, and I wrote Easy Rust while thinking of how to make it easy for companies here to start using it. I hope that other countries that don't use English as a first language can use it too.
+Muallif bu Koreada yashovchi Canadalik, va u Koreadagi kompaniyalar undan foydalanishini o'ylab Oson Rustni yozgan. U umid qiladiki, Ingiliz tilini birinchi til sifatida ishlatmaydigan boshqa mamlakatlar ham undan foydalanadi.
+
+## Tarjimon kim?
+
+Men oddiy bir dasturchi, O'zbek Rust comminityni rivojlantirish uchun o'z hissamni qoshish maqsadida bu Oson Rust qo'llanmasini tarjima qilishni boshladim. Ishonamanki bu sizlarga foydali bo'ladi. Agar qo'llanmada qandaydur hatolik yoki nosozlikni ko'rsangiz yoki sezsangiz uni to'girlashingizni so'rab qolaman.
 
 ## Rustning Oson Ingiliz tilida yozilishi
 
