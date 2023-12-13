@@ -34,10 +34,11 @@ Muallif bu Koreada yashovchi Canadalik, va u Koreadagi kompaniyalar undan foydal
 ## Tarjimon kim?
 
 Men oddiy bir dasturchi, O'zbek Rust comminityni rivojlantirish uchun o'z hissamni qoshish maqsadida bu Oson Rust qo'llanmasini tarjima qilishni boshladim. Ishonamanki bu sizlarga foydali bo'ladi. Agar qo'llanmada qandaydur hatolik yoki nosozlikni ko'rsangiz yoki sezsangiz uni to'girlashingizni so'rab qolaman.
+[Github](https://github.com/alshrv/easy-rust-uz)
 
 ## Rustning Oson Ingiliz tilida yozilishi
 
-*Rust in Easy English* was written from July to August 2020, and is over 400 pages long. You can contact me here or [on LinkedIn](https://www.linkedin.com/in/davemacleod) or [on Twitter](https://twitter.com/mithridates) if you have any questions. If you see anything wrong or have a pull request to make, go ahead. Over 20 people have already helped out by fixing typos and problems in the code, so you can too. I'm not the world's best Rust expert so I always like to hear new ideas or see where I can make the book better.
+*Rust in Easy English* 2020-yil Iyul va Avgust oylari oraligida yozildi, va u 400 betdan ko'proq. Agar sizda qandaydur savollar bo'lsa muallif bilan [LinkedInda](https://www.linkedin.com/in/davemacleod)yoki [Twitterda](https://twitter.com/mithridates) bog'lanishingiz mumkin. Agar siz qandaydir xatolik yoki pull requestingiz bo'lsa, bemalol. Allaqachon 20dan oshiq odamlar codedagi xatoliklarni yoki matndagi xatolarni to'g'irlashga yordam berishdi (Ingiliz tilidagi versiyasida ), va bu ishni siz ham qila olasiz. Men dunyodagi engi yaxshi Rust ustasi emasman shuning uchun men har doim yangi g'oyalarni yoki qo'llanmani qayerini yaxshiroq qilish mumkinligini eshitishga tayyorman.
 
 
 
@@ -155,9 +156,9 @@ Men oddiy bir dasturchi, O'zbek Rust comminityni rivojlantirish uchun o'z hissam
   - [Cargo doc](#cargo-doc)
   - [The end?](#the-end)
 
-# 1-bob Rust sizning brauzeringizda
+# 1-qism Rust sizning brauzeringizda
 
-This book has two parts. In Part 1, you will learn as much Rust as you can just in your browser. You can actually learn almost everything you need to know without installing Rust, so Part 1 is very long. Then at the end is Part 2. It is much shorter, and is about Rust on your computer. That's where you will learn everything else you need to know that you can only do outside of a browser. Some examples are: working with files, taking user input, graphics, and personal settings. Hopefully, by the end of Part 1 you will like Rust enough that you will install it. And if you don't, no problem - Part 1 teaches you so much that you won't mind.
+Bu kitob ikki qismdan iborat. 1-qismda, siz faqat brauzeringida imkon qadar Rustni o'rganasiz. Rustni o'rnatmasdan, siz bilishingiz kerak bo'lgan deyarli barcha narsani o'rganishingiz mumkin, shuning uchun 1-qism juda uzun. Keyin oxirida 2-qism. U ancha qisqaroq, va u sizning kompiyuteringizdagi Rust haqida. O'sha yerda siz faqat brauzeringizdan tashqarida qilishingiz mumkin bo'lgan hamma narsani bilib olasiz. Misol uchun: fayllar bilan ishlash, foydalanuvchidan qiymat olish, grafika, va shaxsiy sozlamalar haqida. Umid qilamanki, 1-qismning oxiriga kelib Rust sizga yetarlicha yoqadi va siz uni o'rnatasiz, agar o'rnatmasangiz ham muammo yo'q 1-qism sizga shunchalik ko'p malumot beradiki siz uni o'rnatmay qolmaysiz.
 
 ## Rust Playground
 **[See this chapter on YouTube](https://youtu.be/-lYeJeQ11OI)**
@@ -13530,7 +13531,7 @@ And for the rest of it it just calls `dbg!` on itself even if you put in an extr
 As you can see, macros are very complicated! Usually you only want a macro to automatically do something that a simple function can't do very well. The best way to learn about macros is to look at other macro examples. Not many people can quickly write macros without problems. So don't think that you need to know everything about macros to know how to write in Rust. But if you read other macros, and change them a little, you can easily borrow their power. Then you might start to get comfortable with writing your own.
 
 
-# 2-bob Rust sizning kompiyuteringizda
+# 2-qism Rust sizning kompiyuteringizda
 
 You saw that we can learn almost anything in Rust just using the Playground. But if you learned everything so far, you will probably want Rust on your computer now. There are always things that you can't do with the Playground like using files or code in more than just one file. Some other things you need Rust on your computer for are input and flags. But most important is that with Rust on your computer you can use crates. We already learned about crates, but in the Playground you could only use the most popular ones. But with Rust on your computer you can use any crate in your program.
 
