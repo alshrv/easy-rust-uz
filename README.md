@@ -161,20 +161,20 @@ Men oddiy bir dasturchi, O'zbek Rust comminityni rivojlantirish uchun o'z hissam
 Bu kitob ikki qismdan iborat. 1-qismda, siz faqat brauzeringida imkon qadar Rustni o'rganasiz. Rustni o'rnatmasdan, siz bilishingiz kerak bo'lgan deyarli barcha narsani o'rganishingiz mumkin, shuning uchun 1-qism juda uzun. Keyin oxirida 2-qism. U ancha qisqaroq, va u sizning kompiyuteringizdagi Rust haqida. O'sha yerda siz faqat brauzeringizdan tashqarida qilishingiz mumkin bo'lgan hamma narsani bilib olasiz. Misol uchun: fayllar bilan ishlash, foydalanuvchidan qiymat olish, grafika, va shaxsiy sozlamalar haqida. Umid qilamanki, 1-qismning oxiriga kelib Rust sizga yetarlicha yoqadi va siz uni o'rnatasiz, agar o'rnatmasangiz ham muammo yo'q 1-qism sizga shunchalik ko'p malumot beradiki siz uni o'rnatmay qolmaysiz.
 
 ## Rust Playground
-**[See this chapter on YouTube](https://youtu.be/-lYeJeQ11OI)**
+**[Bu bobni YouTubeda tomosha qiling](https://youtu.be/-lYeJeQ11OI)**
 
-Maybe you don't want to install Rust yet, and that's okay. You can go to [https://play.rust-lang.org/](https://play.rust-lang.org/) and start writing Rust without leaving your browser. You can write your code there and click Run to see the results. You can run most of the samples in this book inside the Playground in your browser. Only near the end you will see samples that go beyond what you can do in the Playground (like opening files).
+Balki siz hali ham Rustni o'rnatishni xohlamayotgandursiz, hammasi joyida. Siz [https://play.rust-lang.org/](https://play.rust-lang.org/) ushbu saytga kirishingiz va brauzeringizni tark etmagan holda Rustda yozishini boshlashingiz mumkin. Siz kodingizni shu yerda yozishingiz va natijani ko'rish uchun Run tugmasini bosishingizning o'zi kifoya. Siz ushbu kitobdagi kodlarni brauzeringizdagi shu Playgrounda ishga tushirishingiz mumkin. Faqat oxiridagina sizga kompiyuteringizga Rustni ornatish kerak bo'adi(masalan, fayllar ochishda).
 
-Here are some tips when using the Rust Playground:
+Rust Playgrounddan foydalanish uchun ba'zi maslahatlar:
 
-- Run your code with Run
-- Change Debug to Release if you want your code to be faster. Debug: compiles faster, runs slower, contains debug information. Release: compiles slower, runs much faster, removes debug information.
-- Click on Share to get a url link. You can use that to share your code if you want help. After you click share, you can click on `Open a new thread in the Rust user forum` to ask people there for help right away.
-- Tools: Rustfmt will format your code nicely.
-- Tools: Clippy will give you extra information about how to make your code better.
-- Config: here you can change your theme to dark mode so you can work at night, and many other configurations.
+- Run tugmasi orqali kodingizni ishga tushirasiz.
+- Debugni Releasega o'tkazing agar siz kodingizni tezroq ishga tushishini hohlasangiz. Debug: tezroq kompilatsiya qiladi, sekinroq ishga tushuradi, debug malumotlaridan tashkil topgan bo'ladi. Release: sekinroq kompilatsiya qiladi, tezroq ishga tushadi, debug malumotlarini olib tashlaydi.
+- Share tugmasini bosing agar havola olmoqchi bo'lsangiz. Siz shunday qilib kodingizni boshqalar bilan ulashishingiz mumkin agar yordam kerak bo'lsa. Shareni bosganingizdan so'ng, Siz `Open a new thread in the Rust user forum` yozuvini bosishingiz kerak bo'ladi agar odamlardan yordam so'ramoqchi bo'lsangiz.
+- Tools: Rustfmt sizning ko'dingizni chiroyli ko'rinishga keltiradi.
+- Tools: Clippy sizga ko'dingizni yaxshilash uchun qoshimcha malumotlar beradi.
+- Config: Bu yerda siz tunda ishlash uchun tungi rejimga otkazishingiz va boshqa ko'plab sozlamalarni o'zgartirishingiz mumkin..
 
-If you want to install Rust, go here [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install) and follow the instructions. Usually you will use `rustup` to install and update Rust.
+Agar siz Rustni o'rnatishni xohlasangiz, Bu yerga kiring [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install) va ko'rsatmalarga rioya qiling. Odatda siz `rustup` dan Rustni o'rnatishga yoki yangilash uchun foydalanasiz.
 
 ## 🚧 va ⚠️
 
