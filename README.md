@@ -183,19 +183,19 @@ Ba'zida kitob ichidagi kodlar ishlamaydi. Agar misol ishlamasa, unda ðŸš§ yoki â
 ## Kommentlar
 **[Bu bobni YouTubeda tomosha qiling](https://youtu.be/fJ7jBZG_Rpo)**
 
-Comments are made for programmers to read, not the computer. It's good to write comments to help other people understand your code.  It's also good to help you understand your code later.  (Many people write good code but then forget why they wrote it.) To write comments in Rust you usually use `//`:
+Kommentlar dasturchilar o'qishi uchun qilingan, kompyuterlar uchun emas. Komment yozish boshqa odamlar sizning kodingizni chunishi uchun ham yaxshi. O'zingiz ham keyinroq kodingizni chunishingiz uchun kerak. (Ko'pchilik yaxshi kod yozadi ammo birozdan keyin uni nega yozganini esidan chiqarib qo'yadi) Rustda kod yozish uchun `//` ishlatiladi:
 
 ```rust
 fn main() {
-    // Rust programs start with fn main()
-    // You put the code inside a block. It starts with { and ends with }
-    let some_number = 100; // We can write as much as we want here and the compiler won't look at it
+    // Rust pdasturlari fn main() bilan boshlanadi
+    // Kodingizni blok ichiga qoying. U { bilan boshlanib } bilan tugaydi
+    let some_number = 100; // Biz bu yerga o'zimiz xohlaganimizcha yozishimiz mumkin chunki barbir kompiler bunga qaramaydi
 }
 ```
 
-When you do this, the compiler won't look at anything to the right of the `//`.
+Qachonki siz bunday qilganingizda, kompiler `//` dan keyingi hech narsaga qaramaydi.
 
-There is another kind of comment that you write with `/*` to start and `*/` to end. This one is useful to write in the middle of your code.
+TMana bu esa komentariya yozishning boshqacha usuli `/*` bilan boshlanadi va `*/` bilan tugaydi. Bu kodingizni ortasida yozish uchun juda qulay.
 
 ```rust
 fn main() {
@@ -203,21 +203,21 @@ fn main() {
 }
 ```
 
-To the compiler, `let some_number/*: i16*/ = 100;` looks like `let some_number = 100;`.
+Kompiler uchu `let some_number/*: i16*/ = 100;` bu bunday ko'rinadi `let some_number = 100;`.
 
-The `/* */` form is also useful for very long comments over more than one line. In this example you can see that you need to write `//` for every line. But if you type `/*`, it won't stop until you finish it with `*/`.
+`/* */` bu turdagi kommentlar bir qatordan ko'proq bo'lgan kommentlar uchun foydalidir. Bu misolda siz ko'p qatorli komment yozishingiz uchun `//` ni har bir qatorga qoyib chiqishingiz kerak. Lekin siz `/*` bunday yozsangiz ,  U siz `*/` ni qoymaguningizcha toxtamaydi.
 
 ```rust
 fn main() {
-    let some_number = 100; /* Let me tell you
-    a little about this number.
-    It's 100, which is my favourite number.
-    It's called some_number but actually I think that... */
+    let some_number = 23; /* Sizga men hozir
+    bu raqam haqida ozgina gapirib bermoqchiman.
+    Bu 23 mening yoqtirgan raqamim.
+    Bu some_number deb ataladi lekin aslida esa... */
 
-    let some_number = 100; // Let me tell you
-    // a little about this number.
-    // It's 100, which is my favourite number.
-    // It's called some_number but actually I think that...
+    let some_number = 23; // Men sizga hozir 
+    // bu raqam haqida ozgina gapirib bermoqchiman
+    // Bu 23 mening yoqtirgan raqamim.
+    // Bu some_number deb ataladi lekin aslida esa...
 }
 ```
 
