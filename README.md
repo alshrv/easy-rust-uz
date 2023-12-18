@@ -13,7 +13,7 @@
 
 1-fevral 2021-yil: [Now available on YouTube!](https://www.youtube.com/playlist?list=PLfllocyHVgsRwLkTAhG0E-2QxCf-ozBkk) Ikki oydan so'ng: 1-aprel 2021 gacha 186ta video tayorlandi (23 soatdan ko'proq).
 
-22-dekabr 2020-yil: mdBook [bu](https://dhghomon.github.io/easy_rust)yerdan topishingiz mumkin.
+22-dekabr 2020-yil: mdBook [bu](https://dhghomon.github.io/easy_rust) yerdan topishingiz mumkin.
 
 28-noyabr 2020-yil: [kumakichi](https://github.com/kumakichi) tufayli [endi osonlartirilgan Xitoy tilida ham mavjud](https://github.com/kumakichi/easy_rust_chs)
 
@@ -178,7 +178,7 @@ Agar siz Rustni o'rnatishni xohlasangiz, Bu yerga kiring [https://www.rust-lang.
 
 ## 🚧 va ⚠️
 
-Sometimes the code examples in the book don't work. If an example doesn't work, it will have a 🚧 or a ⚠️ in it. 🚧 is like "under construction": it means that the code is not complete. Rust needs a `fn main()` (a main function) to run, but sometimes we just want to look at small pieces of code so it won't have a `fn main()`. Those examples are correct, but need a `fn main()` for you to run them. And some code examples show you a problem that we will fix. Those ones might have a `fn main()` but generate an error, and so they will have a ⚠️.
+Ba'zida kitob ichidagi kodlar ishlamaydi. Agar misol ishlamasa, unda 🚧 yoki ⚠️ belgi qoyilgan bo'ladi. 🚧 bu huddi "qurilish ishladi olib borilmoqda": bu shuni aglatadiki kod hali tugallanmagan. Rustga `fn main()` (asosiy funksiya) kerak bo'ladi, lekin biz sizga bazida kichik kod qismini ko'rsatishni hohlaymiz shuning uchun unda`fn main()` funksiyasi bo'lmasligi mumkin. U misollar to'g'ri lekin ular ishlatish uchun `fn main()` kerak bo'ladi. Va biz sizga ba'zi misollarda xato kodlarni ko'rsatamiz biz u muammoni yechishni organishimiz uchun. Ularda `fn main()` bo'lsa ham xato chiqarishi mumkin , va shunday qilib ularda ⚠️ belgisi bo'ladi.
 
 ## Kommentlar
 **[Bu bobni YouTubeda tomosha qiling](https://youtu.be/fJ7jBZG_Rpo)**
