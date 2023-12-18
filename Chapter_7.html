@@ -174,30 +174,30 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="kommentlar"><a class="header" href="#kommentlar">Kommentlar</a></h2>
-<p><strong><a href="https://youtu.be/fJ7jBZG_Rpo">See this chapter on YouTube</a></strong></p>
-<p>Comments are made for programmers to read, not the computer. It's good to write comments to help other people understand your code.  It's also good to help you understand your code later.  (Many people write good code but then forget why they wrote it.) To write comments in Rust you usually use <code>//</code>:</p>
+<p><strong><a href="https://youtu.be/fJ7jBZG_Rpo">Bu bobni YouTubeda tomosha qiling</a></strong></p>
+<p>Kommentlar dasturchilar o'qishi uchun qilingan, kompyuterlar uchun emas. Komment yozish boshqa odamlar sizning kodingizni chunishi uchun ham yaxshi. O'zingiz ham keyinroq kodingizni chunishingiz uchun kerak. (Ko'pchilik yaxshi kod yozadi ammo birozdan keyin uni nega yozganini esidan chiqarib qo'yadi) Rustda kod yozish uchun <code>//</code> ishlatiladi:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    // Rust programs start with fn main()
-    // You put the code inside a block. It starts with { and ends with }
-    let some_number = 100; // We can write as much as we want here and the compiler won't look at it
+    // Rust pdasturlari fn main() bilan boshlanadi
+    // Kodingizni blok ichiga qoying. U { bilan boshlanib } bilan tugaydi
+    let some_number = 100; // Biz bu yerga o'zimiz xohlaganimizcha yozishimiz mumkin chunki barbir kompiler bunga qaramaydi
 }</code></pre></pre>
-<p>When you do this, the compiler won't look at anything to the right of the <code>//</code>.</p>
-<p>There is another kind of comment that you write with <code>/*</code> to start and <code>*/</code> to end. This one is useful to write in the middle of your code.</p>
+<p>Qachonki siz bunday qilganingizda, kompiler <code>//</code> dan keyingi hech narsaga qaramaydi.</p>
+<p>TMana bu esa komentariya yozishning boshqacha usuli <code>/*</code> bilan boshlanadi va <code>*/</code> bilan tugaydi. Bu kodingizni ortasida yozish uchun juda qulay.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let some_number/*: i16*/ = 100;
 }</code></pre></pre>
-<p>To the compiler, <code>let some_number/*: i16*/ = 100;</code> looks like <code>let some_number = 100;</code>.</p>
-<p>The <code>/* */</code> form is also useful for very long comments over more than one line. In this example you can see that you need to write <code>//</code> for every line. But if you type <code>/*</code>, it won't stop until you finish it with <code>*/</code>.</p>
+<p>Kompiler uchu <code>let some_number/*: i16*/ = 100;</code> bu bunday ko'rinadi <code>let some_number = 100;</code>.</p>
+<p><code>/* */</code> bu turdagi kommentlar bir qatordan ko'proq bo'lgan kommentlar uchun foydalidir. Bu misolda siz ko'p qatorli komment yozishingiz uchun <code>//</code> ni har bir qatorga qoyib chiqishingiz kerak. Lekin siz <code>/*</code> bunday yozsangiz ,  U siz <code>*/</code> ni qoymaguningizcha toxtamaydi.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let some_number = 100; /* Let me tell you
-    a little about this number.
-    It's 100, which is my favourite number.
-    It's called some_number but actually I think that... */
+    let some_number = 23; /* Sizga men hozir
+    bu raqam haqida ozgina gapirib bermoqchiman.
+    Bu 23 mening yoqtirgan raqamim.
+    Bu some_number deb ataladi lekin aslida esa... */
 
-    let some_number = 100; // Let me tell you
-    // a little about this number.
-    // It's 100, which is my favourite number.
-    // It's called some_number but actually I think that...
+    let some_number = 23; // Men sizga hozir 
+    // bu raqam haqida ozgina gapirib bermoqchiman
+    // Bu 23 mening yoqtirgan raqamim.
+    // Bu some_number deb ataladi lekin aslida esa...
 }</code></pre></pre>
 
                     </main>

@@ -174,20 +174,20 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="turlar-types"><a class="header" href="#turlar-types">Turlar (Types)</a></h2>
-<p>Rust has many types that let you work with numbers, characters, and so on. Some are simple, others are more complicated, and you can even create your own.</p>
+<p>Rust raqamlar, belgilar, va boshqalar bilan ishlash imkonini beruvchi ko'plab turlarga ega. Ba'zilari oddiy, qolganlari esa murakkabroq, va hatto siz ozingizning turingizni yaratishingiz mumkin.</p>
 <h3 id="primtive-turlar"><a class="header" href="#primtive-turlar">Primtive turlar</a></h3>
-<p><strong><a href="https://youtu.be/OxTPU5UGMhs">See this chapter on YouTube</a></strong></p>
-<p>Rust has simple types that are called <strong>primitive types</strong> (primitive = very basic). We will start with integers and <code>char</code> (characters). Integers are whole numbers with no decimal point. There are two types of integers:</p>
+<p><strong><a href="https://youtu.be/OxTPU5UGMhs">Bu bobni YouTubeda tomosha qiling</a></strong></p>
+<p>Rustning oddiy turlari  <strong>primitive turlar</strong> (primitive = boshlangich) deb ataladi. Biz hozir integers(raqamlar) va <code>char</code> (Belgilar) dan boshlaymiz. Integers bu butun sonlar yani kasr qismi bo'lmagan. Ularning ikki xil turi bor:</p>
 <ul>
 <li>Signed integers,</li>
 <li>Unsigned integers.</li>
 </ul>
-<p>Signed means <code>+</code> (plus sign) and <code>-</code> (minus sign), so signed integers can be positive (e.g. +8), negative (e.g. -8), or zero. But unsigned integers can only be positive or zero, because they do not have a sign.</p>
-<p>The signed integers are: <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>, and <code>isize</code>.
-The unsigned integers are: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>, and <code>usize</code>.</p>
-<p>The number after the i or the u means the number of bits for the number, so numbers with more bits can be larger. 8 bits = one byte, so <code>i8</code> is one byte, <code>i64</code> is 8 bytes, and so on. Number types with larger sizes can hold larger numbers. For example, a <code>u8</code> can hold up to 255, but a <code>u16</code> can hold up to 65535. And a <code>u128</code> can hold up to 340282366920938463463374607431768211455.</p>
-<p>So what is <code>isize</code> and <code>usize</code>? This means the number of bits on your type of computer. (The number of bits on your computer is called the <strong>architecture</strong> of your computer.) So <code>isize</code> and <code>usize</code> on a 32-bit computer is like <code>i32</code> and <code>u32</code>, and <code>isize</code> and <code>usize</code> on a 64-bit computer is like <code>i64</code> and <code>u64</code>.</p>
-<p>There are many reasons for the different types of integers. One reason is computer performance: a smaller number of bytes is faster to process. For example, the number -10 as an <code>i8</code> is <code>11110110</code>, but as an <code>i128</code> it is <code>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110</code>. But here are some other uses:</p>
+<p>Signed shuni anglatadiki <code>+</code> (musbat belgisi) va <code>-</code> (manfiy belgisi), shunday qilib signed integers musbat son bo'lishi (e.g. +8), manfiy son bo'lishi (e.g. -8), yoki nol bo'lishi mumkin. Ammo unsigned integerlar faqatgina musbat yoki manfiy bo'lishi mumkin.</p>
+<p>Signed integerlar: <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>, and <code>isize</code>.
+Unsigned integerlar: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>, and <code>usize</code>.</p>
+<p>i yoki u dan keyingi raqam raqam uchun bitlar sonini bildiradi, bundan kelib chiqadiki bitlar qanchalik kotta bo'lsa raqamlar ham shunchalik kotta bo'ladi. 8 bit = bir byte, shuning uchun <code>i8</code> bir byte, <code>i64</code> 8 byte, va hokazo. Kattaroq o'lchamdagi raqamlar turlari kattaroq raqamlarni o'z ichiga olishi mumkin. Misol uchun, <code>u8</code>ga 255gacha son sig'adi, lekin <code>u16</code> ga esa 65535. va <code>u128</code>ga shunday songacha sig'adi 340282366920938463463374607431768211455.</p>
+<p><code>isize</code> va <code>usize</code> nima? Bu sizning kompiyuteringiz turidagi bitlar sonini bildiradi. (Kompiyuteringizdagi bitlar soni kompiyuteringiz <strong>architecture</strong> deb ataladi.) Shunday qilib <code>isize</code> va <code>usize</code> 32-bit lik kompiyuterda <code>i32</code>dek yoki <code>u32</code>dek, va <code>isize</code> va <code>usize</code> 64-bit lik kompiyuterda  <code>i64</code> va <code>u64</code>.</p>
+<p>Turli hildagi integerlar qilishning sabablari bir nechta. Ulardan biri esa kompiyuterning ishlashi: kichikroq bayt soni tezroq qayta ishlanadi. Misol uchun, -10 soni <code>i8</code> da <code>11110110</code> bunday saqlanadi, lekin <code>i128</code>da esa u <code>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110</code> bunday saqlanadi. Ammo bu yerda boshqa foydalanish usullari mavjud:</p>
 <p>Characters in Rust are called <code>char</code>. Every <code>char</code> has a number: the letter <code>A</code> is number 65, while the character <code>友</code> (&quot;friend&quot; in Chinese) is number 21451. The list of numbers is called &quot;Unicode&quot;. Unicode uses smaller numbers for characters that are used more, like A through Z, or digits 0 through 9, or space.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let first_letter = 'A';
