@@ -223,26 +223,26 @@ fn main() {
 
 ## Turlar (Types)
 
-Rust has many types that let you work with numbers, characters, and so on. Some are simple, others are more complicated, and you can even create your own.
+Rust raqamlar, belgilar, va boshqalar bilan ishlash imkonini beruvchi ko'plab turlarga ega. Ba'zilari oddiy, qolganlari esa murakkabroq, va hatto siz ozingizning turingizni yaratishingiz mumkin.
 
 ### Primtive turlar
 **[Bu bobni YouTubeda tomosha qiling](https://youtu.be/OxTPU5UGMhs)**
 
-Rust has simple types that are called **primitive types** (primitive = very basic). We will start with integers and `char` (characters). Integers are whole numbers with no decimal point. There are two types of integers:
+Rustning oddiy turlari  **primitive turlar** (primitive = boshlangich) deb ataladi. Biz hozir integers(raqamlar) va `char` (Belgilar) dan boshlaymiz. Integers bu butun sonlar yani kasr qismi bo'lmagan. Ularning ikki xil turi bor:
 
 - Signed integers,
 - Unsigned integers.
 
-Signed means `+` (plus sign) and `-` (minus sign), so signed integers can be positive (e.g. +8), negative (e.g. -8), or zero. But unsigned integers can only be positive or zero, because they do not have a sign.
+Signed shuni anglatadiki `+` (musbat belgisi) va `-` (manfiy belgisi), shunday qilib signed integers musbat son bo'lishi (e.g. +8), manfiy son bo'lishi (e.g. -8), yoki nol bo'lishi mumkin. Ammo unsigned integerlar faqatgina musbat yoki manfiy bo'lishi mumkin.
 
-The signed integers are: `i8`, `i16`, `i32`, `i64`, `i128`, and `isize`.
-The unsigned integers are: `u8`, `u16`, `u32`, `u64`, `u128`, and `usize`.
+Signed integerlar: `i8`, `i16`, `i32`, `i64`, `i128`, and `isize`.
+Unsigned integerlar: `u8`, `u16`, `u32`, `u64`, `u128`, and `usize`.
 
-The number after the i or the u means the number of bits for the number, so numbers with more bits can be larger. 8 bits = one byte, so `i8` is one byte, `i64` is 8 bytes, and so on. Number types with larger sizes can hold larger numbers. For example, a `u8` can hold up to 255, but a `u16` can hold up to 65535. And a `u128` can hold up to 340282366920938463463374607431768211455.
+i yoki u dan keyingi raqam raqam uchun bitlar sonini bildiradi, bundan kelib chiqadiki bitlar qanchalik kotta bo'lsa raqamlar ham shunchalik kotta bo'ladi. 8 bit = bir byte, shuning uchun `i8` bir byte, `i64` 8 byte, va hokazo. Kattaroq o'lchamdagi raqamlar turlari kattaroq raqamlarni o'z ichiga olishi mumkin. Misol uchun, `u8`ga 255gacha son sig'adi, lekin `u16` ga esa 65535. va `u128`ga shunday songacha sig'adi 340282366920938463463374607431768211455.
 
-So what is `isize` and `usize`? This means the number of bits on your type of computer. (The number of bits on your computer is called the **architecture** of your computer.) So `isize` and `usize` on a 32-bit computer is like `i32` and `u32`, and `isize` and `usize` on a 64-bit computer is like `i64` and `u64`.
+`isize` va `usize` nima? Bu sizning kompiyuteringiz turidagi bitlar sonini bildiradi. (Kompiyuteringizdagi bitlar soni kompiyuteringiz **architecture** deb ataladi.) Shunday qilib `isize` va `usize` 32-bit lik kompiyuterda `i32`dek yoki `u32`dek, va `isize` va `usize` 64-bit lik kompiyuterda  `i64` va `u64`.
 
-There are many reasons for the different types of integers. One reason is computer performance: a smaller number of bytes is faster to process. For example, the number -10 as an `i8` is `11110110`, but as an `i128` it is `11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110`. But here are some other uses:
+Turli hildagi integerlar qilishning sabablari bir nechta. Ulardan biri esa kompiyuterning ishlashi: kichikroq bayt soni tezroq qayta ishlanadi. Misol uchun, -10 soni `i8` da `11110110` bunday saqlanadi, lekin `i128`da esa u `11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110` bunday saqlanadi. Ammo bu yerda boshqa foydalanish usullari mavjud:
 
 Characters in Rust are called `char`. Every `char` has a number: the letter `A` is number 65, while the character `友` ("friend" in Chinese) is number 21451. The list of numbers is called "Unicode". Unicode uses smaller numbers for characters that are used more, like A through Z, or digits 0 through 9, or space.
 
