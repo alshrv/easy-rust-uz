@@ -244,34 +244,33 @@ i yoki u dan keyingi raqam raqam uchun bitlar sonini bildiradi, bundan kelib chi
 
 Turli hildagi integerlar qilishning sabablari bir nechta. Ulardan biri esa kompiyuterning ishlashi: kichikroq bayt soni tezroq qayta ishlanadi. Misol uchun, -10 soni `i8` da `11110110` bunday saqlanadi, lekin `i128`da esa u `11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110` bunday saqlanadi. Ammo bu yerda boshqa foydalanish usullari mavjud:
 
-Characters in Rust are called `char`. Every `char` has a number: the letter `A` is number 65, while the character `友` ("friend" in Chinese) is number 21451. The list of numbers is called "Unicode". Unicode uses smaller numbers for characters that are used more, like A through Z, or digits 0 through 9, or space.
+Rustda belgilar `char` deb nomlanadi. Har bir `char` ning alohida raqami bor: `A` harfining raqami 65, Shuningdek bu belgi `友` ("do'st" Xitoychasiga) raqami 21451. Raqamlarning royhati "Unicode" deb ataladi. Unicode ko'p ishlatiladigan belgilarga kichikroq raqamlar qoyadi, Misol uchun A dan Zgacha, yoki raqamlar 0 dan 9 gacha, yoki space.
 
 ```rust
 fn main() {
-    let first_letter = 'A';
-    let space = ' '; // A space inside ' ' is also a char
-    let other_language_char = 'Ꮔ'; // Thanks to Unicode, other languages like Cherokee display just fine too
-    let cat_face = '😺'; // Emojis are chars too
+    let birinchi_belgi = 'A';
+    let space = ' '; // Bosh joyning ichidagi ' ' ham char
+    let boshqa_tillar = 'Ꮔ'; // Unicodega rahmat, Cherokee dek boshqa tillar ham ekannga yaxshi chiqadi
+    let cat_face = '😺'; // Emojilar ham char hisoblanadi
 }
 ```
 
-The characters that are used most have numbers less than 256, and they can fit into a `u8`. Remember, a `u8` is 0 plus all the numbers up to 255, for 256 in total. This means that Rust can safely **cast** a `u8` into a `char`, using `as`. ("Cast `u8` as `char`" means "pretend `u8` is a `char`")
+Ko'p belgilar uchun ishlatiladigan raqamlar 256dan kichik bo'ladi, va ular `u8` uchun mos keladi. Shuni yodda tutingki, `u8` 0dan 255gacha bo'lgan barcha mustab sonlar, umumiy 256ta bo'ladi. Bu shuni anglatadiki Rust xafsiz **cast** qila oladi `u8`ni `char`ga, `as` dan foydalanib. ("Cast `u8` as `char`" shuni anglatadiki "Goyoki `u8` `char`dek")
 
-Casting with `as` is useful because Rust is very strict. It always needs to know the type, and won't let you use two different types together even if they are both integers. For example, this will not work:
-
+`as` bilan cast qilish foydali chunki Rust juda ham talabchan. U har doim o'zgaruvchi turini bilishi kerak, va u hech qachon ikkita turni birga ishlatishga yo'l qo'ymaydi, ikkalasi integer bo'lgan holda ham. Misol uchun bu ishlamaydi.
 ```rust
-fn main() { // main() is where Rust programs start to run. Code goes inside {} (curly brackets)
+fn main() { // main() bu Rust ilovasi ishga tushadigan joy. Ko'd {} (Jingalak qavslar) ichida yoziladi 
 
-    let my_number = 100; // We didn't write a type of integer,
-                         // so Rust chooses i32. Rust always
-                         // chooses i32 for integers if you don't
-                         // tell it to use a different type
+    let my_number = 100; // Biz integerning turini yozmadik,
+                         // Shunday qilib Rust i32 ni tanladi.
+                         // Rust har doim i32 ni tanlaydi agar siz
+                         // unga qanday turdan foydalanishn aytmasangiz
 
     println!("{}", my_number as char); // ⚠️
 }
 ```
 
-Here is the reason:
+Buning sababi:
 
 ```text
 error[E0604]: only `u8` can be cast as `char`, not `i32`
@@ -281,7 +280,7 @@ error[E0604]: only `u8` can be cast as `char`, not `i32`
   |                    ^^^^^^^^^^^^^^^^^
 ```
 
-Fortunately we can easily fix this with `as`. We can't cast `i32` as a `char`, but we can cast an `i32` as a `u8`. And then we can do the same from `u8` to `char`. So in one line we use `as` to make my_number a `u8`, and again to make it a `char`. Now it will compile:
+Yaxshiyamki biz buni onsongina `as` bilan tog'irlay olamiz. Biz `i32` ni `char` ga o'gira olmaymiz, lekin biz `i32` ni `u8` ga o'gira olamiz. Undan so'ng biz huddi shunday qilib `u8`ni `char` ga o'giramiz. Shunday qilib biz bir qatorning o'zida `i32` ni 'u8'ga va uni `char` ga aylantirdik. Eni esa bu kompilyatsiya bo'ladi:
 
 ```rust
 fn main() {
@@ -290,95 +289,95 @@ fn main() {
 }
 ```
 
-It prints `d` because that is the `char` in place 100.
+Bu `d` ni chop etadi chunki ASCII jadvalida 100 chi bo'lib `d` turadi.
 
-The easier way, however, is just to tell Rust that `my_number` is a `u8`. Here's how you do it:
+Osonroq usuli shunki, shunchaki Rustga `my_number` `u8` turida ekanligini aytish. Buni qanday bajarasiz:
 
 ```rust
 fn main() {
-    let my_number: u8 = 100; //  change my_number to my_number: u8
+    let my_number: u8 = 100; //  my_number ni my_number: u8 ga ozgartirish
     println!("{}", my_number as char);
 }
 ```
 
-So those are two reasons for all the different number types in Rust. Here is another reason: `usize` is the size that Rust uses for *indexing*. (Indexing means "which item is first", "which item is second", etc.) `usize` is the best size for indexing because:
+Shunday qilib Rustda raqamlarning har-xil turi borligiga ikkita sabab bor. Mana boshqa bir sabab: `usize` shunday turki Rust uni *indexing* uchun ishlatadi. (Indexing shuni anglatadiki "qaysi element birinchi", "qaysi element ikkinchi", va boshqalar.) `usize` indexlash uchun eng yaxshi olchamdir chunki:
 
-- An index can't be negative, so it needs to be a number with a u
-- It should be big, because sometimes you need to index many things, but
-- It can't be a u64 because 32-bit computers can't use u64.
+- Index manfiy bo'la olmaydi, shuning uchun unda u bo'lishi kerak
+- U katta bo'lishi kerak, chunki siz bir xilda ko'p narsalarni indexlashingiz kerak bo'lib qoladi, lekin
+- U `u64` bo'la olmaydi chunki 32-bit lik kompiyuter `u64` ni o'qiy olmaydi.
 
-So Rust uses `usize` so that your computer can get the biggest number for indexing that it can read.
+Sizning kompiyuteringiz o'qiy oladigan eng katta sonni olish uchun Rust `usize` ni ishlatadi.
 
 
 
-Let's learn some more about `char`. You saw that a `char` is always one character, and uses `''` instead of `""`.
+Keling `char` haqida ko'proq bilib olamiz. O'zingiz ko'rganingizdek `char` faqat bir belgidan tashkil topadi, va u `''` dan foydalanadi `""` ni o'rniga.
 
-All `chars` use 4 bytes of memory, since 4 bytes are enough to hold any kind of character:
-- Basic letters and symbols usually need 1 out of 4 bytes: `a b 1 2 + - = $ @`
-- Other letters like German Umlauts or accents need 2 out of 4 bytes: `ä ö ü ß è é à ñ`
-- Korean, Japanese or Chinese characters need 3 or 4 bytes: `国 안 녕`
+Hamma `charlar` xotiradan 4 byte joy oladi, 4 byte xotira har qanday belgini saqlab turish uchun yetadi:
+- Asosiy harflar va belgilar odatda 4 bytedan 1 byte joy talab qiladi: `a b 1 2 + - = $ @`
+- Boshqa Nemis Umlautlari kabi boshqa belgilar 4 bytedan 2 byte joy talab qiladi: `ä ö ü ß è é à ñ`
+- Koreys, Japon yoki Xitoy belgilari uchun 3 yoki 4 bytes kerak: `国 안 녕`
 
-When using characters as part of a string, the string is encoded to use the least amount of memory needed for each character.
+Qachonki biz belgilarni stringning(satrning) bir qismi qilib ishlatayotganimizda, string char ning xotiradagi eng kam joyini olish uchun dasturlangan.
 
-We can use `.len()` to see this for ourselves:
+Buni o'zingiz guvoxi bo'lishingiz uchun `.len` dan foydalanishingiz mumkin:
 
 ```rust
 fn main() {
-    println!("Size of a char: {}", std::mem::size_of::<char>()); // 4 bytes
-    println!("Size of string containing 'a': {}", "a".len()); // .len() gives the size of the string in bytes
-    println!("Size of string containing 'ß': {}", "ß".len());
-    println!("Size of string containing '国': {}", "国".len());
-    println!("Size of string containing '𓅱': {}", "𓅱".len());
+    println!("Charning o'lchami {}", std::mem::size_of::<char>()); // 4 byte
+    println!("Stringning o'lchami 'a': {}", "a".len()); // .len() string o'lchamini bytelarda ifoda ettiradi
+    println!("Stringning o'lchami 'ß': {}", "ß".len());
+    println!("Stringning o'lchami '国': {}", "国".len());
+    println!("Stringning o'lchami '𓅱': {}", "𓅱".len());
 }
 ```
 
-This prints:
+Shunday chiqadi:
 
 ```text
-Size of a char: 4
-Size of string containing 'a': 1
-Size of string containing 'ß': 2
-Size of string containing '国': 3
-Size of string containing '𓅱': 4
+Charning o'lchami 4
+Stringning o'lchami 'a': 1
+Stringning o'lchami 'ß': 2
+Stringning o'lchami '国': 3
+Stringning o'lchami '𓅱': 4
 ```
 
-You can see that `a` is one byte, the German `ß` is two, the Japanese `国` is three, and the ancient Egyptian `𓅱` is 4 bytes.
+Ko'rishingiz mumkinki, a - bir bayt, nemischa ß - ikkita, yaponcha - uch, qadimgi Misr 𓅱 - 4 bayt.
 
 ```rust
 fn main() {
     let slice = "Hello!";
-    println!("Slice is {} bytes.", slice.len());
+    println!("Slice bu {} bytes.", slice.len());
     let slice2 = "안녕!"; // Korean for "hi"
-    println!("Slice2 is {} bytes.", slice2.len());
+    println!("Slice2 bu {} bytes.", slice2.len());
 }
 ```
 
-This prints:
+Bunday chiqadi:
 
 ```text
-Slice is 6 bytes.
-Slice2 is 7 bytes.
+Slice bu 6 bytes.
+Slice2 bu 7 bytes.
 ```
 
-`slice` is 6 characters in length and 6 bytes, but `slice2` is 3 characters in length and 7 bytes.
+`slice` 6ta belgidan tashkil topgan va 6 byte, lekin `slice2` 3ta belgidan tashkil topgan va 7 byte.
 
-If `.len()` gives the size in bytes, what about the size in characters? We will learn about these methods later, but you can just remember that `.chars().count()` will do it. `.chars().count()` turns what you wrote into characters and then counts how many there are.
+Agar `.len()` o'lchamlarni bytelarda bersa, qanday qilib belgilarning uzungligini topishimiz mumkin? Biz bu methodlarni keyinroq o'rganamiz, lekin  siz `.chars().count()` qilishini yodda tuting. `.chars().count()` siz yozgan narsalarni belgilarga aylantiradi va uni sanaydi.
 
 
 ```rust
 fn main() {
     let slice = "Hello!";
-    println!("Slice is {} bytes and also {} characters.", slice.len(), slice.chars().count());
+    println!("Slice bu {} byte va {}ta belgi.", slice.len(), slice.chars().count());
     let slice2 = "안녕!";
-    println!("Slice2 is {} bytes but only {} characters.", slice2.len(), slice2.chars().count());
+    println!("Slice2 bu {} byte lekin faqatgina {}ta belgi.", slice2.len(), slice2.chars().count());
 }
 ```
 
-This prints:
+Bunday chiqadi:
 
 ```text
-Slice is 6 bytes and also 6 characters.
-Slice2 is 7 bytes but only 3 characters.
+Slice bu 6 byte va 6ta belgi..
+Slice2 bu 7 byte lekin faqatgina 3ta belgi.
 ```
 
 ## Tur interfacelari
