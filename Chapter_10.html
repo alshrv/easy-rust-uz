@@ -177,7 +177,7 @@
 <p><strong>Bu bobni YouTubeda tomosha qiling: <a href="https://youtu.be/yYlPHRl2geQ">Video 1</a>, <a href="https://youtu.be/DTCSfBJJZb8">Video 2</a></strong></p>
 <p>When you start a new Rust program, it always has this code:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;Hello, world!&quot;);
+    println!("Hello, world!");
 }</code></pre></pre>
 <ul>
 <li><code>fn</code> means function,</li>
@@ -188,12 +188,12 @@
 <p><code>println!</code> is a <strong>macro</strong> that prints to the console. A <strong>macro</strong> is like a function that writes code for you. Macros have a <code>!</code> after them. We will learn about making macros later. For now, remember that <code>!</code> means that it is a macro.</p>
 <p>To learn about the <code>;</code>, we will create another function. First, in <code>main</code> we will print a number 8:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;Hello, world number {}!&quot;, 8);
+    println!("Hello, world number {}!", 8);
 }</code></pre></pre>
-<p>The <code>{}</code> in <code>println!</code> means &quot;put the variable inside here&quot;. This prints <code>Hello, world number 8!</code>.</p>
+<p>The <code>{}</code> in <code>println!</code> means "put the variable inside here". This prints <code>Hello, world number 8!</code>.</p>
 <p>We can put more in, just like we did before:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;Hello, worlds number {} and {}!&quot;, 8, 9);
+    println!("Hello, worlds number {} and {}!", 8, 9);
 }</code></pre></pre>
 <p>This prints <code>Hello, worlds number 8 and 9!</code>.</p>
 <p>Now let's create the function.</p>
@@ -202,16 +202,16 @@
 }
 
 fn main() {
-    println!(&quot;Hello, world number {}!&quot;, number());
+    println!("Hello, world number {}!", number());
 }</code></pre></pre>
 <p>This also prints <code>Hello, world number 8!</code>. When Rust looks at <code>number()</code> it sees a function. This function:</p>
 <ul>
 <li>Does not take anything (because it has <code>()</code>)</li>
-<li>Returns an <code>i32</code>. The <code>-&gt;</code> (called a &quot;skinny arrow&quot;) shows what the function returns.</li>
+<li>Returns an <code>i32</code>. The <code>-&gt;</code> (called a "skinny arrow") shows what the function returns.</li>
 </ul>
 <p>Inside the function is just <code>8</code>. Because there is no <code>;</code>, this is the value it returns. If it had a <code>;</code>, it would not return anything (it would return a <code>()</code>). Rust will not compile this if it has a <code>;</code>, because the return is <code>i32</code> and <code>;</code> returns <code>()</code>, not <code>i32</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;Hello, world number {}&quot;, number());
+    println!("Hello, world number {}", number());
 }
 
 fn number() -&gt; i32 {
@@ -224,12 +224,12 @@ fn number() -&gt; i32 {
 6 |     8;
   |      - help: consider removing this semicolon
 </code></pre>
-<p>This means &quot;you told me that <code>number()</code> returns an <code>i32</code>, but you added a <code>;</code> so it doesn't return anything&quot;. So the compiler suggests removing the semicolon.</p>
+<p>This means "you told me that <code>number()</code> returns an <code>i32</code>, but you added a <code>;</code> so it doesn't return anything". So the compiler suggests removing the semicolon.</p>
 <p>You can also write <code>return 8;</code> but in Rust it is normal to just remove the <code>;</code> to <code>return</code>.</p>
 <p>When you want to give variables to a function, put them inside the <code>()</code>. You have to give them a name and write the type.</p>
 <pre><pre class="playground"><code class="language-rust">fn multiply(number_one: i32, number_two: i32) { // Two i32s will enter the function. We will call them number_one and number_two.
     let result = number_one * number_two;
-    println!(&quot;{} times {} is {}&quot;, number_one, number_two, result);
+    println!("{} times {} is {}", number_one, number_two, result);
 }
 
 fn main() {
@@ -241,7 +241,7 @@ fn main() {
 <p>We can also return an <code>i32</code>. Just take out the semicolon at the end:</p>
 <pre><pre class="playground"><code class="language-rust">fn multiply(number_one: i32, number_two: i32) -&gt; i32 {
     let result = number_one * number_two;
-    println!(&quot;{} times {} is {}&quot;, number_one, number_two, result);
+    println!("{} times {} is {}", number_one, number_two, result);
     result // this is the i32 that we return
 }
 
@@ -252,7 +252,7 @@ fn main() {
 <p>Use <code>let</code> to declare a variable (declare a variable = tell Rust to make a variable).</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number = 8;
-    println!(&quot;Hello, number {}&quot;, my_number);
+    println!("Hello, number {}", my_number);
 }</code></pre></pre>
 <p>Variables start and end inside a code block <code>{}</code>. In this example, <code>my_number</code> ends before we call <code>println!</code>, because it is inside its own code block.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -261,7 +261,7 @@ fn main() {
                            // my_number ends here!
     }
 
-    println!(&quot;Hello, number {}&quot;, my_number); // ⚠️ there is no my_number and
+    println!("Hello, number {}", my_number); // ⚠️ there is no my_number and
                                              // println!() can't find it
 }</code></pre></pre>
 <p>You can use a code block to return a value:</p>
@@ -272,7 +272,7 @@ fn main() {
                           // It works just like a function
     };
 
-    println!(&quot;My number is: {}&quot;, my_number);
+    println!("My number is: {}", my_number);
 }</code></pre></pre>
 <p>If you add a semicolon inside the block, it will return <code>()</code> (nothing):</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -283,7 +283,7 @@ fn main() {
                            // second_number dies now
     };
 
-    println!(&quot;My number is: {:?}&quot;, my_number); // my_number is ()
+    println!("My number is: {:?}", my_number); // my_number is ()
 }</code></pre></pre>
 <p>So why did we write <code>{:?}</code> and not <code>{}</code>? We will talk about that now.</p>
 

@@ -179,7 +179,7 @@
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number = 5;
     if my_number == 7 {
-        println!(&quot;It's seven&quot;);
+        println!("It's seven");
     }
 }</code></pre></pre>
 <p>Also note that you use <code>==</code> and not <code>=</code>. <code>==</code> is to compare, <code>=</code> is to <em>assign</em> (to give a value). Also note that we wrote <code>if my_number == 7</code> and not <code>if (my_number == 7)</code>. You don't need brackets with <code>if</code> in Rust.</p>
@@ -187,11 +187,11 @@
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number = 5;
     if my_number == 7 {
-        println!(&quot;It's seven&quot;);
+        println!("It's seven");
     } else if my_number == 6 {
-        println!(&quot;It's six&quot;)
+        println!("It's six")
     } else {
-        println!(&quot;It's a different number&quot;)
+        println!("It's a different number")
     }
 }</code></pre></pre>
 <p>This prints <code>It's a different number</code> because it's not equal to 7 or 6.</p>
@@ -199,11 +199,11 @@
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number = 5;
     if my_number % 2 == 1 &amp;&amp; my_number &gt; 0 { // % 2 means the number that remains after diving by two
-        println!(&quot;It's a positive odd number&quot;);
+        println!("It's a positive odd number");
     } else if my_number == 6 {
-        println!(&quot;It's six&quot;)
+        println!("It's six")
     } else {
-        println!(&quot;It's a different number&quot;)
+        println!("It's a different number")
     }
 }</code></pre></pre>
 <p>This prints <code>It's a positive odd number</code> because when you divide it by 2 you have a remainder of 1, and it's greater than 0.</p>
@@ -211,9 +211,9 @@
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number: u8 = 5;
     match my_number {
-        0 =&gt; println!(&quot;it's zero&quot;),
-        1 =&gt; println!(&quot;it's one&quot;),
-        2 =&gt; println!(&quot;it's two&quot;),
+        0 =&gt; println!("it's zero"),
+        1 =&gt; println!("it's one"),
+        2 =&gt; println!("it's two"),
         // ⚠️
     }
 }</code></pre></pre>
@@ -224,14 +224,14 @@
 3 |     match my_number {
   |           ^^^^^^^^^ pattern `3u8..=std::u8::MAX` not covered
 </code></pre>
-<p>This means &quot;you told me about 0 to 2, but <code>u8</code>s can go up to 255. What about 3? What about 4? What about 5?&quot; And so on. So you can add <code>_</code> which means &quot;anything else&quot;.</p>
+<p>This means "you told me about 0 to 2, but <code>u8</code>s can go up to 255. What about 3? What about 4? What about 5?" And so on. So you can add <code>_</code> which means "anything else".</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number: u8 = 5;
     match my_number {
-        0 =&gt; println!(&quot;it's zero&quot;),
-        1 =&gt; println!(&quot;it's one&quot;),
-        2 =&gt; println!(&quot;it's two&quot;),
-        _ =&gt; println!(&quot;It's some other number&quot;),
+        0 =&gt; println!("it's zero"),
+        1 =&gt; println!("it's one"),
+        2 =&gt; println!("it's two"),
+        _ =&gt; println!("It's some other number"),
     }
 }</code></pre></pre>
 <p>That prints <code>It's some other number</code>.</p>
@@ -239,7 +239,7 @@
 <ul>
 <li>You write <code>match</code> and then make a <code>{}</code> code block.</li>
 <li>Write the <em>pattern</em> on the left and use a <code>=&gt;</code> fat arrow to say what to do when it matches.</li>
-<li>Each line is called an &quot;arm&quot;.</li>
+<li>Each line is called an "arm".</li>
 <li>Put a comma between the arms (not a semicolon).</li>
 </ul>
 <p>You can declare a value with a match:</p>
@@ -254,36 +254,36 @@
 <p><code>second_number</code> will be 10. Do you see the semicolon at the end? That is because, after the match is over, we actually told the compiler this: <code>let second_number = 10;</code></p>
 <p>You can match on more complicated things too. You use a tuple to do it.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let sky = &quot;cloudy&quot;;
-    let temperature = &quot;warm&quot;;
+    let sky = "cloudy";
+    let temperature = "warm";
 
     match (sky, temperature) {
-        (&quot;cloudy&quot;, &quot;cold&quot;) =&gt; println!(&quot;It's dark and unpleasant today&quot;),
-        (&quot;clear&quot;, &quot;warm&quot;) =&gt; println!(&quot;It's a nice day&quot;),
-        (&quot;cloudy&quot;, &quot;warm&quot;) =&gt; println!(&quot;It's dark but not bad&quot;),
-        _ =&gt; println!(&quot;Not sure what the weather is.&quot;),
+        ("cloudy", "cold") =&gt; println!("It's dark and unpleasant today"),
+        ("clear", "warm") =&gt; println!("It's a nice day"),
+        ("cloudy", "warm") =&gt; println!("It's dark but not bad"),
+        _ =&gt; println!("Not sure what the weather is."),
     }
 }</code></pre></pre>
-<p>This prints <code>It's dark but not bad</code> because it matches &quot;cloudy&quot; and &quot;warm&quot; for <code>sky</code> and <code>temperature</code>.</p>
-<p>You can even put <code>if</code> inside of <code>match</code>. This is called a &quot;match guard&quot;:</p>
+<p>This prints <code>It's dark but not bad</code> because it matches "cloudy" and "warm" for <code>sky</code> and <code>temperature</code>.</p>
+<p>You can even put <code>if</code> inside of <code>match</code>. This is called a "match guard":</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let children = 5;
     let married = true;
 
     match (children, married) {
-        (children, married) if married == false =&gt; println!(&quot;Not married with {} children&quot;, children),
-        (children, married) if children == 0 &amp;&amp; married == true =&gt; println!(&quot;Married but no children&quot;),
-        _ =&gt; println!(&quot;Married? {}. Number of children: {}.&quot;, married, children),
+        (children, married) if married == false =&gt; println!("Not married with {} children", children),
+        (children, married) if children == 0 &amp;&amp; married == true =&gt; println!("Married but no children"),
+        _ =&gt; println!("Married? {}. Number of children: {}.", married, children),
     }
 }</code></pre></pre>
 <p>This will print <code>Married? true. Number of children: 5.</code></p>
 <p>You can use _ as many times as you want in a match. In this match on colours, we have three but only check one at a time.</p>
 <pre><pre class="playground"><code class="language-rust">fn match_colours(rbg: (i32, i32, i32)) {
     match rbg {
-        (r, _, _) if r &lt; 10 =&gt; println!(&quot;Not much red&quot;),
-        (_, b, _) if b &lt; 10 =&gt; println!(&quot;Not much blue&quot;),
-        (_, _, g) if g &lt; 10 =&gt; println!(&quot;Not much green&quot;),
-        _ =&gt; println!(&quot;Each colour has at least 10&quot;),
+        (r, _, _) if r &lt; 10 =&gt; println!("Not much red"),
+        (_, b, _) if b &lt; 10 =&gt; println!("Not much blue"),
+        (_, _, g) if g &lt; 10 =&gt; println!("Not much green"),
+        _ =&gt; println!("Each colour has at least 10"),
     }
 }
 
@@ -309,7 +309,7 @@ Not much green
     let my_number = 10;
     let some_variable = match my_number {
         10 =&gt; 8,
-        _ =&gt; &quot;Not ten&quot;, // ⚠️
+        _ =&gt; "Not ten", // ⚠️
     };
 }</code></pre></pre>
 <p>The compiler tells you that:</p>
@@ -320,14 +320,14 @@ Not much green
    |  _________________________-
 16 | |         10 =&gt; 8,
    | |               - this is found to be of type `{integer}`
-17 | |         _ =&gt; &quot;Not ten&quot;,
+17 | |         _ =&gt; "Not ten",
    | |              ^^^^^^^^^ expected integer, found `&amp;str`
 18 | |     };
    | |_____- `match` arms have incompatible types
 </code></pre>
 <p>This will also not work, for the same reason:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let some_variable = if my_number == 10 { 8 } else { &quot;something else &quot;}; // ⚠️
+    let some_variable = if my_number == 10 { 8 } else { "something else "}; // ⚠️
 }</code></pre></pre>
 <p>But this works, because it's not a <code>match</code> so you have a different <code>let</code> statement each time:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -336,15 +336,15 @@ Not much green
     if my_number == 10 {
         let some_variable = 8;
     } else {
-        let some_variable = &quot;Something else&quot;;
+        let some_variable = "Something else";
     }
 }</code></pre></pre>
 <p>You can also use <code>@</code> to give a name to the value of a <code>match</code> expression, and then you can use it. In this example we match an <code>i32</code> input in a function. If it's 4 or 13 we want to use that number in a <code>println!</code> statement. Otherwise, we don't need to use it.</p>
 <pre><pre class="playground"><code class="language-rust">fn match_number(input: i32) {
     match input {
-    number @ 4 =&gt; println!(&quot;{} is an unlucky number in China (sounds close to 死)!&quot;, number),
-    number @ 13 =&gt; println!(&quot;{} is unlucky in North America, lucky in Italy! In bocca al lupo!&quot;, number),
-    _ =&gt; println!(&quot;Looks like a normal number&quot;),
+    number @ 4 =&gt; println!("{} is an unlucky number in China (sounds close to 死)!", number),
+    number @ 13 =&gt; println!("{} is unlucky in North America, lucky in Italy! In bocca al lupo!", number),
+    _ =&gt; println!("Looks like a normal number"),
     }
 }
 

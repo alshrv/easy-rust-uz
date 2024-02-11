@@ -177,33 +177,33 @@
 <p><strong><a href="https://youtu.be/pSyaGzGg26o">Bu bobni YouTubeda tomosha qiling</a></strong></p>
 <p>Rust has two main types of strings: <code>String</code> and <code>&amp;str</code>. What is the difference?</p>
 <ul>
-<li><code>&amp;str</code> is a simple string. When you write <code>let my_variable = &quot;Hello, world!&quot;</code>, you create a <code>&amp;str</code>. A <code>&amp;str</code> is very fast.</li>
+<li><code>&amp;str</code> is a simple string. When you write <code>let my_variable = "Hello, world!"</code>, you create a <code>&amp;str</code>. A <code>&amp;str</code> is very fast.</li>
 <li><code>String</code> is a more complicated string. It is a bit slower, but it has more functions. A <code>String</code> is a pointer, with data on the heap.</li>
 </ul>
 <p>Also note that <code>&amp;str</code> has the <code>&amp;</code> in front of it because you need a reference to use a <code>str</code>. That's because of the reason we saw above: the stack needs to know the size. So we give it a <code>&amp;</code> that it knows the size of, and then it is happy. Also, because you use a <code>&amp;</code> to interact with a <code>str</code>, you don't own it. But a <code>String</code> is an <em>owned</em> type. We will soon learn why that is important to know.</p>
 <p>Both <code>&amp;str</code> and <code>String</code> are UTF-8. For example, you can write:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let name = &quot;서태지&quot;; // This is a Korean name. No problem, because a &amp;str is UTF-8.
-    let other_name = String::from(&quot;Adrian Fahrenheit Țepeș&quot;); // Ț and ș are no problem in UTF-8.
+    let name = "서태지"; // This is a Korean name. No problem, because a &amp;str is UTF-8.
+    let other_name = String::from("Adrian Fahrenheit Țepeș"); // Ț and ș are no problem in UTF-8.
 }</code></pre></pre>
-<p>You can see in <code>String::from(&quot;Adrian Fahrenheit Țepeș&quot;)</code> that it is easy to make a <code>String</code> from a <code>&amp;str</code>. The two types are very closely linked together, even though they are different.</p>
+<p>You can see in <code>String::from("Adrian Fahrenheit Țepeș")</code> that it is easy to make a <code>String</code> from a <code>&amp;str</code>. The two types are very closely linked together, even though they are different.</p>
 <p>You can even write emojis, thanks to UTF-8.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let name = &quot;😂&quot;;
-    println!(&quot;My name is actually {}&quot;, name);
+    let name = "😂";
+    println!("My name is actually {}", name);
 }</code></pre></pre>
 <p>On your computer that will print <code>My name is actually 😂</code> unless your command line can't print it. Then it will show <code>My name is actually �</code>. But Rust has no problem with emojis or any other Unicode.</p>
 <p>Let's look at the reason for using a <code>&amp;</code> for <code>str</code>s again to make sure we understand.</p>
 <ul>
-<li><code>str</code> is a dynamically sized type (dynamically sized = the size can be different). For example, the names &quot;서태지&quot; and &quot;Adrian Fahrenheit Țepeș&quot; are not the same size:</li>
+<li><code>str</code> is a dynamically sized type (dynamically sized = the size can be different). For example, the names "서태지" and "Adrian Fahrenheit Țepeș" are not the same size:</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust">fn main() {
 
-    println!(&quot;A String is always {:?} bytes. It is Sized.&quot;, std::mem::size_of::&lt;String&gt;()); // std::mem::size_of::&lt;Type&gt;() gives you the size in bytes of a type
-    println!(&quot;And an i8 is always {:?} bytes. It is Sized.&quot;, std::mem::size_of::&lt;i8&gt;());
-    println!(&quot;And an f64 is always {:?} bytes. It is Sized.&quot;, std::mem::size_of::&lt;f64&gt;());
-    println!(&quot;But a &amp;str? It can be anything. '서태지' is {:?} bytes. It is not Sized.&quot;, std::mem::size_of_val(&quot;서태지&quot;)); // std::mem::size_of_val() gives you the size in bytes of a variable
-    println!(&quot;And 'Adrian Fahrenheit Țepeș' is {:?} bytes. It is not Sized.&quot;, std::mem::size_of_val(&quot;Adrian Fahrenheit Țepeș&quot;));
+    println!("A String is always {:?} bytes. It is Sized.", std::mem::size_of::&lt;String&gt;()); // std::mem::size_of::&lt;Type&gt;() gives you the size in bytes of a type
+    println!("And an i8 is always {:?} bytes. It is Sized.", std::mem::size_of::&lt;i8&gt;());
+    println!("And an f64 is always {:?} bytes. It is Sized.", std::mem::size_of::&lt;f64&gt;());
+    println!("But a &amp;str? It can be anything. '서태지' is {:?} bytes. It is not Sized.", std::mem::size_of_val("서태지")); // std::mem::size_of_val() gives you the size in bytes of a variable
+    println!("And 'Adrian Fahrenheit Țepeș' is {:?} bytes. It is not Sized.", std::mem::size_of_val("Adrian Fahrenheit Țepeș"));
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">A String is always 24 bytes. It is Sized.
@@ -215,35 +215,35 @@ And 'Adrian Fahrenheit Țepeș' is 25 bytes. It is not Sized.
 <p>That is why we need a &amp;, because <code>&amp;</code> makes a pointer, and Rust knows the size of the pointer. So the pointer goes on the stack. If we wrote <code>str</code>, Rust wouldn't know what to do because it doesn't know the size.</p>
 <p>There are many ways to make a <code>String</code>. Here are some:</p>
 <ul>
-<li><code>String::from(&quot;This is the string text&quot;);</code> This is a method for String that takes text and creates a String.</li>
-<li><code>&quot;This is the string text&quot;.to_string()</code>. This is a method for &amp;str that makes it a String.</li>
+<li><code>String::from("This is the string text");</code> This is a method for String that takes text and creates a String.</li>
+<li><code>"This is the string text".to_string()</code>. This is a method for &amp;str that makes it a String.</li>
 <li>The <code>format!</code> macro. This is like <code>println!</code> except it creates a String instead of printing. So you can do this:</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_name = &quot;Billybrobby&quot;;
-    let my_country = &quot;USA&quot;;
-    let my_home = &quot;Korea&quot;;
+    let my_name = "Billybrobby";
+    let my_country = "USA";
+    let my_home = "Korea";
 
     let together = format!(
-        &quot;I am {} and I come from {} but I live in {}.&quot;,
+        "I am {} and I come from {} but I live in {}.",
         my_name, my_country, my_home
     );
 }</code></pre></pre>
 <p>Now we have a String named <em>together</em>, but did not print it yet.</p>
-<p>One other way to make a String is called <code>.into()</code> but it is a bit different because <code>.into()</code> isn't just for making a <code>String</code>. Some types can easily convert to and from another type using <code>From</code> and <code>.into()</code>. And if you have <code>From</code>, then you also have <code>.into()</code>. <code>From</code> is clearer because you already know the types: you know that <code>String::from(&quot;Some str&quot;)</code> is a <code>String</code> from a <code>&amp;str</code>. But with <code>.into()</code>, sometimes the compiler doesn't know:</p>
+<p>One other way to make a String is called <code>.into()</code> but it is a bit different because <code>.into()</code> isn't just for making a <code>String</code>. Some types can easily convert to and from another type using <code>From</code> and <code>.into()</code>. And if you have <code>From</code>, then you also have <code>.into()</code>. <code>From</code> is clearer because you already know the types: you know that <code>String::from("Some str")</code> is a <code>String</code> from a <code>&amp;str</code>. But with <code>.into()</code>, sometimes the compiler doesn't know:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_string = &quot;Try to make this a String&quot;.into(); // ⚠️
+    let my_string = "Try to make this a String".into(); // ⚠️
 }</code></pre></pre>
-<p>Rust doesn't know what type you want, because many types can be made from a <code>&amp;str</code>. It says, &quot;I can make a &amp;str into a lot of things. Which one do you want?&quot;</p>
+<p>Rust doesn't know what type you want, because many types can be made from a <code>&amp;str</code>. It says, "I can make a &amp;str into a lot of things. Which one do you want?"</p>
 <pre><code class="language-text">error[E0282]: type annotations needed
  --&gt; src\main.rs:2:9
   |
-2 |     let my_string = &quot;Try to make this a String&quot;.into();
+2 |     let my_string = "Try to make this a String".into();
   |         ^^^^^^^^^ consider giving `my_string` a type
 </code></pre>
 <p>So you can do this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_string: String = &quot;Try to make this a String&quot;.into();
+    let my_string: String = "Try to make this a String".into();
 }</code></pre></pre>
 <p>And now you get a String.</p>
 

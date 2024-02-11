@@ -190,9 +190,9 @@
     let mut vector2 = vec![10, 20, 30]; // we will use .iter_mut() on this one
     vector2.iter_mut().for_each(|x| *x +=100);
 
-    println!(&quot;{:?}&quot;, vector1_a);
-    println!(&quot;{:?}&quot;, vector2);
-    println!(&quot;{:?}&quot;, vector1_b);
+    println!("{:?}", vector1_a);
+    println!("{:?}", vector2);
+    println!("{:?}", vector1_b);
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">[2, 3, 4]
@@ -248,18 +248,18 @@ impl Library {
 
 fn main() {
     let mut my_library = Library::new(); // make a new library
-    my_library.add_book(&quot;The Doom of the Darksword&quot;); // add some books
-    my_library.add_book(&quot;Demian - die Geschichte einer Jugend&quot;);
-    my_library.add_book(&quot;구운몽&quot;);
-    my_library.add_book(&quot;吾輩は猫である&quot;);
+    my_library.add_book("The Doom of the Darksword"); // add some books
+    my_library.add_book("Demian - die Geschichte einer Jugend");
+    my_library.add_book("구운몽");
+    my_library.add_book("吾輩は猫である");
 
-    println!(&quot;{:?}&quot;, my_library.books); // we can print our list of books
+    println!("{:?}", my_library.books); // we can print our list of books
 }</code></pre></pre>
 <p>That works well. Now we want to implement <code>Iterator</code> for the library so we can use it in a <code>for</code> loop. Right now if we try a <code>for</code> loop, it doesn't work:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>for item in my_library {
-    println!(&quot;{}&quot;, item); // ⚠️
+    println!("{}", item); // ⚠️
 }
 <span class="boring">}</span></code></pre></pre>
 <p>It says:</p>
@@ -273,7 +273,7 @@ fn main() {
    = note: required by `std::iter::IntoIterator::into_iter`
 </code></pre>
 <p>But we can make library into an iterator with <code>impl Iterator for Library</code>. Information on the <code>Iterator</code> trait is here in the standard library: <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">https://doc.rust-lang.org/std/iter/trait.Iterator.html</a></p>
-<p>On the top left of the page it says: <code>Associated Types: Item</code> and <code>Required Methods: next</code>. An &quot;associated type&quot; means &quot;a type that goes together&quot;. Our associated type will be <code>String</code>, because we want the iterator to give us Strings.</p>
+<p>On the top left of the page it says: <code>Associated Types: Item</code> and <code>Required Methods: next</code>. An "associated type" means "a type that goes together". Our associated type will be <code>String</code>, because we want the iterator to give us Strings.</p>
 <p>In the page it has an example that looks like this:</p>
 <pre><pre class="playground"><code class="language-rust">// an iterator which alternates between Some and None
 struct Alternate {
@@ -298,7 +298,7 @@ impl Iterator for Alternate {
 
 fn main() {}</code></pre></pre>
 <p>You can see that under <code>impl Iterator for Alternate</code> it says <code>type Item = i32</code>. This is the associated type. Our iterator will be for our list of books, which is a <code>Vec&lt;String&gt;</code>. When we call next, it will give us a <code>String</code>. So we will write <code>type Item = String;</code>. That is the associated item.</p>
-<p>To implement <code>Iterator</code>, you need to write the <code>fn next()</code> function. This is where you decide what the iterator should do. For our <code>Library</code>, we want it to give us the last books first. So we will <code>match</code> with <code>.pop()</code> which takes the last item off if it is <code>Some</code>. We also want to print &quot; is found!&quot; for each item. Now it looks like this:</p>
+<p>To implement <code>Iterator</code>, you need to write the <code>fn next()</code> function. This is where you decide what the iterator should do. For our <code>Library</code>, we want it to give us the last books first. So we will <code>match</code> with <code>.pop()</code> which takes the last item off if it is <code>Some</code>. We also want to print " is found!" for each item. Now it looks like this:</p>
 <pre><pre class="playground"><code class="language-rust">#[derive(Debug, Clone)]
 struct Library {
     library_type: LibraryType,
@@ -330,7 +330,7 @@ impl Iterator for Library {
 
     fn next(&amp;mut self) -&gt; Option&lt;String&gt; {
         match self.books.pop() {
-            Some(book) =&gt; Some(book + &quot; is found!&quot;), // Rust allows String + &amp;str
+            Some(book) =&gt; Some(book + " is found!"), // Rust allows String + &amp;str
             None =&gt; None,
         }
     }
@@ -338,13 +338,13 @@ impl Iterator for Library {
 
 fn main() {
     let mut my_library = Library::new();
-    my_library.add_book(&quot;The Doom of the Darksword&quot;);
-    my_library.add_book(&quot;Demian - die Geschichte einer Jugend&quot;);
-    my_library.add_book(&quot;구운몽&quot;);
-    my_library.add_book(&quot;吾輩は猫である&quot;);
+    my_library.add_book("The Doom of the Darksword");
+    my_library.add_book("Demian - die Geschichte einer Jugend");
+    my_library.add_book("구운몽");
+    my_library.add_book("吾輩は猫である");
 
     for item in my_library.clone() { // we can use a for loop now. Give it a clone so Library won't be destroyed
-        println!(&quot;{}&quot;, item);
+        println!("{}", item);
     }
 }</code></pre></pre>
 <p>This prints:</p>

@@ -179,16 +179,16 @@
     let my_number = 9;
     let reference = &amp;my_number;
 
-    println!(&quot;{}&quot;, my_number == reference); // ⚠️
+    println!("{}", my_number == reference); // ⚠️
 }</code></pre></pre>
 <p>The compiler prints:</p>
 <pre><code class="language-text">error[E0277]: can't compare `{integer}` with `&amp;{integer}`
  --&gt; src\main.rs:5:30
   |
-5 |     println!(&quot;{}&quot;, my_number == reference);
+5 |     println!("{}", my_number == reference);
   |                              ^^ no implementation for `{integer} == &amp;{integer}`
 </code></pre>
-<p>So we change line 5 to <code>println!(&quot;{}&quot;, my_number == *reference);</code> and now it prints <code>true</code> because it's now <code>i32</code> == <code>i32</code>, not <code>i32</code> == <code>&amp;i32</code>. This is called dereferencing.</p>
+<p>So we change line 5 to <code>println!("{}", my_number == *reference);</code> and now it prints <code>true</code> because it's now <code>i32</code> == <code>i32</code>, not <code>i32</code> == <code>&amp;i32</code>. This is called dereferencing.</p>
 <p>But when you use a method, Rust will dereference for you. The <code>.</code> in a method is called the dot operator, and it does dereferencing for free.</p>
 <p>First, let's make a struct with one <code>u8</code> field. Then we will make a reference to it and try to compare. It will not work:</p>
 <pre><pre class="playground"><code class="language-rust">struct Item {
@@ -202,9 +202,9 @@ fn main() {
 
     let reference_number = &amp;item.number; // reference number type is &amp;u8
 
-    println!(&quot;{}&quot;, reference_number == 8); // ⚠️ &amp;u8 and u8 cannot be compared
+    println!("{}", reference_number == 8); // ⚠️ &amp;u8 and u8 cannot be compared
 }</code></pre></pre>
-<p>To make it work, we need to dereference: <code>println!(&quot;{}&quot;, *reference_number == 8);</code>.</p>
+<p>To make it work, we need to dereference: <code>println!("{}", *reference_number == 8);</code>.</p>
 <p>But with the dot operator, we don't need <code>*</code>. For example:</p>
 <pre><pre class="playground"><code class="language-rust">struct Item {
     number: u8,
@@ -217,7 +217,7 @@ fn main() {
 
     let reference_item = &amp;item;
 
-    println!(&quot;{}&quot;, reference_item.number == 8); // we don't need to write *reference_item.number
+    println!("{}", reference_item.number == 8); // we don't need to write *reference_item.number
 }</code></pre></pre>
 <p>Now let's create a method for <code>Item</code> that compares <code>number</code> to another number. We don't need to use <code>*</code> anywhere:</p>
 <pre><pre class="playground"><code class="language-rust">struct Item {
@@ -226,7 +226,7 @@ fn main() {
 
 impl Item {
     fn compare_number(&amp;self, other_number: u8) { // takes a reference to self
-        println!(&quot;Are {} and {} equal? {}&quot;, self.number, other_number, self.number == other_number);
+        println!("Are {} and {} equal? {}", self.number, other_number, self.number == other_number);
             // We don't need to write *self.number
     }
 }

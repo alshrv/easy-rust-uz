@@ -185,7 +185,7 @@
     use std::fmt::Display;
 
     fn prints_one_thing&lt;T: Display&gt;(input: T) { // Print anything that implements Display
-        println!(&quot;{}&quot;, input)
+        println!("{}", input)
     }
 }
 
@@ -195,13 +195,13 @@ fn main() {}</code></pre></pre>
 fn main() {
     crate::print_things::prints_one_thing(6);
 }</code></pre></pre>
-<p><code>crate</code> means &quot;inside this project&quot;, but for our simple example it's the same as &quot;inside this file&quot;. Inside that is the mod <code>print_things</code>, then finally the <code>prints_one_thing()</code> function. You can write that every time, or you can write <code>use</code> to import it. Now we can see the error that says that it's private:</p>
+<p><code>crate</code> means "inside this project", but for our simple example it's the same as "inside this file". Inside that is the mod <code>print_things</code>, then finally the <code>prints_one_thing()</code> function. You can write that every time, or you can write <code>use</code> to import it. Now we can see the error that says that it's private:</p>
 <pre><pre class="playground"><code class="language-rust">// ⚠️
 mod print_things {
     use std::fmt::Display;
 
     fn prints_one_thing&lt;T: Display&gt;(input: T) {
-        println!(&quot;{}&quot;, input)
+        println!("{}", input)
     }
 }
 
@@ -209,7 +209,7 @@ fn main() {
     use crate::print_things::prints_one_thing;
 
     prints_one_thing(6);
-    prints_one_thing(&quot;Trying to print a string...&quot;.to_string());
+    prints_one_thing("Trying to print a string...".to_string());
 }</code></pre></pre>
 <p>Here's the error:</p>
 <pre><code class="language-text">error[E0603]: function `prints_one_thing` is private
@@ -230,7 +230,7 @@ note: the function `prints_one_thing` is defined here
     use std::fmt::Display;
 
     pub fn prints_one_thing&lt;T: Display&gt;(input: T) {
-        println!(&quot;{}&quot;, input)
+        println!("{}", input)
     }
 }
 
@@ -238,7 +238,7 @@ fn main() {
     use crate::print_things::prints_one_thing;
 
     prints_one_thing(6);
-    prints_one_thing(&quot;Trying to print a string...&quot;.to_string());
+    prints_one_thing("Trying to print a string...".to_string());
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">6
@@ -250,7 +250,7 @@ Trying to print a string...
 <li><code>pub</code> for an enum or trait: everything becomes public. This makes sense because traits are about giving the same behaviour to something. And enums are about choosing between items, and you need to see them all to choose them.</li>
 <li><code>pub</code> for a module: a top level module will be <code>pub</code> because if it isn't pub then nobody can touch anything in it at all. But modules inside modules need <code>pub</code> to be public.</li>
 </ul>
-<p>So let's put a struct named <code>Billy</code> inside <code>print_things</code>. This struct will be almost all public, but not quite. The struct is public so it will say <code>pub struct Billy</code>. Inside it will have a <code>name</code> and <code>times_to_print</code>. <code>name</code> will not be public, because we only want the user to create structs named <code>&quot;Billy&quot;.to_string()</code>. But the user can select the number of times to print, so that will be public. It looks like this:</p>
+<p>So let's put a struct named <code>Billy</code> inside <code>print_things</code>. This struct will be almost all public, but not quite. The struct is public so it will say <code>pub struct Billy</code>. Inside it will have a <code>name</code> and <code>times_to_print</code>. <code>name</code> will not be public, because we only want the user to create structs named <code>"Billy".to_string()</code>. But the user can select the number of times to print, so that will be public. It looks like this:</p>
 <pre><pre class="playground"><code class="language-rust">mod print_things {
     use std::fmt::{Display, Debug};
 
@@ -263,20 +263,20 @@ Trying to print a string...
     impl Billy {
         pub fn new(times_to_print: u32) -&gt; Self { // That means the user needs to use new to create a Billy. The user can only change the number of times_to_print
             Self {
-                name: &quot;Billy&quot;.to_string(), // We choose the name - the user can't
+                name: "Billy".to_string(), // We choose the name - the user can't
                 times_to_print,
             }
         }
 
         pub fn print_billy(&amp;self) { // This function prints a Billy
             for _ in 0..self.times_to_print {
-                println!(&quot;{:?}&quot;, self.name);
+                println!("{:?}", self.name);
             }
         }
     }
 
     pub fn prints_one_thing&lt;T: Display&gt;(input: T) {
-        println!(&quot;{}&quot;, input)
+        println!("{}", input)
     }
 }
 
@@ -287,55 +287,55 @@ fn main() {
     my_billy.print_billy();
 }</code></pre></pre>
 <p>This will print:</p>
-<pre><code class="language-text">&quot;Billy&quot;
-&quot;Billy&quot;
-&quot;Billy&quot;
+<pre><code class="language-text">"Billy"
+"Billy"
+"Billy"
 </code></pre>
-<p>By the way, the <code>*</code> to import everything is called the &quot;glob operator&quot;. Glob means &quot;global&quot;, so it means everything.</p>
+<p>By the way, the <code>*</code> to import everything is called the "glob operator". Glob means "global", so it means everything.</p>
 <p>Inside a <code>mod</code> you can create other mods. A child mod (a mod inside of a mod) can always use anything inside a parent mod. You can see this in the next example where we have a <code>mod city</code> inside a <code>mod province</code> inside a <code>mod country</code>.</p>
 <p>You can think of the structure like this: even if you are in a country, you might not be in a province. And even if you are in a province, you might not be in a city. But if you are in a city, you are in its province and you are in its country.</p>
 <pre><pre class="playground"><code class="language-rust">mod country { // The main mod doesn't need pub
     fn print_country(country: &amp;str) { // Note: this function isn't public
-        println!(&quot;We are in the country of {}&quot;, country);
+        println!("We are in the country of {}", country);
     }
     pub mod province { // Make this mod public
 
         fn print_province(province: &amp;str) { // Note: this function isn't public
-            println!(&quot;in the province of {}&quot;, province);
+            println!("in the province of {}", province);
         }
 
         pub mod city { // Make this mod public
             pub fn print_city(country: &amp;str, province: &amp;str, city: &amp;str) {  // This function is public though
                 crate::country::print_country(country);
                 crate::country::province::print_province(province);
-                println!(&quot;in the city of {}&quot;, city);
+                println!("in the city of {}", city);
             }
         }
     }
 }
 
 fn main() {
-    crate::country::province::city::print_city(&quot;Canada&quot;, &quot;New Brunswick&quot;, &quot;Moncton&quot;);
+    crate::country::province::city::print_city("Canada", "New Brunswick", "Moncton");
 }</code></pre></pre>
 <p>The interesting part is that <code>print_city</code> can access <code>print_province</code> and <code>print_country</code>. That's because <code>mod city</code> is inside the other mods. It doesn't need <code>pub</code> in front of <code>print_province</code> to use it. And that makes sense: a city doesn't need to do anything to be inside a province and inside a country.</p>
-<p>You probably noticed that <code>crate::country::province::print_province(province);</code> is very long. When we are inside a module we can use <code>super</code> to bring in items from above. Actually the word super itself means &quot;above&quot;, like in &quot;superior&quot;. In our example we only used the function once, but if you use it more then it is a good idea to import. It can also be a good idea if it makes your code easier to read, even if you only use the function once. The code is almost the same now, but a bit easier to read:</p>
+<p>You probably noticed that <code>crate::country::province::print_province(province);</code> is very long. When we are inside a module we can use <code>super</code> to bring in items from above. Actually the word super itself means "above", like in "superior". In our example we only used the function once, but if you use it more then it is a good idea to import. It can also be a good idea if it makes your code easier to read, even if you only use the function once. The code is almost the same now, but a bit easier to read:</p>
 <pre><pre class="playground"><code class="language-rust">mod country {
     fn print_country(country: &amp;str) {
-        println!(&quot;We are in the country of {}&quot;, country);
+        println!("We are in the country of {}", country);
     }
     pub mod province {
         fn print_province(province: &amp;str) {
-            println!(&quot;in the province of {}&quot;, province);
+            println!("in the province of {}", province);
         }
 
         pub mod city {
-            use super::super::*; // use everything in &quot;above above&quot;: that means mod country
-            use super::*;        // use everything in &quot;above&quot;: that means mod province
+            use super::super::*; // use everything in "above above": that means mod country
+            use super::*;        // use everything in "above": that means mod province
 
             pub fn print_city(country: &amp;str, province: &amp;str, city: &amp;str) {
                 print_country(country);
                 print_province(province);
-                println!(&quot;in the city of {}&quot;, city);
+                println!("in the city of {}", city);
             }
         }
     }
@@ -344,8 +344,8 @@ fn main() {
 fn main() {
     use crate::country::province::city::print_city; // bring in the function
 
-    print_city(&quot;Canada&quot;, &quot;New Brunswick&quot;, &quot;Moncton&quot;);
-    print_city(&quot;Korea&quot;, &quot;Gyeonggi-do&quot;, &quot;Gwangju&quot;); // Now it's less work to use it again
+    print_city("Canada", "New Brunswick", "Moncton");
+    print_city("Korea", "Gyeonggi-do", "Gwangju"); // Now it's less work to use it again
 }</code></pre></pre>
 
                     </main>

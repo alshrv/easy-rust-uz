@@ -174,7 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="cow"><a class="header" href="#cow">Cow</a></h2>
-<p>Cow is a very convenient enum. It means &quot;clone on write&quot; and lets you return a <code>&amp;str</code> if you don't need a <code>String</code>, and a <code>String</code> if you need it. (It can also do the same with arrays vs. Vecs, etc.)</p>
+<p>Cow is a very convenient enum. It means "clone on write" and lets you return a <code>&amp;str</code> if you don't need a <code>String</code>, and a <code>String</code> if you need it. (It can also do the same with arrays vs. Vecs, etc.)</p>
 <p>To understand it, let's look at the signature. It says:</p>
 <pre><pre class="playground"><code class="language-rust">pub enum Cow&lt;'a, B&gt;
 where
@@ -186,26 +186,26 @@ where
 
 fn main() {}</code></pre></pre>
 <p>You know right away that <code>'a</code> means it works with references. The <code>ToOwned</code> trait means that it is a type that can be turned into an owned type. For example, <code>str</code> is usually a reference (<code>&amp;str</code>) and you can turn it into an owned <code>String</code>.</p>
-<p>Next is <code>?Sized</code>. This means &quot;maybe Sized, but maybe not&quot;. Almost every type in Rust is Sized, but types like <code>str</code> are not. That is why we need a <code>&amp;</code> for a <code>str</code>, because the compiler doesn't know the size. So if you want a trait that can use something like a <code>str</code>, you add <code>?Sized.</code></p>
+<p>Next is <code>?Sized</code>. This means "maybe Sized, but maybe not". Almost every type in Rust is Sized, but types like <code>str</code> are not. That is why we need a <code>&amp;</code> for a <code>str</code>, because the compiler doesn't know the size. So if you want a trait that can use something like a <code>str</code>, you add <code>?Sized.</code></p>
 <p>Next are the <code>enum</code> variants. They are <code>Borrowed</code> and <code>Owned</code>.</p>
-<p>Imagine that you have a function that returns <code>Cow&lt;'static, str&gt;</code>. If you tell the function to return <code>&quot;My message&quot;.into()</code>, it will look at the type: &quot;My message&quot; is a <code>str</code>. This is a <code>Borrowed</code> type, so it chooses <code>Borrowed(&amp;'a B)</code>. So it becomes <code>Cow::Borrowed(&amp;'static str)</code>.</p>
-<p>And if you give it a <code>format!(&quot;{}&quot;, &quot;My message&quot;).into()</code> then it will look at the type. This time it is a <code>String</code>, because <code>format!</code> makes a <code>String</code>. So this time it will select &quot;Owned&quot;.</p>
+<p>Imagine that you have a function that returns <code>Cow&lt;'static, str&gt;</code>. If you tell the function to return <code>"My message".into()</code>, it will look at the type: "My message" is a <code>str</code>. This is a <code>Borrowed</code> type, so it chooses <code>Borrowed(&amp;'a B)</code>. So it becomes <code>Cow::Borrowed(&amp;'static str)</code>.</p>
+<p>And if you give it a <code>format!("{}", "My message").into()</code> then it will look at the type. This time it is a <code>String</code>, because <code>format!</code> makes a <code>String</code>. So this time it will select "Owned".</p>
 <p>Here is an example to test <code>Cow</code>. We will put a number into a function that returns a <code>Cow&lt;'static, str&gt;</code>. Depending on the number, it will create a <code>&amp;str</code> or a <code>String</code>. Then it uses <code>.into()</code> to turn it into a <code>Cow</code>. When you do that, it will choose either <code>Cow::Borrowed</code> or <code>Cow::Owned</code>. Then we will match to see which one it chose.</p>
 <pre><pre class="playground"><code class="language-rust">use std::borrow::Cow;
 
 fn modulo_3(input: u8) -&gt; Cow&lt;'static, str&gt; {
     match input % 3 {
-        0 =&gt; &quot;Remainder is 0&quot;.into(),
-        1 =&gt; &quot;Remainder is 1&quot;.into(),
-        remainder =&gt; format!(&quot;Remainder is {}&quot;, remainder).into(),
+        0 =&gt; "Remainder is 0".into(),
+        1 =&gt; "Remainder is 1".into(),
+        remainder =&gt; format!("Remainder is {}", remainder).into(),
     }
 }
 
 fn main() {
     for number in 1..=6 {
         match modulo_3(number) {
-            Cow::Borrowed(message) =&gt; println!(&quot;{} went in. The Cow is borrowed with this message: {}&quot;, number, message),
-            Cow::Owned(message) =&gt; println!(&quot;{} went in. The Cow is owned with this message: {}&quot;, number, message),
+            Cow::Borrowed(message) =&gt; println!("{} went in. The Cow is borrowed with this message: {}", number, message),
+            Cow::Owned(message) =&gt; println!("{} went in. The Cow is owned with this message: {}", number, message),
         }
     }
 }</code></pre></pre>

@@ -177,19 +177,19 @@
 <p><code>impl Trait</code> is similar to generics. You remember that generics use a type <code>T</code> (or any other name) which then gets decided when the program compiles. First let's look at a concrete type:</p>
 <pre><pre class="playground"><code class="language-rust">fn gives_higher_i32(one: i32, two: i32) {
     let higher = if one &gt; two { one } else { two };
-    println!(&quot;{} is higher.&quot;, higher);
+    println!("{} is higher.", higher);
 }
 
 fn main() {
     gives_higher_i32(8, 10);
 }</code></pre></pre>
 <p>This prints: <code>10 is higher.</code>.</p>
-<p>But this only takes <code>i32</code>, so now we will make it generic. We need to compare and we need to print with <code>{}</code>, so our type T needs <code>PartialOrd</code> and <code>Display</code>. Remember, this means &quot;only take types that already have <code>PartialOrd</code> and <code>Display</code>&quot;.</p>
+<p>But this only takes <code>i32</code>, so now we will make it generic. We need to compare and we need to print with <code>{}</code>, so our type T needs <code>PartialOrd</code> and <code>Display</code>. Remember, this means "only take types that already have <code>PartialOrd</code> and <code>Display</code>".</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Display;
 
 fn gives_higher_i32&lt;T: PartialOrd + Display&gt;(one: T, two: T) {
     let higher = if one &gt; two { one } else { two };
-    println!(&quot;{} is higher.&quot;, higher);
+    println!("{} is higher.", higher);
 }
 
 fn main() {
@@ -197,12 +197,12 @@ fn main() {
 }</code></pre></pre>
 <p>Now let's look at <code>impl Trait</code>, which is similar. Instead of a type <code>T</code>, we can bring in a type <code>impl Trait</code>. Then it will take in a type that implements that trait. It is almost the same:</p>
 <pre><pre class="playground"><code class="language-rust">fn prints_it(input: impl Into&lt;String&gt; + std::fmt::Display) { // Takes anything that can turn into a String and has Display
-    println!(&quot;You can print many things, including {}&quot;, input);
+    println!("You can print many things, including {}", input);
 }
 
 fn main() {
-    let name = &quot;Tuon&quot;;
-    let string_name = String::from(&quot;Tuon&quot;);
+    let name = "Tuon";
+    let string_name = String::from("Tuon");
     prints_it(name);
     prints_it(string_name);
 }</code></pre></pre>
@@ -217,22 +217,22 @@ fn main() {
         Map::new(self, f)
     }
 <span class="boring">}</span></code></pre></pre>
-<p><code>fn map&lt;B, F&gt;(self, f: F)</code> mean that it takes two generic types. <code>F</code> is a function that takes one item from the container implementing <code>.map()</code> and <code>B</code> is the return type of that function. Then after the <code>where</code> we see the trait bounds. (&quot;Trait bound&quot; means &quot;it must have this trait&quot;.) One is <code>Sized</code>, and the next is the closure signature. It must be an <code>FnMut</code>, and do the closure on <code>Self::Item</code>, which is the iterator that you give it. Then it returns <code>B</code>.</p>
-<p>So we can do the same thing to return a closure. To return a closure, use <code>impl</code> and then the closure signature. Once you return it, you can use it just like a function. Here is a small example of a function that gives you a closure depending on the text you put in. If you put &quot;double&quot; or &quot;triple&quot; in then it multiplies it by 2 or 3, and otherwise it gives you the same number. Because it's a closure we can do anything we want, so we also print a message.</p>
+<p><code>fn map&lt;B, F&gt;(self, f: F)</code> mean that it takes two generic types. <code>F</code> is a function that takes one item from the container implementing <code>.map()</code> and <code>B</code> is the return type of that function. Then after the <code>where</code> we see the trait bounds. ("Trait bound" means "it must have this trait".) One is <code>Sized</code>, and the next is the closure signature. It must be an <code>FnMut</code>, and do the closure on <code>Self::Item</code>, which is the iterator that you give it. Then it returns <code>B</code>.</p>
+<p>So we can do the same thing to return a closure. To return a closure, use <code>impl</code> and then the closure signature. Once you return it, you can use it just like a function. Here is a small example of a function that gives you a closure depending on the text you put in. If you put "double" or "triple" in then it multiplies it by 2 or 3, and otherwise it gives you the same number. Because it's a closure we can do anything we want, so we also print a message.</p>
 <pre><pre class="playground"><code class="language-rust">fn returns_a_closure(input: &amp;str) -&gt; impl FnMut(i32) -&gt; i32 {
     match input {
-        &quot;double&quot; =&gt; |mut number| {
+        "double" =&gt; |mut number| {
             number *= 2;
-            println!(&quot;Doubling number. Now it is {}&quot;, number);
+            println!("Doubling number. Now it is {}", number);
             number
         },
-        &quot;triple&quot; =&gt; |mut number| {
+        "triple" =&gt; |mut number| {
             number *= 40;
-            println!(&quot;Tripling number. Now it is {}&quot;, number);
+            println!("Tripling number. Now it is {}", number);
             number
         },
         _ =&gt; |number| {
-            println!(&quot;Sorry, it's the same: {}.&quot;, number);
+            println!("Sorry, it's the same: {}.", number);
             number
         },
     }
@@ -242,9 +242,9 @@ fn main() {
     let my_number = 10;
 
     // Make three closures
-    let mut doubles = returns_a_closure(&quot;double&quot;);
-    let mut triples = returns_a_closure(&quot;triple&quot;);
-    let mut quadruples = returns_a_closure(&quot;quadruple&quot;);
+    let mut doubles = returns_a_closure("double");
+    let mut triples = returns_a_closure("triple");
+    let mut quadruples = returns_a_closure("quadruple");
 
     doubles(my_number);
     triples(my_number);
@@ -265,23 +265,23 @@ fn change_fear(input: TimeOfDay) -&gt; impl FnMut(f64) -&gt; f64 { // The functi
                       // Instead of TimeOfDay::Dawn, TimeOfDay::Day, etc.
     match input {
         Dawn =&gt; |x| { // This is the variable character_fear that we give it later
-            println!(&quot;The morning sun has vanquished the horrible night. You no longer feel afraid.&quot;);
-            println!(&quot;Your fear is now {}&quot;, x * 0.5);
+            println!("The morning sun has vanquished the horrible night. You no longer feel afraid.");
+            println!("Your fear is now {}", x * 0.5);
             x * 0.5
         },
         Day =&gt; |x| {
-            println!(&quot;What a nice day. Maybe put your feet up and rest a bit.&quot;);
-            println!(&quot;Your fear is now {}&quot;, x * 0.2);
+            println!("What a nice day. Maybe put your feet up and rest a bit.");
+            println!("Your fear is now {}", x * 0.2);
             x * 0.2
         },
         Sunset =&gt; |x| {
-            println!(&quot;The sun is almost down! This is no good.&quot;);
-            println!(&quot;Your fear is now {}&quot;, x * 1.4);
+            println!("The sun is almost down! This is no good.");
+            println!("Your fear is now {}", x * 1.4);
             x * 1.4
         },
         Night =&gt; |x| {
-            println!(&quot;What a horrible night to have a curse.&quot;);
-            println!(&quot;Your fear is now {}&quot;, x * 5.0);
+            println!("What a horrible night to have a curse.");
+            println!("Your fear is now {}", x * 5.0);
             x * 5.0
         },
     }

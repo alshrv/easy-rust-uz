@@ -177,13 +177,13 @@
 <p>Closures are like quick functions that don't need a name. Sometimes they are called lambdas. Closures are easy to find because they use <code>||</code> instead of <code>()</code>. They are very common in Rust, and once you learn to use them you will wonder how you lived without them.</p>
 <p>You can bind a closure to a variable, and then it looks exactly like a function when you use it:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_closure = || println!(&quot;This is a closure&quot;);
+    let my_closure = || println!("This is a closure");
     my_closure();
 }</code></pre></pre>
 <p>So this closure takes nothing: <code>||</code> and prints a message: <code>This is a closure</code>.</p>
 <p>In between the <code>||</code> we can add input variables and types, like inside <code>()</code> for a function:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_closure = |x: i32| println!(&quot;{}&quot;, x);
+    let my_closure = |x: i32| println!("{}", x);
 
     my_closure(5);
     my_closure(5+5);
@@ -197,7 +197,7 @@
     let my_closure = || {
         let number = 7;
         let other_number = 10;
-        println!(&quot;The two numbers are {} and {}.&quot;, number, other_number);
+        println!("The two numbers are {} and {}.", number, other_number);
           // This closure can be as long as we want, just like a function.
     };
 
@@ -208,23 +208,23 @@
     let number_one = 6;
     let number_two = 10;
 
-    let my_closure = || println!(&quot;{}&quot;, number_one + number_two);
+    let my_closure = || println!("{}", number_one + number_two);
     my_closure();
 }</code></pre></pre>
 <p>So this prints <code>16</code>. You didn't need to put anything in <code>||</code> because it can just take <code>number_one</code> and <code>number_two</code> and add them.</p>
-<p>By the way, that is where the name <strong>closure</strong> comes from, because they take variables and &quot;enclose&quot; them inside. And if you want to be very correct:</p>
+<p>By the way, that is where the name <strong>closure</strong> comes from, because they take variables and "enclose" them inside. And if you want to be very correct:</p>
 <ul>
-<li>a <code>||</code> that doesn't enclose a variable from outside is an &quot;anonymous function&quot;. Anonymous means &quot;doesn't have a name&quot;. It works more like a regular function.</li>
-<li>a <code>||</code> that does enclose a variable from outside is a &quot;closure&quot;. It &quot;encloses&quot; the variables around it to use them.</li>
+<li>a <code>||</code> that doesn't enclose a variable from outside is an "anonymous function". Anonymous means "doesn't have a name". It works more like a regular function.</li>
+<li>a <code>||</code> that does enclose a variable from outside is a "closure". It "encloses" the variables around it to use them.</li>
 </ul>
-<p>But people will often call all <code>||</code> functions closures, so you don't have to worry about the name. We will just say &quot;closure&quot; for anything with a <code>||</code>, but remember that it can mean an &quot;anonymous function&quot;.</p>
-<p>Why is it good to know the difference? It's because an anonymous function actually makes the same machine code as a function with a name. They feel &quot;high level&quot;, so sometimes people think that the machine code will be complicated. But the machine code that Rust makes from it is just as fast as a regular function.</p>
+<p>But people will often call all <code>||</code> functions closures, so you don't have to worry about the name. We will just say "closure" for anything with a <code>||</code>, but remember that it can mean an "anonymous function".</p>
+<p>Why is it good to know the difference? It's because an anonymous function actually makes the same machine code as a function with a name. They feel "high level", so sometimes people think that the machine code will be complicated. But the machine code that Rust makes from it is just as fast as a regular function.</p>
 <p>So let's look at some more things that closures can do. You can also do this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let number_one = 6;
     let number_two = 10;
 
-    let my_closure = |x: i32| println!(&quot;{}&quot;, number_one + number_two + x);
+    let my_closure = |x: i32| println!("{}", number_one + number_two + x);
     my_closure(5);
 }</code></pre></pre>
 <p>This closure takes <code>number_one</code> and <code>number_two</code>. We also gave it a new variable <code>x</code> and said that <code>x</code> is 5. Then it adds all three together to print <code>21</code>.</p>
@@ -241,7 +241,7 @@
         }
     });
 
-    println!(&quot;{}&quot;, fourth);
+    println!("{}", fourth);
 }</code></pre></pre>
 <p>Of course, a closure can be very simple. You can just write <code>let fourth = my_vec.get(3).unwrap_or_else(|| &amp;0);</code> for example. You don't always need to use a <code>{}</code> and write complicated code just because there is a closure. As long as you put the <code>||</code> in, the compiler knows that you have put in the closure that you need.</p>
 <p>The most frequent closure method is maybe <code>.map()</code>. Let's take a look at it again. Here is one way to use it:</p>
@@ -252,7 +252,7 @@
         .iter()                     // iterate over it
         .map(|number| number * 2)   // for each item, multiply by two
         .collect::&lt;Vec&lt;i32&gt;&gt;();     // then make a new Vec from this
-    println!(&quot;{:?}&quot;, double_vec);
+    println!("{:?}", double_vec);
 }</code></pre></pre>
 <p>Another good example is with <code>.for_each()</code> after <code>.enumerate()</code>. The <code>.enumerate()</code> method gives an iterator with the index number and the item. For example: <code>[10, 9, 8]</code> becomes <code>(0, 10), (1, 9), (2, 8)</code>. The type for each item here is <code>(usize, i32)</code>. So you can do this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -261,7 +261,7 @@
     num_vec
         .iter()      // iterate over num_vec
         .enumerate() // get (index, number)
-        .for_each(|(index, number)| println!(&quot;Index number {} has number {}&quot;, index, number)); // do something for each one
+        .for_each(|(index, number)| println!("Index number {} has number {}", index, number)); // do something for each one
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Index number 0 has number 10
@@ -276,7 +276,7 @@ Index number 2 has number 8
     num_vec
         .iter()
         .enumerate()
-        .map(|(index, number)| println!(&quot;Index number {} has number {}&quot;, index, number));
+        .map(|(index, number)| println!("Index number {} has number {}", index, number));
 
 }</code></pre></pre>
 <p>It says:</p>
@@ -286,7 +286,7 @@ Index number 2 has number 8
 4 | /     num_vec
 5 | |         .iter()
 6 | |         .enumerate()
-7 | |         .map(|(index, number)| println!(&quot;Index number {} has number {}&quot;, index, number));
+7 | |         .map(|(index, number)| println!("Index number {} has number {}", index, number));
   | |_________________________________________________________________________________________^
   |
   = note: `#[warn(unused_must_use)]` on by default
@@ -305,21 +305,21 @@ Index number 2 has number 8
 <li>then enumerate over all the <code>i32</code>s from the iterator</li>
 <li>then map over all the enumerated <code>i32</code>s</li>
 </ul>
-<p>Rust only wants to do one calculation, so it creates the structure and waits. Then if we say <code>.collect::&lt;Vec&lt;i32&gt;&gt;()</code> it knows what to do, and starts moving. This is what <code>iterators are lazy and do nothing unless consumed</code> means. The iterators don't do anything until you &quot;consume&quot; them (use them up).</p>
+<p>Rust only wants to do one calculation, so it creates the structure and waits. Then if we say <code>.collect::&lt;Vec&lt;i32&gt;&gt;()</code> it knows what to do, and starts moving. This is what <code>iterators are lazy and do nothing unless consumed</code> means. The iterators don't do anything until you "consume" them (use them up).</p>
 <p>You can even create complicated things like <code>HashMap</code> using <code>.collect()</code>, so it is very powerful. Here is an example of how to put two vecs into a <code>HashMap</code>. First we make the two vectors, and then we will use <code>.into_iter()</code> on them to get an iterator of values. Then we use the <code>.zip()</code> method. This method takes two iterators and attaches them together, like a zipper. Finally, we use <code>.collect()</code> to make the <code>HashMap</code>.</p>
 <p>Here is the code:</p>
 <pre><pre class="playground"><code class="language-rust">use std::collections::HashMap;
 
 fn main() {
     let some_numbers = vec![0, 1, 2, 3, 4, 5]; // a Vec&lt;i32&gt;
-    let some_words = vec![&quot;zero&quot;, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;]; // a Vec&lt;&amp;str&gt;
+    let some_words = vec!["zero", "one", "two", "three", "four", "five"]; // a Vec&lt;&amp;str&gt;
 
     let number_word_hashmap = some_numbers
         .into_iter()                 // now it is an iter
         .zip(some_words.into_iter()) // inside .zip() we put in the other iter. Now they are together.
         .collect::&lt;HashMap&lt;_, _&gt;&gt;();
 
-    println!(&quot;For key {} we get {}.&quot;, 2, number_word_hashmap.get(&amp;2).unwrap());
+    println!("For key {} we get {}.", 2, number_word_hashmap.get(&amp;2).unwrap());
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">For key 2 we get two.
@@ -329,37 +329,37 @@ fn main() {
 
 fn main() {
     let some_numbers = vec![0, 1, 2, 3, 4, 5]; // a Vec&lt;i32&gt;
-    let some_words = vec![&quot;zero&quot;, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;]; // a Vec&lt;&amp;str&gt;
+    let some_words = vec!["zero", "one", "two", "three", "four", "five"]; // a Vec&lt;&amp;str&gt;
     let number_word_hashmap: HashMap&lt;_, _&gt; = some_numbers  // Because we tell it the type here...
         .into_iter()
         .zip(some_words.into_iter())
         .collect(); // we don't have to tell it here
 }</code></pre></pre>
-<p>There is another method that is like <code>.enumerate()</code> for <code>char</code>s: <code>char_indices()</code>. (Indices means &quot;indexes&quot;). You use it in the same way. Let's pretend we have a big string that made of 3-digit numbers.</p>
+<p>There is another method that is like <code>.enumerate()</code> for <code>char</code>s: <code>char_indices()</code>. (Indices means "indexes"). You use it in the same way. Let's pretend we have a big string that made of 3-digit numbers.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let numbers_together = &quot;140399923481800622623218009598281&quot;;
+    let numbers_together = "140399923481800622623218009598281";
 
     for (index, number) in numbers_together.char_indices() {
         match (index % 3, number) {
-            (0..=1, number) =&gt; print!(&quot;{}&quot;, number), // just print the number if there is a remainder
-            _ =&gt; print!(&quot;{}\t&quot;, number), // otherwise print the number with a tab space
+            (0..=1, number) =&gt; print!("{}", number), // just print the number if there is a remainder
+            _ =&gt; print!("{}\t", number), // otherwise print the number with a tab space
         }
     }
 }</code></pre></pre>
 <p>This prints <code>140     399     923     481     800     622     623     218     009     598    281</code>.</p>
 <h3 id="_-closureda"><a class="header" href="#_-closureda">|_| closureda</a></h3>
-<p>Sometimes you see <code>|_|</code> in a closure. This means that the closure needs an argument (like <code>x</code>), but you don't want to use it. So <code>|_|</code> means &quot;Okay, this closure takes an argument but I won't give it a name because I don't care about it&quot;.</p>
+<p>Sometimes you see <code>|_|</code> in a closure. This means that the closure needs an argument (like <code>x</code>), but you don't want to use it. So <code>|_|</code> means "Okay, this closure takes an argument but I won't give it a name because I don't care about it".</p>
 <p>Here is an example of an error when you don't do that:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_vec = vec![8, 9, 10];
 
-    println!(&quot;{:?}&quot;, my_vec.iter().for_each(|| println!(&quot;We didn't use the variables at all&quot;))); // ⚠️
+    println!("{:?}", my_vec.iter().for_each(|| println!("We didn't use the variables at all"))); // ⚠️
 }</code></pre></pre>
 <p>Rust says that</p>
 <pre><code class="language-text">error[E0593]: closure is expected to take 1 argument, but it takes 0 arguments
   --&gt; src\main.rs:28:36
    |
-28 |     println!(&quot;{:?}&quot;, my_vec.iter().for_each(|| println!(&quot;We didn't use the variables at all&quot;)));
+28 |     println!("{:?}", my_vec.iter().for_each(|| println!("We didn't use the variables at all")));
    |                                    ^^^^^^^^ -- takes 0 arguments
    |                                    |
    |                                    expected closure that takes 1 argument
@@ -367,25 +367,25 @@ fn main() {
 <p>The compiler actually gives you some help:</p>
 <pre><code class="language-text">help: consider changing the closure to take and ignore the expected argument
    |
-28 |     println!(&quot;{:?}&quot;, my_vec.iter().for_each(|_| println!(&quot;We didn't use the variables at all&quot;)));
+28 |     println!("{:?}", my_vec.iter().for_each(|_| println!("We didn't use the variables at all")));
 </code></pre>
 <p>This is good advice. If you change <code>||</code> to <code>|_|</code> then it will work.</p>
 <h3 id="closurelar-va-iteratorlar-uchun-foydali-methodlar"><a class="header" href="#closurelar-va-iteratorlar-uchun-foydali-methodlar">Closurelar va iteratorlar uchun foydali methodlar</a></h3>
 <p>Rust becomes a very fun to language once you become comfortable with closures. With closures you can <em>chain</em> methods to each other and do a lot of things with very little code. Here are some closures and methods used with closures that we didn't see yet.</p>
 <p><code>.filter()</code>: This lets you keep the items in an iterator that you want to keep. Let's filter the months of the year.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let months = vec![&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;];
+    let months = vec!["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     let filtered_months = months
         .into_iter()                         // make an iter
         .filter(|month| month.len() &lt; 5)     // We don't want months more than 5 bytes in length.
                                              // We know that each letter is one byte so .len() is fine
-        .filter(|month| month.contains(&quot;u&quot;)) // Also we only like months with the letter u
+        .filter(|month| month.contains("u")) // Also we only like months with the letter u
         .collect::&lt;Vec&lt;&amp;str&gt;&gt;();
 
-    println!(&quot;{:?}&quot;, filtered_months);
+    println!("{:?}", filtered_months);
 }</code></pre></pre>
-<p>This prints <code>[&quot;June&quot;, &quot;July&quot;]</code>.</p>
+<p>This prints <code>["June", "July"]</code>.</p>
 <p><code>.filter_map()</code>. This is called <code>filter_map()</code> because it does <code>.filter()</code> and <code>.map()</code>. The closure must return an <code>Option&lt;T&gt;</code>, and then <code>filter_map()</code> takes the value out of each <code>Option</code> if it is <code>Some</code>. So for example if you were to <code>.filter_map()</code> a <code>vec![Some(2), None, Some(3)]</code>, it would return <code>[2, 3]</code>.</p>
 <p>We will write an example with a <code>Company</code> struct. Each company has a <code>name</code> so that field is <code>String</code>, but the CEO might have recently quit. So the <code>ceo</code> field is <code>Option&lt;String&gt;</code>. We will <code>.filter_map()</code> over some companies to just keep the CEO names.</p>
 <pre><pre class="playground"><code class="language-rust">struct Company {
@@ -396,7 +396,7 @@ fn main() {
 impl Company {
     fn new(name: &amp;str, ceo: &amp;str) -&gt; Self {
         let ceo = match ceo {
-            &quot;&quot; =&gt; None,
+            "" =&gt; None,
             ceo =&gt; Some(ceo.to_string()),
         }; // ceo is decided, so now we return Self
         Self {
@@ -412,10 +412,10 @@ impl Company {
 
 fn main() {
     let company_vec = vec![
-        Company::new(&quot;Umbrella Corporation&quot;, &quot;Unknown&quot;),
-        Company::new(&quot;Ovintiv&quot;, &quot;Doug Suttles&quot;),
-        Company::new(&quot;The Red-Headed League&quot;, &quot;&quot;),
-        Company::new(&quot;Stark Enterprises&quot;, &quot;&quot;),
+        Company::new("Umbrella Corporation", "Unknown"),
+        Company::new("Ovintiv", "Doug Suttles"),
+        Company::new("The Red-Headed League", ""),
+        Company::new("Stark Enterprises", ""),
     ];
 
     let all_the_ceos = company_vec
@@ -423,20 +423,20 @@ fn main() {
         .filter_map(|company| company.get_ceo()) // filter_map needs Option&lt;T&gt;
         .collect::&lt;Vec&lt;String&gt;&gt;();
 
-    println!(&quot;{:?}&quot;, all_the_ceos);
+    println!("{:?}", all_the_ceos);
 }</code></pre></pre>
-<p>This prints <code>[&quot;Unknown&quot;, &quot;Doug Suttles&quot;]</code>.</p>
+<p>This prints <code>["Unknown", "Doug Suttles"]</code>.</p>
 <p>Since <code>.filter_map()</code> needs an <code>Option</code>, what about <code>Result</code>? No problem: there is a method called <code>.ok()</code> that turns <code>Result</code> into <code>Option</code>. It is called <code>.ok()</code> because all it can send is the <code>Ok</code> result (the <code>Err</code> information is gone). You remember that <code>Option</code> is <code>Option&lt;T&gt;</code> while <code>Result</code> is <code>Result&lt;T, E&gt;</code> with information for both <code>Ok</code> and <code>Err</code>. So when you use <code>.ok()</code>, any <code>Err</code> information is lost and it becomes <code>None</code>.</p>
 <p>Using <code>.parse()</code> is an easy example for this, where we try to parse some user input. <code>.parse()</code> here takes a <code>&amp;str</code> and tries to turn it into an <code>f32</code>. It returns a <code>Result</code>, but we are using <code>filter_map()</code> so we just throw out the errors. Anything that is <code>Err</code> becomes <code>None</code> and is filtered out by <code>.filter_map()</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let user_input = vec![&quot;8.9&quot;, &quot;Nine point nine five&quot;, &quot;8.0&quot;, &quot;7.6&quot;, &quot;eleventy-twelve&quot;];
+    let user_input = vec!["8.9", "Nine point nine five", "8.0", "7.6", "eleventy-twelve"];
 
     let actual_numbers = user_input
         .into_iter()
         .filter_map(|input| input.parse::&lt;f32&gt;().ok())
         .collect::&lt;Vec&lt;f32&gt;&gt;();
 
-    println!(&quot;{:?}&quot;, actual_numbers);
+    println!("{:?}", actual_numbers);
 }</code></pre></pre>
 <p>This prints <code>[8.9, 8.0, 7.6]</code>.</p>
 <p>On the opposite side of <code>.ok()</code> is <code>.ok_or()</code> and <code>ok_or_else()</code>. This turns an <code>Option</code> into a <code>Result</code>. It is called <code>.ok_or()</code> because a <code>Result</code> gives an <code>Ok</code> <strong>or</strong> an <code>Err</code>, so you have to let it know what the <code>Err</code> value will be. That is because <code>None</code> in an <code>Option</code> doesn't have any information. Also, you can see now that the <em>else</em> part in the names of these methods means that it has a closure.</p>
@@ -450,7 +450,7 @@ struct Company {
 impl Company {
     fn new(name: &amp;str, ceo: &amp;str) -&gt; Self {
         let ceo = match ceo {
-            &quot;&quot; =&gt; None,
+            "" =&gt; None,
             ceo =&gt; Some(ceo.to_string()),
         };
         Self {
@@ -466,34 +466,34 @@ impl Company {
 
 fn main() {
     let company_vec = vec![
-        Company::new(&quot;Umbrella Corporation&quot;, &quot;Unknown&quot;),
-        Company::new(&quot;Ovintiv&quot;, &quot;Doug Suttles&quot;),
-        Company::new(&quot;The Red-Headed League&quot;, &quot;&quot;),
-        Company::new(&quot;Stark Enterprises&quot;, &quot;&quot;),
+        Company::new("Umbrella Corporation", "Unknown"),
+        Company::new("Ovintiv", "Doug Suttles"),
+        Company::new("The Red-Headed League", ""),
+        Company::new("Stark Enterprises", ""),
     ];
 
     let mut results_vec = vec![]; // Pretend we need to gather error results too
 
     company_vec
         .iter()
-        .for_each(|company| results_vec.push(company.get_ceo().ok_or(&quot;No CEO found&quot;)));
+        .for_each(|company| results_vec.push(company.get_ceo().ok_or("No CEO found")));
 
     for item in results_vec {
-        println!(&quot;{:?}&quot;, item);
+        println!("{:?}", item);
     }
 }</code></pre></pre>
 <p>This line is the biggest change:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
-.for_each(|company| results_vec.push(company.get_ceo().ok_or(&quot;No CEO found&quot;)));
+.for_each(|company| results_vec.push(company.get_ceo().ok_or("No CEO found")));
 <span class="boring">}</span></code></pre></pre>
-<p>It means: &quot;For each company, use <code>get_ceo()</code>. If you get it, then pass on the value inside <code>Ok</code>. And if you don't, pass on &quot;No CEO found&quot; inside <code>Err</code>. Then push this into the vec.&quot;</p>
+<p>It means: "For each company, use <code>get_ceo()</code>. If you get it, then pass on the value inside <code>Ok</code>. And if you don't, pass on "No CEO found" inside <code>Err</code>. Then push this into the vec."</p>
 <p>So when we print <code>results_vec</code> we get this:</p>
-<pre><code class="language-text">Ok(&quot;Unknown&quot;)
-Ok(&quot;Doug Suttles&quot;)
-Err(&quot;No CEO found&quot;)
-Err(&quot;No CEO found&quot;)
+<pre><code class="language-text">Ok("Unknown")
+Ok("Doug Suttles")
+Err("No CEO found")
+Err("No CEO found")
 </code></pre>
 <p>So now we have all four entries. Now let's use <code>.ok_or_else()</code> so we can use a closure and get a better error message. Now we have space to use <code>format!</code> to create a <code>String</code>, and put the company name in that. Then we return the <code>String</code>.</p>
 <pre><pre class="playground"><code class="language-rust">// Everything before main() is exactly the same
@@ -505,7 +505,7 @@ struct Company {
 impl Company {
     fn new(name: &amp;str, ceo: &amp;str) -&gt; Self {
         let ceo = match ceo {
-            &quot;&quot; =&gt; None,
+            "" =&gt; None,
             name =&gt; Some(name.to_string()),
         };
         Self {
@@ -521,32 +521,32 @@ impl Company {
 
 fn main() {
     let company_vec = vec![
-        Company::new(&quot;Umbrella Corporation&quot;, &quot;Unknown&quot;),
-        Company::new(&quot;Ovintiv&quot;, &quot;Doug Suttles&quot;),
-        Company::new(&quot;The Red-Headed League&quot;, &quot;&quot;),
-        Company::new(&quot;Stark Enterprises&quot;, &quot;&quot;),
+        Company::new("Umbrella Corporation", "Unknown"),
+        Company::new("Ovintiv", "Doug Suttles"),
+        Company::new("The Red-Headed League", ""),
+        Company::new("Stark Enterprises", ""),
     ];
 
     let mut results_vec = vec![];
 
     company_vec.iter().for_each(|company| {
         results_vec.push(company.get_ceo().ok_or_else(|| {
-            let err_message = format!(&quot;No CEO found for {}&quot;, company.name);
+            let err_message = format!("No CEO found for {}", company.name);
             err_message
         }))
     });
 
     for item in results_vec {
-        println!(&quot;{:?}&quot;, item);
+        println!("{:?}", item);
     }
 }</code></pre></pre>
 <p>This gives us:</p>
-<pre><code class="language-text">Ok(&quot;Unknown&quot;)
-Ok(&quot;Doug Suttles&quot;)
-Err(&quot;No CEO found for The Red-Headed League&quot;)
-Err(&quot;No CEO found for Stark Enterprises&quot;)
+<pre><code class="language-text">Ok("Unknown")
+Ok("Doug Suttles")
+Err("No CEO found for The Red-Headed League")
+Err("No CEO found for Stark Enterprises")
 </code></pre>
-<p><code>.and_then()</code> is a helpful method that takes an <code>Option</code>, then lets you do something to its value and pass it on. So its input is an <code>Option</code>, and its output is also an <code>Option</code>. It is sort of like a safe &quot;unwrap, then do something, then wrap again&quot;.</p>
+<p><code>.and_then()</code> is a helpful method that takes an <code>Option</code>, then lets you do something to its value and pass it on. So its input is an <code>Option</code>, and its output is also an <code>Option</code>. It is sort of like a safe "unwrap, then do something, then wrap again".</p>
 <p>An easy example is a number that we get from a vec using <code>.get()</code>, because that returns an <code>Option</code>. Now we can pass it to <code>and_then()</code>, and do some math on it if it is <code>Some</code>. If it is <code>None</code>, then the <code>None</code> just gets passed through.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let new_vec = vec![8, 9, 0]; // just a vec with numbers
@@ -563,7 +563,7 @@ Err(&quot;No CEO found for Stark Enterprises&quot;)
                 .and_then(|number| Some(number + number_to_add))
         );
     }
-    println!(&quot;{:?}&quot;, empty_vec);
+    println!("{:?}", empty_vec);
 }</code></pre></pre>
 <p>This prints <code>[Some(14), Some(15), Some(6), None, None]</code>. You can see that <code>None</code> isn't filtered out, just passed on.</p>
 <p><code>.and()</code> is sort of like a <code>bool</code> for <code>Option</code>. You can match many <code>Option</code>s to each other, and if they are all <code>Some</code> then it will give the last one. And if one of them is a <code>None</code>, then it will give <code>None</code>.</p>
@@ -574,32 +574,32 @@ Err(&quot;No CEO found for Stark Enterprises&quot;)
     let three = true;
     let four = true;
 
-    println!(&quot;{}&quot;, one &amp;&amp; three); // prints true
-    println!(&quot;{}&quot;, one &amp;&amp; two &amp;&amp; three &amp;&amp; four); // prints false
+    println!("{}", one &amp;&amp; three); // prints true
+    println!("{}", one &amp;&amp; two &amp;&amp; three &amp;&amp; four); // prints false
 }</code></pre></pre>
-<p>Now here is the same thing with <code>.and()</code>. Imagine we did five operations and put the results in a Vec&lt;Option&lt;&amp;str&gt;&gt;. If we get a value, we push <code>Some(&quot;success!&quot;)</code> to the vec. Then we do this two more times. After that we use <code>.and()</code> to only show the indexes that got <code>Some</code> every time.</p>
+<p>Now here is the same thing with <code>.and()</code>. Imagine we did five operations and put the results in a Vec&lt;Option&lt;&amp;str&gt;&gt;. If we get a value, we push <code>Some("success!")</code> to the vec. Then we do this two more times. After that we use <code>.and()</code> to only show the indexes that got <code>Some</code> every time.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let first_try = vec![Some(&quot;success!&quot;), None, Some(&quot;success!&quot;), Some(&quot;success!&quot;), None];
-    let second_try = vec![None, Some(&quot;success!&quot;), Some(&quot;success!&quot;), Some(&quot;success!&quot;), Some(&quot;success!&quot;)];
-    let third_try = vec![Some(&quot;success!&quot;), Some(&quot;success!&quot;), Some(&quot;success!&quot;), Some(&quot;success!&quot;), None];
+    let first_try = vec![Some("success!"), None, Some("success!"), Some("success!"), None];
+    let second_try = vec![None, Some("success!"), Some("success!"), Some("success!"), Some("success!")];
+    let third_try = vec![Some("success!"), Some("success!"), Some("success!"), Some("success!"), None];
 
     for i in 0..first_try.len() {
-        println!(&quot;{:?}&quot;, first_try[i].and(second_try[i]).and(third_try[i]));
+        println!("{:?}", first_try[i].and(second_try[i]).and(third_try[i]));
     }
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">None
 None
-Some(&quot;success!&quot;)
-Some(&quot;success!&quot;)
+Some("success!")
+Some("success!")
 None
 </code></pre>
-<p>The first one (index 0) is <code>None</code> because there is a <code>None</code> for index 0 in <code>second_try</code>. The second is <code>None</code> because there is a <code>None</code> in <code>first_try</code>. The next is <code>Some(&quot;success!&quot;)</code> because there is no <code>None</code> for <code>first_try</code>, <code>second try</code>, or <code>third_try</code>.</p>
+<p>The first one (index 0) is <code>None</code> because there is a <code>None</code> for index 0 in <code>second_try</code>. The second is <code>None</code> because there is a <code>None</code> in <code>first_try</code>. The next is <code>Some("success!")</code> because there is no <code>None</code> for <code>first_try</code>, <code>second try</code>, or <code>third_try</code>.</p>
 <p><code>.any()</code> and <code>.all()</code> are very easy to use in iterators. They return a <code>bool</code> depending on your input. In this example we make a very large vec (about 20,000 items) with all the characters from <code>'a'</code> to <code>'働'</code>. Then we make a function to check if a character is inside it.</p>
 <p>Next we make a smaller vec and ask it whether it is all alphabetic (with the <code>.is_alphabetic()</code> method). Then we ask it if all the characters are less than the Korean character <code>'행'</code>.</p>
 <p>Also note that you put a reference in, because <code>.iter()</code> gives a reference and you need a <code>&amp;</code> to compare with another <code>&amp;</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn in_char_vec(char_vec: &amp;Vec&lt;char&gt;, check: char) {
-    println!(&quot;Is {} inside? {}&quot;, check, char_vec.iter().any(|&amp;char| char == check));
+    println!("Is {} inside? {}", check, char_vec.iter().any(|&amp;char| char == check));
 }
 
 fn main() {
@@ -609,8 +609,8 @@ fn main() {
     in_char_vec(&amp;char_vec, '鑿');
 
     let smaller_vec = ('A'..'z').collect::&lt;Vec&lt;char&gt;&gt;();
-    println!(&quot;All alphabetic? {}&quot;, smaller_vec.iter().all(|&amp;x| x.is_alphabetic()));
-    println!(&quot;All less than the character 행? {}&quot;, smaller_vec.iter().all(|&amp;x| x &lt; '행'));
+    println!("All alphabetic? {}", smaller_vec.iter().all(|&amp;x| x.is_alphabetic()));
+    println!("All less than the character 행? {}", smaller_vec.iter().all(|&amp;x| x &lt; '행'));
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Is i inside? true
@@ -630,8 +630,8 @@ All less than the character 행? true
     big_vec.push(5);
 
     let mut iterator = big_vec.iter().rev();
-    println!(&quot;{:?}&quot;, iterator.next());
-    println!(&quot;{:?}&quot;, iterator.next());
+    println!("{:?}", iterator.next());
+    println!("{:?}", iterator.next());
 }</code></pre></pre>
 <p>It prints:</p>
 <pre><code class="language-text">Some(5)
@@ -642,7 +642,7 @@ Some(6)
     let mut big_vec = vec![6; 1000];
     big_vec.push(5);
 
-    println!(&quot;{:?}&quot;, big_vec.iter().rev().any(|&amp;number| number == 5));
+    println!("{:?}", big_vec.iter().rev().any(|&amp;number| number == 5));
 }</code></pre></pre>
 <p>And because it's <code>.rev()</code>, it only calls <code>.next()</code> one time and stops. If we don't use <code>.rev()</code> then it will call <code>.next()</code> 1001 times before it stops. This code shows it:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -658,23 +658,23 @@ Some(6)
             break;
         }
     }
-    println!(&quot;Final counter is: {}&quot;, counter);
+    println!("Final counter is: {}", counter);
 }</code></pre></pre>
 <p>This prints <code>Final counter is: 1001</code> so we know that it had to call <code>.next()</code> 1001 times before it found 5.</p>
 <p><code>.find()</code> tells you if an iterator has something, and <code>.position()</code> tells you where it is. <code>.find()</code> is different from <code>.any()</code> because it returns an <code>Option</code> with the value inside (or <code>None</code>). Meanwhile, <code>.position()</code> is also an <code>Option</code> with the position number, or <code>None</code>. In other words:</p>
 <ul>
-<li><code>.find()</code>: &quot;I'll try to get it for you&quot;</li>
-<li><code>.position()</code>: &quot;I'll try to find where it is for you&quot;</li>
+<li><code>.find()</code>: "I'll try to get it for you"</li>
+<li><code>.position()</code>: "I'll try to find where it is for you"</li>
 </ul>
 <p>Here is a simple example:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let num_vec = vec![10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
-    println!(&quot;{:?}&quot;, num_vec.iter().find(|&amp;number| number % 3 == 0)); // find takes a reference, so we give it &amp;number
-    println!(&quot;{:?}&quot;, num_vec.iter().find(|&amp;number| number * 2 == 30));
+    println!("{:?}", num_vec.iter().find(|&amp;number| number % 3 == 0)); // find takes a reference, so we give it &amp;number
+    println!("{:?}", num_vec.iter().find(|&amp;number| number * 2 == 30));
 
-    println!(&quot;{:?}&quot;, num_vec.iter().position(|&amp;number| number % 3 == 0));
-    println!(&quot;{:?}&quot;, num_vec.iter().position(|&amp;number| number * 2 == 30));
+    println!("{:?}", num_vec.iter().position(|&amp;number| number % 3 == 0));
+    println!("{:?}", num_vec.iter().position(|&amp;number| number * 2 == 30));
 
 }</code></pre></pre>
 <p>This prints:</p>
@@ -685,23 +685,23 @@ None
 </code></pre>
 <p>With <code>.cycle()</code> you can create an iterator that loops forever. This type of iterator works well with <code>.zip()</code> to create something new, like this example which creates a <code>Vec&lt;(i32, &amp;str)&gt;</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let even_odd = vec![&quot;even&quot;, &quot;odd&quot;];
+    let even_odd = vec!["even", "odd"];
 
     let even_odd_vec = (0..6)
         .zip(even_odd.into_iter().cycle())
         .collect::&lt;Vec&lt;(i32, &amp;str)&gt;&gt;();
-    println!(&quot;{:?}&quot;, even_odd_vec);
+    println!("{:?}", even_odd_vec);
 }</code></pre></pre>
 <p>So even though <code>.cycle()</code> might never end, the other iterator only runs six times when zipping them together. That means that the iterator made by <code>.cycle()</code> doesn't get a <code>.next()</code> call again so it is done after six times. The output is:</p>
-<pre><code>[(0, &quot;even&quot;), (1, &quot;odd&quot;), (2, &quot;even&quot;), (3, &quot;odd&quot;), (4, &quot;even&quot;), (5, &quot;odd&quot;)]
+<pre><code>[(0, "even"), (1, "odd"), (2, "even"), (3, "odd"), (4, "even"), (5, "odd")]
 </code></pre>
 <p>Something similar can be done with a range that doesn't have an ending. If you write <code>0..</code> then you create a range that never stops. You can use this very easily:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let ten_chars = ('a'..).take(10).collect::&lt;Vec&lt;char&gt;&gt;();
     let skip_then_ten_chars = ('a'..).skip(1300).take(10).collect::&lt;Vec&lt;char&gt;&gt;();
 
-    println!(&quot;{:?}&quot;, ten_chars);
-    println!(&quot;{:?}&quot;, skip_then_ten_chars);
+    println!("{:?}", ten_chars);
+    println!("{:?}", skip_then_ten_chars);
 }</code></pre></pre>
 <p>Both print ten characters, but the second one skipped 1300 places and prints ten letters in Armenian.</p>
 <pre><code>['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
@@ -711,7 +711,7 @@ None
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let some_numbers = vec![9, 6, 9, 10, 11];
 
-    println!(&quot;{}&quot;, some_numbers
+    println!("{}", some_numbers
         .iter()
         .fold(0, |total_so_far, next_number| total_so_far + next_number)
     );
@@ -726,13 +726,13 @@ None
 </ul>
 <p>But you don't just need to add things with it. Here is an example where we add a '-' to every character to make a <code>String</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let a_string = &quot;I don't have any dashes in me.&quot;;
+    let a_string = "I don't have any dashes in me.";
 
     println!(
-        &quot;{}&quot;,
+        "{}",
         a_string
             .chars() // Now it's an iterator
-            .fold(&quot;-&quot;.to_string(), |mut string_so_far, next_char| { // Start with a String &quot;-&quot;. Bring it in as mutable each time along with the next char
+            .fold("-".to_string(), |mut string_so_far, next_char| { // Start with a String "-". Bring it in as mutable each time along with the next char
                 string_so_far.push(next_char); // Push the char on, then '-'
                 string_so_far.push('-');
                 string_so_far} // Don't forget to pass it on to the next loop
@@ -763,11 +763,11 @@ None
     let num_vec = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
     for chunk in num_vec.chunks(3) {
-        println!(&quot;{:?}&quot;, chunk);
+        println!("{:?}", chunk);
     }
     println!();
     for window in num_vec.windows(3) {
-        println!(&quot;{:?}&quot;, window);
+        println!("{:?}", window);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -788,22 +788,22 @@ None
 <p>By the way, <code>.chunks()</code> will panic if you give it nothing. You can write <code>.chunks(1000)</code> for a vector with one item, but you can't write <code>.chunks()</code> with anything with a length of 0. You can see that right in the function if you click on [src] because it says <code>assert!(chunk_size != 0);</code>.</p>
 <p><code>.match_indices()</code> lets you pull out everything inside a <code>String</code> or <code>&amp;str</code> that matches your input, and gives you the index too. It is similar to <code>.enumerate()</code> because it returns a tuple with two items.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let rules = &quot;Rule number 1: No fighting. Rule number 2: Go to bed at 8 pm. Rule number 3: Wake up at 6 am.&quot;;
-    let rule_locations = rules.match_indices(&quot;Rule&quot;).collect::&lt;Vec&lt;(_, _)&gt;&gt;(); // This is Vec&lt;usize, &amp;str&gt; but we just tell Rust to do it
-    println!(&quot;{:?}&quot;, rule_locations);
+    let rules = "Rule number 1: No fighting. Rule number 2: Go to bed at 8 pm. Rule number 3: Wake up at 6 am.";
+    let rule_locations = rules.match_indices("Rule").collect::&lt;Vec&lt;(_, _)&gt;&gt;(); // This is Vec&lt;usize, &amp;str&gt; but we just tell Rust to do it
+    println!("{:?}", rule_locations);
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">[(0, &quot;Rule&quot;), (28, &quot;Rule&quot;), (62, &quot;Rule&quot;)]
+<pre><code class="language-text">[(0, "Rule"), (28, "Rule"), (62, "Rule")]
 </code></pre>
-<p><code>.peekable()</code> lets you make an iterator where you can see (peek at) the next item. It's like calling <code>.next()</code> (it gives an <code>Option</code>) except that the iterator doesn't move, so you can use it as many times as you want. You can actually think of peekable as &quot;stoppable&quot;, because you can stop for as long as you want. Here is an example of us using <code>.peek()</code> three times for every item. We can use <code>.peek()</code> forever until we use <code>.next()</code> to move to the next item.</p>
+<p><code>.peekable()</code> lets you make an iterator where you can see (peek at) the next item. It's like calling <code>.next()</code> (it gives an <code>Option</code>) except that the iterator doesn't move, so you can use it as many times as you want. You can actually think of peekable as "stoppable", because you can stop for as long as you want. Here is an example of us using <code>.peek()</code> three times for every item. We can use <code>.peek()</code> forever until we use <code>.next()</code> to move to the next item.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let just_numbers = vec![1, 5, 100];
     let mut number_iter = just_numbers.iter().peekable(); // This actually creates a type of iterator called Peekable
 
     for _ in 0..3 {
-        println!(&quot;I love the number {}&quot;, number_iter.peek().unwrap());
-        println!(&quot;I really love the number {}&quot;, number_iter.peek().unwrap());
-        println!(&quot;{} is such a nice number&quot;, number_iter.peek().unwrap());
+        println!("I love the number {}", number_iter.peek().unwrap());
+        println!("I really love the number {}", number_iter.peek().unwrap());
+        println!("{} is such a nice number", number_iter.peek().unwrap());
         number_iter.next();
     }
 }</code></pre></pre>
@@ -821,18 +821,18 @@ I really love the number 100
 <p>Here is another example where we use <code>.peek()</code> to match on an item. After we are done using it, we call <code>.next()</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let locations = vec![
-        (&quot;Nevis&quot;, 25),
-        (&quot;Taber&quot;, 8428),
-        (&quot;Markerville&quot;, 45),
-        (&quot;Cardston&quot;, 3585),
+        ("Nevis", 25),
+        ("Taber", 8428),
+        ("Markerville", 45),
+        ("Cardston", 3585),
     ];
     let mut location_iter = locations.iter().peekable();
     while location_iter.peek().is_some() {
         match location_iter.peek() {
             Some((name, number)) if *number &lt; 100 =&gt; { // .peek() gives us a reference so we need *
-                println!(&quot;Found a hamlet: {} with {} people&quot;, name, number)
+                println!("Found a hamlet: {} with {} people", name, number)
             }
-            Some((name, number)) =&gt; println!(&quot;Found a town: {} with {} people&quot;, name, number),
+            Some((name, number)) =&gt; println!("Found a town: {} with {} people", name, number),
             None =&gt; break,
         }
         location_iter.next();
@@ -854,15 +854,15 @@ struct Names {
 
 fn main() {
     let vec_of_names = vec![
-        &quot;Caesar&quot;,
-        &quot;Frodo Baggins&quot;,
-        &quot;Bilbo Baggins&quot;,
-        &quot;Jean-Luc Picard&quot;,
-        &quot;Data&quot;,
-        &quot;Rand Al'Thor&quot;,
-        &quot;Paul Atreides&quot;,
-        &quot;Barack Hussein Obama&quot;,
-        &quot;Bill Jefferson Clinton&quot;,
+        "Caesar",
+        "Frodo Baggins",
+        "Bilbo Baggins",
+        "Jean-Luc Picard",
+        "Data",
+        "Rand Al'Thor",
+        "Paul Atreides",
+        "Barack Hussein Obama",
+        "Bill Jefferson Clinton",
     ];
 
     let mut iter_of_names = vec_of_names.iter().peekable();
@@ -882,11 +882,11 @@ fn main() {
         }
     }
 
-    println!(&quot;{:?}&quot;, all_names);
+    println!("{:?}", all_names);
 }</code></pre></pre>
 <p>This will print:</p>
-<pre><code class="language-text">Names { one_word: [&quot;Caesar&quot;, &quot;Data&quot;], two_words: [&quot;Frodo Baggins&quot;, &quot;Bilbo Baggins&quot;, &quot;Jean-Luc Picard&quot;, &quot;Rand Al\'Thor&quot;, &quot;Paul Atreides&quot;], three_words:
-[&quot;Barack Hussein Obama&quot;, &quot;Bill Jefferson Clinton&quot;] }
+<pre><code class="language-text">Names { one_word: ["Caesar", "Data"], two_words: ["Frodo Baggins", "Bilbo Baggins", "Jean-Luc Picard", "Rand Al\'Thor", "Paul Atreides"], three_words:
+["Barack Hussein Obama", "Bill Jefferson Clinton"] }
 </code></pre>
 
                     </main>

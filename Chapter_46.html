@@ -174,17 +174,17 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="rc"><a class="header" href="#rc">Rc</a></h2>
-<p>Rc means &quot;reference counter&quot;. You know that in Rust, every variable can only have one owner. That is why this doesn't work:</p>
+<p>Rc means "reference counter". You know that in Rust, every variable can only have one owner. That is why this doesn't work:</p>
 <pre><pre class="playground"><code class="language-rust">fn takes_a_string(input: String) {
-    println!(&quot;It is: {}&quot;, input)
+    println!("It is: {}", input)
 }
 
 fn also_takes_a_string(input: String) {
-    println!(&quot;It is: {}&quot;, input)
+    println!("It is: {}", input)
 }
 
 fn main() {
-    let user_name = String::from(&quot;User MacUserson&quot;);
+    let user_name = String::from("User MacUserson");
 
     takes_a_string(user_name);
     also_takes_a_string(user_name); // ⚠️
@@ -206,10 +206,10 @@ struct CityData {
 
 fn main() {
     let calgary = City {
-        name: &quot;Calgary&quot;.to_string(),
+        name: "Calgary".to_string(),
         population: 1_200_000,
            // Pretend that this string is very very long
-        city_history: &quot;Calgary began as a fort called Fort Calgary that...&quot;.to_string(),
+        city_history: "Calgary began as a fort called Fort Calgary that...".to_string(),
     };
 
     let canada_cities = CityData {
@@ -217,7 +217,7 @@ fn main() {
         histories: vec![calgary.city_history], // But this String is very long
     };
 
-    println!(&quot;Calgary's history is: {}&quot;, calgary.city_history);  // ⚠️
+    println!("Calgary's history is: {}", calgary.city_history);  // ⚠️
 }</code></pre></pre>
 <p>Of course, it doesn't work because <code>canada_cities</code> now owns the data and <code>calgary</code> doesn't. It says:</p>
 <pre><code class="language-text">error[E0382]: borrow of moved value: `calgary.city_history`
@@ -226,7 +226,7 @@ fn main() {
 24 |         histories: vec![calgary.city_history], // But this String is very long
    |                         -------------------- value moved here
 ...
-27 |     println!(&quot;Calgary's history is: {}&quot;, calgary.city_history);  // ⚠️
+27 |     println!("Calgary's history is: {}", calgary.city_history);  // ⚠️
    |                                          ^^^^^^^^^^^^^^^^^^^^ value borrowed here after move
    |
    = note: move occurs because `calgary.city_history` has type `std::string::String`, which does not implement the `Copy` trait
@@ -272,10 +272,10 @@ struct CityData {
 
 fn main() {
     let calgary = City {
-        name: &quot;Calgary&quot;.to_string(),
+        name: "Calgary".to_string(),
         population: 1_200_000,
            // Pretend that this string is very very long
-        city_history: Rc::new(&quot;Calgary began as a fort called Fort Calgary that...&quot;.to_string()), // Rc::new() to make the Rc
+        city_history: Rc::new("Calgary began as a fort called Fort Calgary that...".to_string()), // Rc::new() to make the Rc
     };
 
     let canada_cities = CityData {
@@ -283,12 +283,12 @@ fn main() {
         histories: vec![calgary.city_history.clone()], // .clone() to increase the count
     };
 
-    println!(&quot;Calgary's history is: {}&quot;, calgary.city_history);
-    println!(&quot;{}&quot;, Rc::strong_count(&amp;calgary.city_history));
+    println!("Calgary's history is: {}", calgary.city_history);
+    println!("{}", Rc::strong_count(&amp;calgary.city_history));
     let new_owner = calgary.city_history.clone();
 }</code></pre></pre>
-<p>This prints <code>2</code>. And <code>new_owner</code> is now an <code>Rc&lt;String&gt;</code>. Now if we use <code>println!(&quot;{}&quot;, Rc::strong_count(&amp;calgary.city_history));</code>, we get <code>3</code>.</p>
-<p>So if there are strong pointers, are there weak pointers? Yes, there are. Weak pointers are useful because if two <code>Rc</code>s point at each other, they can't die. This is called a &quot;reference cycle&quot;. If item 1 has an Rc to item 2, and item 2 has an Rc to item 1, they can't get to 0. In this case you want to use weak references. Then <code>Rc</code> will count the references, but if it only has weak references then it can die. You use <code>Rc::downgrade(&amp;item)</code> instead of <code>Rc::clone(&amp;item)</code> to make weak references. Also, you use <code>Rc::weak_count(&amp;item)</code> to see the weak count.</p>
+<p>This prints <code>2</code>. And <code>new_owner</code> is now an <code>Rc&lt;String&gt;</code>. Now if we use <code>println!("{}", Rc::strong_count(&amp;calgary.city_history));</code>, we get <code>3</code>.</p>
+<p>So if there are strong pointers, are there weak pointers? Yes, there are. Weak pointers are useful because if two <code>Rc</code>s point at each other, they can't die. This is called a "reference cycle". If item 1 has an Rc to item 2, and item 2 has an Rc to item 1, they can't get to 0. In this case you want to use weak references. Then <code>Rc</code> will count the references, but if it only has weak references then it can die. You use <code>Rc::downgrade(&amp;item)</code> instead of <code>Rc::clone(&amp;item)</code> to make weak references. Also, you use <code>Rc::weak_count(&amp;item)</code> to see the weak count.</p>
 
                     </main>
 

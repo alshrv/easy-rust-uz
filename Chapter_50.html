@@ -174,7 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="arc"><a class="header" href="#arc">Arc</a></h2>
-<p>You remember that we used an <code>Rc</code> to give a variable more than one owner. If we are doing the same thing in a thread, we need an <code>Arc</code>. <code>Arc</code> means &quot;atomic reference counter&quot;. Atomic means that it uses the computer's processor so that data only gets written once each time. This is important because if two threads write data at the same time, you will get the wrong result. For example, imagine if you could do this in Rust:</p>
+<p>You remember that we used an <code>Rc</code> to give a variable more than one owner. If we are doing the same thing in a thread, we need an <code>Arc</code>. <code>Arc</code> means "atomic reference counter". Atomic means that it uses the computer's processor so that data only gets written once each time. This is important because if two threads write data at the same time, you will get the wrong result. For example, imagine if you could do this in Rust:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
@@ -198,11 +198,11 @@ for i in 0..10 { // Thread 2
 <pre><pre class="playground"><code class="language-rust">fn main() {
 
     let handle = std::thread::spawn(|| {
-        println!(&quot;The thread is working!&quot;) // Just testing the thread
+        println!("The thread is working!") // Just testing the thread
     });
 
     handle.join().unwrap(); // Make the thread wait here until it is done
-    println!(&quot;Exiting the program&quot;);
+    println!("Exiting the program");
 }</code></pre></pre>
 <p>So far this just prints:</p>
 <pre><code class="language-text">The thread is working!
@@ -213,12 +213,12 @@ Exiting the program
 
     let handle = std::thread::spawn(|| {
         for _ in 0..5 {
-            println!(&quot;The thread is working!&quot;)
+            println!("The thread is working!")
         }
     });
 
     handle.join().unwrap();
-    println!(&quot;Exiting the program&quot;);
+    println!("Exiting the program");
 }</code></pre></pre>
 <p>This works too. We get the following:</p>
 <pre><code class="language-text">The thread is working!
@@ -228,24 +228,24 @@ The thread is working!
 The thread is working!
 Exiting the program
 </code></pre>
-<p>Now let's make one more thread. Each thread will do the same thing. You can see that the threads are working at the same time. Sometimes it will say <code>Thread 1 is working!</code> first, but other times <code>Thread 2 is working!</code> is first. This is called <strong>concurrency</strong>, which means &quot;running together&quot;.</p>
+<p>Now let's make one more thread. Each thread will do the same thing. You can see that the threads are working at the same time. Sometimes it will say <code>Thread 1 is working!</code> first, but other times <code>Thread 2 is working!</code> is first. This is called <strong>concurrency</strong>, which means "running together".</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
 
     let thread1 = std::thread::spawn(|| {
         for _ in 0..5 {
-            println!(&quot;Thread 1 is working!&quot;)
+            println!("Thread 1 is working!")
         }
     });
 
     let thread2 = std::thread::spawn(|| {
         for _ in 0..5 {
-            println!(&quot;Thread 2 is working!&quot;)
+            println!("Thread 2 is working!")
         }
     });
 
     thread1.join().unwrap();
     thread2.join().unwrap();
-    println!(&quot;Exiting the program&quot;);
+    println!("Exiting the program");
 }</code></pre></pre>
 <p>This will print:</p>
 <pre><code class="language-text">Thread 1 is working!
@@ -298,8 +298,8 @@ fn main() {
 
     thread1.join().unwrap();
     thread2.join().unwrap();
-    println!(&quot;Value is: {:?}&quot;, my_number);
-    println!(&quot;Exiting the program&quot;);
+    println!("Value is: {:?}", my_number);
+    println!("Exiting the program");
 }</code></pre></pre>
 <p>The program prints:</p>
 <pre><code class="language-text">Value is: Mutex { data: 20 }
@@ -326,7 +326,7 @@ fn main() {
     }
 
     handle_vec.into_iter().for_each(|handle| handle.join().unwrap()); // call join on all handles
-    println!(&quot;{:?}&quot;, my_number);
+    println!("{:?}", my_number);
 }</code></pre></pre>
 <p>Finally this prints <code>Mutex { data: 20 }</code>.</p>
 <p>This looks complicated but <code>Arc&lt;Mutex&lt;SomeType&gt;&gt;&gt;</code> is used very often in Rust, so it becomes natural. Also, you can always write your code to make it cleaner. Here is the same code with one more <code>use</code> statement and two functions. The functions don't do anything new, but they move some code out of <code>main()</code>. You can try rewriting code like this if it is hard to read.</p>
@@ -359,7 +359,7 @@ fn main() {
 
     handle_vec.into_iter().for_each(|handle| handle.join().unwrap()); // Make each one wait
 
-    println!(&quot;{:?}&quot;, my_number);
+    println!("{:?}", my_number);
 }</code></pre></pre>
 
                     </main>

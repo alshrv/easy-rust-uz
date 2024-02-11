@@ -184,14 +184,14 @@
 
 fn main() {
     let six = give_six!();
-    println!(&quot;{}&quot;, six);
+    println!("{}", six);
 }</code></pre></pre>
-<p>But it's not the same as a <code>match</code> statement, because a macro actually doesn't compile anything. It just takes an input and gives an output. Then the compiler checks to see if it makes sense. That's why a macro is like &quot;code that writes code&quot;. You will remember that a true <code>match</code> statement needs to give the same type, so this won't work:</p>
+<p>But it's not the same as a <code>match</code> statement, because a macro actually doesn't compile anything. It just takes an input and gives an output. Then the compiler checks to see if it makes sense. That's why a macro is like "code that writes code". You will remember that a true <code>match</code> statement needs to give the same type, so this won't work:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
 // ⚠️
     let my_number = 10;
     match my_number {
-        10 =&gt; println!(&quot;You got a ten&quot;),
+        10 =&gt; println!("You got a ten"),
         _ =&gt; 10,
     }
 }</code></pre></pre>
@@ -200,7 +200,7 @@ fn main() {
  --&gt; src\main.rs:5:14
   |
 3 | /     match my_number {
-4 | |         10 =&gt; println!(&quot;You got a ten&quot;),
+4 | |         10 =&gt; println!("You got a ten"),
   | |               ------------------------- this is found to be of type `()`
 5 | |         _ =&gt; 10,
   | |              ^^ expected `()`, found integer
@@ -213,7 +213,7 @@ fn main() {
         6
     };
     () =&gt; {
-        println!(&quot;You didn't give me 6.&quot;);
+        println!("You didn't give me 6.");
     };
 }
 
@@ -224,10 +224,10 @@ fn main() {
 <p>This is just fine, and prints <code>You didn't give me 6.</code>. You can also see that it's not a match arm because there's no <code>_</code> case. We can only give it <code>(6)</code>, or <code>()</code>. Anything else will make an error. And the <code>6</code> we give it isn't even an <code>i32</code>, it's just an input 6. You can actually set anything as the input for a macro, because it's just looking at input to see what it gets. For example:</p>
 <pre><pre class="playground"><code class="language-rust">macro_rules! might_print {
     (THis is strange input 하하はは哈哈 but it still works) =&gt; {
-        println!(&quot;You guessed the secret message!&quot;)
+        println!("You guessed the secret message!")
     };
     () =&gt; {
-        println!(&quot;You didn't guess it&quot;);
+        println!("You didn't guess it");
     };
 }
 
@@ -242,17 +242,17 @@ You didn't guess it
 <p>So a macro isn't exactly Rust syntax. But a macro can also understand different types of input that you give it. Take this example:</p>
 <pre><pre class="playground"><code class="language-rust">macro_rules! might_print {
     ($input:expr) =&gt; {
-        println!(&quot;You gave me: {}&quot;, $input);
+        println!("You gave me: {}", $input);
     }
 }
 
 fn main() {
     might_print!(6);
 }</code></pre></pre>
-<p>This will print <code>You gave me: 6</code>. The <code>$input:expr</code> part is important. It means &quot;for an expression, give it the variable name $input&quot;. In macros, variables start with a <code>$</code>. In this macro, if you give it one expression, it will print it. Let's try it out some more:</p>
+<p>This will print <code>You gave me: 6</code>. The <code>$input:expr</code> part is important. It means "for an expression, give it the variable name $input". In macros, variables start with a <code>$</code>. In this macro, if you give it one expression, it will print it. Let's try it out some more:</p>
 <pre><pre class="playground"><code class="language-rust">macro_rules! might_print {
     ($input:expr) =&gt; {
-        println!(&quot;You gave me: {:?}&quot;, $input); // Now we'll use {:?} because we will give it different kinds of expressions
+        println!("You gave me: {:?}", $input); // Now we'll use {:?} because we will give it different kinds of expressions
     }
 }
 
@@ -287,7 +287,7 @@ literal: matches -?LiteralExpression
 <pre><pre class="playground"><code class="language-rust">macro_rules! check {
     ($input1:ident, $input2:expr) =&gt; {
         println!(
-            &quot;Is {:?} equal to {:?}? {:?}&quot;,
+            "Is {:?} equal to {:?}? {:?}",
             $input1,
             $input2,
             $input1 == $input2
@@ -311,7 +311,7 @@ Is 6 equal to 10? false
 <pre><pre class="playground"><code class="language-rust">macro_rules! print_anything {
     ($input:tt) =&gt; {
         let output = stringify!($input);
-        println!(&quot;{}&quot;, output);
+        println!("{}", output);
     };
 }
 
@@ -330,7 +330,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust">macro_rules! print_anything {
     ($($input1:tt),*) =&gt; {
         let output = stringify!($($input1),*);
-        println!(&quot;{}&quot;, output);
+        println!("{}", output);
     };
 }
 
@@ -351,7 +351,7 @@ fn main() {
     ($name:ident, $($input:tt),*) =&gt; { // First you give it one name for the function, then it checks everything else
         fn $name() {
             let output = stringify!($($input),*); // It makes everything else into a string
-            println!(&quot;{}&quot;, output);
+            println!("{}", output);
         }
     };
 }
@@ -384,20 +384,20 @@ this, is, really, nice
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>macro_rules! todo {
-    () =&gt; (panic!(&quot;not yet implemented&quot;));
-    ($($arg:tt)+) =&gt; (panic!(&quot;not yet implemented: {}&quot;, $crate::format_args!($($arg)+)));
+    () =&gt; (panic!("not yet implemented"));
+    ($($arg:tt)+) =&gt; (panic!("not yet implemented: {}", $crate::format_args!($($arg)+)));
 }
 <span class="boring">}</span></code></pre></pre>
 <p>This one has two options: you can enter <code>()</code>, or a number of token trees (<code>tt</code>).</p>
 <ul>
-<li>If you enter <code>()</code>, it just uses <code>panic!</code> with a message. So you could actually just write <code>panic!(&quot;not yet implemented&quot;)</code> instead of <code>todo!</code> and it would be the same.</li>
+<li>If you enter <code>()</code>, it just uses <code>panic!</code> with a message. So you could actually just write <code>panic!("not yet implemented")</code> instead of <code>todo!</code> and it would be the same.</li>
 <li>If you enter some arguments, it will try to print them. You can see the same <code>format_args!</code> macro inside, which works like <code>println!</code>.</li>
 </ul>
 <p>So if you write this, it will work too:</p>
 <pre><pre class="playground"><code class="language-rust">fn not_done() {
     let time = 8;
-    let reason = &quot;lack of time&quot;;
-    todo!(&quot;Not done yet because of {}. Check back in {} hours&quot;, reason, time);
+    let reason = "lack of time";
+    todo!("Not done yet because of {}. Check back in {} hours", reason, time);
 }
 
 fn main() {
@@ -409,7 +409,7 @@ fn main() {
 <p>Inside a macro you can even call the same macro. Here's one:</p>
 <pre><pre class="playground"><code class="language-rust">macro_rules! my_macro {
     () =&gt; {
-        println!(&quot;Let's print this.&quot;);
+        println!("Let's print this.");
     };
     ($input:expr) =&gt; {
         my_macro!();
@@ -431,14 +431,14 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>macro_rules! dbg {
     () =&gt; {
-        $crate::eprintln!(&quot;[{}:{}]&quot;, $crate::file!(), $crate::line!()); //$crate means the crate that it's in.
+        $crate::eprintln!("[{}:{}]", $crate::file!(), $crate::line!()); //$crate means the crate that it's in.
     };
     ($val:expr) =&gt; {
         // Use of `match` here is intentional because it affects the lifetimes
         // of temporaries - https://stackoverflow.com/a/48732525/1063961
         match $val {
             tmp =&gt; {
-                $crate::eprintln!(&quot;[{}:{}] {} = {:#?}&quot;,
+                $crate::eprintln!("[{}:{}] {} = {:#?}",
                     $crate::file!(), $crate::line!(), $crate::stringify!($val), &amp;tmp);
                 tmp
             }
@@ -461,7 +461,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust">fn main() {
     dbg!(vec![8, 9, 10]);
 }</code></pre></pre>
-<p>This will match the next arm, because it's one expression. It will then call the input <code>tmp</code> and use this code: <code> $crate::eprintln!(&quot;[{}:{}] {} = {:#?}&quot;, $crate::file!(), $crate::line!(), $crate::stringify!($val), &amp;tmp);</code>. So it will print with <code>file!</code> and <code>line!</code>, then <code>$val</code> made into a <code>String</code>, and pretty print with <code>{:#?}</code> for <code>tmp</code>. So for our input it will write this:</p>
+<p>This will match the next arm, because it's one expression. It will then call the input <code>tmp</code> and use this code: <code> $crate::eprintln!("[{}:{}] {} = {:#?}", $crate::file!(), $crate::line!(), $crate::stringify!($val), &amp;tmp);</code>. So it will print with <code>file!</code> and <code>line!</code>, then <code>$val</code> made into a <code>String</code>, and pretty print with <code>{:#?}</code> for <code>tmp</code>. So for our input it will write this:</p>
 <pre><code class="language-text">[src/main.rs:2] vec![8, 9, 10] = [
     8,
     9,

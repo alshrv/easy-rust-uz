@@ -184,7 +184,7 @@
 fn prints_number(input: i32) {
     assert_eq!(input % 2, 0); // number must be equal.
                               // If number % 2 is not 0, it panics
-    println!(&quot;The number is not odd. It is {}&quot;, input);
+    println!("The number is not odd. It is {}", input);
 }</code></pre></pre>
 <p>Maybe you don't have any plans to use <code>assert_eq!</code> in your code, but it is everywhere in Rust documentation. This is because in a document you would need a lot of room to <code>println!</code> everything. Also, you would require <code>Display</code> or <code>Debug</code> for the things you want to print. That's why documentation has <code>assert_eq!</code> everywhere. Here is an example from here <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">https://doc.rust-lang.org/std/vec/struct.Vec.html</a> showing how to use a Vec:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -204,31 +204,31 @@ fn prints_number(input: i32) {
     vec.extend([1, 2, 3].iter().copied());
 
     for x in &amp;vec {
-        println!(&quot;{}&quot;, x);
+        println!("{}", x);
     }
     assert_eq!(vec, [7, 1, 2, 3]);
 }</code></pre></pre>
-<p>In these examples, you can just think of <code>assert_eq!(a, b)</code> as saying &quot;a is b&quot;. Now look at the same example with comments on the right. The comments show what it actually means.</p>
+<p>In these examples, you can just think of <code>assert_eq!(a, b)</code> as saying "a is b". Now look at the same example with comments on the right. The comments show what it actually means.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let mut vec = Vec::new();
     vec.push(1);
     vec.push(2);
 
-    assert_eq!(vec.len(), 2); // &quot;The vec length is 2&quot;
-    assert_eq!(vec[0], 1); // &quot;vec[0] is 1&quot;
+    assert_eq!(vec.len(), 2); // "The vec length is 2"
+    assert_eq!(vec[0], 1); // "vec[0] is 1"
 
-    assert_eq!(vec.pop(), Some(2)); // &quot;When you use .pop(), you get Some()&quot;
-    assert_eq!(vec.len(), 1); // &quot;The vec length is now 1&quot;
+    assert_eq!(vec.pop(), Some(2)); // "When you use .pop(), you get Some()"
+    assert_eq!(vec.len(), 1); // "The vec length is now 1"
 
     vec[0] = 7;
-    assert_eq!(vec[0], 7); // &quot;Vec[0] is 7&quot;
+    assert_eq!(vec[0], 7); // "Vec[0] is 7"
 
     vec.extend([1, 2, 3].iter().copied());
 
     for x in &amp;vec {
-        println!(&quot;{}&quot;, x);
+        println!("{}", x);
     }
-    assert_eq!(vec, [7, 1, 2, 3]); // &quot;The vec now has [7, 1, 2, 3]&quot;
+    assert_eq!(vec, [7, 1, 2, 3]); // "The vec now has [7, 1, 2, 3]"
 }</code></pre></pre>
 <h3 id="qidirish"><a class="header" href="#qidirish">Qidirish</a></h3>
 <p>The top bar of a Rust document is the search bar. It shows you results as you type. When you go down a page you can't see the search bar anymore, but if you press the <strong>s</strong> key on the keyboard you can search again. So pressing <strong>s</strong> anywhere lets you search right away.</p>
@@ -249,7 +249,7 @@ pub fn with_capacity(capacity: usize) -&gt; String {
 <span class="boring">}</span></code></pre></pre>
 <p>Interesting! Now you can see that a String is a kind of <code>Vec</code>. And actually a <code>String</code> is a vector of <code>u8</code> bytes, which is interesting to know. You didn't need to know that to use the <code>with_capacity</code> method so you only see it if you click [src]. So clicking on [src] is a good idea if the document doesn't have much detail and you want to know more.</p>
 <h3 id="traitlar-haqida-malumotlar"><a class="header" href="#traitlar-haqida-malumotlar">Traitlar haqida malumotlar</a></h3>
-<p>The important part of the documentation for a trait is &quot;Required Methods&quot; on the left. If you see Required Methods, it probably means that you have to write the method yourself. For example, for <code>Iterator</code> you need to write the <code>.next()</code> method. And for <code>From</code> you need to write the <code>.from()</code> method. But some traits can be implemented with just an <strong>attribute</strong>, like we see in <code>#[derive(Debug)]</code>. <code>Debug</code> needs the <code>.fmt()</code> method, but usually you just use <code>#[derive(Debug)]</code> unless you want to do it yourself. That's why the page on <code>std::fmt::Debug</code> says that &quot;Generally speaking, you should just derive a Debug implementation.&quot;</p>
+<p>The important part of the documentation for a trait is "Required Methods" on the left. If you see Required Methods, it probably means that you have to write the method yourself. For example, for <code>Iterator</code> you need to write the <code>.next()</code> method. And for <code>From</code> you need to write the <code>.from()</code> method. But some traits can be implemented with just an <strong>attribute</strong>, like we see in <code>#[derive(Debug)]</code>. <code>Debug</code> needs the <code>.fmt()</code> method, but usually you just use <code>#[derive(Debug)]</code> unless you want to do it yourself. That's why the page on <code>std::fmt::Debug</code> says that "Generally speaking, you should just derive a Debug implementation."</p>
 
                     </main>
 

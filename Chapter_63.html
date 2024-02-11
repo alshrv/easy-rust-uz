@@ -185,7 +185,7 @@ fn main() {
 
     let mut rng = rand::thread_rng();
     for _ in 0..6 {
-        print!(&quot;{} &quot;, my_letters.choose(&amp;mut rng).unwrap());
+        print!("{} ", my_letters.choose(&amp;mut rng).unwrap());
     }
 }</code></pre></pre>
 <p>This will print something like <code>b c g h e a</code>. But we want to see what <code>cargo</code> does first. To use <code>cargo</code> and run our program, usually we type <code>cargo run</code>. This will build our program and run it for us. But when it starts compiling, it does something like this:</p>
@@ -205,20 +205,20 @@ g f c f h b
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Display;
 
 fn print_and_return_thing&lt;T: Display&gt;(input: T) -&gt; T {
-    println!(&quot;You gave me {} and now I will give it back.&quot;, input);
+    println!("You gave me {} and now I will give it back.", input);
     input
 }
 
 fn main() {
-    let my_name = print_and_return_thing(&quot;Windy&quot;);
+    let my_name = print_and_return_thing("Windy");
     let small_number = print_and_return_thing(9.0);
 }</code></pre></pre>
-<p>This function can take anything with <code>Display</code>, so we gave it a <code>&amp;str</code> and next gave it a <code>f64</code> and that is no problem for us. But the compiler doesn't look at generics, because it doesn't want to do anything at runtime. It wants to put together a program that can run by itself as fast as possible. So when it looks at the first part with <code>&quot;Windy&quot;</code>, it doesn't see <code>fn print_and_return_thing&lt;T: Display&gt;(input: T) -&gt; T</code>. It sees something like <code>fn print_and_return_thing(input: &amp;str) -&gt; &amp;str</code>. And next it sees <code>fn print_and_return_thing(input: f64) -&gt; f64</code>. All the checking about traits and so on is done during compile time. That's why generics take longer to compile, because it needs to figure them out, and make it concrete.</p>
+<p>This function can take anything with <code>Display</code>, so we gave it a <code>&amp;str</code> and next gave it a <code>f64</code> and that is no problem for us. But the compiler doesn't look at generics, because it doesn't want to do anything at runtime. It wants to put together a program that can run by itself as fast as possible. So when it looks at the first part with <code>"Windy"</code>, it doesn't see <code>fn print_and_return_thing&lt;T: Display&gt;(input: T) -&gt; T</code>. It sees something like <code>fn print_and_return_thing(input: &amp;str) -&gt; &amp;str</code>. And next it sees <code>fn print_and_return_thing(input: f64) -&gt; f64</code>. All the checking about traits and so on is done during compile time. That's why generics take longer to compile, because it needs to figure them out, and make it concrete.</p>
 <p>One more thing: Rust in 2020 is working hard on compile time, because this part takes the longest. Every version of Rust is a little bit faster at compiling, and there are some other plans to speed it up. But in the meantime, here's what you should know:</p>
 <ul>
 <li><code>cargo build</code> will build your program so you can run it</li>
 <li><code>cargo run</code> will build your program and run it</li>
-<li><code>cargo build --release</code> and <code>cargo run --release</code> will do the same but in release mode. What's that? Release mode is for when your code is finally done. Then Rust will take even longer to compile, but it does this because it uses everything it knows to make it faster. Release mode is actually a <em>lot</em> faster than the regular mode, which is called debug mode. That's because it compiles quicker and has more debug information. The regular <code>cargo build</code> is called a &quot;debug build&quot; and <code>cargo build --release</code> is called a &quot;release build&quot;.</li>
+<li><code>cargo build --release</code> and <code>cargo run --release</code> will do the same but in release mode. What's that? Release mode is for when your code is finally done. Then Rust will take even longer to compile, but it does this because it uses everything it knows to make it faster. Release mode is actually a <em>lot</em> faster than the regular mode, which is called debug mode. That's because it compiles quicker and has more debug information. The regular <code>cargo build</code> is called a "debug build" and <code>cargo build --release</code> is called a "release build".</li>
 <li><code>cargo check</code> is a way to check your code. It's like compiling except that it won't actually make your program. This is a good way to check your code a lot because it doesn't take as long as <code>build</code> or <code>run</code>.</li>
 </ul>
 <p>By the way, the <code>--release</code> part of the command is called a <code>flag</code>. That means extra information in a command.</p>

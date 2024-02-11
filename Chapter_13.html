@@ -193,13 +193,13 @@ Chapter 3: My job               23
 Chapter 4: My family            30
 Chapter 5: Future plans         43
 </code></pre>
-<p>So this is like five pointers. You can read them and find the information they are talking about. Where is the chapter &quot;My life&quot;? It's on page 1 (it <em>points</em> to page 1). Where is the chapter &quot;My job?&quot; It's on page 23.</p>
+<p>So this is like five pointers. You can read them and find the information they are talking about. Where is the chapter "My life"? It's on page 1 (it <em>points</em> to page 1). Where is the chapter "My job?" It's on page 23.</p>
 <p>The pointer you usually see in Rust is called a <strong>reference</strong>. This is the important part to know: a reference points to the memory of another value. A reference means you <em>borrow</em> the value, but you don't own it. It's the same as our book: the table of contents doesn't own the information. It's the chapters that own the information. In Rust, references have a <code>&amp;</code> in front of them. So:</p>
 <ul>
 <li><code>let my_variable = 8</code> makes a regular variable, but</li>
 <li><code>let my_reference = &amp;my_variable</code> makes a reference.</li>
 </ul>
-<p>You read <code>my_reference = &amp;my_variable</code> like this: &quot;my_reference is a reference to my_variable&quot;. Or: &quot;my_reference refers to my_variable&quot;.</p>
+<p>You read <code>my_reference = &amp;my_variable</code> like this: "my_reference is a reference to my_variable". Or: "my_reference refers to my_variable".</p>
 <p>This means that <code>my_reference</code> is only looking at the data of <code>my_variable</code>. <code>my_variable</code> still owns its data.</p>
 <p>You can also have a reference to a reference, or any number of references.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -208,7 +208,7 @@ Chapter 5: Future plans         43
     let double_reference = &amp;single_reference; // This is a &amp;&amp;i32
     let five_references = &amp;&amp;&amp;&amp;&amp;my_number; // This is a &amp;&amp;&amp;&amp;&amp;i32
 }</code></pre></pre>
-<p>These are all different types, just in the same way that &quot;a friend of a friend&quot; is different from &quot;a friend&quot;.</p>
+<p>These are all different types, just in the same way that "a friend of a friend" is different from "a friend".</p>
 
                     </main>
 

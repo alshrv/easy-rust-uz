@@ -187,7 +187,7 @@
 <pre><pre class="playground"><code class="language-rust">fn prints_number(number: i32) { // There is no -&gt; so it's not returning anything
                              // If number was not copy type, it would take it
                              // and we couldn't use it again
-    println!(&quot;{}&quot;, number);
+    println!("{}", number);
 }
 
 fn main() {
@@ -201,11 +201,11 @@ fn main() {
 <p>On the left in <strong>Trait Implementations</strong> you can look in alphabetical order. A, B, C... there is no <strong>Copy</strong> in C. But there is <strong>Clone</strong>. <strong>Clone</strong> is similar to <strong>Copy</strong>, but usually needs more memory. Also, you have to call it with <code>.clone()</code> - it won't clone just by itself.</p>
 <p>In this example, <code>prints_country()</code> prints the country name, a <code>String</code>. We want to print it two times, but we can't:</p>
 <pre><pre class="playground"><code class="language-rust">fn prints_country(country_name: String) {
-    println!(&quot;{}&quot;, country_name);
+    println!("{}", country_name);
 }
 
 fn main() {
-    let country = String::from(&quot;Kiribati&quot;);
+    let country = String::from("Kiribati");
     prints_country(country);
     prints_country(country); // ⚠️
 }</code></pre></pre>
@@ -213,7 +213,7 @@ fn main() {
 <pre><code class="language-text">error[E0382]: use of moved value: `country`
  --&gt; src\main.rs:4:20
   |
-2 |     let country = String::from(&quot;Kiribati&quot;);
+2 |     let country = String::from("Kiribati");
   |         ------- move occurs because `country` has type `std::string::String`, which does not implement the `Copy` trait
 3 |     prints_country(country);
   |                    ------- value moved here
@@ -222,23 +222,23 @@ fn main() {
 </code></pre>
 <p>The important part is <code>which does not implement the Copy trait</code>. But in the documentation we saw that String implements the <code>Clone</code> trait. So we can add <code>.clone()</code> to our code. This creates a clone, and we send the clone to the function. Now <code>country</code> is still alive, so we can use it.</p>
 <pre><pre class="playground"><code class="language-rust">fn prints_country(country_name: String) {
-    println!(&quot;{}&quot;, country_name);
+    println!("{}", country_name);
 }
 
 fn main() {
-    let country = String::from(&quot;Kiribati&quot;);
+    let country = String::from("Kiribati");
     prints_country(country.clone()); // make a clone and give it to the function. Only the clone goes in, and country is still alive
     prints_country(country);
 }</code></pre></pre>
 <p>Of course, if the <code>String</code> is very large, <code>.clone()</code> can use a lot of memory. One <code>String</code> can be a whole book in length, and every time we call <code>.clone()</code> it will copy the book. So using <code>&amp;</code> for a reference is faster, if you can. For example, this code pushes a <code>&amp;str</code> onto a <code>String</code> and then makes a clone every time it gets used in a function:</p>
 <pre><pre class="playground"><code class="language-rust">fn get_length(input: String) { // Takes ownership of a String
-    println!(&quot;It's {} words long.&quot;, input.split_whitespace().count()); // splits to count the number of words
+    println!("It's {} words long.", input.split_whitespace().count()); // splits to count the number of words
 }
 
 fn main() {
     let mut my_string = String::new();
     for _ in 0..50 {
-        my_string.push_str(&quot;Here are some more words &quot;); // push the words on
+        my_string.push_str("Here are some more words "); // push the words on
         get_length(my_string.clone()); // gives it a clone every time
     }
 }</code></pre></pre>
@@ -250,19 +250,19 @@ It's 250 words long.
 </code></pre>
 <p>That's 50 clones. Here it is using a reference instead, which is better:</p>
 <pre><pre class="playground"><code class="language-rust">fn get_length(input: &amp;String) {
-    println!(&quot;It's {} words long.&quot;, input.split_whitespace().count());
+    println!("It's {} words long.", input.split_whitespace().count());
 }
 
 fn main() {
     let mut my_string = String::new();
     for _ in 0..50 {
-        my_string.push_str(&quot;Here are some more words &quot;);
+        my_string.push_str("Here are some more words ");
         get_length(&amp;my_string);
     }
 }</code></pre></pre>
 <p>Instead of 50 clones, it's zero.</p>
 <h3 id="qiymatsiz-ozgaruchilar"><a class="header" href="#qiymatsiz-ozgaruchilar">Qiymatsiz o'zgaruchilar</a></h3>
-<p>A variable without a value is called an &quot;uninitialized&quot; variable. Uninitialized means &quot;hasn't started yet&quot;. They are simple: just write <code>let</code> and the variable name:</p>
+<p>A variable without a value is called an "uninitialized" variable. Uninitialized means "hasn't started yet". They are simple: just write <code>let</code> and the variable name:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_variable; // ⚠️
 }</code></pre></pre>
@@ -296,7 +296,7 @@ fn main() {
         my_number = loop_then_return(number);
     }
 
-    println!(&quot;{}&quot;, my_number);
+    println!("{}", my_number);
 }</code></pre></pre>
 <p>This prints <code>100</code>.</p>
 <p>You can see that <code>my_number</code> was declared in the <code>main()</code> function, so it lives until the end. But it gets its value from inside a loop. However, that value lives as long as <code>my_number</code>, because <code>my_number</code> has the value. And if you wrote <code>let my_number = loop_then_return(number)</code> inside the block, it would just die right away.</p>
@@ -307,7 +307,7 @@ fn main() {
         my_number = 100;
     }
 
-    println!(&quot;{}&quot;, my_number);
+    println!("{}", my_number);
 }</code></pre></pre>
 <p>So it's almost like saying <code>let my_number = { 100 };</code>.</p>
 <p>Also note that <code>my_number</code> is not <code>mut</code>. It didn't get a value until it got 100, so it never changed its value. In the end, the real code for <code>my_number</code> is just <code>let my_number = 100;</code>.</p>

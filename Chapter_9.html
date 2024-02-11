@@ -198,7 +198,7 @@
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let number = 0________u8;
     let number2 = 1___6______2____4______i32;
-    println!(&quot;{}, {}&quot;, number, number2);
+    println!("{}, {}", number, number2);
 }</code></pre></pre>
 <p>This prints <code>0, 1624</code>.</p>
 <h3 id="floatlar"><a class="header" href="#floatlar">Floatlar</a></h3>
@@ -221,14 +221,14 @@
 5 |     let third_float = my_float + my_other_float;
   |                                  ^^^^^^^^^^^^^^ expected `f64`, found `f32`
 </code></pre>
-<p>The compiler writes &quot;expected (type), found (type)&quot; when you use the wrong type. It reads your code like this:</p>
+<p>The compiler writes "expected (type), found (type)" when you use the wrong type. It reads your code like this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_float: f64 = 5.0; // The compiler sees an f64
     let my_other_float: f32 = 8.5; // The compiler sees an f32. It is a different type.
     let third_float = my_float + // You want to add my_float to something, so it must be an f64 plus another f64. Now it expects an f64...
     let third_float = my_float + my_other_float;  // ⚠️ but it found an f32. It can't add them.
 }</code></pre></pre>
-<p>So when you see &quot;expected (type), found (type)&quot;, you must find why the compiler expected a different type.</p>
+<p>So when you see "expected (type), found (type)", you must find why the compiler expected a different type.</p>
 <p>Of course, with simple numbers it is easy to fix. You can cast the <code>f32</code> to an <code>f64</code> with <code>as</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_float: f64 = 5.0;
@@ -236,7 +236,7 @@
 
     let third_float = my_float + my_other_float as f64; // my_other_float as f64 = use my_other_float like an f64
 }</code></pre></pre>
-<p>Or even more simply, remove the type declarations. (&quot;to declare a type&quot; = &quot;to tell Rust to use the type&quot;) Rust will choose types that can add together.</p>
+<p>Or even more simply, remove the type declarations. ("to declare a type" = "to tell Rust to use the type") Rust will choose types that can add together.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_float = 5.0; // Rust will choose f64
     let my_other_float = 8.5; // Here again it will choose f64

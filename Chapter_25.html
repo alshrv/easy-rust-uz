@@ -176,15 +176,15 @@
                         <h2 id="structlar"><a class="header" href="#structlar">Structlar</a></h2>
 <p><strong>Bu bobni YouTubeda tomosha qiling: <a href="https://youtu.be/W23uQghBOFk">Part 1</a> and <a href="https://youtu.be/GSVhrjLCuNA">Part 2</a></strong></p>
 <p>With structs, you can create your own type. You will use structs all the time in Rust because they are so convenient. Structs are created with the keyword <code>struct</code>. The name of a struct should be in UpperCamelCase (capital letter for each word, no spaces). If you write a struct in all lowercase, the compiler will tell you.</p>
-<p>There are three types of structs. One is a &quot;unit struct&quot;. Unit means &quot;doesn't have anything&quot;. For a unit struct, you just write the name and a semicolon.</p>
+<p>There are three types of structs. One is a "unit struct". Unit means "doesn't have anything". For a unit struct, you just write the name and a semicolon.</p>
 <pre><pre class="playground"><code class="language-rust">struct FileDirectory;
 fn main() {}</code></pre></pre>
-<p>The next is a tuple struct, or an unnamed struct. It is &quot;unnamed&quot; because you only need to write the types, not the field names. Tuple structs are good when you need a simple struct and don't need to remember names.</p>
+<p>The next is a tuple struct, or an unnamed struct. It is "unnamed" because you only need to write the types, not the field names. Tuple structs are good when you need a simple struct and don't need to remember names.</p>
 <pre><pre class="playground"><code class="language-rust">struct Colour(u8, u8, u8);
 
 fn main() {
     let my_colour = Colour(50, 0, 50); // Make a colour out of RGB (red, green, blue)
-    println!(&quot;The second part of the colour is: {}&quot;, my_colour.1);
+    println!("The second part of the colour is: {}", my_colour.1);
 }</code></pre></pre>
 <p>This prints <code>The second part of the colour is: 0</code>.</p>
 <p>The third type is the named struct. This is probably the most common struct. In this struct you declare field names and types inside a <code>{}</code> code block. Note that you don't write a semicolon after a named struct, because there is a whole code block after it.</p>
@@ -238,8 +238,8 @@ fn main() {}</code></pre></pre>
 
 fn main() {
     let population = 500_000;
-    let capital = String::from(&quot;Elista&quot;);
-    let leader_name = String::from(&quot;Batu Khasikov&quot;);
+    let capital = String::from("Elista");
+    let leader_name = String::from("Batu Khasikov");
 
     let kalmykia = Country {
         population: population,
@@ -256,8 +256,8 @@ fn main() {
 
 fn main() {
     let population = 500_000;
-    let capital = String::from(&quot;Elista&quot;);
-    let leader_name = String::from(&quot;Batu Khasikov&quot;);
+    let capital = String::from("Elista");
+    let leader_name = String::from("Batu Khasikov");
 
     let kalmykia = Country {
         population,

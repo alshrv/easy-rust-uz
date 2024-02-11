@@ -188,7 +188,7 @@ struct City {
 fn main() {
 
     let mut tallinn = City {
-        name: &quot;Tallinn&quot;.to_string(),
+        name: "Tallinn".to_string(),
         population: HashMap::new(), // So far the HashMap is empty
     };
 
@@ -198,7 +198,7 @@ fn main() {
 
 
     for (year, population) in tallinn.population { // The HashMap is HashMap&lt;u32, u32&gt; so it returns a two items each time
-        println!(&quot;In the year {} the city of {} had a population of {}.&quot;, year, tallinn.name, population);
+        println!("In the year {} the city of {} had a population of {}.", year, tallinn.name, population);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -223,7 +223,7 @@ struct City {
 fn main() {
 
     let mut tallinn = City {
-        name: &quot;Tallinn&quot;.to_string(),
+        name: "Tallinn".to_string(),
         population: BTreeMap::new(), // Just change HashMap to BTreeMap
     };
 
@@ -232,7 +232,7 @@ fn main() {
     tallinn.population.insert(2020, 437_619);
 
     for (year, population) in tallinn.population {
-        println!(&quot;In the year {} the city of {} had a population of {}.&quot;, year, tallinn.name, population);
+        println!("In the year {} the city of {} had a population of {}.", year, tallinn.name, population);
     }
 }</code></pre></pre>
 <p>Now it will always print:</p>
@@ -241,30 +241,30 @@ In the year 1851 the city of Tallinn had a population of 24000.
 In the year 2020 the city of Tallinn had a population of 437619.
 </code></pre>
 <p>Now we will go back to <code>HashMap</code>.</p>
-<p>You can get a value in a <code>HashMap</code> by just putting the key in <code>[]</code> square brackets. In this next example we will bring up the value for the key <code>Bielefeld</code>, which is <code>Germany</code>. But be careful, because the program will crash if there is no key. If you write <code>println!(&quot;{:?}&quot;, city_hashmap[&quot;Bielefeldd&quot;]);</code> for example then it will crash, because <code>Bielefeldd</code> doesn't exist.</p>
+<p>You can get a value in a <code>HashMap</code> by just putting the key in <code>[]</code> square brackets. In this next example we will bring up the value for the key <code>Bielefeld</code>, which is <code>Germany</code>. But be careful, because the program will crash if there is no key. If you write <code>println!("{:?}", city_hashmap["Bielefeldd"]);</code> for example then it will crash, because <code>Bielefeldd</code> doesn't exist.</p>
 <p>If you are not sure that there will be a key, you can use <code>.get()</code> which returns an <code>Option</code>. If it exists it will be <code>Some(value)</code>, and if not you will get <code>None</code> instead of crashing the program. That's why <code>.get()</code> is the safer way to get a value from a <code>HashMap</code>.</p>
 <pre><pre class="playground"><code class="language-rust">use std::collections::HashMap;
 
 fn main() {
-    let canadian_cities = vec![&quot;Calgary&quot;, &quot;Vancouver&quot;, &quot;Gimli&quot;];
-    let german_cities = vec![&quot;Karlsruhe&quot;, &quot;Bad Doberan&quot;, &quot;Bielefeld&quot;];
+    let canadian_cities = vec!["Calgary", "Vancouver", "Gimli"];
+    let german_cities = vec!["Karlsruhe", "Bad Doberan", "Bielefeld"];
 
     let mut city_hashmap = HashMap::new();
 
     for city in canadian_cities {
-        city_hashmap.insert(city, &quot;Canada&quot;);
+        city_hashmap.insert(city, "Canada");
     }
     for city in german_cities {
-        city_hashmap.insert(city, &quot;Germany&quot;);
+        city_hashmap.insert(city, "Germany");
     }
 
-    println!(&quot;{:?}&quot;, city_hashmap[&quot;Bielefeld&quot;]);
-    println!(&quot;{:?}&quot;, city_hashmap.get(&quot;Bielefeld&quot;));
-    println!(&quot;{:?}&quot;, city_hashmap.get(&quot;Bielefeldd&quot;));
+    println!("{:?}", city_hashmap["Bielefeld"]);
+    println!("{:?}", city_hashmap.get("Bielefeld"));
+    println!("{:?}", city_hashmap.get("Bielefeldd"));
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">&quot;Germany&quot;
-Some(&quot;Germany&quot;)
+<pre><code class="language-text">"Germany"
+Some("Germany")
 None
 </code></pre>
 <p>This is because <em>Bielefeld</em> exists, but <em>Bielefeldd</em> does not exist.</p>
@@ -274,35 +274,35 @@ None
 fn main() {
     let mut book_hashmap = HashMap::new();
 
-    book_hashmap.insert(1, &quot;L'Allemagne Moderne&quot;);
-    book_hashmap.insert(1, &quot;Le Petit Prince&quot;);
-    book_hashmap.insert(1, &quot;섀도우 오브 유어 스마일&quot;);
-    book_hashmap.insert(1, &quot;Eye of the World&quot;);
+    book_hashmap.insert(1, "L'Allemagne Moderne");
+    book_hashmap.insert(1, "Le Petit Prince");
+    book_hashmap.insert(1, "섀도우 오브 유어 스마일");
+    book_hashmap.insert(1, "Eye of the World");
 
-    println!(&quot;{:?}&quot;, book_hashmap.get(&amp;1));
+    println!("{:?}", book_hashmap.get(&amp;1));
 }</code></pre></pre>
-<p>This prints <code>Some(&quot;Eye of the World&quot;)</code>, because it was the last one you used <code>.insert()</code> for.</p>
+<p>This prints <code>Some("Eye of the World")</code>, because it was the last one you used <code>.insert()</code> for.</p>
 <p>It is easy to check if an entry exists, because you can check with <code>.get()</code> which gives an <code>Option</code>:</p>
 <pre><pre class="playground"><code class="language-rust">use std::collections::HashMap;
 
 fn main() {
     let mut book_hashmap = HashMap::new();
 
-    book_hashmap.insert(1, &quot;L'Allemagne Moderne&quot;);
+    book_hashmap.insert(1, "L'Allemagne Moderne");
 
     if book_hashmap.get(&amp;1).is_none() { // is_none() returns a bool: true if it's None, false if it's Some
-        book_hashmap.insert(1, &quot;Le Petit Prince&quot;);
+        book_hashmap.insert(1, "Le Petit Prince");
     }
 
-    println!(&quot;{:?}&quot;, book_hashmap.get(&amp;1));
+    println!("{:?}", book_hashmap.get(&amp;1));
 }</code></pre></pre>
-<p>This prints <code>Some(&quot;L\'Allemagne Moderne&quot;)</code> because there was already a key for <code>1</code>, so we didn't insert <code>Le Petit Prince</code>.</p>
+<p>This prints <code>Some("L\'Allemagne Moderne")</code> because there was already a key for <code>1</code>, so we didn't insert <code>Le Petit Prince</code>.</p>
 <p><code>HashMap</code> has a very interesting method called <code>.entry()</code> that you definitely want to try out. With it you can try to make an entry and use another method like <code>.or_insert()</code> to insert the value if there is no key. The interesting part is that it also gives a mutable reference so you can change it if you want. First is an example where we just insert <code>true</code> every time we insert a book title into the <code>HashMap</code>.</p>
 <p>Let's pretend that we have a library and want to keep track of our books.</p>
 <pre><pre class="playground"><code class="language-rust">use std::collections::HashMap;
 
 fn main() {
-    let book_collection = vec![&quot;L'Allemagne Moderne&quot;, &quot;Le Petit Prince&quot;, &quot;Eye of the World&quot;, &quot;Eye of the World&quot;]; // Eye of the World appears twice
+    let book_collection = vec!["L'Allemagne Moderne", "Le Petit Prince", "Eye of the World", "Eye of the World"]; // Eye of the World appears twice
 
     let mut book_hashmap = HashMap::new();
 
@@ -310,7 +310,7 @@ fn main() {
         book_hashmap.entry(book).or_insert(true);
     }
     for (book, true_or_false) in book_hashmap {
-        println!(&quot;Do we have {}? {}&quot;, book, true_or_false);
+        println!("Do we have {}? {}", book, true_or_false);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -348,7 +348,7 @@ enum Entry&lt;K, V&gt; {
 <pre><pre class="playground"><code class="language-rust">use std::collections::HashMap;
 
 fn main() {
-    let book_collection = vec![&quot;L'Allemagne Moderne&quot;, &quot;Le Petit Prince&quot;, &quot;Eye of the World&quot;, &quot;Eye of the World&quot;];
+    let book_collection = vec!["L'Allemagne Moderne", "Le Petit Prince", "Eye of the World", "Eye of the World"];
 
     let mut book_hashmap = HashMap::new();
 
@@ -358,7 +358,7 @@ fn main() {
     }
 
     for (book, number) in book_hashmap {
-        println!(&quot;{}, {}&quot;, book, number);
+        println!("{}, {}", book, number);
     }
 }</code></pre></pre>
 <p>The important part is <code>let return_value = book_hashmap.entry(book).or_insert(0);</code>. If you take out the <code>let</code>, you get <code>book_hashmap.entry(book).or_insert(0)</code>. Without <code>let</code> it does nothing: it inserts 0, and nobody takes the mutable reference to 0. So we bind it to <code>return_value</code> so we can keep the 0. Then we increase the value by 1, which gives at least 1 for every book in the <code>HashMap</code>. Then when <code>.entry()</code> looks at <em>Eye of the World</em> again it doesn't insert anything, but it gives us a mutable 1. Then we increase it to 2, and that's why it prints this:</p>
@@ -371,12 +371,12 @@ Eye of the World, 2
 
 fn main() {
     let data = vec![ // This is the raw data
-        (&quot;male&quot;, 9),
-        (&quot;female&quot;, 5),
-        (&quot;male&quot;, 0),
-        (&quot;female&quot;, 6),
-        (&quot;female&quot;, 5),
-        (&quot;male&quot;, 10),
+        ("male", 9),
+        ("female", 5),
+        ("male", 0),
+        ("female", 6),
+        ("female", 5),
+        ("male", 10),
     ];
 
     let mut survey_hash = HashMap::new();
@@ -386,14 +386,14 @@ fn main() {
     }
 
     for (male_or_female, numbers) in survey_hash {
-        println!(&quot;{:?}: {:?}&quot;, male_or_female, numbers);
+        println!("{:?}: {:?}", male_or_female, numbers);
     }
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">&quot;female&quot;, [5, 6, 5]
-&quot;male&quot;, [9, 0, 10]
+<pre><code class="language-text">"female", [5, 6, 5]
+"male", [9, 0, 10]
 </code></pre>
-<p>The important line is: <code>survey_hash.entry(item.0).or_insert(Vec::new()).push(item.1);</code> So if it sees &quot;female&quot; it will check to see if there is &quot;female&quot; already in the <code>HashMap</code>. If not, it will insert a <code>Vec::new()</code>, then push the number in. If it sees &quot;female&quot; already in the <code>HashMap</code>, it will not insert a new Vec, and will just push the number into it.</p>
+<p>The important line is: <code>survey_hash.entry(item.0).or_insert(Vec::new()).push(item.1);</code> So if it sees "female" it will check to see if there is "female" already in the <code>HashMap</code>. If not, it will insert a <code>Vec::new()</code>, then push the number in. If it sees "female" already in the <code>HashMap</code>, it will not insert a new Vec, and will just push the number into it.</p>
 <h3 id="hashset-va-btreeset"><a class="header" href="#hashset-va-btreeset">HashSet va BTreeSet</a></h3>
 <p>A <code>HashSet</code> is actually a <code>HashMap</code> that only has keys. On <a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html">the page for HashSet</a> it explains this on the top:</p>
 <p><code>A hash set implemented as a HashMap where the value is ().</code> So it's a <code>HashMap</code> with keys, no values.</p>
@@ -416,7 +416,7 @@ fn main() {
     }
 
     let hashset_length = number_hashset.len(); // The length tells us how many numbers are in it
-    println!(&quot;There are {} unique numbers, so we are missing {}.&quot;, hashset_length, 100 - hashset_length);
+    println!("There are {} unique numbers, so we are missing {}.", hashset_length, 100 - hashset_length);
 
     // Let's see what numbers we are missing
     let mut missing_vec = vec![];
@@ -426,9 +426,9 @@ fn main() {
         }
     }
 
-    print!(&quot;It does not contain: &quot;);
+    print!("It does not contain: ");
     for number in missing_vec {
-        print!(&quot;{} &quot;, number);
+        print!("{} ", number);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -439,7 +439,7 @@ It does not contain: 1 2 4 6 7 9 12 21 23 27 30 31 39 40 45 47 48 50 52 53 62 65
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>for entry in number_hashset { // 🚧
-    print!(&quot;{} &quot;, entry);
+    print!("{} ", entry);
 }
 <span class="boring">}</span></code></pre></pre>
 <p>Maybe it will print this: <code>67 28 42 25 95 59 87 11 5 81 64 34 8 15 13 86 10 89 63 93 49 41 46 57 60 29 17 22 74 43 32 38 36 76 71 18 14 84 61 16 35 90 56 54 91 19 94 44 3 0 68 80 51 92 24 20 82 26 58 33 55 96 37 66 79 73</code>. But it will almost never print it in the same way again.</p>
@@ -460,7 +460,7 @@ fn main() {
         number_btreeset.insert(number);
     }
     for entry in number_btreeset {
-        print!(&quot;{} &quot;, entry);
+        print!("{} ", entry);
     }
 }</code></pre></pre>
 <p>Now it will print in order: <code>0 3 5 8 10 11 13 14 15 16 17 18 19 20 22 24 25 26 28 29 32 33 34 35 36 37 38 41 42 43 44 46 49 51 54 55 56 57 58 59 60 61 63 64 66 67 68 71 73 74 76 79 80 81 82 84 86 87 89 90 91 92 93 94 95 96</code>.</p>
@@ -488,7 +488,7 @@ fn main() {
     }
 
     while let Some(number) = my_heap.pop() { // .pop() returns Some(number) if a number is there, None if not. It pops from the front
-        println!(&quot;Popped off {}. Remaining numbers are: {:?}&quot;, number, show_remainder(&amp;my_heap));
+        println!("Popped off {}. Remaining numbers are: {:?}", number, show_remainder(&amp;my_heap));
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -508,14 +508,14 @@ fn main() {
     let mut jobs = BinaryHeap::new();
 
     // Add jobs to do throughout the day
-    jobs.push((100, &quot;Write back to email from the CEO&quot;));
-    jobs.push((80, &quot;Finish the report today&quot;));
-    jobs.push((5, &quot;Watch some YouTube&quot;));
-    jobs.push((70, &quot;Tell your team members thanks for always working hard&quot;));
-    jobs.push((30, &quot;Plan who to hire next for the team&quot;));
+    jobs.push((100, "Write back to email from the CEO"));
+    jobs.push((80, "Finish the report today"));
+    jobs.push((5, "Watch some YouTube"));
+    jobs.push((70, "Tell your team members thanks for always working hard"));
+    jobs.push((30, "Plan who to hire next for the team"));
 
     while let Some(job) = jobs.pop() {
-        println!(&quot;You need to: {}&quot;, job.1);
+        println!("You need to: {}", job.1);
     }
 }</code></pre></pre>
 <p>This will always print:</p>
@@ -560,7 +560,7 @@ fn main() {
 fn check_remaining(input: &amp;VecDeque&lt;(&amp;str, bool)&gt;) { // Each item is a (&amp;str, bool)
     for item in input {
         if item.1 == false {
-            println!(&quot;You must: {}&quot;, item.0);
+            println!("You must: {}", item.0);
         }
     }
 }
@@ -573,7 +573,7 @@ fn done(input: &amp;mut VecDeque&lt;(&amp;str, bool)&gt;) {
 
 fn main() {
     let mut my_vecdeque = VecDeque::new();
-    let things_to_do = vec![&quot;send email to customer&quot;, &quot;add new product to list&quot;, &quot;phone Loki back&quot;];
+    let things_to_do = vec!["send email to customer", "add new product to list", "phone Loki back"];
 
     for thing in things_to_do {
         my_vecdeque.push_front((thing, false));
@@ -585,12 +585,12 @@ fn main() {
     check_remaining(&amp;my_vecdeque);
 
     for task in my_vecdeque {
-        print!(&quot;{:?} &quot;, task);
+        print!("{:?} ", task);
     }
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">You must: phone Loki back
-(&quot;add new product to list&quot;, true) (&quot;send email to customer&quot;, true) (&quot;phone Loki back&quot;, false)
+("add new product to list", true) ("send email to customer", true) ("phone Loki back", false)
 </code></pre>
 
                     </main>

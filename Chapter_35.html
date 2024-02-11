@@ -208,10 +208,10 @@ let result = self.second_thing as u32 + self.first_thing
 
 trait Dog { // The dog trait gives some functionality
     fn bark(&amp;self) { // It can bark
-        println!(&quot;Woof woof!&quot;);
+        println!("Woof woof!");
     }
     fn run(&amp;self) { // and it can run
-        println!(&quot;The dog is running!&quot;);
+        println!("The dog is running!");
     }
 }
 
@@ -219,21 +219,21 @@ impl Dog for Animal {} // Now Animal has the trait Dog
 
 fn main() {
     let rover = Animal {
-        name: &quot;Rover&quot;.to_string(),
+        name: "Rover".to_string(),
     };
 
     rover.bark(); // Now Animal can use bark()
     rover.run();  // and it can use run()
 }</code></pre></pre>
-<p>This is okay, but we don't want to print &quot;The dog is running&quot;. You can change the methods that a <code>trait</code> gives you if you want, but you have to have the same signature. That means that it needs to take the same things, and return the same things. For example, we can change the method <code>.run()</code>, but we have to follow the signature. The signature says:</p>
+<p>This is okay, but we don't want to print "The dog is running". You can change the methods that a <code>trait</code> gives you if you want, but you have to have the same signature. That means that it needs to take the same things, and return the same things. For example, we can change the method <code>.run()</code>, but we have to follow the signature. The signature says:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
 fn run(&amp;self) {
-    println!(&quot;The dog is running!&quot;);
+    println!("The dog is running!");
 }
 <span class="boring">}</span></code></pre></pre>
-<p><code>fn run(&amp;self)</code> means &quot;fn <code>run()</code> takes <code>&amp;self</code>, and returns nothing&quot;. So you can't do this:</p>
+<p><code>fn run(&amp;self)</code> means "fn <code>run()</code> takes <code>&amp;self</code>, and returns nothing". So you can't do this:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn run(&amp;self) -&gt; i32 { // ⚠️
@@ -251,22 +251,22 @@ fn run(&amp;self) {
 
 trait Dog { // The dog trait gives some functionality
     fn bark(&amp;self) { // It can bark
-        println!(&quot;Woof woof!&quot;);
+        println!("Woof woof!");
     }
     fn run(&amp;self) { // and it can run
-        println!(&quot;The dog is running!&quot;);
+        println!("The dog is running!");
     }
 }
 
 impl Dog for Animal {
     fn run(&amp;self) {
-        println!(&quot;{} is running!&quot;, self.name);
+        println!("{} is running!", self.name);
     }
 }
 
 fn main() {
     let rover = Animal {
-        name: &quot;Rover&quot;.to_string(),
+        name: "Rover".to_string(),
     };
 
     rover.bark(); // Now Animal can use bark()
@@ -286,22 +286,22 @@ trait Dog {
 
 impl Dog for Animal {
     fn bark(&amp;self) {
-        println!(&quot;{}, stop barking!!&quot;, self.name);
+        println!("{}, stop barking!!", self.name);
     }
     fn run(&amp;self) {
-        println!(&quot;{} is running!&quot;, self.name);
+        println!("{} is running!", self.name);
     }
 }
 
 fn main() {
     let rover = Animal {
-        name: &quot;Rover&quot;.to_string(),
+        name: "Rover".to_string(),
     };
 
     rover.bark();
     rover.run();
 }</code></pre></pre>
-<p>So when you create a trait, you must think: &quot;Which functions should I write? And which functions should the user write?&quot; If you think the user should use the function the same way every time, then write out the function. If you think the user will use it differently, then just write the function signature.</p>
+<p>So when you create a trait, you must think: "Which functions should I write? And which functions should the user write?" If you think the user should use the function the same way every time, then write out the function. If you think the user will use it differently, then just write the function signature.</p>
 <p>So let's try implementing the Display trait for our struct. First we will make a simple struct:</p>
 <pre><pre class="playground"><code class="language-rust">struct Cat {
     name: String,
@@ -310,7 +310,7 @@ fn main() {
 
 fn main() {
     let mr_mantle = Cat {
-        name: &quot;Reggie Mantle&quot;.to_string(),
+        name: "Reggie Mantle".to_string(),
         age: 4,
     };
 }</code></pre></pre>
@@ -323,14 +323,14 @@ struct Cat {
 
 fn main() {
     let mr_mantle = Cat {
-        name: &quot;Reggie Mantle&quot;.to_string(),
+        name: "Reggie Mantle".to_string(),
         age: 4,
     };
 
-    println!(&quot;Mr. Mantle is a {:?}&quot;, mr_mantle);
+    println!("Mr. Mantle is a {:?}", mr_mantle);
 }</code></pre></pre>
 <p>but Debug print is not the prettiest way to print, because it looks like this.</p>
-<pre><code class="language-text">Mr. Mantle is a Cat { name: &quot;Reggie Mantle&quot;, age: 4 }
+<pre><code class="language-text">Mr. Mantle is a Cat { name: "Reggie Mantle", age: 4 }
 </code></pre>
 <p>So we need to implement <code>Display</code> for <code>Cat</code> if we want nicer printing. On <a href="https://doc.rust-lang.org/std/fmt/trait.Display.html">https://doc.rust-lang.org/std/fmt/trait.Display.html</a> we can see the information for Display, and one example. It says:</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt;
@@ -342,7 +342,7 @@ struct Position {
 
 impl fmt::Display for Position {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
-        write!(f, &quot;({}, {})&quot;, self.longitude, self.latitude)
+        write!(f, "({}, {})", self.longitude, self.latitude)
     }
 }
 
@@ -357,7 +357,7 @@ struct Cat {
 
 impl fmt::Display for Cat {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
-        write!(f, &quot;{} is a cat who is {} years old.&quot;, self.name, self.age)
+        write!(f, "{} is a cat who is {} years old.", self.name, self.age)
     }
 }
 
@@ -372,17 +372,17 @@ struct Cat {
 
 impl fmt::Display for Cat {
   fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
-      write!(f, &quot;{} is a cat who is {} years old.&quot;, self.name, self.age)
+      write!(f, "{} is a cat who is {} years old.", self.name, self.age)
   }
 }
 
 fn main() {
     let mr_mantle = Cat {
-        name: &quot;Reggie Mantle&quot;.to_string(),
+        name: "Reggie Mantle".to_string(),
         age: 4,
     };
 
-    println!(&quot;{}&quot;, mr_mantle);
+    println!("{}", mr_mantle);
 }</code></pre></pre>
 <p>Success! Now when we use <code>{}</code> to print, we get <code>Reggie Mantle is a cat who is 4 years old.</code>. This looks much better.</p>
 <p>By the way, if you implement <code>Display</code> then you get the <code>ToString</code> trait for free. That's because you use the <code>format!</code> macro for the <code>.fmt()</code> function, which lets you make a <code>String</code> with <code>.to_string()</code>. So we could do something like this where we pass <code>reggie_mantle</code> to a function that wants a <code>String</code>, or anything else.</p>
@@ -394,22 +394,22 @@ struct Cat {
 
 impl fmt::Display for Cat {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
-        write!(f, &quot;{} is a cat who is {} years old.&quot;, self.name, self.age)
+        write!(f, "{} is a cat who is {} years old.", self.name, self.age)
     }
 }
 
 fn print_cats(pet: String) {
-    println!(&quot;{}&quot;, pet);
+    println!("{}", pet);
 }
 
 fn main() {
     let mr_mantle = Cat {
-        name: &quot;Reggie Mantle&quot;.to_string(),
+        name: "Reggie Mantle".to_string(),
         age: 4,
     };
 
     print_cats(mr_mantle.to_string()); // Turn him into a String here
-    println!(&quot;Mr. Mantle's String is {} letters long.&quot;, mr_mantle.to_string().chars().count()); // Turn him into chars and count them
+    println!("Mr. Mantle's String is {} letters long.", mr_mantle.to_string().chars().count()); // Turn him into chars and count them
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Reggie Mantle is a cat who is 4 years old.
@@ -428,14 +428,14 @@ trait FightClose {
     fn attack_with_sword(&amp;self, opponent: &amp;mut Monster) {
         opponent.health -= 10;
         println!(
-            &quot;You attack with your sword. Your opponent now has {} health left.&quot;,
+            "You attack with your sword. Your opponent now has {} health left.",
             opponent.health
         );
     }
     fn attack_with_hand(&amp;self, opponent: &amp;mut Monster) {
         opponent.health -= 2;
         println!(
-            &quot;You attack with your hand. Your opponent now has {} health left.&quot;,
+            "You attack with your hand. Your opponent now has {} health left.",
             opponent.health
         );
     }
@@ -448,7 +448,7 @@ trait FightFromDistance {
         if distance &lt; 10 {
             opponent.health -= 10;
             println!(
-                &quot;You attack with your bow. Your opponent now has {} health left.&quot;,
+                "You attack with your bow. Your opponent now has {} health left.",
                 opponent.health
             );
         }
@@ -458,7 +458,7 @@ trait FightFromDistance {
             opponent.health -= 4;
         }
         println!(
-            &quot;You attack with your rock. Your opponent now has {} health left.&quot;,
+            "You attack with your rock. Your opponent now has {} health left.",
             opponent.health
         );
     }
@@ -496,14 +496,14 @@ trait FightClose: std::fmt::Debug { // Now a type needs Debug to use FightClose
     fn attack_with_sword(&amp;self, opponent: &amp;mut Monster) {
         opponent.health -= 10;
         println!(
-            &quot;You attack with your sword. Your opponent now has {} health left. You are now at: {:?}&quot;, // We can now print self with {:?} because we have Debug
+            "You attack with your sword. Your opponent now has {} health left. You are now at: {:?}", // We can now print self with {:?} because we have Debug
             opponent.health, &amp;self
         );
     }
     fn attack_with_hand(&amp;self, opponent: &amp;mut Monster) {
         opponent.health -= 2;
         println!(
-            &quot;You attack with your hand. Your opponent now has {} health left.  You are now at: {:?}&quot;,
+            "You attack with your hand. Your opponent now has {} health left.  You are now at: {:?}",
             opponent.health, &amp;self
         );
     }
@@ -516,7 +516,7 @@ trait FightFromDistance: std::fmt::Debug { // We could also do trait FightFromDi
         if distance &lt; 10 {
             opponent.health -= 10;
             println!(
-                &quot;You attack with your bow. Your opponent now has {} health left.  You are now at: {:?}&quot;,
+                "You attack with your bow. Your opponent now has {} health left.  You are now at: {:?}",
                 opponent.health, self
             );
         }
@@ -526,7 +526,7 @@ trait FightFromDistance: std::fmt::Debug { // We could also do trait FightFromDi
             opponent.health -= 4;
         }
         println!(
-            &quot;You attack with your rock. Your opponent now has {} health left.  You are now at: {:?}&quot;,
+            "You attack with your rock. Your opponent now has {} health left.  You are now at: {:?}",
             opponent.health, self
         );
     }
@@ -547,7 +547,7 @@ fn main() {
 You attack with your bow. Your opponent now has 20 health left.  You are now at: Ranger { health: 80 }
 </code></pre>
 <p>In a real game it might be better to rewrite this for each type, because <code>You are now at: Wizard { health: 60 }</code> looks funny. That's also why methods inside traits are usually simple, because you don't know what type is going to use it. You can't write things like <code>self.0 += 10</code> for example. But this example shows that we can use other traits inside a trait we are writing. And when we do that, we get some methods that we can use.</p>
-<p>One other way to use a trait is with what are called <code>trait bounds</code>. That means &quot;limitations by a trait&quot;. Trait bounds are easy because a trait actually doesn't need any methods, or anything at all. Let's rewrite our code with something similar but different. This time our trait doesn't have any methods, but we have other functions that require traits to use.</p>
+<p>One other way to use a trait is with what are called <code>trait bounds</code>. That means "limitations by a trait". Trait bounds are easy because a trait actually doesn't need any methods, or anything at all. Let's rewrite our code with something similar but different. This time our trait doesn't have any methods, but we have other functions that require traits to use.</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Debug;  // So we don't have to write std::fmt::Debug every time now
 
 struct Monster {
@@ -576,7 +576,7 @@ fn attack_with_bow&lt;T: FightFromDistance + Debug&gt;(character: &amp;T, oppone
     if distance &lt; 10 {
         opponent.health -= 10;
         println!(
-            &quot;You attack with your bow. Your opponent now has {} health left.  You are now at: {:?}&quot;,
+            "You attack with your bow. Your opponent now has {} health left.  You are now at: {:?}",
             opponent.health, character
         );
     }
@@ -585,7 +585,7 @@ fn attack_with_bow&lt;T: FightFromDistance + Debug&gt;(character: &amp;T, oppone
 fn attack_with_sword&lt;T: FightClose + Debug&gt;(character: &amp;T, opponent: &amp;mut Monster) {
     opponent.health -= 10;
     println!(
-        &quot;You attack with your sword. Your opponent now has {} health left. You are now at: {:?}&quot;,
+        "You attack with your sword. Your opponent now has {} health left. You are now at: {:?}",
         opponent.health, character
     );
 }
@@ -593,7 +593,7 @@ fn attack_with_sword&lt;T: FightClose + Debug&gt;(character: &amp;T, opponent: &
 fn fireball&lt;T: Magic + Debug&gt;(character: &amp;T, opponent: &amp;mut Monster, distance: u32) {
     if distance &lt; 15 {
         opponent.health -= 20;
-        println!(&quot;You raise your hands and cast a fireball! Your opponent now has {} health left. You are now at: {:?}&quot;,
+        println!("You raise your hands and cast a fireball! Your opponent now has {} health left. You are now at: {:?}",
     opponent.health, character);
     }
 }
@@ -636,7 +636,7 @@ From&lt;VecDeque&lt;T&gt;&gt;
 
 fn print_vec&lt;T: Display&gt;(input: &amp;Vec&lt;T&gt;) { // Take any Vec&lt;T&gt; if type T has Display
     for item in input {
-        print!(&quot;{} &quot;, item);
+        print!("{} ", item);
     }
     println!();
 }
@@ -646,10 +646,10 @@ fn main() {
     let array_vec = Vec::from([8, 9, 10]); // Try from an array
     print_vec(&amp;array_vec);
 
-    let str_vec = Vec::from(&quot;What kind of vec will I be?&quot;); // An array from a &amp;str? This will be interesting
+    let str_vec = Vec::from("What kind of vec will I be?"); // An array from a &amp;str? This will be interesting
     print_vec(&amp;str_vec);
 
-    let string_vec = Vec::from(&quot;What kind of vec will a String be?&quot;.to_string()); // Also from a String
+    let string_vec = Vec::from("What kind of vec will a String be?".to_string()); // Also from a String
     print_vec(&amp;string_vec);
 }</code></pre></pre>
 <p>It prints the following:</p>
@@ -691,14 +691,14 @@ impl Country {
     fn print_cities(&amp;self) { // function to print the cities in Country
         for city in &amp;self.cities {
             // &amp; because Vec&lt;City&gt; isn't Copy
-            println!(&quot;{:?} has a population of {:?}.&quot;, city.name, city.population);
+            println!("{:?} has a population of {:?}.", city.name, city.population);
         }
     }
 }
 
 fn main() {
-    let helsinki = City::new(&quot;Helsinki&quot;, 631_695);
-    let turku = City::new(&quot;Turku&quot;, 186_756);
+    let helsinki = City::new("Helsinki", 631_695);
+    let turku = City::new("Turku", 186_756);
 
     let finland_cities = vec![helsinki, turku]; // This is the Vec&lt;City&gt;
     let finland = Country::from(finland_cities); // So now we can use From
@@ -706,8 +706,8 @@ fn main() {
     finland.print_cities();
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">&quot;Helsinki&quot; has a population of 631695.
-&quot;Turku&quot; has a population of 186756.
+<pre><code class="language-text">"Helsinki" has a population of 631695.
+"Turku" has a population of 186756.
 </code></pre>
 <p>You can see that <code>From</code> is easy to implement from types you didn't create like <code>Vec</code>, <code>i32</code>, and so on. Here is one more example where we create a vector that has two vectors. The first vector holds even numbers, and the second holds odd numbers. With <code>From</code> you can give it a vector of <code>i32</code>s and it will turn it into a <code>Vec&lt;Vec&lt;i32&gt;&gt;</code>: a vector that holds vectors of <code>i32</code>.</p>
 <pre><pre class="playground"><code class="language-rust">use std::convert::From;
@@ -733,7 +733,7 @@ fn main() {
     let bunch_of_numbers = vec![8, 7, -1, 3, 222, 9787, -47, 77, 0, 55, 7, 8];
     let new_vec = EvenOddVec::from(bunch_of_numbers);
 
-    println!(&quot;Even numbers: {:?}\nOdd numbers: {:?}&quot;, new_vec.0[0], new_vec.0[1]);
+    println!("Even numbers: {:?}\nOdd numbers: {:?}", new_vec.0[0], new_vec.0[1]);
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Even numbers: [8, 222, 0, 8]
@@ -771,32 +771,32 @@ fn as_ref(&amp;self) -&gt; &amp;OsStr
 <p>You can see that it takes <code>&amp;self</code> and gives a reference to the other type. This means that if you have a generic type T, you can say that it needs <code>AsRef&lt;str&gt;</code>. If you do that, it will be able to take a <code>&amp;str</code> and a <code>String</code>.</p>
 <p>Let's start with the generic function. This doesn't work yet:</p>
 <pre><pre class="playground"><code class="language-rust">fn print_it&lt;T&gt;(input: T) {
-    println!(&quot;{}&quot;, input) // ⚠️
+    println!("{}", input) // ⚠️
 }
 
 fn main() {
-    print_it(&quot;Please print me&quot;);
+    print_it("Please print me");
 }</code></pre></pre>
 <p>Rust says <code>error[E0277]: T doesn't implement std::fmt::Display</code>. So we will require T to implement Display.</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Display;
 
 fn print_it&lt;T: Display&gt;(input: T) {
-    println!(&quot;{}&quot;, input)
+    println!("{}", input)
 }
 
 fn main() {
-    print_it(&quot;Please print me&quot;);
+    print_it("Please print me");
 }</code></pre></pre>
 <p>Now it works and prints <code>Please print me</code>. That is good, but T can still be too many things. It can be an <code>i8</code>, an <code>f32</code> and anything else with just <code>Display</code>. So we add <code>AsRef&lt;str&gt;</code>, and now T needs both <code>AsRef&lt;str&gt;</code> and <code>Display</code>.</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Display;
 
 fn print_it&lt;T: AsRef&lt;str&gt; + Display&gt;(input: T) {
-    println!(&quot;{}&quot;, input)
+    println!("{}", input)
 }
 
 fn main() {
-    print_it(&quot;Please print me&quot;);
-    print_it(&quot;Also, please print me&quot;.to_string());
+    print_it("Please print me");
+    print_it("Also, please print me".to_string());
     // print_it(7); &lt;- This will not print
 }</code></pre></pre>
 <p>Now it won't take types like <code>i8</code>.</p>
@@ -807,12 +807,12 @@ fn print_it&lt;T&gt;(input: T) // Now this line is easy to read
 where
     T: AsRef&lt;str&gt; + Debug + Display, // and these traits are easy to read
 {
-    println!(&quot;{}&quot;, input)
+    println!("{}", input)
 }
 
 fn main() {
-    print_it(&quot;Please print me&quot;);
-    print_it(&quot;Also, please print me&quot;.to_string());
+    print_it("Please print me");
+    print_it("Also, please print me".to_string());
 }</code></pre></pre>
 
                     </main>

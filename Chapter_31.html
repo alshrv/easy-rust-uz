@@ -176,18 +176,18 @@
                         <h2 id="genericlar"><a class="header" href="#genericlar">Genericlar</a></h2>
 <p>In functions, you write what type to take as input:</p>
 <pre><pre class="playground"><code class="language-rust">fn return_number(number: i32) -&gt; i32 {
-    println!(&quot;Here is your number.&quot;);
+    println!("Here is your number.");
     number
 }
 
 fn main() {
     let number = return_number(5);
 }</code></pre></pre>
-<p>But what if you want to take more than just <code>i32</code>? You can use generics for this. Generics means &quot;maybe one type, maybe another type&quot;.</p>
-<p>For generics, you use angle brackets with the type inside, like this: <code>&lt;T&gt;</code> This means &quot;any type you put into the function&quot;. Usually, generics uses types with one capital letter (T, U, V, etc.), though you don't have to just use one letter.</p>
+<p>But what if you want to take more than just <code>i32</code>? You can use generics for this. Generics means "maybe one type, maybe another type".</p>
+<p>For generics, you use angle brackets with the type inside, like this: <code>&lt;T&gt;</code> This means "any type you put into the function". Usually, generics uses types with one capital letter (T, U, V, etc.), though you don't have to just use one letter.</p>
 <p>This is how you change the function to make it generic:</p>
 <pre><pre class="playground"><code class="language-rust">fn return_number&lt;T&gt;(number: T) -&gt; T {
-    println!(&quot;Here is your number.&quot;);
+    println!("Here is your number.");
     number
 }
 
@@ -199,24 +199,24 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn return_number(number: MyType) -&gt; MyType { // ⚠️
-    println!(&quot;Here is your number.&quot;);
+    println!("Here is your number.");
     number
 }
 <span class="boring">}</span></code></pre></pre>
 <p>As you can see, <code>MyType</code> is concrete, not generic. So we need to write this and so now it works:</p>
 <pre><pre class="playground"><code class="language-rust">fn return_number&lt;MyType&gt;(number: MyType) -&gt; MyType {
-    println!(&quot;Here is your number.&quot;);
+    println!("Here is your number.");
     number
 }
 
 fn main() {
     let number = return_number(5);
 }</code></pre></pre>
-<p>So the single letter <code>T</code> is for human eyes, but the part after the function name is for the compiler's &quot;eyes&quot;. Without it, it's not generic.</p>
+<p>So the single letter <code>T</code> is for human eyes, but the part after the function name is for the compiler's "eyes". Without it, it's not generic.</p>
 <p>Now we will go back to type <code>T</code>, because Rust code usually uses <code>T</code>.</p>
 <p>You will remember that some types in Rust are <strong>Copy</strong>, some are <strong>Clone</strong>, some are <strong>Display</strong>, some are <strong>Debug</strong>, and so on. With <strong>Debug</strong>, we can print with <code>{:?}</code>. So now you can see that we have a problem if we want to print <code>T</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn print_number&lt;T&gt;(number: T) {
-    println!(&quot;Here is your number: {:?}&quot;, number); // ⚠️
+    println!("Here is your number: {:?}", number); // ⚠️
 }
 
 fn main() {
@@ -226,20 +226,20 @@ fn main() {
 <pre><code class="language-text">error[E0277]: `T` doesn't implement `std::fmt::Debug`
   --&gt; src\main.rs:29:43
    |
-29 |     println!(&quot;Here is your number: {:?}&quot;, number);
+29 |     println!("Here is your number: {:?}", number);
    |                                           ^^^^^^ `T` cannot be formatted using `{:?}` because it doesn't implement `std::fmt::Debug`
 </code></pre>
-<p>T doesn't implement <strong>Debug</strong>. So do we implement Debug for T? No, because we don't know what T is. But we can tell the function: &quot;Don't worry, because any type T for this function will have Debug&quot;.</p>
+<p>T doesn't implement <strong>Debug</strong>. So do we implement Debug for T? No, because we don't know what T is. But we can tell the function: "Don't worry, because any type T for this function will have Debug".</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Debug; // Debug is located at std::fmt::Debug. So now we can just write 'Debug'.
 
 fn print_number&lt;T: Debug&gt;(number: T) { // &lt;T: Debug&gt; is the important part
-    println!(&quot;Here is your number: {:?}&quot;, number);
+    println!("Here is your number: {:?}", number);
 }
 
 fn main() {
     print_number(5);
 }</code></pre></pre>
-<p>So now the compiler knows: &quot;Okay, this type T is going to have Debug&quot;. Now the code works, because <code>i32</code> has Debug. Now we can give it many types: <code>String</code>, <code>&amp;str</code>, and so on, because they all have Debug.</p>
+<p>So now the compiler knows: "Okay, this type T is going to have Debug". Now the code works, because <code>i32</code> has Debug. Now we can give it many types: <code>String</code>, <code>&amp;str</code>, and so on, because they all have Debug.</p>
 <p>Now we can create a struct and give it Debug with #[derive(Debug)], so now we can print it too. Our function can take <code>i32</code>, the struct Animal, and more:</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Debug;
 
@@ -250,12 +250,12 @@ struct Animal {
 }
 
 fn print_item&lt;T: Debug&gt;(item: T) {
-    println!(&quot;Here is your item: {:?}&quot;, item);
+    println!("Here is your item: {:?}", item);
 }
 
 fn main() {
     let charlie = Animal {
-        name: &quot;Charlie&quot;.to_string(),
+        name: "Charlie".to_string(),
         age: 1,
     };
 
@@ -265,7 +265,7 @@ fn main() {
     print_item(number);
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">Here is your item: Animal { name: &quot;Charlie&quot;, age: 1 }
+<pre><code class="language-text">Here is your item: Animal { name: "Charlie", age: 1 }
 Here is your item: 55
 </code></pre>
 <p>Sometimes we need more than one type in a generic function. We have to write out each type name, and think about how we want to use it. In this example, we want two types. First we want to print a statement for type T. Printing with <code>{}</code> is nicer, so we will require <code>Display</code> for <code>T</code>.</p>
@@ -274,11 +274,11 @@ Here is your item: 55
 use std::cmp::PartialOrd;
 
 fn compare_and_display&lt;T: Display, U: Display + PartialOrd&gt;(statement: T, num_1: U, num_2: U) {
-    println!(&quot;{}! Is {} greater than {}? {}&quot;, statement, num_1, num_2, num_1 &gt; num_2);
+    println!("{}! Is {} greater than {}? {}", statement, num_1, num_2, num_1 &gt; num_2);
 }
 
 fn main() {
-    compare_and_display(&quot;Listen up!&quot;, 9, 8);
+    compare_and_display("Listen up!", 9, 8);
 }</code></pre></pre>
 <p>This prints <code>Listen up!! Is 9 greater than 8? true</code>.</p>
 <p>So <code>fn compare_and_display&lt;T: Display, U: Display + PartialOrd&gt;(statement: T, num_1: U, num_2: U)</code> says:</p>
@@ -297,11 +297,11 @@ where
     T: Display,
     U: Display + PartialOrd,
 {
-    println!(&quot;{}! Is {} greater than {}? {}&quot;, statement, num_1, num_2, num_1 &gt; num_2);
+    println!("{}! Is {} greater than {}? {}", statement, num_1, num_2, num_1 &gt; num_2);
 }
 
 fn main() {
-    compare_and_display(&quot;Listen up!&quot;, 9, 8);
+    compare_and_display("Listen up!", 9, 8);
 }</code></pre></pre>
 <p>Using <code>where</code> is a good idea when you have many generic types.</p>
 <p>Also note:</p>
@@ -313,13 +313,13 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Display;
 
 fn say_two&lt;T: Display, U: Display&gt;(statement_1: T, statement_2: U) { // Type T needs Display, type U needs Display
-    println!(&quot;I have two things to say: {} and {}&quot;, statement_1, statement_2);
+    println!("I have two things to say: {} and {}", statement_1, statement_2);
 }
 
 fn main() {
 
-    say_two(&quot;Hello there!&quot;, String::from(&quot;I hate sand.&quot;)); // Type T is a &amp;str, but type U is a String.
-    say_two(String::from(&quot;Where is Padme?&quot;), String::from(&quot;Is she all right?&quot;)); // Both types are String.
+    say_two("Hello there!", String::from("I hate sand.")); // Type T is a &amp;str, but type U is a String.
+    say_two(String::from("Where is Padme?"), String::from("Is she all right?")); // Both types are String.
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">I have two things to say: Hello there! and I hate sand.

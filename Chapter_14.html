@@ -178,24 +178,24 @@
 <p>Adding <code>\n</code> will make a new line, and <code>\t</code> will make a tab:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     // Note: this is print!, not println!
-    print!(&quot;\t Start with a tab\nand move to a new line&quot;);
+    print!("\t Start with a tab\nand move to a new line");
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">         Start with a tab
 and move to a new line
 </code></pre>
-<p>Inside <code>&quot;&quot;</code> you can write over many lines with no problem, but be careful with the spacing:</p>
+<p>Inside <code>""</code> you can write over many lines with no problem, but be careful with the spacing:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     // Note: After the first line you have to start on the far left.
     // If you write directly under println!, it will add the spaces
-    println!(&quot;Inside quotes
+    println!("Inside quotes
 you can write over
 many lines
-and it will print just fine.&quot;);
+and it will print just fine.");
 
-    println!(&quot;If you forget to write
+    println!("If you forget to write
     on the left side, the spaces
-    will be added when you print.&quot;);
+    will be added when you print.");
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Inside quotes
@@ -206,39 +206,39 @@ If you forget to write
     on the left side, the spaces
     will be added when you print.
 </code></pre>
-<p>If you want to print characters like <code>\n</code> (called &quot;escape characters&quot;), you can add an extra <code>\</code>:</p>
+<p>If you want to print characters like <code>\n</code> (called "escape characters"), you can add an extra <code>\</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;Here are two escape characters: \\n and \\t&quot;);
+    println!("Here are two escape characters: \\n and \\t");
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Here are two escape characters: \n and \t
 </code></pre>
-<p>Sometimes you have too many <code>&quot;</code> and escape characters, and want Rust to ignore everything. To do this, you can add <code>r#</code> to the beginning and <code>#</code> to the end.</p>
+<p>Sometimes you have too many <code>"</code> and escape characters, and want Rust to ignore everything. To do this, you can add <code>r#</code> to the beginning and <code>#</code> to the end.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;He said, \&quot;You can find the file at c:\\files\\my_documents\\file.txt.\&quot; Then I found the file.&quot;); // We used \ five times here
-    println!(r#&quot;He said, &quot;You can find the file at c:\files\my_documents\file.txt.&quot; Then I found the file.&quot;#)
+    println!("He said, \"You can find the file at c:\\files\\my_documents\\file.txt.\" Then I found the file."); // We used \ five times here
+    println!(r#"He said, "You can find the file at c:\files\my_documents\file.txt." Then I found the file."#)
 }</code></pre></pre>
 <p>This prints the same thing, but using <code>r#</code> makes it easier for humans to read.</p>
-<pre><code class="language-text">He said, &quot;You can find the file at c:\files\my_documents\file.txt.&quot; Then I found the file.
-He said, &quot;You can find the file at c:\files\my_documents\file.txt.&quot; Then I found the file.
+<pre><code class="language-text">He said, "You can find the file at c:\files\my_documents\file.txt." Then I found the file.
+He said, "You can find the file at c:\files\my_documents\file.txt." Then I found the file.
 </code></pre>
 <p>If you need to print with a <code>#</code> inside, then you can start with <code>r##</code> and end with <code>##</code>. And if you need more than one, you can add one more # on each side.</p>
 <p>Here are four examples:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
 
-    let my_string = &quot;'Ice to see you,' he said.&quot;; // single quotes
-    let quote_string = r#&quot;&quot;Ice to see you,&quot; he said.&quot;#; // double quotes
-    let hashtag_string = r##&quot;The hashtag #IceToSeeYou had become very popular.&quot;##; // Has one # so we need at least ##
-    let many_hashtags = r####&quot;&quot;You don't have to type ### to use a hashtag. You can just use #.&quot;&quot;####; // Has three ### so we need at least ####
+    let my_string = "'Ice to see you,' he said."; // single quotes
+    let quote_string = r#""Ice to see you," he said."#; // double quotes
+    let hashtag_string = r##"The hashtag #IceToSeeYou had become very popular."##; // Has one # so we need at least ##
+    let many_hashtags = r####""You don't have to type ### to use a hashtag. You can just use #.""####; // Has three ### so we need at least ####
 
-    println!(&quot;{}\n{}\n{}\n{}\n&quot;, my_string, quote_string, hashtag_string, many_hashtags);
+    println!("{}\n{}\n{}\n{}\n", my_string, quote_string, hashtag_string, many_hashtags);
 
 }</code></pre></pre>
 <p>This will print:</p>
 <pre><code class="language-text">'Ice to see you,' he said.
-&quot;Ice to see you,&quot; he said.
+"Ice to see you," he said.
 The hashtag #IceToSeeYou had become very popular.
-&quot;You don't have to type ### to use a hashtag. You can just use #.&quot;
+"You don't have to type ### to use a hashtag. You can just use #."
 </code></pre>
 <p><code>r#</code> has another use: with it you can use a keyword (words like <code>let</code>, <code>fn</code>, etc.) as a variable name.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -248,13 +248,13 @@ The hashtag #IceToSeeYou had become very popular.
 <p><code>r#</code> has this function because older versions of Rust had fewer keywords than Rust now. So with <code>r#</code> you can avoid mistakes with variable names that were not keywords before.</p>
 <p>Or maybe for some reason you <em>really</em> need a function to have a name like <code>return</code>. Then you can write this:</p>
 <pre><pre class="playground"><code class="language-rust">fn r#return() -&gt; u8 {
-    println!(&quot;Here is your number.&quot;);
+    println!("Here is your number.");
     8
 }
 
 fn main() {
     let my_number = r#return();
-    println!(&quot;{}&quot;, my_number);
+    println!("{}", my_number);
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Here is your number.
@@ -266,7 +266,7 @@ fn main() {
 </code></pre>
 <p>So when you print this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;{:?}&quot;, b&quot;This will look like numbers&quot;);
+    println!("{:?}", b"This will look like numbers");
 }</code></pre></pre>
 <p>Here is the result:</p>
 <pre><code class="language-text">[84, 104, 105, 115, 32, 119, 105, 108, 108, 32, 108, 111, 111, 107, 32, 108, 105, 107, 101, 32, 110, 117, 109, 98, 101, 114, 115]
@@ -274,49 +274,49 @@ fn main() {
 <p>For a <code>char</code> this is called a <em>byte</em>, and for a <code>&amp;str</code> it's called a <em>byte string</em>.</p>
 <p>You can also put <code>b</code> and <code>r</code> together if you need to:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;{:?}&quot;, br##&quot;I like to write &quot;#&quot;.&quot;##);
+    println!("{:?}", br##"I like to write "#"."##);
 }</code></pre></pre>
 <p>That will print <code>[73, 32, 108, 105, 107, 101, 32, 116, 111, 32, 119, 114, 105, 116, 101, 32, 34, 35, 34, 46]</code>.</p>
 <p>There is also a Unicode escape that lets you print any Unicode character inside a string: <code>\u{}</code>. A hexadecimal number goes inside the <code>{}</code> to print it. Here is a short example of how to get the Unicode number, and how to print it again.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;{:X}&quot;, '행' as u32); // Cast char as u32 to get the hexadecimal value
-    println!(&quot;{:X}&quot;, 'H' as u32);
-    println!(&quot;{:X}&quot;, '居' as u32);
-    println!(&quot;{:X}&quot;, 'い' as u32);
+    println!("{:X}", '행' as u32); // Cast char as u32 to get the hexadecimal value
+    println!("{:X}", 'H' as u32);
+    println!("{:X}", '居' as u32);
+    println!("{:X}", 'い' as u32);
 
-    println!(&quot;\u{D589}, \u{48}, \u{5C45}, \u{3044}&quot;); // Try printing them with unicode escape \u
+    println!("\u{D589}, \u{48}, \u{5C45}, \u{3044}"); // Try printing them with unicode escape \u
 }</code></pre></pre>
 <p>We know that <code>println!</code> can print with <code>{}</code> (for Display) and <code>{:?}</code> (for Debug), plus <code>{:#?}</code> for pretty printing. But there are many other ways to print.</p>
 <p>For example, if you have a reference, you can use <code>{:p}</code> to print the <em>pointer address</em>. Pointer address means the location in your computer's memory.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let number = 9;
     let number_ref = &amp;number;
-    println!(&quot;{:p}&quot;, number_ref);
+    println!("{:p}", number_ref);
 }</code></pre></pre>
 <p>This prints <code>0xe2bc0ffcfc</code> or some other address. It might be different every time, depending on where your computer stores it.</p>
 <p>Or you can print binary, hexadecimal and octal:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let number = 555;
-    println!(&quot;Binary: {:b}, hexadecimal: {:x}, octal: {:o}&quot;, number, number, number);
+    println!("Binary: {:b}, hexadecimal: {:x}, octal: {:o}", number, number, number);
 }</code></pre></pre>
 <p>This prints <code>Binary: 1000101011, hexadecimal: 22b, octal: 1053</code>.</p>
 <p>Or you can add numbers to change the order. The first variable will be in index 0, the next in index 1, and so on.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let father_name = &quot;Vlad&quot;;
-    let son_name = &quot;Adrian Fahrenheit&quot;;
-    let family_name = &quot;Țepeș&quot;;
-    println!(&quot;This is {1} {2}, son of {0} {2}.&quot;, father_name, son_name, family_name);
+    let father_name = "Vlad";
+    let son_name = "Adrian Fahrenheit";
+    let family_name = "Țepeș";
+    println!("This is {1} {2}, son of {0} {2}.", father_name, son_name, family_name);
 }</code></pre></pre>
 <p><code>father_name</code> is in position 0, <code>son_name</code> is in position 1, and <code>family_name</code> is in position 2. So it prints <code>This is Adrian Fahrenheit Țepeș, son of Vlad Țepeș</code>.</p>
 <p>Maybe you have a very complex string to print with too many variables inside the <code>{}</code> curly brackets. Or maybe you need to print a variable more than one time. Then it can help to add names to the <code>{}</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     println!(
-        &quot;{city1} is in {country} and {city2} is also in {country},
-but {city3} is not in {country}.&quot;,
-        city1 = &quot;Seoul&quot;,
-        city2 = &quot;Busan&quot;,
-        city3 = &quot;Tokyo&quot;,
-        country = &quot;Korea&quot;
+        "{city1} is in {country} and {city2} is also in {country},
+but {city3} is not in {country}.",
+        city1 = "Seoul",
+        city2 = "Busan",
+        city3 = "Tokyo",
+        country = "Korea"
     );
 }</code></pre></pre>
 <p>That will print:</p>
@@ -329,15 +329,15 @@ but Tokyo is not in Korea.
 <ol>
 <li>Do you want a variable name? Write that first, like when we wrote {country} above.
 (Then add a <code>:</code> after it if you want to do more things)</li>
-<li>Do you want a padding character? For example, 55 with three &quot;padding zeros&quot; looks like 00055.</li>
+<li>Do you want a padding character? For example, 55 with three "padding zeros" looks like 00055.</li>
 <li>What alignment (left / middle / right) for the padding?</li>
 <li>Do you want a minimum length? (just write a number)</li>
 <li>Do you want a maximum length? (write a number with a <code>.</code> in front)</li>
 </ol>
-<p>For example, if I want to write &quot;a&quot; with five ㅎ characters on the left and five ㅎ characters on the right:</p>
+<p>For example, if I want to write "a" with five ㅎ characters on the left and five ㅎ characters on the right:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let letter = &quot;a&quot;;
-    println!(&quot;{:ㅎ^11}&quot;, letter);
+    let letter = "a";
+    println!("{:ㅎ^11}", letter);
 }</code></pre></pre>
 <p>This prints <code>ㅎㅎㅎㅎㅎaㅎㅎㅎㅎㅎ</code>. Let's look at 1) to 5) for this to understand how the compiler reads it.</p>
 <ul>
@@ -348,13 +348,13 @@ but Tokyo is not in Korea.
 </ul>
 <p>Here is an example of many types of formatting.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let title = &quot;TODAY'S NEWS&quot;;
-    println!(&quot;{:-^30}&quot;, title); // no variable name, pad with -, put in centre, 30 characters long
-    let bar = &quot;|&quot;;
-    println!(&quot;{: &lt;15}{: &gt;15}&quot;, bar, bar); // no variable name, pad with space, 15 characters each, one to the left, one to the right
-    let a = &quot;SEOUL&quot;;
-    let b = &quot;TOKYO&quot;;
-    println!(&quot;{city1:-&lt;15}{city2:-&gt;15}&quot;, city1 = a, city2 = b); // variable names city1 and city2, pad with -, one to the left, one to the right
+    let title = "TODAY'S NEWS";
+    println!("{:-^30}", title); // no variable name, pad with -, put in centre, 30 characters long
+    let bar = "|";
+    println!("{: &lt;15}{: &gt;15}", bar, bar); // no variable name, pad with space, 15 characters each, one to the left, one to the right
+    let a = "SEOUL";
+    let b = "TOKYO";
+    println!("{city1:-&lt;15}{city2:-&gt;15}", city1 = a, city2 = b); // variable names city1 and city2, pad with -, one to the left, one to the right
 }</code></pre></pre>
 <p>It prints:</p>
 <pre><code class="language-text">---------TODAY'S NEWS---------

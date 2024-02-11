@@ -177,17 +177,17 @@
 <p><strong><a href="https://youtu.be/R13sQ8SNoEQ">Bu bobni YouTubeda tomosha qiling</a></strong></p>
 <p>References are very important in Rust. Rust uses references to make sure that all memory access is safe. We know that we use <code>&amp;</code> to create a reference:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let country = String::from(&quot;Austria&quot;);
+    let country = String::from("Austria");
     let ref_one = &amp;country;
     let ref_two = &amp;country;
 
-    println!(&quot;{}&quot;, ref_one);
+    println!("{}", ref_one);
 }</code></pre></pre>
 <p>This prints <code>Austria</code>.</p>
-<p>In the code, <code>country</code> is a <code>String</code>. We then created two references to <code>country</code>. They have the type <code>&amp;String</code>, which you say is a &quot;reference to a String&quot;. We could create three references or one hundred references to <code>country</code> and it would be no problem.</p>
+<p>In the code, <code>country</code> is a <code>String</code>. We then created two references to <code>country</code>. They have the type <code>&amp;String</code>, which you say is a "reference to a String". We could create three references or one hundred references to <code>country</code> and it would be no problem.</p>
 <p>But this is a problem:</p>
 <pre><pre class="playground"><code class="language-rust">fn return_str() -&gt; &amp;str {
-    let country = String::from(&quot;Austria&quot;);
+    let country = String::from("Austria");
     let country_ref = &amp;country;
     country_ref // ⚠️
 }
@@ -196,7 +196,7 @@ fn main() {
     let country = return_str();
 }</code></pre></pre>
 <p>The function <code>return_str()</code> creates a String, then it creates a reference to the String. Then it tries to return the reference. But the String <code>country</code> only lives inside the function, and then it dies. Once a variable is gone, the computer will clean up the memory and use it for something else. So after the function is over, <code>country_ref</code> is referring to memory that is already gone, and that's not okay. Rust prevents us from making a mistake with memory here.</p>
-<p>This is the important part about the &quot;owned&quot; type that we talked about above. Because you own a <code>String</code>, you can pass it around. But a <code>&amp;String</code> will die if its <code>String</code> dies, so you don't pass around &quot;ownership&quot; with it.</p>
+<p>This is the important part about the "owned" type that we talked about above. Because you own a <code>String</code>, you can pass it around. But a <code>&amp;String</code> will die if its <code>String</code> dies, so you don't pass around "ownership" with it.</p>
 
                     </main>
 

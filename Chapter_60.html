@@ -174,7 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="tashqi-cratelar"><a class="header" href="#tashqi-cratelar">Tashqi cratelar</a></h2>
-<p>An external crate means &quot;someone else's crate&quot;.</p>
+<p>An external crate means "someone else's crate".</p>
 <p>For this section you <em>almost</em> need to install Rust, but we can still use just the Playground. Now we are going to learn how to import crates that other people have written. This is important in Rust because of two reasons:</p>
 <ul>
 <li>It is very easy to import other crates, and</li>
@@ -184,35 +184,35 @@
 <p>In this book we will only look at the most popular crates, the crates that everyone who uses Rust knows.</p>
 <p>To begin learning external crates, we will start with the most common one: <code>rand</code>.</p>
 <h3 id="rand"><a class="header" href="#rand">rand</a></h3>
-<p>Did you notice that we didn't use any random numbers yet? That's because random numbers aren't in the standard library. But there are a lot of crates that are &quot;almost standard library&quot; because everybody uses them. In any case, it's very easy to bring in a crate. If you have Rust on your computer, there is a file called <code>Cargo.toml</code> that has this information. A <code>Cargo.toml</code> file looks like this when you start:</p>
+<p>Did you notice that we didn't use any random numbers yet? That's because random numbers aren't in the standard library. But there are a lot of crates that are "almost standard library" because everybody uses them. In any case, it's very easy to bring in a crate. If you have Rust on your computer, there is a file called <code>Cargo.toml</code> that has this information. A <code>Cargo.toml</code> file looks like this when you start:</p>
 <pre><code class="language-text">[package]
-name = &quot;rust_book&quot;
-version = &quot;0.1.0&quot;
-authors = [&quot;David MacLeod&quot;]
-edition = &quot;2018&quot;
+name = "rust_book"
+version = "0.1.0"
+authors = ["David MacLeod"]
+edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 </code></pre>
-<p>Now if you want to add the <code>rand</code> crate, search for it on <code>crates.io</code>, which is where all the crates go. That takes you to <code>https://crates.io/crates/rand</code>. And when you click on that, you can see a screen that says <code>Cargo.toml   rand = &quot;0.7.3&quot;</code>. All you do is add that under [dependencies] like this:</p>
+<p>Now if you want to add the <code>rand</code> crate, search for it on <code>crates.io</code>, which is where all the crates go. That takes you to <code>https://crates.io/crates/rand</code>. And when you click on that, you can see a screen that says <code>Cargo.toml   rand = "0.7.3"</code>. All you do is add that under [dependencies] like this:</p>
 <pre><code class="language-text">[package]
-name = &quot;rust_book&quot;
-version = &quot;0.1.0&quot;
-authors = [&quot;David MacLeod&quot;]
-edition = &quot;2018&quot;
+name = "rust_book"
+version = "0.1.0"
+authors = ["David MacLeod"]
+edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand = &quot;0.7.3&quot;
+rand = "0.7.3"
 </code></pre>
 <p>And then Cargo will do the rest for you. Then you can start writing code like <a href="https://docs.rs/rand/0.7.3/rand/">this example code</a> on the <code>rand</code> document website. To get to the documents you can click on the <code>docs</code> button in <a href="https://crates.io/crates/rand">the page on crates.io</a>.</p>
 <p>So that's enough about Cargo: we are still using just the Playground. Luckily, the Playground already has the top 100 crates installed. So you don't need to write in <code>Cargo.toml</code> yet. On the Playground you can imagine that it has a long list like this with 100 crates:</p>
 <pre><code class="language-text">[dependencies]
-rand = &quot;0.7.3&quot;
-some_other_crate = &quot;0.1.0&quot;
-another_nice_crate = &quot;1.7&quot;
+rand = "0.7.3"
+some_other_crate = "0.1.0"
+another_nice_crate = "1.7"
 </code></pre>
 <p>That means that to use <code>rand</code>, you can just do this.</p>
 <pre><pre class="playground"><code class="language-rust">use rand; // This means the whole crate rand
@@ -222,18 +222,18 @@ another_nice_crate = &quot;1.7&quot;
 fn main() {
     for _ in 0..5 {
         let random_u16 = rand::random::&lt;u16&gt;();
-        print!(&quot;{} &quot;, random_u16);
+        print!("{} ", random_u16);
     }
 }</code></pre></pre>
 <p>It will print a different <code>u16</code> number every time, like <code>42266 52873 56528 46927 6867</code>.</p>
-<p>The main functions in <code>rand</code> are <code>random</code> and <code>thread_rng</code> (rng means &quot;random number generator&quot;). And actually if you look at <code>random</code> it says: &quot;This is simply a shortcut for <code>thread_rng().gen()</code>&quot;. So it's actually just <code>thread_rng</code> that does almost everything.</p>
+<p>The main functions in <code>rand</code> are <code>random</code> and <code>thread_rng</code> (rng means "random number generator"). And actually if you look at <code>random</code> it says: "This is simply a shortcut for <code>thread_rng().gen()</code>". So it's actually just <code>thread_rng</code> that does almost everything.</p>
 <p>Here is a simple example of numbers from 1 to 10. To get those numbers, we use <code>.gen_range()</code> between 1 and 11.</p>
 <pre><pre class="playground"><code class="language-rust">use rand::{thread_rng, Rng}; // Or just use rand::*; if we are lazy
 
 fn main() {
     let mut number_maker = thread_rng();
     for _ in 0..5 {
-        print!(&quot;{} &quot;, number_maker.gen_range(1, 11));
+        print!("{} ", number_maker.gen_range(1, 11));
     }
 }</code></pre></pre>
 <p>This will print something like <code>7 2 4 8 6</code>.</p>
@@ -246,14 +246,14 @@ use std::fmt; // Going to impl Display for our character
 
 struct Character {
     strength: u8,
-    dexterity: u8,    // This means &quot;body quickness&quot;
-    constitution: u8, // This means &quot;health&quot;
+    dexterity: u8,    // This means "body quickness"
+    constitution: u8, // This means "health"
     intelligence: u8,
     wisdom: u8,
-    charisma: u8, // This means &quot;popularity with people&quot;
+    charisma: u8, // This means "popularity with people"
 }
 
-fn three_die_six() -&gt; u8 { // A &quot;die&quot; is the thing you throw to get the number
+fn three_die_six() -&gt; u8 { // A "die" is the thing you throw to get the number
     let mut generator = thread_rng(); // Create our random number generator
     let mut stat = 0; // This is the total
     for _ in 0..3 {
@@ -300,7 +300,7 @@ impl Character {
         }
     }
     fn display(&amp;self) { // We can do this because we implemented Display below
-        println!(&quot;{}&quot;, self);
+        println!("{}", self);
         println!();
     }
 }
@@ -309,13 +309,13 @@ impl fmt::Display for Character { // Just follow the code for in https://doc.rus
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
         write!(
             f,
-            &quot;Your character has these stats:
+            "Your character has these stats:
 strength: {}
 dexterity: {}
 constitution: {}
 intelligence: {}
 wisdom: {}
-charisma: {}&quot;,
+charisma: {}",
             self.strength,
             self.dexterity,
             self.constitution,
@@ -358,14 +358,14 @@ charisma: 10
 <p><code>rayon</code> is a popular crate that lets you speed up your Rust code. It's popular because it creates threads without needing things like <code>thread::spawn</code>. In other words, it is popular because it is effective but easy to write. For example:</p>
 <ul>
 <li><code>.iter()</code>, <code>.iter_mut()</code>, <code>into_iter()</code> in rayon is written like this:</li>
-<li><code>.par_iter()</code>, <code>.par_iter_mut()</code>, <code>par_into_iter()</code>. So you just add <code>par_</code> and your code becomes much faster. (par means &quot;parallel&quot;)</li>
+<li><code>.par_iter()</code>, <code>.par_iter_mut()</code>, <code>par_into_iter()</code>. So you just add <code>par_</code> and your code becomes much faster. (par means "parallel")</li>
 </ul>
 <p>Other methods are the same: <code>.chars()</code> is <code>.par_chars()</code>, and so on.</p>
 <p>Here is an example of a simple piece of code that is making the computer do a lot of work:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let mut my_vec = vec![0; 200_000];
     my_vec.iter_mut().enumerate().for_each(|(index, number)| *number+=index+1);
-    println!(&quot;{:?}&quot;, &amp;my_vec[5000..5005]);
+    println!("{:?}", &amp;my_vec[5000..5005]);
 }</code></pre></pre>
 <p>It creates a vector with 200,000 items: each one is 0. Then it calls <code>.enumerate()</code> to get the index for each number, and changes the 0 to the index number. It's too long to print so we only print items 5000 to 5004. This is still very fast in Rust, but if you want you can make it faster with Rayon. The code is almost the same:</p>
 <pre><pre class="playground"><code class="language-rust">use rayon::prelude::*; // Import rayon
@@ -373,9 +373,9 @@ charisma: 10
 fn main() {
     let mut my_vec = vec![0; 200_000];
     my_vec.par_iter_mut().enumerate().for_each(|(index, number)| *number+=index+1); // add par_ to iter_mut
-    println!(&quot;{:?}&quot;, &amp;my_vec[5000..5005]);
+    println!("{:?}", &amp;my_vec[5000..5005]);
 }</code></pre></pre>
-<p>And that's it. <code>rayon</code> has many other methods to customize what you want to do, but at its most simple it is just &quot;add <code>_par</code> to make your program faster&quot;.</p>
+<p>And that's it. <code>rayon</code> has many other methods to customize what you want to do, but at its most simple it is just "add <code>_par</code> to make your program faster".</p>
 <h3 id="serde"><a class="header" href="#serde">serde</a></h3>
 <p><code>serde</code> is a popular crate that lets you convert to and from formats like JSON, YAML, etc. The most common way to use it is by creating a <code>struct</code> with two attributes on top. <a href="https://serde.rs/">It looks like this</a>:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]

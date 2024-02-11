@@ -174,18 +174,18 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="bir-nechta-threadlar"><a class="header" href="#bir-nechta-threadlar">Bir nechta threadlar</a></h2>
-<p>If you use multiple threads, you can do many things at the same time. Modern computers have more than one core so they can do more than one thing at the same time, and Rust lets you use them. Rust uses threads that are called &quot;OS threads&quot;. OS thread means the operating system creates the thread on a different core. (Some other languages use &quot;green threads&quot;, which are less powerful)</p>
+<p>If you use multiple threads, you can do many things at the same time. Modern computers have more than one core so they can do more than one thing at the same time, and Rust lets you use them. Rust uses threads that are called "OS threads". OS thread means the operating system creates the thread on a different core. (Some other languages use "green threads", which are less powerful)</p>
 <p>You create threads with <code>std::thread::spawn</code> and then a closure to tell it what to do. Threads are interesting because they run at the same time, and you can test it to see what happens. Here is a simple example:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     std::thread::spawn(|| {
-        println!(&quot;I am printing something&quot;);
+        println!("I am printing something");
     });
 }</code></pre></pre>
 <p>If you run this, it will be different every time. Sometimes it will print, and sometimes it won't print (this depends on your computer speed too). That is because sometimes <code>main()</code> finishes before the thread finishes. And when <code>main()</code> finishes, the program is over. This is easier to see in a <code>for</code> loop:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for _ in 0..10 { // set up ten threads
         std::thread::spawn(|| {
-            println!(&quot;I am printing something&quot;);
+            println!("I am printing something");
         });
     }   // Now the threads start.
 }       // How many can finish before main() ends here?</code></pre></pre>
@@ -200,10 +200,10 @@ shutdown
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for _ in 0..10 {
         std::thread::spawn(|| {
-            println!(&quot;I am printing something&quot;);
+            println!("I am printing something");
         });
     }
-    for _ in 0..1_000_000 { // make the program declare &quot;let x = 9&quot; one million times
+    for _ in 0..1_000_000 { // make the program declare "let x = 9" one million times
                             // It has to finish this before it can exit the main function
         let _x = 9;
     }
@@ -220,16 +220,16 @@ where
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for _ in 0..10 {
         let handle = std::thread::spawn(|| {
-            println!(&quot;I am printing something&quot;);
+            println!("I am printing something");
         });
 
     }
 }</code></pre></pre>
-<p><code>handle</code> is now a <code>JoinHandle</code>. What do we do with it? We use a method called <code>.join()</code>. This method means &quot;wait until all the threads are done&quot; (it waits for the threads to join it). So now just write <code>handle.join()</code> and it will wait for each of the threads to finish.</p>
+<p><code>handle</code> is now a <code>JoinHandle</code>. What do we do with it? We use a method called <code>.join()</code>. This method means "wait until all the threads are done" (it waits for the threads to join it). So now just write <code>handle.join()</code> and it will wait for each of the threads to finish.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for _ in 0..10 {
         let handle = std::thread::spawn(|| {
-            println!(&quot;I am printing something&quot;);
+            println!("I am printing something");
         });
 
         handle.join(); // Wait for the threads to finish
@@ -244,18 +244,18 @@ where
 <p>A closure will try to use <code>Fn</code> if it can. But if it needs to change the value it will use <code>FnMut</code>, and if it needs to take the whole value, it will use <code>FnOnce</code>. <code>FnOnce</code> is a good name because it explains what it does: it takes the value once, and then it can't take it again.</p>
 <p>Here is an example:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_string = String::from(&quot;I will go into the closure&quot;);
-    let my_closure = || println!(&quot;{}&quot;, my_string);
+    let my_string = String::from("I will go into the closure");
+    let my_closure = || println!("{}", my_string);
     my_closure();
     my_closure();
 }</code></pre></pre>
 <p><code>String</code> is not <code>Copy</code>, so <code>my_closure()</code> is <code>Fn</code>: it takes a reference.</p>
 <p>If we change <code>my_string</code>, it will be <code>FnMut</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_string = String::from(&quot;I will go into the closure&quot;);
+    let mut my_string = String::from("I will go into the closure");
     let mut my_closure = || {
-        my_string.push_str(&quot; now&quot;);
-        println!(&quot;{}&quot;, my_string);
+        my_string.push_str(" now");
+        println!("{}", my_string);
     };
     my_closure();
     my_closure();
@@ -275,15 +275,15 @@ I will go into the closure now now
             .collect::&lt;Vec&lt;u8&gt;&gt;() // collect into a Vec
     };
     let new_vec = my_closure();
-    println!(&quot;{:?}&quot;, new_vec);
+    println!("{:?}", new_vec);
 }</code></pre></pre>
 <p>We took by value, so we can't run <code>my_closure()</code> more than once. That is where the name comes from.</p>
 <p>So now back to threads. Let's try to use a value from outside:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_string = String::from(&quot;Can I go inside the thread?&quot;);
+    let mut my_string = String::from("Can I go inside the thread?");
 
     let handle = std::thread::spawn(|| {
-        println!(&quot;{}&quot;, my_string); // ⚠️
+        println!("{}", my_string); // ⚠️
     });
 
     handle.join();
@@ -294,7 +294,7 @@ I will go into the closure now now
    |
 28 |     let handle = std::thread::spawn(|| {
    |                                     ^^ may outlive borrowed value `my_string`
-29 |         println!(&quot;{}&quot;, my_string);
+29 |         println!("{}", my_string);
    |                        --------- `my_string` is borrowed here
    |
 note: function requires argument type to outlive `'static`
@@ -302,7 +302,7 @@ note: function requires argument type to outlive `'static`
    |
 28 |       let handle = std::thread::spawn(|| {
    |  __________________^
-29 | |         println!(&quot;{}&quot;, my_string);
+29 | |         println!("{}", my_string);
 30 | |     });
    | |______^
 help: to force the closure to take ownership of `my_string` (and any other referenced variables), use the `move` keyword
@@ -313,10 +313,10 @@ help: to force the closure to take ownership of `my_string` (and any other refer
 <p>It is a long message, but helpful: it says to <code>use the `move` keyword</code>. The problem is that we can do anything to <code>my_string</code> while the thread is using it, but it doesn't own it. That would be unsafe.</p>
 <p>Let's try something else that doesn't work:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_string = String::from(&quot;Can I go inside the thread?&quot;);
+    let mut my_string = String::from("Can I go inside the thread?");
 
     let handle = std::thread::spawn(|| {
-        println!(&quot;{}&quot;, my_string); // now my_string is being used as a reference
+        println!("{}", my_string); // now my_string is being used as a reference
     });
 
     std::mem::drop(my_string);  // ⚠️ We try to drop it here. But the thread still needs it.
@@ -325,10 +325,10 @@ help: to force the closure to take ownership of `my_string` (and any other refer
 }</code></pre></pre>
 <p>So you have to take the value with <code>move</code>. Now it is safe:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_string = String::from(&quot;Can I go inside the thread?&quot;);
+    let mut my_string = String::from("Can I go inside the thread?");
 
     let handle = std::thread::spawn(move|| {
-        println!(&quot;{}&quot;, my_string);
+        println!("{}", my_string);
     });
 
     std::mem::drop(my_string);  // ⚠️ we can't drop, because handle has it. So this won't work
@@ -337,10 +337,10 @@ help: to force the closure to take ownership of `my_string` (and any other refer
 }</code></pre></pre>
 <p>So we delete the <code>std::mem::drop</code>, and now it is okay. <code>handle</code> takes <code>my_string</code> and our code is safe.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_string = String::from(&quot;Can I go inside the thread?&quot;);
+    let my_string = String::from("Can I go inside the thread?");
 
     let handle = std::thread::spawn(move|| {
-        println!(&quot;{}&quot;, my_string);
+        println!("{}", my_string);
     });
 
     handle.join().unwrap();

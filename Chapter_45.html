@@ -189,8 +189,8 @@ fn delete_book(book: Book) -&gt; Result&lt;(), String&gt; {} // delete_book shou
                                                     // TODO: impl block and make these functions methods...
 fn check_book_type(book_type: &amp;BookType) { // Let's make sure the match statement works
     match book_type {
-        BookType::HardCover =&gt; println!(&quot;It's hardcover&quot;),
-        BookType::SoftCover =&gt; println!(&quot;It's softcover&quot;),
+        BookType::HardCover =&gt; println!("It's hardcover"),
+        BookType::SoftCover =&gt; println!("It's softcover"),
     }
 }
 
@@ -225,7 +225,7 @@ error[E0308]: mismatched types
 <pre><pre class="playground"><code class="language-rust">struct Book {}
 
 fn get_book(book: &amp;Book) -&gt; Option&lt;String&gt; {
-    todo!() // todo means &quot;I will do it later, please be quiet&quot;
+    todo!() // todo means "I will do it later, please be quiet"
 }
 
 fn delete_book(book: Book) -&gt; Result&lt;(), String&gt; {

@@ -174,9 +174,9 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="umrlar"><a class="header" href="#umrlar">Umrlar</a></h2>
-<p>A lifetime means &quot;how long the variable lives&quot;. You only need to think about lifetimes with references. This is because references can't live longer than the object they come from. For example, this function does not work:</p>
+<p>A lifetime means "how long the variable lives". You only need to think about lifetimes with references. This is because references can't live longer than the object they come from. For example, this function does not work:</p>
 <pre><pre class="playground"><code class="language-rust">fn returns_reference() -&gt; &amp;str {
-    let my_string = String::from(&quot;I am a string&quot;);
+    let my_string = String::from("I am a string");
     &amp;my_string // ⚠️
 }
 
@@ -184,13 +184,13 @@ fn main() {}</code></pre></pre>
 <p>The problem is that <code>my_string</code> only lives inside <code>returns_reference</code>. We try to return <code>&amp;my_string</code>, but <code>&amp;my_string</code> can't exist without <code>my_string</code>. So the compiler says no.</p>
 <p>This code also doesn't work:</p>
 <pre><pre class="playground"><code class="language-rust">fn returns_str() -&gt; &amp;str {
-    let my_string = String::from(&quot;I am a string&quot;);
-    &quot;I am a str&quot; // ⚠️
+    let my_string = String::from("I am a string");
+    "I am a str" // ⚠️
 }
 
 fn main() {
     let my_str = returns_str();
-    println!(&quot;{}&quot;, my_str);
+    println!("{}", my_str);
 }</code></pre></pre>
 <p>But it almost works. The compiler says:</p>
 <pre><code class="language-text">error[E0106]: missing lifetime specifier
@@ -208,16 +208,16 @@ help: consider using the `'static` lifetime
 <p><code>missing lifetime specifier</code> means that we need to add a <code>'</code> with the lifetime. Then it says that it <code>contains a borrowed value, but there is no value for it to be borrowed from</code>. That means that <code>I am a str</code> isn't borrowed from anything. It says <code>consider using the 'static lifetime</code> by writing <code>&amp;'static str</code>. So it thinks we should try saying that this is a string literal.</p>
 <p>Now it works:</p>
 <pre><pre class="playground"><code class="language-rust">fn returns_str() -&gt; &amp;'static str {
-    let my_string = String::from(&quot;I am a string&quot;);
-    &quot;I am a str&quot;
+    let my_string = String::from("I am a string");
+    "I am a str"
 }
 
 fn main() {
     let my_str = returns_str();
-    println!(&quot;{}&quot;, my_str);
+    println!("{}", my_str);
 }</code></pre></pre>
 <p>That's because we returned a <code>&amp;str</code> with a lifetime of <code>static</code>. Meanwhile, <code>my_string</code> can only be returned as a <code>String</code>: we can't return a reference to it because it is going to die in the next line.</p>
-<p>So now <code>fn returns_str() -&gt; &amp;'static str</code> tells Rust: &quot;don't worry, we will only return a string literal&quot;. String literals live for the whole program, so Rust is happy. You'll notice that this is similar to generics. When we tell the compiler something like <code>&lt;T: Display&gt;</code>, we promise that we will only use inputs with <code>Display</code>. Lifetimes are similar: we are not changing any variable lifetimes. We are just telling the compiler what the lifetimes of the inputs will be.</p>
+<p>So now <code>fn returns_str() -&gt; &amp;'static str</code> tells Rust: "don't worry, we will only return a string literal". String literals live for the whole program, so Rust is happy. You'll notice that this is similar to generics. When we tell the compiler something like <code>&lt;T: Display&gt;</code>, we promise that we will only use inputs with <code>Display</code>. Lifetimes are similar: we are not changing any variable lifetimes. We are just telling the compiler what the lifetimes of the inputs will be.</p>
 <p>But <code>'static</code> is not the only lifetime. Actually, every variable has a lifetime, but usually we don't have to write it. The compiler is pretty smart and can usually figure out for itself. We only have to write the lifetime when the compiler doesn't know.</p>
 <p>Here is an example of another lifetime. Imagine we want to create a <code>City</code> struct and give it a <code>&amp;str</code> for the name. We might want to do that because it gives faster performance than with <code>String</code>. So we write it like this, but it won't work yet:</p>
 <pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
@@ -228,7 +228,7 @@ struct City {
 
 fn main() {
     let my_city = City {
-        name: &quot;Ichinomiya&quot;,
+        name: "Ichinomiya",
         date_founded: 1921,
     };
 }</code></pre></pre>
@@ -255,13 +255,13 @@ struct City {
 
 fn main() {
     let my_city = City {
-        name: &quot;Ichinomiya&quot;,
+        name: "Ichinomiya",
         date_founded: 1921,
     };
 
-    println!(&quot;{} was founded in {}&quot;, my_city.name, my_city.date_founded);
+    println!("{} was founded in {}", my_city.name, my_city.date_founded);
 }</code></pre></pre>
-<p>Okay, that works. And maybe this is what you wanted for the struct. However, note that we can only take &quot;string literals&quot;, so not references to something else. So this will not work:</p>
+<p>Okay, that works. And maybe this is what you wanted for the struct. However, note that we can only take "string literals", so not references to something else. So this will not work:</p>
 <pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
 struct City {
     name: &amp;'static str, // must live for the whole program
@@ -269,14 +269,14 @@ struct City {
 }
 
 fn main() {
-    let city_names = vec![&quot;Ichinomiya&quot;.to_string(), &quot;Kurume&quot;.to_string()]; // city_names does not live for the whole program
+    let city_names = vec!["Ichinomiya".to_string(), "Kurume".to_string()]; // city_names does not live for the whole program
 
     let my_city = City {
         name: &amp;city_names[0], // ⚠️ This is a &amp;str, but not a &amp;'static str. It is a reference to a value inside city_names
         date_founded: 1921,
     };
 
-    println!(&quot;{} was founded in {}&quot;, my_city.name, my_city.date_founded);
+    println!("{} was founded in {}", my_city.name, my_city.date_founded);
 }</code></pre></pre>
 <p>The compiler says:</p>
 <pre><code class="language-text">error[E0597]: `city_names` does not live long enough
@@ -300,14 +300,14 @@ struct City&lt;'a&gt; { // City has lifetime 'a
 }
 
 fn main() {
-    let city_names = vec![&quot;Ichinomiya&quot;.to_string(), &quot;Kurume&quot;.to_string()];
+    let city_names = vec!["Ichinomiya".to_string(), "Kurume".to_string()];
 
     let my_city = City {
         name: &amp;city_names[0],
         date_founded: 1921,
     };
 
-    println!(&quot;{} was founded in {}&quot;, my_city.name, my_city.date_founded);
+    println!("{} was founded in {}", my_city.name, my_city.date_founded);
 }</code></pre></pre>
 <p>Also remember that you can write anything instead of <code>'a</code> if you want. This is also similar to generics where we write <code>T</code> and <code>U</code> but can actually write anything.</p>
 <pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
@@ -317,17 +317,17 @@ struct City&lt;'city&gt; { // The lifetime is now called 'city
 }
 
 fn main() {}</code></pre></pre>
-<p>So usually you will write <code>'a, 'b, 'c</code> etc. because it is quick and the usual way to write. But you can always change it if you want. One good tip is that changing the lifetime to a &quot;human-readable&quot; name can help you read code if it is very complicated.</p>
+<p>So usually you will write <code>'a, 'b, 'c</code> etc. because it is quick and the usual way to write. But you can always change it if you want. One good tip is that changing the lifetime to a "human-readable" name can help you read code if it is very complicated.</p>
 <p>Let's look at the comparison to traits for generics again. For example:</p>
 <pre><pre class="playground"><code class="language-rust">use std::fmt::Display;
 
 fn prints&lt;T: Display&gt;(input: T) {
-    println!(&quot;T is {}&quot;, input);
+    println!("T is {}", input);
 }
 
 fn main() {}</code></pre></pre>
-<p>When you write <code>T: Display</code>, it means &quot;please only take T if it has Display&quot;.
-It does not mean: &quot;I am giving Display to T&quot;.</p>
+<p>When you write <code>T: Display</code>, it means "please only take T if it has Display".
+It does not mean: "I am giving Display to T".</p>
 <p>The same is true for lifetimes. When you write 'a here:</p>
 <pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
 struct City&lt;'a&gt; {
@@ -336,9 +336,9 @@ struct City&lt;'a&gt; {
 }
 
 fn main() {}</code></pre></pre>
-<p>It means &quot;please only take an input for <code>name</code> if it lives at least as long as <code>City</code>&quot;.
-It does not mean: &quot;I will make the input for <code>name</code> live as long as <code>City</code>&quot;.</p>
-<p>Now we can learn about <code>&lt;'_&gt;</code> that we saw before. This is called the &quot;anonymous lifetime&quot; and is an indicator that references are being used. Rust will suggest it to you when you are implementing structs, for example. Here is one struct that almost works, but not yet:</p>
+<p>It means "please only take an input for <code>name</code> if it lives at least as long as <code>City</code>".
+It does not mean: "I will make the input for <code>name</code> live as long as <code>City</code>".</p>
+<p>Now we can learn about <code>&lt;'_&gt;</code> that we saw before. This is called the "anonymous lifetime" and is an indicator that references are being used. Rust will suggest it to you when you are implementing structs, for example. Here is one struct that almost works, but not yet:</p>
 <pre><pre class="playground"><code class="language-rust">    // ⚠️
 struct Adventurer&lt;'a&gt; {
     name: &amp;'a str,
@@ -348,7 +348,7 @@ struct Adventurer&lt;'a&gt; {
 impl Adventurer {
     fn take_damage(&amp;mut self) {
         self.hit_points -= 20;
-        println!(&quot;{} has {} hit points left!&quot;, self.name, self.hit_points);
+        println!("{} has {} hit points left!", self.name, self.hit_points);
     }
 }
 
@@ -369,7 +369,7 @@ fn main() {}</code></pre></pre>
 impl Adventurer&lt;'_&gt; {
     fn take_damage(&amp;mut self) {
         self.hit_points -= 20;
-        println!(&quot;{} has {} hit points left!&quot;, self.name, self.hit_points);
+        println!("{} has {} hit points left!", self.name, self.hit_points);
     }
 }
 
@@ -378,7 +378,7 @@ fn main() {}</code></pre></pre>
 <p>Lifetimes can be difficult in Rust, but here are some tips to avoid getting too stressed about them:</p>
 <ul>
 <li>You can stay with owned types, use clones etc. if you want to avoid them for the time being.</li>
-<li>Much of the time, when the compiler wants a lifetime you will just end up writing &lt;'a&gt; here and there and then it will work. It's just a way of saying &quot;don't worry, I won't give you anything that doesn't live long enough&quot;.</li>
+<li>Much of the time, when the compiler wants a lifetime you will just end up writing &lt;'a&gt; here and there and then it will work. It's just a way of saying "don't worry, I won't give you anything that doesn't live long enough".</li>
 <li>You can explore lifetimes just a bit at a time. Write some code with owned values, then make one a reference. The compiler will start to complain, but also give some suggestions. And if it gets too complicated, you can undo it and try again next time.</li>
 </ul>
 <p>Let's do this with our code and see what the compiler says. First we'll go back and take the lifetimes out, and also implement <code>Display</code>. <code>Display</code> will just print the <code>Adventurer</code>'s name.</p>
@@ -391,13 +391,13 @@ struct Adventurer {
 impl Adventurer {
     fn take_damage(&amp;mut self) {
         self.hit_points -= 20;
-        println!(&quot;{} has {} hit points left!&quot;, self.name, self.hit_points);
+        println!("{} has {} hit points left!", self.name, self.hit_points);
     }
 }
 
 impl std::fmt::Display for Adventurer {
         fn fmt(&amp;self, f: &amp;mut std::fmt::Formatter&lt;'_&gt;) -&gt; std::fmt::Result {
-            write!(f, &quot;{} has {} hit points.&quot;, self.name, self.hit_points)
+            write!(f, "{} has {} hit points.", self.name, self.hit_points)
         }
 }
 
@@ -425,13 +425,13 @@ struct Adventurer&lt;'a&gt; {
 impl Adventurer {
     fn take_damage(&amp;mut self) {
         self.hit_points -= 20;
-        println!(&quot;{} has {} hit points left!&quot;, self.name, self.hit_points);
+        println!("{} has {} hit points left!", self.name, self.hit_points);
     }
 }
 
 impl std::fmt::Display for Adventurer {
         fn fmt(&amp;self, f: &amp;mut std::fmt::Formatter&lt;'_&gt;) -&gt; std::fmt::Result {
-            write!(f, &quot;{} has {} hit points.&quot;, self.name, self.hit_points)
+            write!(f, "{} has {} hit points.", self.name, self.hit_points)
         }
 }
 
@@ -458,23 +458,23 @@ error[E0726]: implicit elided lifetime not allowed here
 impl Adventurer&lt;'_&gt; {
     fn take_damage(&amp;mut self) {
         self.hit_points -= 20;
-        println!(&quot;{} has {} hit points left!&quot;, self.name, self.hit_points);
+        println!("{} has {} hit points left!", self.name, self.hit_points);
     }
 }
 
 impl std::fmt::Display for Adventurer&lt;'_&gt; {
 
         fn fmt(&amp;self, f: &amp;mut std::fmt::Formatter&lt;'_&gt;) -&gt; std::fmt::Result {
-            write!(f, &quot;{} has {} hit points.&quot;, self.name, self.hit_points)
+            write!(f, "{} has {} hit points.", self.name, self.hit_points)
         }
 }
 
 fn main() {
     let mut billy = Adventurer {
-        name: &quot;Billy&quot;,
+        name: "Billy",
         hit_points: 100_000,
     };
-    println!(&quot;{}&quot;, billy);
+    println!("{}", billy);
     billy.take_damage();
 }</code></pre></pre>
 <p>This prints:</p>

@@ -179,13 +179,13 @@
 <p>How do you know if you need <code>{:?}</code> and not <code>{}</code>? The compiler will tell you. For example:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let doesnt_print = ();
-    println!(&quot;This will not print: {}&quot;, doesnt_print); // ⚠️
+    println!("This will not print: {}", doesnt_print); // ⚠️
 }</code></pre></pre>
 <p>When we run this, the compiler says:</p>
 <pre><code class="language-text">error[E0277]: `()` doesn't implement `std::fmt::Display`
  --&gt; src\main.rs:3:41
   |
-3 |     println!(&quot;This will not print: {}&quot;, doesnt_print);
+3 |     println!("This will not print: {}", doesnt_print);
   |                                         ^^^^^^^^^^^^ `()` cannot be formatted with the default formatter
   |
   = help: the trait `std::fmt::Display` is not implemented for `()`
@@ -193,27 +193,27 @@
   = note: required by `std::fmt::Display::fmt`
   = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 </code></pre>
-<p>This is a lot of information. But the important part is: <code>you may be able to use {:?} (or {:#?} for pretty-print) instead</code>. This means that you can try <code>{:?}</code>, and also <code>{:#?}</code> <code>{:#?}</code> is called &quot;pretty printing&quot;. It is like <code>{:?}</code> but prints with different formatting over more lines.</p>
+<p>This is a lot of information. But the important part is: <code>you may be able to use {:?} (or {:#?} for pretty-print) instead</code>. This means that you can try <code>{:?}</code>, and also <code>{:#?}</code> <code>{:#?}</code> is called "pretty printing". It is like <code>{:?}</code> but prints with different formatting over more lines.</p>
 <p>So Display means printing with <code>{}</code>, and Debug means printing with <code>{:?}</code>.</p>
 <p>One more thing: you can also use <code>print!</code> without <code>ln</code> if you don't want a new line.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    print!(&quot;This will not print a new line&quot;);
-    println!(&quot; so this will be on the same line&quot;);
+    print!("This will not print a new line");
+    println!(" so this will be on the same line");
 }</code></pre></pre>
 <p>This prints <code>This will not print a new line so this will be on the same line</code>.</p>
 <h3 id="eng-kichkina-va-katta-raqamlar"><a class="header" href="#eng-kichkina-va-katta-raqamlar">Eng kichkina va katta raqamlar</a></h3>
 <p>If you want to see the smallest and biggest numbers, you can use MIN and MAX after the name of the type:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;The smallest i8 is {} and the biggest i8 is {}.&quot;, i8::MIN, i8::MAX); // hint: printing std::i8::MIN means &quot;print MIN inside of the i8 section in the standard library&quot;
-    println!(&quot;The smallest u8 is {} and the biggest u8 is {}.&quot;, u8::MIN, u8::MAX);
-    println!(&quot;The smallest i16 is {} and the biggest i16 is {}.&quot;, i16::MIN, i16::MAX);
-    println!(&quot;The smallest u16 is {} and the biggest u16 is {}.&quot;, u16::MIN, u16::MAX);
-    println!(&quot;The smallest i32 is {} and the biggest i32 is {}.&quot;, i32::MIN, i32::MAX);
-    println!(&quot;The smallest u32 is {} and the biggest u32 is {}.&quot;, u32::MIN, u32::MAX);
-    println!(&quot;The smallest i64 is {} and the biggest i64 is {}.&quot;, i64::MIN, i64::MAX);
-    println!(&quot;The smallest u64 is {} and the biggest u64 is {}.&quot;, u64::MIN, u64::MAX);
-    println!(&quot;The smallest i128 is {} and the biggest i128 is {}.&quot;, i128::MIN, i128::MAX);
-    println!(&quot;The smallest u128 is {} and the biggest u128 is {}.&quot;, u128::MIN, u128::MAX);
+    println!("The smallest i8 is {} and the biggest i8 is {}.", i8::MIN, i8::MAX); // hint: printing std::i8::MIN means "print MIN inside of the i8 section in the standard library"
+    println!("The smallest u8 is {} and the biggest u8 is {}.", u8::MIN, u8::MAX);
+    println!("The smallest i16 is {} and the biggest i16 is {}.", i16::MIN, i16::MAX);
+    println!("The smallest u16 is {} and the biggest u16 is {}.", u16::MIN, u16::MAX);
+    println!("The smallest i32 is {} and the biggest i32 is {}.", i32::MIN, i32::MAX);
+    println!("The smallest u32 is {} and the biggest u32 is {}.", u32::MIN, u32::MAX);
+    println!("The smallest i64 is {} and the biggest i64 is {}.", i64::MIN, i64::MAX);
+    println!("The smallest u64 is {} and the biggest u64 is {}.", u64::MIN, u64::MAX);
+    println!("The smallest i128 is {} and the biggest i128 is {}.", i128::MIN, i128::MAX);
+    println!("The smallest u128 is {} and the biggest u128 is {}.", u128::MIN, u128::MAX);
 
 }</code></pre></pre>
 <p>This will print:</p>

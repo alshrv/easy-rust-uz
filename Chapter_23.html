@@ -183,20 +183,20 @@
 </code></pre>
 <p>That function gets nothing (an empty tuple), and returns nothing (an empty tuple). So we have been using tuples a lot already. When you don't return anything in a function, you actually return an empty tuple.</p>
 <pre><pre class="playground"><code class="language-rust">fn just_prints() {
-    println!(&quot;I am printing&quot;); // Adding ; means we return an empty tuple
+    println!("I am printing"); // Adding ; means we return an empty tuple
 }
 
 fn main() {}</code></pre></pre>
 <p>But tuples can hold many things, and can hold different types too. Items inside a tuple are also indexed with numbers 0, 1, 2, and so on. But to access them, you use a <code>.</code> instead of a <code>[]</code>. Let's put a whole bunch of types into a single tuple.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let random_tuple = (&quot;Here is a name&quot;, 8, vec!['a'], 'b', [8, 9, 10], 7.7);
+    let random_tuple = ("Here is a name", 8, vec!['a'], 'b', [8, 9, 10], 7.7);
     println!(
-        &quot;Inside the tuple is: First item: {:?}
+        "Inside the tuple is: First item: {:?}
 Second item: {:?}
 Third item: {:?}
 Fourth item: {:?}
 Fifth item: {:?}
-Sixth item: {:?}&quot;,
+Sixth item: {:?}",
         random_tuple.0,
         random_tuple.1,
         random_tuple.2,
@@ -206,7 +206,7 @@ Sixth item: {:?}&quot;,
     )
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">Inside the tuple is: First item: &quot;Here is a name&quot;
+<pre><code class="language-text">Inside the tuple is: First item: "Here is a name"
 Second item: 8
 Third item: ['a']
 Fourth item: 'b'
@@ -216,19 +216,19 @@ Sixth item: 7.7
 <p>That tuple is of type <code>(&amp;str, i32, Vec&lt;char&gt;, char, [i32; 3], f64)</code>.</p>
 <p>You can use a tuple to create multiple variables. Take a look at this code:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let str_vec = vec![&quot;one&quot;, &quot;two&quot;, &quot;three&quot;];
+    let str_vec = vec!["one", "two", "three"];
 }</code></pre></pre>
 <p><code>str_vec</code> has three items in it. What if we want to pull them out? That's where we can use a tuple.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let str_vec = vec![&quot;one&quot;, &quot;two&quot;, &quot;three&quot;];
+    let str_vec = vec!["one", "two", "three"];
 
     let (a, b, c) = (str_vec[0], str_vec[1], str_vec[2]); // call them a, b, and c
-    println!(&quot;{:?}&quot;, b);
+    println!("{:?}", b);
 }</code></pre></pre>
-<p>That prints <code>&quot;two&quot;</code>, which is what <code>b</code> is. This is called <em>destructuring</em>. That is because first the variables are inside a structure, but then we made <code>a</code>, <code>b</code>, and <code>c</code> that are not inside a structure.</p>
+<p>That prints <code>"two"</code>, which is what <code>b</code> is. This is called <em>destructuring</em>. That is because first the variables are inside a structure, but then we made <code>a</code>, <code>b</code>, and <code>c</code> that are not inside a structure.</p>
 <p>If you need to destructure but don't want all the variables, you can use <code>_</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let str_vec = vec![&quot;one&quot;, &quot;two&quot;, &quot;three&quot;];
+    let str_vec = vec!["one", "two", "three"];
 
     let (_, _, variable) = (str_vec[0], str_vec[1], str_vec[2]);
 }</code></pre></pre>

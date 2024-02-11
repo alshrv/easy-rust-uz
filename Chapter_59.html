@@ -333,7 +333,7 @@ test it_returns_six ... ok
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 </code></pre>
 <p>That's not too hard.</p>
-<p>Usually you will want to put your tests in their own module. To do this, use the same <code>mod</code> keyword and add <code>#[cfg(test)]</code> above it (remember: <code>cfg</code> means &quot;configure&quot;). You also want to continue to write <code>#[test]</code> above each test. This is because later on when you install Rust, you can do more complicated testing. You will be able to run one test, or all of them, or run a few. Also don't forget to write <code>use super::*;</code> because the test module needs to use the functions above it. Now it will look like this:</p>
+<p>Usually you will want to put your tests in their own module. To do this, use the same <code>mod</code> keyword and add <code>#[cfg(test)]</code> above it (remember: <code>cfg</code> means "configure"). You also want to continue to write <code>#[test]</code> above each test. This is because later on when you install Rust, you can do more complicated testing. You will be able to run one test, or all of them, or run a few. Also don't forget to write <code>use super::*;</code> because the test module needs to use the functions above it. Now it will look like this:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn return_two() -&gt; i8 {
@@ -358,8 +358,8 @@ mod tests {
 }
 <span class="boring">}</span></code></pre></pre>
 <h3 id="test-driven-development"><a class="header" href="#test-driven-development">Test-driven development</a></h3>
-<p>You might see the words &quot;test-driven development&quot; when reading about Rust or another language. It's one way to write programs, and some people like it while others prefer something else. &quot;Test-driven development&quot; means &quot;writing tests first, then writing the code&quot;. When you do this, you will have a lot of tests for everything you want your code to do. Then you start writing the code, and run the tests to see if you did it right. Then the tests are always there to show you if something goes wrong when you add to and rewrite your code. This is pretty easy in Rust because the compiler gives a lot of information about what to fix. Let's write a small example of test-driven development and see what it looks like.</p>
-<p>Let's imagine a calculator that takes user input. It can add (+) and it can subtract (-). If the user writes &quot;5 + 6&quot; it should return 11, if the user writes &quot;5 + 6 - 7&quot; it should return 4, and so on. So we'll start with test functions. You can also see that function names in tests are usually quite long. That is because you might run a lot of tests, and you want to understand which tests have failed.</p>
+<p>You might see the words "test-driven development" when reading about Rust or another language. It's one way to write programs, and some people like it while others prefer something else. "Test-driven development" means "writing tests first, then writing the code". When you do this, you will have a lot of tests for everything you want your code to do. Then you start writing the code, and run the tests to see if you did it right. Then the tests are always there to show you if something goes wrong when you add to and rewrite your code. This is pretty easy in Rust because the compiler gives a lot of information about what to fix. Let's write a small example of test-driven development and see what it looks like.</p>
+<p>Let's imagine a calculator that takes user input. It can add (+) and it can subtract (-). If the user writes "5 + 6" it should return 11, if the user writes "5 + 6 - 7" it should return 4, and so on. So we'll start with test functions. You can also see that function names in tests are usually quite long. That is because you might run a lot of tests, and you want to understand which tests have failed.</p>
 <p>We'll imagine that a single function called <code>math()</code> will do everything. It will return an <code>i32</code> (we won't use floats). Because it needs to return something, we'll just return <code>6</code> every time. Then we will write three test functions. They will all fail, of course. Now the code looks like this:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -373,15 +373,15 @@ mod tests {
 
     #[test]
     fn one_plus_one_is_two() {
-        assert_eq!(math(&quot;1 + 1&quot;), 2);
+        assert_eq!(math("1 + 1"), 2);
     }
     #[test]
     fn one_minus_two_is_minus_one() {
-        assert_eq!(math(&quot;1 - 2&quot;), -1);
+        assert_eq!(math("1 - 2"), -1);
     }
     #[test]
     fn one_minus_minus_one_is_two() {
-        assert_eq!(math(&quot;1 - -1&quot;), 2);
+        assert_eq!(math("1 - -1"), 2);
     }
 }
 <span class="boring">}</span></code></pre></pre>
@@ -397,11 +397,11 @@ test tests::one_plus_one_is_two ... FAILED
 <p>Now the code looks like this:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>const OKAY_CHARACTERS: &amp;str = &quot;1234567890+- &quot;; // Don't forget the space at the end
+</span>const OKAY_CHARACTERS: &amp;str = "1234567890+- "; // Don't forget the space at the end
 
 fn math(input: &amp;str) -&gt; i32 {
     if !input.chars().all(|character| OKAY_CHARACTERS.contains(character)) {
-        panic!(&quot;Please only input numbers, +-, or spaces&quot;);
+        panic!("Please only input numbers, +-, or spaces");
     }
     6 // we still return a 6 for now
 }
@@ -412,21 +412,21 @@ mod tests {
 
     #[test]
     fn one_plus_one_is_two() {
-        assert_eq!(math(&quot;1 + 1&quot;), 2);
+        assert_eq!(math("1 + 1"), 2);
     }
     #[test]
     fn one_minus_two_is_minus_one() {
-        assert_eq!(math(&quot;1 - 2&quot;), -1);
+        assert_eq!(math("1 - 2"), -1);
     }
     #[test]
     fn one_minus_minus_one_is_two() {
-        assert_eq!(math(&quot;1 - -1&quot;), 2);
+        assert_eq!(math("1 - -1"), 2);
     }
 
     #[test]
     #[should_panic]  // Here is our new test - it should panic
     fn panics_when_characters_not_right() {
-        math(&quot;7 + seven&quot;);
+        math("7 + seven");
     }
 }
 <span class="boring">}</span></code></pre></pre>
@@ -441,30 +441,30 @@ test tests::one_plus_one_is_two ... FAILED
 <p>The next step is to write the actual calculator. This is the interesting part about having tests first: the actual code starts much later. First we will put the logic together for the calculator. We want the following:</p>
 <ul>
 <li>All empty spaces should be removed. This is easy with <code>.filter()</code></li>
-<li>The input should turn into a <code>Vec</code> with all the inputs. <code>+</code> doesn't need to be an input, but when the program sees <code>+</code> it should know that the number is done. For example, the input <code>11+1</code> should do something like this: 1) See <code>1</code>, push it into an empty string. 2) See another 1, push it into the string (it is now &quot;11&quot;). 3) See a <code>+</code>, know the number has ended. It will push the string into the vec, then clear the string.</li>
-<li>The program must count the number of <code>-</code>. An odd number (1, 3, 5...) will mean subtract, an even number (2, 4, 6...) will mean add. So &quot;1--9&quot; should give 10, not -8.</li>
+<li>The input should turn into a <code>Vec</code> with all the inputs. <code>+</code> doesn't need to be an input, but when the program sees <code>+</code> it should know that the number is done. For example, the input <code>11+1</code> should do something like this: 1) See <code>1</code>, push it into an empty string. 2) See another 1, push it into the string (it is now "11"). 3) See a <code>+</code>, know the number has ended. It will push the string into the vec, then clear the string.</li>
+<li>The program must count the number of <code>-</code>. An odd number (1, 3, 5...) will mean subtract, an even number (2, 4, 6...) will mean add. So "1--9" should give 10, not -8.</li>
 <li>The program should remove anything after the last number. <code>5+5+++++----</code> is made out of all the characters in <code>OKAY_CHARACTERS</code>, but it should turn to <code>5+5</code>. This is easy with <code>.trim_end_matches()</code>, where you remove anything that matches at the end of a <code>&amp;str</code>.</li>
 </ul>
 <p>(By the way, <code>.trim_end_matches()</code> and <code>.trim_start_matches()</code> used to be <code>trim_right_matches()</code> and <code>trim_left_matches()</code>. But then people noticed that some languages go from right to left (Persian, Hebrew, etc.) so right and left were wrong. You might still see the older names in some code but they are the same thing.)</p>
-<p>First we just want to pass all the tests. After we pass the tests, we can &quot;refactor&quot;. Refactor means to make code better, usually through things like structs and enums and methods. Here is our code to make the tests pass:</p>
+<p>First we just want to pass all the tests. After we pass the tests, we can "refactor". Refactor means to make code better, usually through things like structs and enums and methods. Here is our code to make the tests pass:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>const OKAY_CHARACTERS: &amp;str = &quot;1234567890+- &quot;;
+</span>const OKAY_CHARACTERS: &amp;str = "1234567890+- ";
 
 fn math(input: &amp;str) -&gt; i32 {
     if !input.chars().all(|character| OKAY_CHARACTERS.contains(character)) ||
        !input.chars().take(2).any(|character| character.is_numeric())
     {
-        panic!(&quot;Please only input numbers, +-, or spaces.&quot;);
+        panic!("Please only input numbers, +-, or spaces.");
     }
 
-    let input = input.trim_end_matches(|x| &quot;+- &quot;.contains(x)).chars().filter(|x| *x != ' ').collect::&lt;String&gt;(); // Remove + and - at the end, and all spaces
+    let input = input.trim_end_matches(|x| "+- ".contains(x)).chars().filter(|x| *x != ' ').collect::&lt;String&gt;(); // Remove + and - at the end, and all spaces
     let mut result_vec = vec![]; // Results go in here
     let mut push_string = String::new(); // This is the string we push in every time. We will keep reusing it in the loop.
     for character in input.chars() {
         match character {
             '+' =&gt; {
-                if !push_string.is_empty() { // If the string is empty, we don't want to push &quot;&quot; into result_vec
+                if !push_string.is_empty() { // If the string is empty, we don't want to push "" into result_vec
                     result_vec.push(push_string.clone()); // But if it's not empty, it will be a number. Push it into the vec
                     push_string.clear(); // Then clear the string
                 }
@@ -478,7 +478,7 @@ fn math(input: &amp;str) -&gt; i32 {
                 push_string.push(character);
                 }
             },
-            number =&gt; { // number here means &quot;anything else that matches&quot;. We selected the name here
+            number =&gt; { // number here means "anything else that matches". We selected the name here
                 if push_string.contains('-') { // We might have some - characters to push in first
                     result_vec.push(push_string.clone());
                     push_string.clear();
@@ -523,28 +523,28 @@ mod tests {
 
     #[test]
     fn one_plus_one_is_two() {
-        assert_eq!(math(&quot;1 + 1&quot;), 2);
+        assert_eq!(math("1 + 1"), 2);
     }
     #[test]
     fn one_minus_two_is_minus_one() {
-        assert_eq!(math(&quot;1 - 2&quot;), -1);
+        assert_eq!(math("1 - 2"), -1);
     }
     #[test]
     fn one_minus_minus_one_is_two() {
-        assert_eq!(math(&quot;1 - -1&quot;), 2);
+        assert_eq!(math("1 - -1"), 2);
     }
     #[test]
     fn nine_plus_nine_minus_nine_minus_nine_is_zero() {
-        assert_eq!(math(&quot;9+9-9-9&quot;), 0); // This is a new test
+        assert_eq!(math("9+9-9-9"), 0); // This is a new test
     }
     #[test]
     fn eight_minus_nine_plus_nine_is_eight_even_with_characters_on_the_end() {
-        assert_eq!(math(&quot;8  - 9     +9-----+++++&quot;), 8); // This is a new test
+        assert_eq!(math("8  - 9     +9-----+++++"), 8); // This is a new test
     }
     #[test]
     #[should_panic]
     fn panics_when_characters_not_right() {
-        math(&quot;7 + seven&quot;);
+        math("7 + seven");
     }
 }
 <span class="boring">}</span></code></pre></pre>
@@ -566,7 +566,7 @@ test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 <li>As you write the code, you get ideas for other tests.</li>
 <li>You add the tests, and your tests grow as you go. The more tests you have, the more times your code gets checked.</li>
 </ul>
-<p>Of course, tests don't check everything and it is wrong to think that &quot;passing all tests = the code is perfect&quot;. But tests are great for when you change your code. If you change your code later on and run the tests, if one of them doesn't work you will know what to fix.</p>
+<p>Of course, tests don't check everything and it is wrong to think that "passing all tests = the code is perfect". But tests are great for when you change your code. If you change your code later on and run the tests, if one of them doesn't work you will know what to fix.</p>
 <p>Now we can rewrite (refactor) the code a bit. One good way to start is with clippy. If you installed Rust then you can type <code>cargo clippy</code>, and if you're using the Playground then click on <code>TOOLS</code> and select Clippy. Clippy will look at your code and give you tips to make it simpler. Our code doesn't have any mistakes, but it could be better.</p>
 <p>Clippy tells us two things:</p>
 <pre><code class="language-text">warning: this loop could be written as a `for` loop
@@ -588,7 +588,7 @@ warning: equality checks against true are unnecessary
    = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#bool_comparison
 </code></pre>
 <p>This is true: <code>for entry in math_iter</code> is much simpler than <code>while let Some(entry) = math_iter.next()</code>. And a <code>for</code> loop is actually an iterator so we don't have any reason to write <code>.iter()</code>. Thanks, clippy! And also we didn't need to make <code>math_iter</code>: we can just write <code>for entry in result_vec</code>.</p>
-<p>Now we'll start some real refactoring. Instead of separate variables, we will create a <code>Calculator</code> struct. This will have all the variables we used together. We will change two names to make it more clear. <code>result_vec</code> will become <code>results</code>, and <code>push_string</code> will become <code>current_input</code> (current means &quot;now&quot;). And so far it only has one method: new.</p>
+<p>Now we'll start some real refactoring. Instead of separate variables, we will create a <code>Calculator</code> struct. This will have all the variables we used together. We will change two names to make it more clear. <code>result_vec</code> will become <code>results</code>, and <code>push_string</code> will become <code>current_input</code> (current means "now"). And so far it only has one method: new.</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
@@ -633,15 +633,15 @@ impl Calculator {
     }
 }
 
-const OKAY_CHARACTERS: &amp;str = &quot;1234567890+- &quot;;
+const OKAY_CHARACTERS: &amp;str = "1234567890+- ";
 
 fn math(input: &amp;str) -&gt; i32 {
     if !input.chars().all(|character| OKAY_CHARACTERS.contains(character)) ||
        !input.chars().take(2).any(|character| character.is_numeric()) {
-        panic!(&quot;Please only input numbers, +-, or spaces&quot;);
+        panic!("Please only input numbers, +-, or spaces");
     }
 
-    let input = input.trim_end_matches(|x| &quot;+- &quot;.contains(x)).chars().filter(|x| *x != ' ').collect::&lt;String&gt;();
+    let input = input.trim_end_matches(|x| "+- ".contains(x)).chars().filter(|x| *x != ' ').collect::&lt;String&gt;();
     let mut calculator = Calculator::new();
 
     for character in input.chars() {
@@ -702,28 +702,28 @@ mod tests {
 
     #[test]
     fn one_plus_one_is_two() {
-        assert_eq!(math(&quot;1 + 1&quot;), 2);
+        assert_eq!(math("1 + 1"), 2);
     }
     #[test]
     fn one_minus_two_is_minus_one() {
-        assert_eq!(math(&quot;1 - 2&quot;), -1);
+        assert_eq!(math("1 - 2"), -1);
     }
     #[test]
     fn one_minus_minus_one_is_two() {
-        assert_eq!(math(&quot;1 - -1&quot;), 2);
+        assert_eq!(math("1 - -1"), 2);
     }
     #[test]
     fn nine_plus_nine_minus_nine_minus_nine_is_zero() {
-        assert_eq!(math(&quot;9+9-9-9&quot;), 0);
+        assert_eq!(math("9+9-9-9"), 0);
     }
     #[test]
     fn eight_minus_nine_plus_nine_is_eight_even_with_characters_on_the_end() {
-        assert_eq!(math(&quot;8  - 9     +9-----+++++&quot;), 8);
+        assert_eq!(math("8  - 9     +9-----+++++"), 8);
     }
     #[test]
     #[should_panic]
     fn panics_when_characters_not_right() {
-        math(&quot;7 + seven&quot;);
+        math("7 + seven");
     }
 }
 <span class="boring">}</span></code></pre></pre>
@@ -757,15 +757,15 @@ impl Calculator {
     }
 }
 
-const OKAY_CHARACTERS: &amp;str = &quot;1234567890+- &quot;;
+const OKAY_CHARACTERS: &amp;str = "1234567890+- ";
 
 fn math(input: &amp;str) -&gt; i32 {
     if !input.chars().all(|character| OKAY_CHARACTERS.contains(character)) ||
        !input.chars().take(2).any(|character| character.is_numeric()) {
-        panic!(&quot;Please only input numbers, +-, or spaces&quot;);
+        panic!("Please only input numbers, +-, or spaces");
     }
 
-    let input = input.trim_end_matches(|x| &quot;+- &quot;.contains(x)).chars().filter(|x| *x != ' ').collect::&lt;String&gt;();
+    let input = input.trim_end_matches(|x| "+- ".contains(x)).chars().filter(|x| *x != ' ').collect::&lt;String&gt;();
     let mut calculator = Calculator::new();
 
     for character in input.chars() {
@@ -826,28 +826,28 @@ mod tests {
 
     #[test]
     fn one_plus_one_is_two() {
-        assert_eq!(math(&quot;1 + 1&quot;), 2);
+        assert_eq!(math("1 + 1"), 2);
     }
     #[test]
     fn one_minus_two_is_minus_one() {
-        assert_eq!(math(&quot;1 - 2&quot;), -1);
+        assert_eq!(math("1 - 2"), -1);
     }
     #[test]
     fn one_minus_minus_one_is_two() {
-        assert_eq!(math(&quot;1 - -1&quot;), 2);
+        assert_eq!(math("1 - -1"), 2);
     }
     #[test]
     fn nine_plus_nine_minus_nine_minus_nine_is_zero() {
-        assert_eq!(math(&quot;9+9-9-9&quot;), 0);
+        assert_eq!(math("9+9-9-9"), 0);
     }
     #[test]
     fn eight_minus_nine_plus_nine_is_eight_even_with_characters_on_the_end() {
-        assert_eq!(math(&quot;8  - 9     +9-----+++++&quot;), 8);
+        assert_eq!(math("8  - 9     +9-----+++++"), 8);
     }
     #[test]
     #[should_panic]
     fn panics_when_characters_not_right() {
-        math(&quot;7 + seven&quot;);
+        math("7 + seven");
     }
 }
 <span class="boring">}</span></code></pre></pre>

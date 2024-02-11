@@ -180,7 +180,7 @@
 struct DoesntImplementDisplay {}
 
 fn displays_it&lt;T: Display&gt;(input: T) {
-    println!(&quot;{}&quot;, input);
+    println!("{}", input);
 }
 
 fn main() {}</code></pre></pre>
@@ -228,7 +228,7 @@ impl JustATrait for ArrayAndI8 {}
 
 fn main() {
     println!(
-        &quot;{}, {}, {}, {}, {}&quot;,
+        "{}, {}, {}, {}, {}",
         size_of::&lt;EnumOfNumbers&gt;(),
         size_of::&lt;StructOfNumbers&gt;(),
         size_of::&lt;EnumOfOtherTypes&gt;(),
@@ -276,7 +276,7 @@ impl Error for ErrorOne {} // Now it is an error type with Debug. Time for Displ
 
 impl fmt::Display for ErrorOne {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        write!(f, &quot;You got the first error!&quot;) // All it does is write this message
+        write!(f, "You got the first error!") // All it does is write this message
     }
 }
 
@@ -288,7 +288,7 @@ impl Error for ErrorTwo {}
 
 impl fmt::Display for ErrorTwo {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        write!(f, &quot;You got the second error!&quot;)
+        write!(f, "You got the second error!")
     }
 }
 
@@ -298,7 +298,7 @@ fn returns_errors(input: u8) -&gt; Result&lt;String, Box&lt;dyn Error&gt;&gt; { 
     match input {
         0 =&gt; Err(Box::new(ErrorOne)), // Don't forget to put it in a box
         1 =&gt; Err(Box::new(ErrorTwo)),
-        _ =&gt; Ok(&quot;Looks fine to me&quot;.to_string()), // This is the success type
+        _ =&gt; Ok("Looks fine to me".to_string()), // This is the success type
     }
 
 }
@@ -309,8 +309,8 @@ fn main() {
 
     for number in vec_of_u8s {
         match returns_errors(number) {
-            Ok(input) =&gt; println!(&quot;{}&quot;, input),
-            Err(message) =&gt; println!(&quot;{}&quot;, message),
+            Ok(input) =&gt; println!("{}", input),
+            Err(message) =&gt; println!("{}", message),
         }
     }
 }</code></pre></pre>
@@ -327,7 +327,7 @@ fn returns_errors(input: u8) -&gt; Result&lt;String, Error&gt; {
     match input {
         0 =&gt; Err(ErrorOne),
         1 =&gt; Err(ErrorTwo),
-        _ =&gt; Ok(&quot;Looks fine to me&quot;.to_string()),
+        _ =&gt; Ok("Looks fine to me".to_string()),
     }
 }
 <span class="boring">}</span></code></pre></pre>

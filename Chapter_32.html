@@ -190,8 +190,8 @@ fn main() {
 <p>When we run the code, it panics. Here is the message:</p>
 <pre><code class="language-text">thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 4', src\main.rs:34:5
 </code></pre>
-<p>Panic means that the program stops before the problem happens. Rust sees that the function wants something impossible, and stops. It &quot;unwinds the stack&quot; (takes the values off the stack) and tells you &quot;sorry, I can't do that&quot;.</p>
-<p>So now we will change the return type from <code>i32</code> to <code>Option&lt;i32&gt;</code>. This means &quot;give me a <code>Some(i32)</code> if it's there, and give me <code>None</code> if it's not&quot;. We say that the <code>i32</code> is &quot;wrapped&quot; in an <code>Option</code>, which means that it's inside an <code>Option</code>. You have to do something to get the value out.</p>
+<p>Panic means that the program stops before the problem happens. Rust sees that the function wants something impossible, and stops. It "unwinds the stack" (takes the values off the stack) and tells you "sorry, I can't do that".</p>
+<p>So now we will change the return type from <code>i32</code> to <code>Option&lt;i32&gt;</code>. This means "give me a <code>Some(i32)</code> if it's there, and give me <code>None</code> if it's not". We say that the <code>i32</code> is "wrapped" in an <code>Option</code>, which means that it's inside an <code>Option</code>. You have to do something to get the value out.</p>
 <pre><pre class="playground"><code class="language-rust">fn take_fifth(value: Vec&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
     if value.len() &lt; 5 { // .len() gives the length of the vec.
                          // It must be at least 5.
@@ -204,7 +204,7 @@ fn main() {
 fn main() {
     let new_vec = vec![1, 2];
     let bigger_vec = vec![1, 2, 3, 4, 5];
-    println!(&quot;{:?}, {:?}&quot;, take_fifth(new_vec), take_fifth(bigger_vec));
+    println!("{:?}, {:?}", take_fifth(new_vec), take_fifth(bigger_vec));
 }</code></pre></pre>
 <p>This prints <code>None, Some(5)</code>. This is good, because now we don't panic anymore. But how do we get the value 5?</p>
 <p>We can get the value inside an option with <code>.unwrap()</code>, but be careful with <code>.unwrap()</code>. It's just like unwrapping a present: maybe there's something good inside, or maybe there's an angry snake inside. You only want to <code>.unwrap()</code> if you are sure. If you unwrap a value that is <code>None</code>, the program will panic.</p>
@@ -220,7 +220,7 @@ fn take_fifth(value: Vec&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
 fn main() {
     let new_vec = vec![1, 2];
     let bigger_vec = vec![1, 2, 3, 4, 5];
-    println!(&quot;{:?}, {:?}&quot;,
+    println!("{:?}, {:?}",
         take_fifth(new_vec).unwrap(), // this one is None. .unwrap() will panic!
         take_fifth(bigger_vec).unwrap()
     );
@@ -240,8 +240,8 @@ fn main() {
 fn handle_option(my_option: Vec&lt;Option&lt;i32&gt;&gt;) {
   for item in my_option {
     match item {
-      Some(number) =&gt; println!(&quot;Found a {}!&quot;, number),
-      None =&gt; println!(&quot;Found a None!&quot;),
+      Some(number) =&gt; println!("Found a {}!", number),
+      None =&gt; println!("Found a None!"),
     }
   }
 }
@@ -252,8 +252,8 @@ fn main() {
     let mut option_vec = Vec::new(); // Make a new vec to hold our options
                                      // The vec is type: Vec&lt;Option&lt;i32&gt;&gt;. That means a vec of Option&lt;i32&gt;.
 
-    option_vec.push(take_fifth(new_vec)); // This pushes &quot;None&quot; into the vec
-    option_vec.push(take_fifth(bigger_vec)); // This pushes &quot;Some(5)&quot; into the vec
+    option_vec.push(take_fifth(new_vec)); // This pushes "None" into the vec
+    option_vec.push(take_fifth(bigger_vec)); // This pushes "Some(5)" into the vec
 
     handle_option(option_vec); // handle_option looks at every option in the vec.
                                // It prints the value if it is Some. It doesn't touch it if it is None.
@@ -274,8 +274,8 @@ fn main() {}</code></pre></pre>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
-Some(value) =&gt; println!(&quot;The value is {}&quot;, value),
-None(value) =&gt; println!(&quot;The value is {}&quot;, value),
+Some(value) =&gt; println!("The value is {}", value),
+None(value) =&gt; println!("The value is {}", value),
 <span class="boring">}</span></code></pre></pre>
 <p>because <code>None</code> is just <code>None</code>.</p>
 <p>Of course, there are easier ways to use Option. In this code, we will use a method called <code>.is_some()</code> to tell us if it is <code>Some</code>. (Yes, there is also a method called <code>.is_none()</code>.) In this easier way, we don't need <code>handle_option()</code> anymore. We also don't need a vec for the Options.</p>
@@ -295,9 +295,9 @@ fn main() {
         let inside_number = take_fifth(vec);
         if inside_number.is_some() {
             // .is_some() returns true if we get Some, false if we get None
-            println!(&quot;We got: {}&quot;, inside_number.unwrap()); // now it is safe to use .unwrap() because we already checked
+            println!("We got: {}", inside_number.unwrap()); // now it is safe to use .unwrap() because we already checked
         } else {
-            println!(&quot;We got nothing.&quot;);
+            println!("We got nothing.");
         }
     }
 }</code></pre></pre>
@@ -311,7 +311,7 @@ We got: 5
 <li>Option is about <code>Some</code> or <code>None</code> (value or no value),</li>
 <li>Result is about <code>Ok</code> or <code>Err</code> (okay result, or error result).</li>
 </ul>
-<p>So <code>Option</code> is if you are thinking: &quot;Maybe there will be something, and maybe there won't.&quot; But <code>Result</code> is if you are thinking: &quot;Maybe it will fail.&quot;</p>
+<p>So <code>Option</code> is if you are thinking: "Maybe there will be something, and maybe there won't." But <code>Result</code> is if you are thinking: "Maybe it will fail."</p>
 <p>To compare, here are the signatures for Option and Result.</p>
 <pre><pre class="playground"><code class="language-rust">enum Option&lt;T&gt; {
     None,
@@ -333,7 +333,7 @@ fn main() {}</code></pre></pre>
 fn main() {
     check_error();
 }</code></pre></pre>
-<p><code>check_error</code> says &quot;return <code>()</code> if we get <code>Ok</code>, and return <code>()</code> if we get <code>Err</code>&quot;. Then we return <code>Ok</code> with a <code>()</code>.</p>
+<p><code>check_error</code> says "return <code>()</code> if we get <code>Ok</code>, and return <code>()</code> if we get <code>Err</code>". Then we return <code>Ok</code> with a <code>()</code>.</p>
 <p>The compiler gives us an interesting warning:</p>
 <pre><code class="language-text">warning: unused `std::result::Result` that must be used
  --&gt; src\main.rs:6:5
@@ -355,9 +355,9 @@ fn main() {
 
 fn main() {
     if give_result(5).is_ok() {
-        println!(&quot;It's okay, guys&quot;)
+        println!("It's okay, guys")
     } else {
-        println!(&quot;It's an error, guys&quot;)
+        println!("It's an error, guys")
     }
 }</code></pre></pre>
 <p>This prints <code>It's an error, guys</code>. So we just handled our first error.</p>
@@ -366,7 +366,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust">fn check_if_five(number: i32) -&gt; Result&lt;i32, String&gt; {
     match number {
         5 =&gt; Ok(number),
-        _ =&gt; Err(&quot;Sorry, the number wasn't five.&quot;.to_string()), // This is our error message
+        _ =&gt; Err("Sorry, the number wasn't five.".to_string()), // This is our error message
     }
 }
 
@@ -377,22 +377,22 @@ fn main() {
         result_vec.push(check_if_five(number)); // push each result into the vec
     }
 
-    println!(&quot;{:?}&quot;, result_vec);
+    println!("{:?}", result_vec);
 }</code></pre></pre>
 <p>Our vec prints:</p>
-<pre><code class="language-text">[Err(&quot;Sorry, the number wasn\'t five.&quot;), Err(&quot;Sorry, the number wasn\'t five.&quot;), Err(&quot;Sorry, the number wasn\'t five.&quot;), Ok(5),
-Err(&quot;Sorry, the number wasn\'t five.&quot;)]
+<pre><code class="language-text">[Err("Sorry, the number wasn\'t five."), Err("Sorry, the number wasn\'t five."), Err("Sorry, the number wasn\'t five."), Ok(5),
+Err("Sorry, the number wasn\'t five.")]
 </code></pre>
 <p>Just like Option, <code>.unwrap()</code> on <code>Err</code> will panic.</p>
 <pre><pre class="playground"><code class="language-rust">    // ⚠️
 fn main() {
-    let error_value: Result&lt;i32, &amp;str&gt; = Err(&quot;There was an error&quot;); // Create a Result that is already an Err
-    println!(&quot;{}&quot;, error_value.unwrap()); // Unwrap it
+    let error_value: Result&lt;i32, &amp;str&gt; = Err("There was an error"); // Create a Result that is already an Err
+    println!("{}", error_value.unwrap()); // Unwrap it
 }</code></pre></pre>
 <p>The program panics, and prints:</p>
-<pre><code class="language-text">thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: &quot;There was an error&quot;', src\main.rs:30:20
+<pre><code class="language-text">thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: "There was an error"', src\main.rs:30:20
 </code></pre>
-<p>This information helps you fix your code. <code>src\main.rs:30:20</code> means &quot;inside main.rs in directory src, on line 30 and column 20&quot;. So you can go there to look at your code and fix the problem.</p>
+<p>This information helps you fix your code. <code>src\main.rs:30:20</code> means "inside main.rs in directory src, on line 30 and column 20". So you can go there to look at your code and fix the problem.</p>
 <p>You can also create your own error types. Result functions in the standard library and other people's code usually do this. For example, this function from the standard library:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -405,8 +405,8 @@ pub fn from_utf8(vec: Vec&lt;u8&gt;) -&gt; Result&lt;String, FromUtf8Error&gt;
     let my_vec = vec![2, 3, 4];
     let get_one = my_vec.get(0); // 0 to get the first number
     let get_two = my_vec.get(10); // Returns None
-    println!(&quot;{:?}&quot;, get_one);
-    println!(&quot;{:?}&quot;, get_two);
+    println!("{:?}", get_one);
+    println!("{:?}", get_two);
 }</code></pre></pre>
 <p>This prints</p>
 <pre><code class="language-text">Some(2)
@@ -418,36 +418,36 @@ None
 
     for index in 0..10 {
       match my_vec.get(index) {
-        Some(number) =&gt; println!(&quot;The number is: {}&quot;, number),
+        Some(number) =&gt; println!("The number is: {}", number),
         None =&gt; {}
       }
     }
 }</code></pre></pre>
-<p>This is good, but we don't do anything for <code>None</code> because we don't care. Here we can make the code smaller by using <code>if let</code>. <code>if let</code> means &quot;do something if it matches, and don't do anything if it doesn't&quot;. <code>if let</code> is when you don't care about matching for everything.</p>
+<p>This is good, but we don't do anything for <code>None</code> because we don't care. Here we can make the code smaller by using <code>if let</code>. <code>if let</code> means "do something if it matches, and don't do anything if it doesn't". <code>if let</code> is when you don't care about matching for everything.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_vec = vec![2, 3, 4];
 
     for index in 0..10 {
       if let Some(number) = my_vec.get(index) {
-        println!(&quot;The number is: {}&quot;, number);
+        println!("The number is: {}", number);
       }
     }
 }</code></pre></pre>
-<p><strong>Important to remember</strong>: <code>if let Some(number) = my_vec.get(index)</code> means &quot;if you get <code>Some(number)</code> from <code>my_vec.get(index)</code>&quot;.</p>
+<p><strong>Important to remember</strong>: <code>if let Some(number) = my_vec.get(index)</code> means "if you get <code>Some(number)</code> from <code>my_vec.get(index)</code>".</p>
 <p>Also note: it uses one <code>=</code>. It is not a boolean.</p>
 <p><code>while let</code> is like a while loop for <code>if let</code>. Imagine that we have weather station data like this:</p>
-<pre><code class="language-text">[&quot;Berlin&quot;, &quot;cloudy&quot;, &quot;5&quot;, &quot;-7&quot;, &quot;78&quot;]
-[&quot;Athens&quot;, &quot;sunny&quot;, &quot;not humid&quot;, &quot;20&quot;, &quot;10&quot;, &quot;50&quot;]
+<pre><code class="language-text">["Berlin", "cloudy", "5", "-7", "78"]
+["Athens", "sunny", "not humid", "20", "10", "50"]
 </code></pre>
-<p>We want to get the numbers, but not the words. For the numbers, we can use a method called <code>parse::&lt;i32&gt;()</code>. <code>parse()</code> is the method, and <code>::&lt;i32&gt;</code> is the type. It will try to turn the <code>&amp;str</code> into an <code>i32</code>, and give it to us if it can. It returns a <code>Result</code>, because it might not work (like if you wanted it to parse &quot;Billybrobby&quot; - that's not a number).</p>
+<p>We want to get the numbers, but not the words. For the numbers, we can use a method called <code>parse::&lt;i32&gt;()</code>. <code>parse()</code> is the method, and <code>::&lt;i32&gt;</code> is the type. It will try to turn the <code>&amp;str</code> into an <code>i32</code>, and give it to us if it can. It returns a <code>Result</code>, because it might not work (like if you wanted it to parse "Billybrobby" - that's not a number).</p>
 <p>We will also use <code>.pop()</code>. This takes the last item off of the vector.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let weather_vec = vec![
-        vec![&quot;Berlin&quot;, &quot;cloudy&quot;, &quot;5&quot;, &quot;-7&quot;, &quot;78&quot;],
-        vec![&quot;Athens&quot;, &quot;sunny&quot;, &quot;not humid&quot;, &quot;20&quot;, &quot;10&quot;, &quot;50&quot;],
+        vec!["Berlin", "cloudy", "5", "-7", "78"],
+        vec!["Athens", "sunny", "not humid", "20", "10", "50"],
     ];
     for mut city in weather_vec {
-        println!(&quot;For the city of {}:&quot;, city[0]); // In our data, every first item is the city name
+        println!("For the city of {}:", city[0]); // In our data, every first item is the city name
         while let Some(information) = city.pop() {
             // This means: keep going until you can't pop anymore
             // When the vector reaches 0 items, it will return None
@@ -455,7 +455,7 @@ None
             if let Ok(number) = information.parse::&lt;i32&gt;() {
                 // Try to parse the variable we called information
                 // This returns a result. If it's Ok(number), it will print it
-                println!(&quot;The number is: {}&quot;, number);
+                println!("The number is: {}", number);
             }  // We don't write anything here because we do nothing if we get an error. Throw them all away
         }
     }

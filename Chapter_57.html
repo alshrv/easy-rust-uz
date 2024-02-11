@@ -180,20 +180,20 @@
 fn main() {
     let value = 7; // This is an i32
     let reference = &amp;7; // This is a &amp;i32
-    println!(&quot;{}&quot;, value == reference);
+    println!("{}", value == reference);
 }</code></pre></pre>
 <p>And Rust won't even give a <code>false</code> because it won't even compare the two.</p>
 <pre><code class="language-text">error[E0277]: can't compare `{integer}` with `&amp;{integer}`
  --&gt; src\main.rs:4:26
   |
-4 |     println!(&quot;{}&quot;, value == reference);
+4 |     println!("{}", value == reference);
   |                          ^^ no implementation for `{integer} == &amp;{integer}`
 </code></pre>
 <p>Of course, the solution here is <code>*</code>. So this will print <code>true</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let value = 7;
     let reference = &amp;7;
-    println!(&quot;{}&quot;, value == *reference);
+    println!("{}", value == *reference);
 }</code></pre></pre>
 <p>Now let's imagine a simple type that just holds a number. It will be like a <code>Box</code>, and we have some ideas for some extra functions for it. But if we just give it a number, it won't be able to do much with it.</p>
 <p>We can't use <code>*</code> like we can with <code>Box</code>:</p>
@@ -202,15 +202,15 @@ struct HoldsANumber(u8);
 
 fn main() {
     let my_number = HoldsANumber(20);
-    println!(&quot;{}&quot;, *my_number + 20);
+    println!("{}", *my_number + 20);
 }</code></pre></pre>
 <p>The error is:</p>
 <pre><code class="language-text">error[E0614]: type `HoldsANumber` cannot be dereferenced
   --&gt; src\main.rs:24:22
    |
-24 |     println!(&quot;{:?}&quot;, *my_number + 20);
+24 |     println!("{:?}", *my_number + 20);
 </code></pre>
-<p>We can of course do this: <code>println!(&quot;{:?}&quot;, my_number.0 + 20);</code>. But then we are just adding a separate <code>u8</code> to the 20. It would be nice if we could just add them together. The message <code>cannot be dereferenced</code> gives us a clue: we need to implement <code>Deref</code>. Something simple that implements <code>Deref</code> is sometimes called a &quot;smart pointer&quot;. A smart pointer can point to its item, has information about it, and can use its methods. Because right now we can add <code>my_number.0</code>, which is a <code>u8</code>, but we can't do much else with a <code>HoldsANumber</code>: all it has so far is <code>Debug</code>.</p>
+<p>We can of course do this: <code>println!("{:?}", my_number.0 + 20);</code>. But then we are just adding a separate <code>u8</code> to the 20. It would be nice if we could just add them together. The message <code>cannot be dereferenced</code> gives us a clue: we need to implement <code>Deref</code>. Something simple that implements <code>Deref</code> is sometimes called a "smart pointer". A smart pointer can point to its item, has information about it, and can use its methods. Because right now we can add <code>my_number.0</code>, which is a <code>u8</code>, but we can't do much else with a <code>HoldsANumber</code>: all it has so far is <code>Debug</code>.</p>
 <p>Interesting fact: <code>String</code> is actually a smart pointer to <code>&amp;str</code> and <code>Vec</code> is a smart pointer to array (or other types). So we have actually been using smart pointers since the beginning.</p>
 <p>Implementing <code>Deref</code> is not too hard and the examples in the standard library are easy. <a href="https://doc.rust-lang.org/std/ops/trait.Deref.html">Here's the sample code from the standard library</a>:</p>
 <pre><pre class="playground"><code class="language-rust">use std::ops::Deref;
@@ -236,11 +236,11 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>// 🚧
 impl Deref for HoldsANumber {
-    type Target = u8; // Remember, this is the &quot;associated type&quot;: the type that goes together.
+    type Target = u8; // Remember, this is the "associated type": the type that goes together.
                       // You have to use the right type Target = (the type you want to return)
 
     fn deref(&amp;self) -&gt; &amp;Self::Target { // Rust calls .deref() when you use *. We just defined Target as a u8 so this is easy to understand
-        &amp;self.0   // We chose &amp;self.0 because it's a tuple struct. In a named struct it would be something like &quot;&amp;self.number&quot;
+        &amp;self.0   // We chose &amp;self.0 because it's a tuple struct. In a named struct it would be something like "&amp;self.number"
     }
 }
 <span class="boring">}</span></code></pre></pre>
@@ -259,7 +259,7 @@ impl Deref for HoldsANumber {
 
 fn main() {
     let my_number = HoldsANumber(20);
-    println!(&quot;{:?}&quot;, *my_number + 20);
+    println!("{:?}", *my_number + 20);
 }</code></pre></pre>
 <p>So that will print <code>40</code> and we didn't need to write <code>my_number.0</code>. That means we get the methods of <code>u8</code> and we can write our own methods for <code>HoldsANumber</code>. We will add our own simple method and use another method we get from <code>u8</code> called <code>.checked_sub()</code>. The <code>.checked_sub()</code> method is a safe subtraction that returns an <code>Option</code>. If it can do the subtraction then it gives it to you inside <code>Some</code>, and if it can't do it then it gives a <code>None</code>. Remember, a <code>u8</code> can't be negative so it's safer to do <code>.checked_sub()</code> so we don't panic.</p>
 <pre><pre class="playground"><code class="language-rust">use std::ops::Deref;
@@ -268,7 +268,7 @@ struct HoldsANumber(u8);
 
 impl HoldsANumber {
     fn prints_the_number_times_two(&amp;self) {
-        println!(&quot;{}&quot;, self.0 * 2);
+        println!("{}", self.0 * 2);
     }
 }
 
@@ -282,7 +282,7 @@ impl Deref for HoldsANumber {
 
 fn main() {
     let my_number = HoldsANumber(20);
-    println!(&quot;{:?}&quot;, my_number.checked_sub(100)); // This method comes from u8
+    println!("{:?}", my_number.checked_sub(100)); // This method comes from u8
     my_number.prints_the_number_times_two(); // This is our own method
 }</code></pre></pre>
 <p>This prints:</p>
@@ -296,7 +296,7 @@ struct HoldsANumber(u8);
 
 impl HoldsANumber {
     fn prints_the_number_times_two(&amp;self) {
-        println!(&quot;{}&quot;, self.0 * 2);
+        println!("{}", self.0 * 2);
     }
 }
 
@@ -317,7 +317,7 @@ impl DerefMut for HoldsANumber { // You don't need type Target = u8; here becaus
 fn main() {
     let mut my_number = HoldsANumber(20);
     *my_number = 30; // DerefMut lets us do this
-    println!(&quot;{:?}&quot;, my_number.checked_sub(100));
+    println!("{:?}", my_number.checked_sub(100));
     my_number.prints_the_number_times_two();
 }</code></pre></pre>
 <p>So you can see that <code>Deref</code> gives your type a lot of power.</p>
@@ -367,7 +367,7 @@ enum Alignment {
 }
 
 fn main() {
-    let billy = Character::new(&quot;Billy&quot;.to_string(), 9, 8, 7, 10, 19, 19, 5, Alignment::Good);
+    let billy = Character::new("Billy".to_string(), 9, 8, 7, 10, 19, 19, 5, Alignment::Good);
 }</code></pre></pre>
 <p>Now let's imagine that we want to keep character hit points in a big vec. Maybe we'll put monster data in there too, and keep it all together. Since <code>hit_points</code> is an <code>i8</code>, we implement <code>Deref</code> so we can do all sorts of math on it. But look at how strange it looks in our <code>main()</code> function now:</p>
 <pre><pre class="playground"><code class="language-rust">use std::ops::Deref;
@@ -428,14 +428,14 @@ impl Deref for Character { // impl Deref for Character. Now we can do any intege
 
 
 fn main() {
-    let billy = Character::new(&quot;Billy&quot;.to_string(), 9, 8, 7, 10, 19, 19, 5, Alignment::Good); // Create two characters, billy and brandy
-    let brandy = Character::new(&quot;Brandy&quot;.to_string(), 9, 8, 7, 10, 19, 19, 5, Alignment::Good);
+    let billy = Character::new("Billy".to_string(), 9, 8, 7, 10, 19, 19, 5, Alignment::Good); // Create two characters, billy and brandy
+    let brandy = Character::new("Brandy".to_string(), 9, 8, 7, 10, 19, 19, 5, Alignment::Good);
 
     let mut hit_points_vec = vec![]; // Put our hit points data in here
     hit_points_vec.push(*billy);     // Push *billy?
     hit_points_vec.push(*brandy);    // Push *brandy?
 
-    println!(&quot;{:?}&quot;, hit_points_vec);
+    println!("{:?}", hit_points_vec);
 }</code></pre></pre>
 <p>This just prints <code>[5, 5]</code>. Our code is now very strange for someone to read. We can read <code>Deref</code> just above <code>main()</code> and figure out that <code>*billy</code> means <code>i8</code>, but what if there was a lot of code? Maybe our code is 2000 lines long, and suddenly we have to figure out why we are <code>.push()</code>ing <code>*billy</code>. <code>Character</code> is certainly more than just a smart pointer for <code>i8</code>.</p>
 <p>Of course, it is not illegal to write <code>hit_points_vec.push(*billy)</code>, but it makes the code look very strange. Probably a simple <code>.get_hp()</code> method would be much better, or another struct that holds the characters. Then you could iterate through and push the <code>hit_points</code> for each one. <code>Deref</code> gives a lot of power but it's good to make sure that the code is logical.</p>

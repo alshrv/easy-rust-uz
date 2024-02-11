@@ -178,10 +178,10 @@
 <h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
 <p>In the past (before Rust 1.53), arrays didn't implement <code>Iterator</code> and you needed to use methods like <code>.iter()</code> on them in for <code>loops</code>. (People also used <code>&amp;</code> to get a slice in <code>for</code> loops). So this didn't work in the past:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_cities = [&quot;Beirut&quot;, &quot;Tel Aviv&quot;, &quot;Nicosia&quot;];
+    let my_cities = ["Beirut", "Tel Aviv", "Nicosia"];
 
     for city in my_cities {
-        println!(&quot;{}&quot;, city);
+        println!("{}", city);
     }
 }</code></pre></pre>
 <p>The compiler used to give this message:</p>
@@ -192,16 +192,16 @@
 </code></pre>
 <p>Luckily, that isn't a problem anymore! So all three of these work:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_cities = [&quot;Beirut&quot;, &quot;Tel Aviv&quot;, &quot;Nicosia&quot;];
+    let my_cities = ["Beirut", "Tel Aviv", "Nicosia"];
 
     for city in my_cities {
-        println!(&quot;{}&quot;, city);
+        println!("{}", city);
     }
     for city in &amp;my_cities {
-        println!(&quot;{}&quot;, city);
+        println!("{}", city);
     }
     for city in my_cities.iter() {
-        println!(&quot;{}&quot;, city);
+        println!("{}", city);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -217,17 +217,17 @@ Nicosia
 </code></pre>
 <p>If you want to get variables from an array, you can put their names inside <code>[]</code> to destructure it. This is the same as using a tuple in <code>match</code> statements or destructuring to get variables from a struct.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_cities = [&quot;Beirut&quot;, &quot;Tel Aviv&quot;, &quot;Nicosia&quot;];
+    let my_cities = ["Beirut", "Tel Aviv", "Nicosia"];
     let [city1, city2, city3] = my_cities;
-    println!(&quot;{}&quot;, city1);
+    println!("{}", city1);
 }</code></pre></pre>
 <p>This prints <code>Beirut</code>.</p>
 <h3 id="char"><a class="header" href="#char">char</a></h3>
 <p>You can use the <code>.escape_unicode()</code> method to get the Unicode number for a <code>char</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let korean_word = &quot;청춘예찬&quot;;
+    let korean_word = "청춘예찬";
     for character in korean_word.chars() {
-        print!(&quot;{} &quot;, character.escape_unicode());
+        print!("{} ", character.escape_unicode());
     }
 }</code></pre></pre>
 <p>This prints <code>\u{ccad} \u{cd98} \u{c608} \u{cc2c}</code>.</p>
@@ -237,14 +237,14 @@ use rand::prelude::*;      // We will use random numbers too
 
 fn main() {
     let some_character = char::from(99); // This one is easy - no need for TryFrom
-    println!(&quot;{}&quot;, some_character);
+    println!("{}", some_character);
 
     let mut random_generator = rand::thread_rng();
     // This will try 40,000 times to make a char from a u32.
     // The range is 0 (std::u32::MIN) to u32's highest number (std::u32::MAX). If it doesn't work, we will give it '-'.
     for _ in 0..40_000 {
         let bigger_character = char::try_from(random_generator.gen_range(std::u32::MIN..std::u32::MAX)).unwrap_or('-');
-        print!(&quot;{}&quot;, bigger_character)
+        print!("{}", bigger_character)
     }
 }</code></pre></pre>
 <p>Almost every time it will generate a <code>-</code>. This is part of the sort of output you will see:</p>
@@ -271,14 +271,14 @@ fn main() {
     let some_number = 200_u8;
     let other_number = 200_u8;
 
-    println!(&quot;{:?}&quot;, some_number.checked_add(other_number));
-    println!(&quot;{:?}&quot;, some_number.checked_add(1));
+    println!("{:?}", some_number.checked_add(other_number));
+    println!("{:?}", some_number.checked_add(1));
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">None
 Some(201)
 </code></pre>
-<p>You'll notice that on the page for integers it says <code>rhs</code> a lot. This means &quot;right hand side&quot;, which is the right hand side when you do some math. For example, in <code>5 + 6</code>, <code>5</code> is on the left and <code>6</code> is on the right, so it's the <code>rhs</code>. This is not a keyword, but you will see it a lot so it's good to know.</p>
+<p>You'll notice that on the page for integers it says <code>rhs</code> a lot. This means "right hand side", which is the right hand side when you do some math. For example, in <code>5 + 6</code>, <code>5</code> is on the left and <code>6</code> is on the right, so it's the <code>rhs</code>. This is not a keyword, but you will see it a lot so it's good to know.</p>
 <p>While we are on the subject, let's learn how to implement <code>Add</code>. After you implement <code>Add</code>, you can use <code>+</code> on a type that you create. You need to implement <code>Add</code> yourself because add can mean a lot of things. Here's the example in the standard library page:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -291,7 +291,7 @@ struct Point {
 }
 
 impl Add for Point {
-    type Output = Self; // Remember, this is called an &quot;associated type&quot;: a &quot;type that goes together&quot;.
+    type Output = Self; // Remember, this is called an "associated type": a "type that goes together".
                         // In this case it's just another Point
 
     fn add(self, other: Self) -&gt; Self {
@@ -328,7 +328,7 @@ impl Add for Country {
 
     fn add(self, other: Self) -&gt; Self {
         Self {
-            name: format!(&quot;{} and {}&quot;, self.name, other.name), // We will add the names together,
+            name: format!("{} and {}", self.name, other.name), // We will add the names together,
             population: self.population + other.population, // and the population,
             gdp: self.gdp + other.gdp,   // and the GDP
         }
@@ -339,22 +339,22 @@ impl fmt::Display for Country {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
         write!(
             f,
-            &quot;In {} are {} people and a GDP of ${}&quot;, // Then we can print them all with just {}
+            "In {} are {} people and a GDP of ${}", // Then we can print them all with just {}
             self.name, self.population, self.gdp
         )
     }
 }
 
 fn main() {
-    let nauru = Country::new(&quot;Nauru&quot;, 10_670, 160_000_000);
-    let vanuatu = Country::new(&quot;Vanuatu&quot;, 307_815, 820_000_000);
-    let micronesia = Country::new(&quot;Micronesia&quot;, 104_468, 367_000_000);
+    let nauru = Country::new("Nauru", 10_670, 160_000_000);
+    let vanuatu = Country::new("Vanuatu", 307_815, 820_000_000);
+    let micronesia = Country::new("Micronesia", 104_468, 367_000_000);
 
     // We could have given Country a &amp;str instead of a String for the name. But we would have to write lifetimes everywhere
     // and that would be too much for a small example. Better to just clone them when we call println!.
-    println!(&quot;{}&quot;, nauru.clone());
-    println!(&quot;{}&quot;, nauru.clone() + vanuatu.clone());
-    println!(&quot;{}&quot;, nauru + vanuatu + micronesia);
+    println!("{}", nauru.clone());
+    println!("{}", nauru.clone() + vanuatu.clone());
+    println!("{}", nauru + vanuatu + micronesia);
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">In Nauru are 10670 people and a GDP of $160000000
@@ -368,17 +368,17 @@ In Nauru and Vanuatu and Micronesia are 422953 people and a GDP of $1347000000
 <ul>
 <li><code>.floor()</code>: gives you the next lowest integer.</li>
 <li><code>.ceil()</code>: gives you the next highest integer.</li>
-<li><code>.round()</code>: gives you a higher number if 0.5 or more, or the same number if less than 0.5. This is called rounding because it gives you a &quot;round&quot; number (a number that has a short, simple form).</li>
-<li><code>.trunc()</code>: just cuts off the part after the period. Truncate means &quot;to cut off&quot;.</li>
+<li><code>.round()</code>: gives you a higher number if 0.5 or more, or the same number if less than 0.5. This is called rounding because it gives you a "round" number (a number that has a short, simple form).</li>
+<li><code>.trunc()</code>: just cuts off the part after the period. Truncate means "to cut off".</li>
 </ul>
 <p>Here is a simple function to print them.</p>
 <pre><pre class="playground"><code class="language-rust">fn four_operations(input: f64) {
     println!(
-&quot;For the number {}:
+"For the number {}:
 floor: {}
 ceiling: {}
 rounded: {}
-truncated: {}\n&quot;,
+truncated: {}\n",
         input,
         input.floor(),
         input.ceil(),
@@ -423,25 +423,25 @@ truncated: -19
     let my_vec = vec![8.0_f64, 7.6, 9.4, 10.0, 22.0, 77.345, 10.22, 3.2, -7.77, -10.0];
     let maximum = my_vec.iter().fold(f64::MIN, |current_number, next_number| current_number.max(*next_number)); // Note: start with the lowest possible number for an f64.
     let minimum = my_vec.iter().fold(f64::MAX, |current_number, next_number| current_number.min(*next_number)); // And here start with the highest possible number
-    println!(&quot;{}, {}&quot;, maximum, minimum);
+    println!("{}, {}", maximum, minimum);
 }</code></pre></pre>
 <h3 id="bool"><a class="header" href="#bool">bool</a></h3>
 <p>In Rust you can turn a <code>bool</code> into an integer if you want, because it's safe to do that. But you can't do it the other way around. As you can see, <code>true</code> turns to 1 and <code>false</code> turns to 0.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let true_false = (true, false);
-    println!(&quot;{} {}&quot;, true_false.0 as u8, true_false.1 as i32);
+    println!("{} {}", true_false.0 as u8, true_false.1 as i32);
 }</code></pre></pre>
 <p>This prints <code>1 0</code>. Or you can use <code>.into()</code> if you tell the compiler the type:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let true_false: (i128, u16) = (true.into(), false.into());
-    println!(&quot;{} {}&quot;, true_false.0, true_false.1);
+    println!("{} {}", true_false.0, true_false.1);
 }</code></pre></pre>
 <p>This prints the same thing.</p>
 <p>As of Rust 1.50 (released in February 2021), there is now a method called <code>then()</code>, which turns a <code>bool</code> into an <code>Option</code>. With <code>then()</code> you write a closure, and the closure is called if the item is <code>true</code>. Also, whatever is returned from the closure goes inside the <code>Option</code>. Here's a small example:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
 
     let (tru, fals) = (true.then(|| 8), false.then(|| 8));
-    println!(&quot;{:?}, {:?}&quot;, tru, fals);
+    println!("{:?}, {:?}", tru, fals);
 }</code></pre></pre>
 <p>This just prints <code>Some(8), None</code>.</p>
 <p>And now a bit larger example:</p>
@@ -452,49 +452,49 @@ truncated: -19
         .iter()
         .map(|item| {
             item.then(|| { // Put this inside of map so we can pass it on
-                println!(&quot;Got a {}!&quot;, item);
-                &quot;It's true, you know&quot; // This goes inside Some if it's true
+                println!("Got a {}!", item);
+                "It's true, you know" // This goes inside Some if it's true
                                       // Otherwise it just passes on None
             })
         })
         .collect::&lt;Vec&lt;_&gt;&gt;();
 
-    println!(&quot;Now we have: {:?}&quot;, option_vec);
+    println!("Now we have: {:?}", option_vec);
 
     // That printed out the Nones too. Let's filter map them out in a new Vec.
     let filtered_vec = option_vec.into_iter().filter_map(|c| c).collect::&lt;Vec&lt;_&gt;&gt;();
 
-    println!(&quot;And without the Nones: {:?}&quot;, filtered_vec);
+    println!("And without the Nones: {:?}", filtered_vec);
 }</code></pre></pre>
 <p>And here's what this prints:</p>
 <pre><code class="language-text">Got a true!
 Got a true!
-Now we have: [Some(&quot;It\'s true, you know&quot;), None, Some(&quot;It\'s true, you know&quot;), None, None]
-And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you know&quot;]
+Now we have: [Some("It\'s true, you know"), None, Some("It\'s true, you know"), None, None]
+And without the Nones: ["It\'s true, you know", "It\'s true, you know"]
 </code></pre>
 <h3 id="vec"><a class="header" href="#vec">Vec</a></h3>
 <p>Vec has a lot of methods that we haven't looked at yet. Let's start with <code>.sort()</code>. <code>.sort()</code> is not surprising at all. It uses a <code>&amp;mut self</code> to sort a vector.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let mut my_vec = vec![100, 90, 80, 0, 0, 0, 0, 0];
     my_vec.sort();
-    println!(&quot;{:?}&quot;, my_vec);
+    println!("{:?}", my_vec);
 }</code></pre></pre>
 <p>This prints <code>[0, 0, 0, 0, 0, 80, 90, 100]</code>. But there is one more interesting way to sort called <code>.sort_unstable()</code>, and it is usually faster. It can be faster because it doesn't care about the order of numbers if they are the same number. In regular <code>.sort()</code>, you know that the last <code>0, 0, 0, 0, 0</code> will be in the same order after <code>.sort()</code>. But <code>.sort_unstable()</code> might move the last zero to index 0, then the third last zero to index 2, etc.</p>
-<p><code>.dedup()</code> means &quot;de-duplicate&quot;. It will remove items that are the same in a vector, but only if they are next to each other. This next code will not just print <code>&quot;sun&quot;, &quot;moon&quot;</code>:</p>
+<p><code>.dedup()</code> means "de-duplicate". It will remove items that are the same in a vector, but only if they are next to each other. This next code will not just print <code>"sun", "moon"</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_vec = vec![&quot;sun&quot;, &quot;sun&quot;, &quot;moon&quot;, &quot;moon&quot;, &quot;sun&quot;, &quot;moon&quot;, &quot;moon&quot;];
+    let mut my_vec = vec!["sun", "sun", "moon", "moon", "sun", "moon", "moon"];
     my_vec.dedup();
-    println!(&quot;{:?}&quot;, my_vec);
+    println!("{:?}", my_vec);
 }</code></pre></pre>
-<p>It only gets rid of &quot;sun&quot; next to the other &quot;sun&quot;, then &quot;moon&quot; next to one &quot;moon&quot;, and again with &quot;moon&quot; next to another &quot;moon&quot;. The result is: <code>[&quot;sun&quot;, &quot;moon&quot;, &quot;sun&quot;, &quot;moon&quot;]</code>.</p>
+<p>It only gets rid of "sun" next to the other "sun", then "moon" next to one "moon", and again with "moon" next to another "moon". The result is: <code>["sun", "moon", "sun", "moon"]</code>.</p>
 <p>If you want to remove every duplicate, just <code>.sort()</code> first:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_vec = vec![&quot;sun&quot;, &quot;sun&quot;, &quot;moon&quot;, &quot;moon&quot;, &quot;sun&quot;, &quot;moon&quot;, &quot;moon&quot;];
+    let mut my_vec = vec!["sun", "sun", "moon", "moon", "sun", "moon", "moon"];
     my_vec.sort();
     my_vec.dedup();
-    println!(&quot;{:?}&quot;, my_vec);
+    println!("{:?}", my_vec);
 }</code></pre></pre>
-<p>Result: <code>[&quot;moon&quot;, &quot;sun&quot;]</code>.</p>
+<p>Result: <code>["moon", "sun"]</code>.</p>
 <h3 id="string"><a class="header" href="#string">String</a></h3>
 <p>You will remember that a <code>String</code> is kind of like a <code>Vec</code>. It is so like a <code>Vec</code> that you can do a lot of the same methods. For example, you can start one with <code>String::with_capacity()</code>. You want that if you are always going to be pushing a <code>char</code> with <code>.push()</code> or pushing a <code>&amp;str</code> with <code>.push_str()</code>. Here's an example of a <code>String</code> that has too many allocations.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
@@ -502,10 +502,10 @@ And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you 
     let mut capacity_counter = 0; // capacity starts at 0
     for _ in 0..100_000 { // Do this 100,000 times
         if push_string.capacity() != capacity_counter { // First check if capacity is different now
-            println!(&quot;{}&quot;, push_string.capacity()); // If it is, print it
+            println!("{}", push_string.capacity()); // If it is, print it
             capacity_counter = push_string.capacity(); // then update the counter
         }
-        push_string.push_str(&quot;I'm getting pushed into the string!&quot;); // and push this in every time
+        push_string.push_str("I'm getting pushed into the string!"); // and push this in every time
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -534,10 +534,10 @@ And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you 
     let mut capacity_counter = 0;
     for _ in 0..100_000 {
         if push_string.capacity() != capacity_counter {
-            println!(&quot;{}&quot;, push_string.capacity());
+            println!("{}", push_string.capacity());
             capacity_counter = push_string.capacity();
         }
-        push_string.push_str(&quot;I'm getting pushed into the string!&quot;);
+        push_string.push_str("I'm getting pushed into the string!");
     }
 }</code></pre></pre>
 <p>And this prints <code>4587520</code>. Perfect! We never had to allocate again.</p>
@@ -547,17 +547,17 @@ And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you 
     let mut capacity_counter = 0;
     for _ in 0..100_000 {
         if push_string.capacity() != capacity_counter {
-            println!(&quot;{}&quot;, push_string.capacity());
+            println!("{}", push_string.capacity());
             capacity_counter = push_string.capacity();
         }
-        push_string.push_str(&quot;I'm getting pushed into the string!&quot;);
+        push_string.push_str("I'm getting pushed into the string!");
     }
     push_string.shrink_to_fit();
-    println!(&quot;{}&quot;, push_string.capacity());
+    println!("{}", push_string.capacity());
     push_string.push('a');
-    println!(&quot;{}&quot;, push_string.capacity());
+    println!("{}", push_string.capacity());
     push_string.shrink_to_fit();
-    println!(&quot;{}&quot;, push_string.capacity());
+    println!("{}", push_string.capacity());
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">4587520
@@ -568,11 +568,11 @@ And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you 
 <p>So first we had a size of <code>4587520</code>, but we weren't using it all. We used <code>.shrink_to_fit()</code> and got the size down to <code>3500000</code>. But then we forget that we needed to push an <code>a</code> on. When we did that, Rust saw that we needed more space and gave us double: now it's <code>7000000</code>. Whoops! So we did <code>.shrink_to_fit()</code> again and now it's back down to <code>3500001</code>.</p>
 <p><code>.pop()</code> works for a <code>String</code>, just like for a <code>Vec</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_string = String::from(&quot;.daer ot drah tib elttil a si gnirts sihT&quot;);
+    let mut my_string = String::from(".daer ot drah tib elttil a si gnirts sihT");
     loop {
         let pop_result = my_string.pop();
         match pop_result {
-            Some(character) =&gt; print!(&quot;{}&quot;, character),
+            Some(character) =&gt; print!("{}", character),
             None =&gt; break,
         }
     }
@@ -580,15 +580,15 @@ And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you 
 <p>This prints <code>This string is a little bit hard to read.</code> because it starts from the last character.</p>
 <p><code>.retain()</code> is a method that uses a closure, which is rare for <code>String</code>. It's just like <code>.filter()</code> for an iterator.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let mut my_string = String::from(&quot;Age: 20 Height: 194 Weight: 80&quot;);
+    let mut my_string = String::from("Age: 20 Height: 194 Weight: 80");
     my_string.retain(|character| character.is_alphabetic() || character == ' '); // Keep if a letter or a space
     dbg!(my_string); // Let's use dbg!() for fun this time instead of println!
 }</code></pre></pre>
 <p>This prints:</p>
-<pre><code class="language-text">[src\main.rs:4] my_string = &quot;Age  Height  Weight &quot;
+<pre><code class="language-text">[src\main.rs:4] my_string = "Age  Height  Weight "
 </code></pre>
 <h3 id="osstring-va-cstring"><a class="header" href="#osstring-va-cstring">OsString va CString</a></h3>
-<p><code>std::ffi</code> is the part of <code>std</code> that helps you use Rust with other languages or operating systems. It has types like <code>OsString</code> and <code>CString</code>, which are like <code>String</code> for the operating system or <code>String</code> for the language C. They each have their own <code>&amp;str</code> type too: <code>OsStr</code> and <code>CStr</code>. <code>ffi</code> means &quot;foreign function interface&quot;.</p>
+<p><code>std::ffi</code> is the part of <code>std</code> that helps you use Rust with other languages or operating systems. It has types like <code>OsString</code> and <code>CString</code>, which are like <code>String</code> for the operating system or <code>String</code> for the language C. They each have their own <code>&amp;str</code> type too: <code>OsStr</code> and <code>CStr</code>. <code>ffi</code> means "foreign function interface".</p>
 <p>You can use <code>OsString</code> when you have to work with an operating system that doesn't have Unicode. All Rust strings are unicode, but not every operating system has it. Here is the simple English explanation from the standard library on why we have <code>OsString</code>:</p>
 <ul>
 <li>A string on Unix (Linux, etc.) might be lots of bytes together that don't have zeros. And sometimes you read them as Unicode UTF-8.</li>
@@ -596,7 +596,7 @@ And without the Nones: [&quot;It\'s true, you know&quot;, &quot;It\'s true, you 
 <li>In Rust, strings are always valid UTF-8, which may contain zeros.</li>
 </ul>
 <p>So an <code>OsString</code> is made to be read by all of them.</p>
-<p>You can do all the regular things with an <code>OsString</code> like <code>OsString::from(&quot;Write something here&quot;)</code>. It also has an interesting method called <code>.into_string()</code> that tries to make it into a regular <code>String</code>. It returns a <code>Result</code>, but the <code>Err</code> part is just the original <code>OsString</code>:</p>
+<p>You can do all the regular things with an <code>OsString</code> like <code>OsString::from("Write something here")</code>. It also has an interesting method called <code>.into_string()</code> that tries to make it into a regular <code>String</code>. It returns a <code>Result</code>, but the <code>Err</code> part is just the original <code>OsString</code>:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
@@ -607,10 +607,10 @@ pub fn into_string(self) -&gt; Result&lt;String, OsString&gt;
 
 fn main() {
     // ⚠️
-    let os_string = OsString::from(&quot;This string works for your OS too.&quot;);
+    let os_string = OsString::from("This string works for your OS too.");
     match os_string.into_string() {
-        Ok(valid) =&gt; valid.thth(),           // Compiler: &quot;What's .thth()??&quot;
-        Err(not_valid) =&gt; not_valid.occg(),  // Compiler: &quot;What's .occg()??&quot;
+        Ok(valid) =&gt; valid.thth(),           // Compiler: "What's .thth()??"
+        Err(not_valid) =&gt; not_valid.occg(),  // Compiler: "What's .occg()??"
     }
 }</code></pre></pre>
 <p>Then the compiler tells us exactly what we want to know:</p>
@@ -632,10 +632,10 @@ error[E0599]: no method named `occg` found for struct `std::ffi::OsString` in th
 <pre><pre class="playground"><code class="language-rust">use std::mem;
 
 fn main() {
-    println!(&quot;{}&quot;, mem::size_of::&lt;i32&gt;());
+    println!("{}", mem::size_of::&lt;i32&gt;());
     let my_array = [8; 50];
-    println!(&quot;{}&quot;, mem::size_of_val(&amp;my_array));
-    let mut some_string = String::from(&quot;You can drop a String because it's on the heap&quot;);
+    println!("{}", mem::size_of_val(&amp;my_array));
+    let mut some_string = String::from("You can drop a String because it's on the heap");
     mem::drop(some_string);
     // some_string.clear();   If we did this it would panic
 }</code></pre></pre>
@@ -651,7 +651,7 @@ fn main() {
 struct Ring { // Create a ring from Lord of the Rings
     owner: String,
     former_owner: String,
-    seeker: String, // seeker means &quot;person looking for it&quot;
+    seeker: String, // seeker means "person looking for it"
 }
 
 impl Ring {
@@ -666,15 +666,15 @@ impl Ring {
 
 impl fmt::Display for Ring { // Display to show who has it and who wants it
         fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
-            write!(f, &quot;{} has the ring, {} used to have it, and {} wants it&quot;, self.owner, self.former_owner, self.seeker)
+            write!(f, "{} has the ring, {} used to have it, and {} wants it", self.owner, self.former_owner, self.seeker)
         }
 }
 
 fn main() {
-    let mut one_ring = Ring::new(&quot;Frodo&quot;, &quot;Gollum&quot;, &quot;Sauron&quot;);
-    println!(&quot;{}&quot;, one_ring);
+    let mut one_ring = Ring::new("Frodo", "Gollum", "Sauron");
+    println!("{}", one_ring);
     mem::swap(&amp;mut one_ring.owner, &amp;mut one_ring.former_owner); // Gollum got the ring back for a second
-    println!(&quot;{}&quot;, one_ring);
+    println!("{}", one_ring);
 }</code></pre></pre>
 <p>This will print:</p>
 <pre><code class="language-text">Frodo has the ring, Gollum used to have it, and Sauron wants it
@@ -699,7 +699,7 @@ impl City {
     fn change_name(&amp;mut self, name: &amp;str) {
         let old_name = mem::replace(&amp;mut self.name, name.to_string());
         println!(
-            &quot;The city once called {} is now called {}.&quot;,
+            "The city once called {} is now called {}.",
             old_name, self.name
         );
     }
@@ -707,12 +707,12 @@ impl City {
 
 fn main() {
     let mut capital_city = City {
-        name: &quot;Constantinople&quot;.to_string(),
+        name: "Constantinople".to_string(),
     };
-    capital_city.change_name(&quot;Istanbul&quot;);
+    capital_city.change_name("Istanbul");
 }</code></pre></pre>
 <p>This prints <code>The city once called Constantinople is now called Istanbul.</code>.</p>
-<p>One function called <code>.take()</code> is like <code>.replace()</code> but it leaves the default value in the item. You will remember that default values are usually things like 0, &quot;&quot;, and so on. Here is the signature:</p>
+<p>One function called <code>.take()</code> is like <code>.replace()</code> but it leaves the default value in the item. You will remember that default values are usually things like 0, "", and so on. Here is the signature:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 🚧
@@ -732,7 +732,7 @@ fn main() {
         new_vec.push(taker);
     });
 
-    println!(&quot;{:?}\n{:?}&quot;, number_vec, new_vec);
+    println!("{:?}\n{:?}", number_vec, new_vec);
 }</code></pre></pre>
 <p>And as you can see, it replaced all the numbers with 0: no index was deleted.</p>
 <pre><code class="language-text">[0, 0, 0, 0, 0, 0]
@@ -744,7 +744,7 @@ use std::ops::{Deref, DerefMut}; // We will use this to get the power of u32
 
 struct Bank {
     money_inside: u32,
-    money_at_desk: DeskMoney, // This is our &quot;smart pointer&quot; type. It has its own default, but it will use u32
+    money_at_desk: DeskMoney, // This is our "smart pointer" type. It has its own default, but it will use u32
 }
 
 struct DeskMoney(u32);
@@ -772,7 +772,7 @@ impl DerefMut for DeskMoney { // And with this we can add, subtract, etc.
 impl Bank {
     fn check_money(&amp;self) {
         println!(
-            &quot;There is ${} in the back and ${} at the desk.\n&quot;,
+            "There is ${} in the back and ${} at the desk.\n",
             self.money_inside, *self.money_at_desk // Use * so we can just print the u32
         );
     }
@@ -784,14 +784,14 @@ struct Robber {
 
 impl Robber {
     fn check_money(&amp;self) {
-        println!(&quot;The robber has ${} right now.\n&quot;, self.money_in_pocket);
+        println!("The robber has ${} right now.\n", self.money_in_pocket);
     }
 
     fn rob_bank(&amp;mut self, bank: &amp;mut Bank) {
         let new_money = mem::take(&amp;mut bank.money_at_desk); // Here it takes the money, and leaves 50 because that is the default
         self.money_in_pocket += *new_money; // Use * because we can only add u32. DeskMoney can't add
         bank.money_inside -= *new_money;    // Same here
-        println!(&quot;She robbed the bank. She now has ${}!\n&quot;, self.money_in_pocket);
+        println!("She robbed the bank. She now has ${}!\n", self.money_in_pocket);
     }
 }
 
@@ -837,7 +837,7 @@ There is $4900 in the back and $50 at the desk.
 <h3 id="prelude"><a class="header" href="#prelude">prelude</a></h3>
 <p>The standard library has a prelude too, which is why you don't have to write things like <code>use std::vec::Vec</code> to create a <code>Vec</code>. You can see all the items <a href="https://doc.rust-lang.org/std/prelude/index.html#prelude-contents">here</a>, and will already know almost all of them:</p>
 <ul>
-<li><code>std::marker::{Copy, Send, Sized, Sync, Unpin}</code>. You haven't seen <code>Unpin</code> before, because it is used for almost every type (like <code>Sized</code>, which is also very common). To &quot;pin&quot; means to not let something move. In this case a <code>Pin</code> means that it can't move in memory, but most items have <code>Unpin</code> so you can. That's why functions like <code>std::mem::replace</code> work, because they aren't pinned.</li>
+<li><code>std::marker::{Copy, Send, Sized, Sync, Unpin}</code>. You haven't seen <code>Unpin</code> before, because it is used for almost every type (like <code>Sized</code>, which is also very common). To "pin" means to not let something move. In this case a <code>Pin</code> means that it can't move in memory, but most items have <code>Unpin</code> so you can. That's why functions like <code>std::mem::replace</code> work, because they aren't pinned.</li>
 <li><code>std::ops::{Drop, Fn, FnMut, FnOnce}</code>.</li>
 <li><code>std::mem::drop</code></li>
 <li><code>std::boxed::Box</code>.</li>
@@ -857,14 +857,14 @@ There is $4900 in the back and $50 at the desk.
 #![no_implicit_prelude]
 fn main() {
     let my_vec = vec![8, 9, 10];
-    let my_string = String::from(&quot;This won't work&quot;);
-    println!(&quot;{:?}, {}&quot;, my_vec, my_string);
+    let my_string = String::from("This won't work");
+    println!("{:?}, {}", my_vec, my_string);
 }</code></pre></pre>
 <p>Now Rust has no idea what you are trying to do:</p>
 <pre><code class="language-text">error: cannot find macro `println` in this scope
  --&gt; src/main.rs:5:5
   |
-5 |     println!(&quot;{:?}, {}&quot;, my_vec, my_string);
+5 |     println!("{:?}, {}", my_vec, my_string);
   |     ^^^^^^^
 
 error: cannot find macro `vec` in this scope
@@ -876,7 +876,7 @@ error: cannot find macro `vec` in this scope
 error[E0433]: failed to resolve: use of undeclared type or module `String`
  --&gt; src/main.rs:4:21
   |
-4 |     let my_string = String::from(&quot;This won't work&quot;);
+4 |     let my_string = String::from("This won't work");
   |                     ^^^^^^ use of undeclared type or module `String`
 
 error: aborting due to 3 previous errors
@@ -892,8 +892,8 @@ use std::println; // and this to print
 
 fn main() {
     let my_vec = vec![8, 9, 10];
-    let my_string = String::from(&quot;This won't work&quot;);
-    println!(&quot;{:?}, {}&quot;, my_vec, my_string);
+    let my_string = String::from("This won't work");
+    println!("{:?}, {}", my_vec, my_string);
 }</code></pre></pre>
 <p>And now it finally works, printing <code>[8, 9, 10], This won't work</code>. So you can see why Rust uses the prelude. But if you want, you don't need to use it. And you can even use <code>#![no_std]</code> (we saw this once) for when you can't even use something like stack memory. But most of the time you don't have to think about not using the prelude or <code>std</code> at all.</p>
 <p>So why didn't we see the <code>extern</code> keyword before? It's because you don't need it that much anymore. Before, when bringing in an external crate you had to use it. So to use <code>rand</code> in the past, you had to write:</p>
@@ -908,9 +908,9 @@ fn main() {
 
 fn main() {
     let time = Instant::now();
-    println!(&quot;{:?}&quot;, time);
+    println!("{:?}", time);
 }</code></pre></pre>
-<p>If you print it, you'll get something like this: <code>Instant { tv_sec: 2738771, tv_nsec: 685628140 }</code>. That's talking about seconds and nanoseconds, but it's not very useful. If you look at 2738771 seconds for example (written in August), it is 31.70 days. That doesn't have anything to do with the month or the day of the year. But the page on <code>Instant</code> tells us that it isn't supposed to be useful on its own. It says that it is &quot;opaque and useful only with Duration.&quot; Opaque means &quot;you can't figure it out&quot;, and duration means &quot;how much time passed&quot;. So it's only useful when doing things like comparing times.</p>
+<p>If you print it, you'll get something like this: <code>Instant { tv_sec: 2738771, tv_nsec: 685628140 }</code>. That's talking about seconds and nanoseconds, but it's not very useful. If you look at 2738771 seconds for example (written in August), it is 31.70 days. That doesn't have anything to do with the month or the day of the year. But the page on <code>Instant</code> tells us that it isn't supposed to be useful on its own. It says that it is "opaque and useful only with Duration." Opaque means "you can't figure it out", and duration means "how much time passed". So it's only useful when doing things like comparing times.</p>
 <p>If you look at the traits on the left, one of them is <code>Sub&lt;Instant&gt;</code>. That means we can use <code>-</code> to subtract one from another. And when we click on [src] to see what it does, it says:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -937,37 +937,37 @@ fn main() {
         }
     }
     let time3 = Instant::now();
-    println!(&quot;{:?}&quot;, time2 - time1);
-    println!(&quot;{:?}&quot;, time3 - time1);
+    println!("{:?}", time2 - time1);
+    println!("{:?}", time3 - time1);
 }</code></pre></pre>
 <p>This will print something like this:</p>
 <pre><code class="language-text">1.025µs
 683.378µs
 </code></pre>
 <p>So that's just over 1 microsecond vs. 683 microseconds. We can see that Rust did take some time to do it.</p>
-<p>There is one fun thing we can do with just a single <code>Instant</code> though. We can turn it into a <code>String</code> with <code>format!(&quot;{:?}&quot;, Instant::now());</code>. It looks like this:</p>
+<p>There is one fun thing we can do with just a single <code>Instant</code> though. We can turn it into a <code>String</code> with <code>format!("{:?}", Instant::now());</code>. It looks like this:</p>
 <pre><pre class="playground"><code class="language-rust">use std::time::Instant;
 
 fn main() {
-    let time1 = format!(&quot;{:?}&quot;, Instant::now());
-    println!(&quot;{}&quot;, time1);
+    let time1 = format!("{:?}", Instant::now());
+    println!("{}", time1);
 }</code></pre></pre>
 <p>That prints something like <code>Instant { tv_sec: 2740773, tv_nsec: 632821036 }</code>. That's not useful, but if we use <code>.iter()</code> and <code>.rev()</code> and <code>.skip(2)</code>, we can skip the <code>}</code> and <code> </code> at the end. We can use it to make a random number generator.</p>
 <pre><pre class="playground"><code class="language-rust">use std::time::Instant;
 
 fn bad_random_number(digits: usize) {
     if digits &gt; 9 {
-        panic!(&quot;Random number can only be up to 9 digits&quot;);
+        panic!("Random number can only be up to 9 digits");
     }
     let now = Instant::now();
-    let output = format!(&quot;{:?}&quot;, now);
+    let output = format!("{:?}", now);
 
     output
         .chars()
         .rev()
         .skip(2)
         .take(digits)
-        .for_each(|character| print!(&quot;{}&quot;, character));
+        .for_each(|character| print!("{}", character));
     println!();
 }
 
@@ -990,9 +990,9 @@ use std::thread::sleep;
 
 fn main() {
     let three_seconds = Duration::from_secs(3);
-    println!(&quot;I must sleep now.&quot;);
+    println!("I must sleep now.");
     sleep(three_seconds);
-    println!(&quot;Did I miss anything?&quot;);
+    println!("Did I miss anything?");
 }</code></pre></pre>
 <p>This will just print</p>
 <pre><code class="language-text">I must sleep now.
@@ -1015,11 +1015,11 @@ Did I miss anything?
 fn choose_city(place: &amp;UkrainePlaces) {
     use UkrainePlaces::*;
     match place {
-        Kiev =&gt; println!(&quot;You will live in Kiev&quot;),
-        Kharkiv =&gt; println!(&quot;You will live in Kharkiv&quot;),
+        Kiev =&gt; println!("You will live in Kiev"),
+        Kharkiv =&gt; println!("You will live in Kharkiv"),
         Chernobyl =&gt; unreachable!(),
-        Odesa =&gt; println!(&quot;You will live in Odesa&quot;),
-        Dnipro =&gt; println!(&quot;You will live in Dnipro&quot;),
+        Odesa =&gt; println!("You will live in Odesa"),
+        Dnipro =&gt; println!("You will live in Dnipro"),
     }
 }
 
@@ -1034,16 +1034,16 @@ fn main() {
     let true_or_false = true;
 
     match true_or_false {
-        true =&gt; println!(&quot;It's true&quot;),
-        false =&gt; println!(&quot;It's false&quot;),
-        true =&gt; println!(&quot;It's true&quot;), // Whoops, we wrote true again
+        true =&gt; println!("It's true"),
+        false =&gt; println!("It's false"),
+        true =&gt; println!("It's true"), // Whoops, we wrote true again
     }
 }</code></pre></pre>
 <p>It will say:</p>
 <pre><code class="language-text">warning: unreachable pattern
  --&gt; src/main.rs:7:9
   |
-7 |         true =&gt; println!(&quot;It's true&quot;),
+7 |         true =&gt; println!("It's true"),
   |         ^^^^
   |
 </code></pre>
@@ -1061,7 +1061,7 @@ fn main() {
     pub mod third_mod {
         pub fn print_a_country(input: &amp;mut Vec&lt;&amp;str&gt;) {
             println!(
-                &quot;The last country is {} inside the module {}&quot;,
+                "The last country is {} inside the module {}",
                 input.pop().unwrap(),
                 module_path!()
             );
@@ -1071,14 +1071,14 @@ fn main() {
 
 fn main() {
     use something::third_mod::*;
-    let mut country_vec = vec![&quot;Portugal&quot;, &quot;Czechia&quot;, &quot;Finland&quot;];
+    let mut country_vec = vec!["Portugal", "Czechia", "Finland"];
     
     // do some stuff
-    println!(&quot;Hello from file {}&quot;, file!());
+    println!("Hello from file {}", file!());
 
     // do some stuff
     println!(
-        &quot;On line {} we got the country {}&quot;,
+        "On line {} we got the country {}",
         line!(),
         country_vec.pop().unwrap()
     );
@@ -1086,7 +1086,7 @@ fn main() {
     // do some more stuff
 
     println!(
-        &quot;The next country is {} on line {} and column {}.&quot;,
+        "The next country is {} on line {} and column {}.",
         country_vec.pop().unwrap(),
         line!(),
         column!(),
@@ -1105,10 +1105,10 @@ The last country is Portugal inside the module rust_book::something::third_mod
 <p><code>cfg!</code></p>
 <p>We know that you can use attributes like <code>#[cfg(test)]</code> and <code>#[cfg(windows)]</code> to tell the compiler what to do in certain cases. When you have <code>test</code>, it will run the code when you run Rust under testing mode (if it's on your computer you type <code>cargo test</code>). And when you use <code>windows</code>, it will run the code if the user is using Windows. But maybe you just want to change one tiny bit of code depending on the operating system, etc. That's when this macro is useful. It returns a <code>bool</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let helpful_message = if cfg!(target_os = &quot;windows&quot;) { &quot;backslash&quot; } else { &quot;slash&quot; };
+    let helpful_message = if cfg!(target_os = "windows") { "backslash" } else { "slash" };
 
     println!(
-        &quot;...then in your hard drive, type the directory name followed by a {}. Then you...&quot;,
+        "...then in your hard drive, type the directory name followed by a {}. Then you...",
         helpful_message
     );
 }</code></pre></pre>
@@ -1129,10 +1129,10 @@ fn bring_number(should_run: bool) -&gt; u32 { // This function takes a bool as t
     if cfg!(test) &amp;&amp; should_run { // if it should run and has the configuration test, return 5
         5
     } else if should_run { // if it's not a test but it should run, print something. When you run a test it ignores println! statements
-        println!(&quot;Returning 5. This is not a test&quot;);
+        println!("Returning 5. This is not a test");
         5
     } else {
-        println!(&quot;This shouldn't run, returning 0.&quot;); // otherwise return 0
+        println!("This shouldn't run, returning 0."); // otherwise return 0
         0
     }
 }

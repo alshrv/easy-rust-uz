@@ -185,7 +185,7 @@
     let mut counter = 0; // set a counter to 0
     loop {
         counter +=1; // increase the counter by 1
-        println!(&quot;The counter is now: {}&quot;, counter);
+        println!("The counter is now: {}", counter);
         if counter == 5 { // stop when counter == 5
             break;
         }
@@ -198,23 +198,23 @@ The counter is now: 3
 The counter is now: 4
 The counter is now: 5
 </code></pre>
-<p>If you have a loop inside of a loop, you can give them names. With names, you can tell Rust which loop to <code>break</code> out of. Use <code>'</code> (called a &quot;tick&quot;) and a <code>:</code> to give it a name:</p>
+<p>If you have a loop inside of a loop, you can give them names. With names, you can tell Rust which loop to <code>break</code> out of. Use <code>'</code> (called a "tick") and a <code>:</code> to give it a name:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let mut counter = 0;
     let mut counter2 = 0;
-    println!(&quot;Now entering the first loop.&quot;);
+    println!("Now entering the first loop.");
 
     'first_loop: loop {
         // Give the first loop a name
         counter += 1;
-        println!(&quot;The counter is now: {}&quot;, counter);
+        println!("The counter is now: {}", counter);
         if counter &gt; 9 {
             // Starts a second loop inside this loop
-            println!(&quot;Now entering the second loop.&quot;);
+            println!("Now entering the second loop.");
 
             'second_loop: loop {
                 // now we are inside 'second_loop
-                println!(&quot;The second counter is now: {}&quot;, counter2);
+                println!("The second counter is now: {}", counter2);
                 counter2 += 1;
                 if counter2 == 3 {
                     break 'first_loop; // Break out of 'first_loop so we can exit the program
@@ -246,7 +246,7 @@ The second counter is now: 2
 
     while counter &lt; 5 {
         counter +=1;
-        println!(&quot;The counter is now: {}&quot;, counter);
+        println!("The counter is now: {}", counter);
     }
 }</code></pre></pre>
 <p>A <code>for</code> loop lets you tell Rust what to do each time. But in a <code>for</code> loop, the loop stops after a certain number of times. <code>for</code> loops use <strong>ranges</strong> very often. You use <code>..</code> and <code>..=</code> to create a range.</p>
@@ -256,11 +256,11 @@ The second counter is now: 2
 </ul>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for number in 0..3 {
-        println!(&quot;The number is: {}&quot;, number);
+        println!("The number is: {}", number);
     }
 
     for number in 0..=3 {
-        println!(&quot;The next number is: {}&quot;, number);
+        println!("The next number is: {}", number);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -276,7 +276,7 @@ The next number is: 3
 <p>If you don't need a variable name, use <code>_</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for _ in 0..3 {
-        println!(&quot;Printing the same thing three times&quot;);
+        println!("Printing the same thing three times");
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -288,7 +288,7 @@ Printing the same thing three times
 <p>And actually, if you give a variable name and don't use it, Rust will tell you:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     for number in 0..3 {
-        println!(&quot;Printing the same thing three times&quot;);
+        println!("Printing the same thing three times");
     }
 }</code></pre></pre>
 <p>This prints the same thing as above. The program compiles fine, but Rust will remind you that you didn't use <code>number</code>:</p>
@@ -298,7 +298,7 @@ Printing the same thing three times
 2 |     for number in 0..3 {
   |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_number`
 </code></pre>
-<p>Rust suggests writing <code>_number</code> instead of <code>_</code>. Putting <code>_</code> in front of a variable name means &quot;maybe I will use it later&quot;. But using just <code>_</code> means &quot;I don't care about this variable at all&quot;. So you can put <code>_</code> in front of variable names if you will use them later and don't want the compiler to tell you about them.</p>
+<p>Rust suggests writing <code>_number</code> instead of <code>_</code>. Putting <code>_</code> in front of a variable name means "maybe I will use it later". But using just <code>_</code> means "I don't care about this variable at all". So you can put <code>_</code> in front of variable names if you will use them later and don't want the compiler to tell you about them.</p>
 <p>You can also use <code>break</code> to return a value. You write the value right after <code>break</code> and use a <code>;</code>. Here is an example with a <code>loop</code> and a break that gives <code>my_number</code> its value.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let mut counter = 5;
@@ -308,22 +308,22 @@ Printing the same thing three times
             break counter;
         }
     };
-    println!(&quot;{}&quot;, my_number);
+    println!("{}", my_number);
 }</code></pre></pre>
-<p>This prints <code>56</code>. <code>break counter;</code> means &quot;break and return the value of counter&quot;. And because the whole block starts with <code>let</code>, <code>my_number</code> gets the value.</p>
+<p>This prints <code>56</code>. <code>break counter;</code> means "break and return the value of counter". And because the whole block starts with <code>let</code>, <code>my_number</code> gets the value.</p>
 <p>Now that we know how to use loops, here is a better solution to our <code>match</code> problem with colours from before. It is a better solution because we want to compare everything, and a <code>for</code> loop looks at every item.</p>
 <pre><pre class="playground"><code class="language-rust">fn match_colours(rbg: (i32, i32, i32)) {
-    println!(&quot;Comparing a colour with {} red, {} blue, and {} green:&quot;, rbg.0, rbg.1, rbg.2);
-    let new_vec = vec![(rbg.0, &quot;red&quot;), (rbg.1, &quot;blue&quot;), (rbg.2, &quot;green&quot;)]; // Put the colours in a vec. Inside are tuples with the colour names
+    println!("Comparing a colour with {} red, {} blue, and {} green:", rbg.0, rbg.1, rbg.2);
+    let new_vec = vec![(rbg.0, "red"), (rbg.1, "blue"), (rbg.2, "green")]; // Put the colours in a vec. Inside are tuples with the colour names
     let mut all_have_at_least_10 = true; // Start with true. We will set it to false if one colour is less than 10
     for item in new_vec {
         if item.0 &lt; 10 {
             all_have_at_least_10 = false; // Now it's false
-            println!(&quot;Not much {}.&quot;, item.1) // And we print the colour name.
+            println!("Not much {}.", item.1) // And we print the colour name.
         }
     }
     if all_have_at_least_10 { // Check if it's still true, and print if true
-        println!(&quot;Each colour has at least 10.&quot;)
+        println!("Each colour has at least 10.")
     }
     println!(); // Add one more line
 }

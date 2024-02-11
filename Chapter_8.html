@@ -188,94 +188,94 @@ Unsigned integerlar: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>
 <p>i yoki u dan keyingi raqam raqam uchun bitlar sonini bildiradi, bundan kelib chiqadiki bitlar qanchalik kotta bo'lsa raqamlar ham shunchalik kotta bo'ladi. 8 bit = bir byte, shuning uchun <code>i8</code> bir byte, <code>i64</code> 8 byte, va hokazo. Kattaroq o'lchamdagi raqamlar turlari kattaroq raqamlarni o'z ichiga olishi mumkin. Misol uchun, <code>u8</code>ga 255gacha son sig'adi, lekin <code>u16</code> ga esa 65535. va <code>u128</code>ga shunday songacha sig'adi 340282366920938463463374607431768211455.</p>
 <p><code>isize</code> va <code>usize</code> nima? Bu sizning kompiyuteringiz turidagi bitlar sonini bildiradi. (Kompiyuteringizdagi bitlar soni kompiyuteringiz <strong>architecture</strong> deb ataladi.) Shunday qilib <code>isize</code> va <code>usize</code> 32-bit lik kompiyuterda <code>i32</code>dek yoki <code>u32</code>dek, va <code>isize</code> va <code>usize</code> 64-bit lik kompiyuterda  <code>i64</code> va <code>u64</code>.</p>
 <p>Turli hildagi integerlar qilishning sabablari bir nechta. Ulardan biri esa kompiyuterning ishlashi: kichikroq bayt soni tezroq qayta ishlanadi. Misol uchun, -10 soni <code>i8</code> da <code>11110110</code> bunday saqlanadi, lekin <code>i128</code>da esa u <code>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110110</code> bunday saqlanadi. Ammo bu yerda boshqa foydalanish usullari mavjud:</p>
-<p>Characters in Rust are called <code>char</code>. Every <code>char</code> has a number: the letter <code>A</code> is number 65, while the character <code>友</code> (&quot;friend&quot; in Chinese) is number 21451. The list of numbers is called &quot;Unicode&quot;. Unicode uses smaller numbers for characters that are used more, like A through Z, or digits 0 through 9, or space.</p>
+<p>Rustda belgilar <code>char</code> deb nomlanadi. Har bir <code>char</code> ning alohida raqami bor: <code>A</code> harfining raqami 65, Shuningdek bu belgi <code>友</code> ("do'st" Xitoychasiga) raqami 21451. Raqamlarning royhati "Unicode" deb ataladi. Unicode ko'p ishlatiladigan belgilarga kichikroq raqamlar qoyadi, Misol uchun A dan Zgacha, yoki raqamlar 0 dan 9 gacha, yoki space.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let first_letter = 'A';
-    let space = ' '; // A space inside ' ' is also a char
-    let other_language_char = 'Ꮔ'; // Thanks to Unicode, other languages like Cherokee display just fine too
-    let cat_face = '😺'; // Emojis are chars too
+    let birinchi_belgi = 'A';
+    let space = ' '; // Bosh joyning ichidagi ' ' ham char
+    let boshqa_tillar = 'Ꮔ'; // Unicodega rahmat, Cherokee dek boshqa tillar ham ekannga yaxshi chiqadi
+    let cat_face = '😺'; // Emojilar ham char hisoblanadi
 }</code></pre></pre>
-<p>The characters that are used most have numbers less than 256, and they can fit into a <code>u8</code>. Remember, a <code>u8</code> is 0 plus all the numbers up to 255, for 256 in total. This means that Rust can safely <strong>cast</strong> a <code>u8</code> into a <code>char</code>, using <code>as</code>. (&quot;Cast <code>u8</code> as <code>char</code>&quot; means &quot;pretend <code>u8</code> is a <code>char</code>&quot;)</p>
-<p>Casting with <code>as</code> is useful because Rust is very strict. It always needs to know the type, and won't let you use two different types together even if they are both integers. For example, this will not work:</p>
-<pre><pre class="playground"><code class="language-rust">fn main() { // main() is where Rust programs start to run. Code goes inside {} (curly brackets)
+<p>Ko'p belgilar uchun ishlatiladigan raqamlar 256dan kichik bo'ladi, va ular <code>u8</code> uchun mos keladi. Shuni yodda tutingki, <code>u8</code> 0dan 255gacha bo'lgan barcha mustab sonlar, umumiy 256ta bo'ladi. Bu shuni anglatadiki Rust xafsiz <strong>cast</strong> qila oladi <code>u8</code>ni <code>char</code>ga, <code>as</code> dan foydalanib. ("Cast <code>u8</code> as <code>char</code>" shuni anglatadiki "Goyoki <code>u8</code> <code>char</code>dek")</p>
+<p><code>as</code> bilan cast qilish foydali chunki Rust juda ham talabchan. U har doim o'zgaruvchi turini bilishi kerak, va u hech qachon ikkita turni birga ishlatishga yo'l qo'ymaydi, ikkalasi integer bo'lgan holda ham. Misol uchun bu ishlamaydi.</p>
+<pre><pre class="playground"><code class="language-rust">fn main() { // main() bu Rust ilovasi ishga tushadigan joy. Ko'd {} (Jingalak qavslar) ichida yoziladi 
 
-    let my_number = 100; // We didn't write a type of integer,
-                         // so Rust chooses i32. Rust always
-                         // chooses i32 for integers if you don't
-                         // tell it to use a different type
+    let my_number = 100; // Biz integerning turini yozmadik,
+                         // Shunday qilib Rust i32 ni tanladi.
+                         // Rust har doim i32 ni tanlaydi agar siz
+                         // unga qanday turdan foydalanishn aytmasangiz
 
-    println!(&quot;{}&quot;, my_number as char); // ⚠️
+    println!("{}", my_number as char); // ⚠️
 }</code></pre></pre>
-<p>Here is the reason:</p>
+<p>Buning sababi:</p>
 <pre><code class="language-text">error[E0604]: only `u8` can be cast as `char`, not `i32`
  --&gt; src\main.rs:3:20
   |
-3 |     println!(&quot;{}&quot;, my_number as char);
+3 |     println!("{}", my_number as char);
   |                    ^^^^^^^^^^^^^^^^^
 </code></pre>
-<p>Fortunately we can easily fix this with <code>as</code>. We can't cast <code>i32</code> as a <code>char</code>, but we can cast an <code>i32</code> as a <code>u8</code>. And then we can do the same from <code>u8</code> to <code>char</code>. So in one line we use <code>as</code> to make my_number a <code>u8</code>, and again to make it a <code>char</code>. Now it will compile:</p>
+<p>Yaxshiyamki biz buni onsongina <code>as</code> bilan tog'irlay olamiz. Biz <code>i32</code> ni <code>char</code> ga o'gira olmaymiz, lekin biz <code>i32</code> ni <code>u8</code> ga o'gira olamiz. Undan so'ng biz huddi shunday qilib <code>u8</code>ni <code>char</code> ga o'giramiz. Shunday qilib biz bir qatorning o'zida <code>i32</code> ni 'u8'ga va uni <code>char</code> ga aylantirdik. Eni esa bu kompilyatsiya bo'ladi:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_number = 100;
-    println!(&quot;{}&quot;, my_number as u8 as char);
+    println!("{}", my_number as u8 as char);
 }</code></pre></pre>
-<p>It prints <code>d</code> because that is the <code>char</code> in place 100.</p>
-<p>The easier way, however, is just to tell Rust that <code>my_number</code> is a <code>u8</code>. Here's how you do it:</p>
+<p>Bu <code>d</code> ni chop etadi chunki ASCII jadvalida 100 chi bo'lib <code>d</code> turadi.</p>
+<p>Osonroq usuli shunki, shunchaki Rustga <code>my_number</code> <code>u8</code> turida ekanligini aytish. Buni qanday bajarasiz:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_number: u8 = 100; //  change my_number to my_number: u8
-    println!(&quot;{}&quot;, my_number as char);
+    let my_number: u8 = 100; //  my_number ni my_number: u8 ga ozgartirish
+    println!("{}", my_number as char);
 }</code></pre></pre>
-<p>So those are two reasons for all the different number types in Rust. Here is another reason: <code>usize</code> is the size that Rust uses for <em>indexing</em>. (Indexing means &quot;which item is first&quot;, &quot;which item is second&quot;, etc.) <code>usize</code> is the best size for indexing because:</p>
+<p>Shunday qilib Rustda raqamlarning har-xil turi borligiga ikkita sabab bor. Mana boshqa bir sabab: <code>usize</code> shunday turki Rust uni <em>indexing</em> uchun ishlatadi. (Indexing shuni anglatadiki "qaysi element birinchi", "qaysi element ikkinchi", va boshqalar.) <code>usize</code> indexlash uchun eng yaxshi olchamdir chunki:</p>
 <ul>
-<li>An index can't be negative, so it needs to be a number with a u</li>
-<li>It should be big, because sometimes you need to index many things, but</li>
-<li>It can't be a u64 because 32-bit computers can't use u64.</li>
+<li>Index manfiy bo'la olmaydi, shuning uchun unda u bo'lishi kerak</li>
+<li>U katta bo'lishi kerak, chunki siz bir xilda ko'p narsalarni indexlashingiz kerak bo'lib qoladi, lekin</li>
+<li>U <code>u64</code> bo'la olmaydi chunki 32-bit lik kompiyuter <code>u64</code> ni o'qiy olmaydi.</li>
 </ul>
-<p>So Rust uses <code>usize</code> so that your computer can get the biggest number for indexing that it can read.</p>
-<p>Let's learn some more about <code>char</code>. You saw that a <code>char</code> is always one character, and uses <code>''</code> instead of <code>&quot;&quot;</code>.</p>
-<p>All <code>chars</code> use 4 bytes of memory, since 4 bytes are enough to hold any kind of character:</p>
+<p>Sizning kompiyuteringiz o'qiy oladigan eng katta sonni olish uchun Rust <code>usize</code> ni ishlatadi.</p>
+<p>Keling <code>char</code> haqida ko'proq bilib olamiz. O'zingiz ko'rganingizdek <code>char</code> faqat bir belgidan tashkil topadi, va u <code>''</code> dan foydalanadi <code>""</code> ni o'rniga.</p>
+<p>Hamma <code>charlar</code> xotiradan 4 byte joy oladi, 4 byte xotira har qanday belgini saqlab turish uchun yetadi:</p>
 <ul>
-<li>Basic letters and symbols usually need 1 out of 4 bytes: <code>a b 1 2 + - = $ @</code></li>
-<li>Other letters like German Umlauts or accents need 2 out of 4 bytes: <code>ä ö ü ß è é à ñ</code></li>
-<li>Korean, Japanese or Chinese characters need 3 or 4 bytes: <code>国 안 녕</code></li>
+<li>Asosiy harflar va belgilar odatda 4 bytedan 1 byte joy talab qiladi: <code>a b 1 2 + - = $ @</code></li>
+<li>Boshqa Nemis Umlautlari kabi boshqa belgilar 4 bytedan 2 byte joy talab qiladi: <code>ä ö ü ß è é à ñ</code></li>
+<li>Koreys, Japon yoki Xitoy belgilari uchun 3 yoki 4 bytes kerak: <code>国 안 녕</code></li>
 </ul>
-<p>When using characters as part of a string, the string is encoded to use the least amount of memory needed for each character.</p>
-<p>We can use <code>.len()</code> to see this for ourselves:</p>
+<p>Qachonki biz belgilarni stringning(satrning) bir qismi qilib ishlatayotganimizda, string char ning xotiradagi eng kam joyini olish uchun dasturlangan.</p>
+<p>Buni o'zingiz guvoxi bo'lishingiz uchun <code>.len</code> dan foydalanishingiz mumkin:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    println!(&quot;Size of a char: {}&quot;, std::mem::size_of::&lt;char&gt;()); // 4 bytes
-    println!(&quot;Size of string containing 'a': {}&quot;, &quot;a&quot;.len()); // .len() gives the size of the string in bytes
-    println!(&quot;Size of string containing 'ß': {}&quot;, &quot;ß&quot;.len());
-    println!(&quot;Size of string containing '国': {}&quot;, &quot;国&quot;.len());
-    println!(&quot;Size of string containing '𓅱': {}&quot;, &quot;𓅱&quot;.len());
+    println!("Charning o'lchami {}", std::mem::size_of::&lt;char&gt;()); // 4 byte
+    println!("Stringning o'lchami 'a': {}", "a".len()); // .len() string o'lchamini bytelarda ifoda ettiradi
+    println!("Stringning o'lchami 'ß': {}", "ß".len());
+    println!("Stringning o'lchami '国': {}", "国".len());
+    println!("Stringning o'lchami '𓅱': {}", "𓅱".len());
 }</code></pre></pre>
-<p>This prints:</p>
-<pre><code class="language-text">Size of a char: 4
-Size of string containing 'a': 1
-Size of string containing 'ß': 2
-Size of string containing '国': 3
-Size of string containing '𓅱': 4
+<p>Shunday chiqadi:</p>
+<pre><code class="language-text">Charning o'lchami 4
+Stringning o'lchami 'a': 1
+Stringning o'lchami 'ß': 2
+Stringning o'lchami '国': 3
+Stringning o'lchami '𓅱': 4
 </code></pre>
-<p>You can see that <code>a</code> is one byte, the German <code>ß</code> is two, the Japanese <code>国</code> is three, and the ancient Egyptian <code>𓅱</code> is 4 bytes.</p>
+<p>Ko'rishingiz mumkinki, a - bir bayt, nemischa ß - ikkita, yaponcha - uch, qadimgi Misr 𓅱 - 4 bayt.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let slice = &quot;Hello!&quot;;
-    println!(&quot;Slice is {} bytes.&quot;, slice.len());
-    let slice2 = &quot;안녕!&quot;; // Korean for &quot;hi&quot;
-    println!(&quot;Slice2 is {} bytes.&quot;, slice2.len());
+    let slice = "Hello!";
+    println!("Slice bu {} bytes.", slice.len());
+    let slice2 = "안녕!"; // Korean for "hi"
+    println!("Slice2 bu {} bytes.", slice2.len());
 }</code></pre></pre>
-<p>This prints:</p>
-<pre><code class="language-text">Slice is 6 bytes.
-Slice2 is 7 bytes.
+<p>Bunday chiqadi:</p>
+<pre><code class="language-text">Slice bu 6 bytes.
+Slice2 bu 7 bytes.
 </code></pre>
-<p><code>slice</code> is 6 characters in length and 6 bytes, but <code>slice2</code> is 3 characters in length and 7 bytes.</p>
-<p>If <code>.len()</code> gives the size in bytes, what about the size in characters? We will learn about these methods later, but you can just remember that <code>.chars().count()</code> will do it. <code>.chars().count()</code> turns what you wrote into characters and then counts how many there are.</p>
+<p><code>slice</code> 6ta belgidan tashkil topgan va 6 byte, lekin <code>slice2</code> 3ta belgidan tashkil topgan va 7 byte.</p>
+<p>Agar <code>.len()</code> o'lchamlarni bytelarda bersa, qanday qilib belgilarning uzungligini topishimiz mumkin? Biz bu methodlarni keyinroq o'rganamiz, lekin  siz <code>.chars().count()</code> qilishini yodda tuting. <code>.chars().count()</code> siz yozgan narsalarni belgilarga aylantiradi va uni sanaydi.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let slice = &quot;Hello!&quot;;
-    println!(&quot;Slice is {} bytes and also {} characters.&quot;, slice.len(), slice.chars().count());
-    let slice2 = &quot;안녕!&quot;;
-    println!(&quot;Slice2 is {} bytes but only {} characters.&quot;, slice2.len(), slice2.chars().count());
+    let slice = "Hello!";
+    println!("Slice bu {} byte va {}ta belgi.", slice.len(), slice.chars().count());
+    let slice2 = "안녕!";
+    println!("Slice2 bu {} byte lekin faqatgina {}ta belgi.", slice2.len(), slice2.chars().count());
 }</code></pre></pre>
-<p>This prints:</p>
-<pre><code class="language-text">Slice is 6 bytes and also 6 characters.
-Slice2 is 7 bytes but only 3 characters.
+<p>Bunday chiqadi:</p>
+<pre><code class="language-text">Slice bu 6 byte va 6ta belgi..
+Slice2 bu 7 byte lekin faqatgina 3ta belgi.
 </code></pre>
 
                     </main>

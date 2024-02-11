@@ -176,15 +176,15 @@
                         <h2 id="types-of-str"><a class="header" href="#types-of-str">Types of &amp;str</a></h2>
 <p>There is more than one type of <code>&amp;str</code>. We have:</p>
 <ul>
-<li>String literals: you make these when you write <code>let my_str = &quot;I am a &amp;str&quot;</code>. They last for the whole program, because they are written directly into the binary. They have the type <code>&amp;'static str</code>. <code>'</code> means its lifetime, and string literal have a lifetime called <code>static</code>.</li>
+<li>String literals: you make these when you write <code>let my_str = "I am a &amp;str"</code>. They last for the whole program, because they are written directly into the binary. They have the type <code>&amp;'static str</code>. <code>'</code> means its lifetime, and string literal have a lifetime called <code>static</code>.</li>
 <li>Borrowed str: This is the regular <code>&amp;str</code> form without a <code>static</code> lifetime. If you create a <code>String</code> and get a reference to it, Rust will convert it to a <code>&amp;str</code> when you need it. For example:</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust">fn prints_str(my_str: &amp;str) { // it can use &amp;String like a &amp;str
-    println!(&quot;{}&quot;, my_str);
+    println!("{}", my_str);
 }
 
 fn main() {
-    let my_string = String::from(&quot;I am a string&quot;);
+    let my_string = String::from("I am a string");
     prints_str(&amp;my_string); // we give prints_str a &amp;String
 }</code></pre></pre>
 <p>So what is a lifetime? We will learn that now.</p>

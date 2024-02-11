@@ -184,8 +184,8 @@
 
 fn main() {
     let papa_doc = Person { // create variable papa_doc
-        name: &quot;Papa Doc&quot;.to_string(),
-        real_name: &quot;Clarence&quot;.to_string(),
+        name: "Papa Doc".to_string(),
+        real_name: "Clarence".to_string(),
         height: 170,
         happiness: false
     };
@@ -197,7 +197,7 @@ fn main() {
         happiness: d
     } = papa_doc;
 
-    println!(&quot;They call him {} but his real name is {}. He is {} cm tall and is he happy? {}&quot;, a, b, c, d);
+    println!("They call him {} but his real name is {}. He is {} cm tall and is he happy? {}", a, b, c, d);
 }</code></pre></pre>
 <p>This prints: <code>They call him Papa Doc but his real name is Clarence. He is 170 cm tall and is he happy? false</code></p>
 <p>You can see that it's backwards. First we say <code>let papa_doc = Person { fields }</code> to create the struct. Then we say <code>let Person { fields } = papa_doc</code> to destructure it.</p>
@@ -230,14 +230,14 @@ fn process_city_values(city: &amp;City) {
     } = city;
         // now we have the values to use separately
     let two_names = vec![name, name_before];
-    println!(&quot;The city's two names are {:?}&quot;, two_names);
+    println!("The city's two names are {:?}", two_names);
 }
 
 fn main() {
-    let tallinn = City::new(&quot;Tallinn&quot;.to_string(), &quot;Reval&quot;.to_string(), 426_538, 1219);
+    let tallinn = City::new("Tallinn".to_string(), "Reval".to_string(), 426_538, 1219);
     process_city_values(&amp;tallinn);
 }</code></pre></pre>
-<p>This prints <code>The city's two names are [&quot;Tallinn&quot;, &quot;Reval&quot;]</code>.</p>
+<p>This prints <code>The city's two names are ["Tallinn", "Reval"]</code>.</p>
 
                     </main>
 

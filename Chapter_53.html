@@ -218,8 +218,8 @@ struct Struct5 {}
 fn main() {
     let char1 = 'ん'; // and four variables. We don't use any of them but the compiler is quiet
     let char2 = ';';
-    let some_str = &quot;I'm just a regular &amp;str&quot;;
-    let some_vec = vec![&quot;I&quot;, &quot;am&quot;, &quot;just&quot;, &quot;a&quot;, &quot;vec&quot;];
+    let some_str = "I'm just a regular &amp;str";
+    let some_vec = vec!["I", "am", "just", "a", "vec"];
 }</code></pre></pre>
 <p>Of course, dealing with dead code and unused variables is important. But sometimes you want the compiler to be quiet for a while. Or you might need to show some code or teach people Rust and don't want to confuse them with compiler messages.</p>
 <p><code>#[derive(TraitName)]</code> lets you derive some traits for structs and enums that you create. This works with many common traits that can be automatically derived. Some like <code>Display</code> can't be automatically derived, because for <code>Display</code> you have to choose how to display:</p>
@@ -231,7 +231,7 @@ struct HoldsAString {
 
 fn main() {
     let my_string = HoldsAString {
-        the_string: &quot;Here I am!&quot;.to_string(),
+        the_string: "Here I am!".to_string(),
     };
 }</code></pre></pre>
 <p>The error message will tell you that.</p>
@@ -249,9 +249,9 @@ struct HoldsAString {
 
 fn main() {
     let my_string = HoldsAString {
-        the_string: &quot;Here I am!&quot;.to_string(),
+        the_string: "Here I am!".to_string(),
     };
-    println!(&quot;{:?}&quot;, my_string);
+    println!("{:?}", my_string);
 }</code></pre></pre>
 <p>Also, you can make a struct <code>Copy</code> if (and only if) its fields are all <code>Copy</code>. <code>HoldsAString</code> has <code>String</code> which is not <code>Copy</code> so you can't use <code>#[derive(Copy)]</code> for it. But for this struct you can:</p>
 <pre><pre class="playground"><code class="language-rust">#[derive(Clone, Copy)] // You also need Clone to use Copy
@@ -274,7 +274,7 @@ fn main() {
     does_nothing(number_and_bool); // If it didn't have copy, this would make an error
 }</code></pre></pre>
 <p><code>#[cfg()]</code> means configuration and tells the compiler whether to run code or not. You see it usually like this: <code>#[cfg(test)]</code>. You use that when writing test functions so that it knows not to run them unless you are testing. Then you can have tests next to your code but the compiler won't run them unless you tell it to.</p>
-<p>One other example using <code>cfg</code> is <code>#[cfg(target_os = &quot;windows&quot;)]</code>. With that you can tell the compiler to only run the code on Windows, or Linux, or anything else.</p>
+<p>One other example using <code>cfg</code> is <code>#[cfg(target_os = "windows")]</code>. With that you can tell the compiler to only run the code on Windows, or Linux, or anything else.</p>
 <p><code>#![no_std]</code> is an interesting attribute that tells Rust not to bring in the standard library. That means you don't have <code>Vec</code>, <code>String</code>, and anything else in the standard library. You will see this in code for small devices that don't have much memory or space.</p>
 <p>You can see many more attributes <a href="https://doc.rust-lang.org/reference/attributes.html">here</a>.</p>
 

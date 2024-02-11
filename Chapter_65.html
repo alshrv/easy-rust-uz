@@ -182,8 +182,8 @@ fn give_number(input: &amp;str) -&gt; Result&lt;i32, ()&gt; {
 }
 
 fn main() {
-    println!(&quot;{:?}&quot;, give_number(&quot;88&quot;));
-    println!(&quot;{:?}&quot;, give_number(&quot;5&quot;));
+    println!("{:?}", give_number("88"));
+    println!("{:?}", give_number("5"));
 }</code></pre></pre>
 <p>The compiler tells us exactly what to do:</p>
 <pre><code class="language-text">error[E0308]: mismatched types
@@ -205,8 +205,8 @@ fn give_number(input: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
 }
 
 fn main() {
-    println!(&quot;{:?}&quot;, give_number(&quot;88&quot;));
-    println!(&quot;{:?}&quot;, give_number(&quot;5&quot;));
+    println!("{:?}", give_number("88"));
+    println!("{:?}", give_number("5"));
 }</code></pre></pre>
 <p>Now the program works!</p>
 <pre><code class="language-text">Ok(88)
@@ -221,17 +221,17 @@ fn give_number(input: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
 }
 
 fn main() {
-    println!(&quot;{:?}&quot;, give_number(&quot;88&quot;)?);
-    println!(&quot;{:?}&quot;, give_number(&quot;5&quot;)?);
+    println!("{:?}", give_number("88")?);
+    println!("{:?}", give_number("5")?);
 }</code></pre></pre>
 <p>It says:</p>
 <pre><code class="language-text">error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `std::ops::Try`)
   --&gt; src\main.rs:8:22
    |
 7  | / fn main() {
-8  | |     println!(&quot;{:?}&quot;, give_number(&quot;88&quot;)?);
+8  | |     println!("{:?}", give_number("88")?);
    | |                      ^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a function that returns `()`
-9  | |     println!(&quot;{:?}&quot;, give_number(&quot;5&quot;)?);
+9  | |     println!("{:?}", give_number("5")?);
 10 | | }
    | |_- this function should return `Result` or `Option` to accept `?`
 </code></pre>
@@ -243,8 +243,8 @@ fn give_number(input: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
 }
 
 fn main() -&gt; Result&lt;(), ParseIntError&gt; {
-    println!(&quot;{:?}&quot;, give_number(&quot;88&quot;)?);
-    println!(&quot;{:?}&quot;, give_number(&quot;5&quot;)?);
+    println!("{:?}", give_number("88")?);
+    println!("{:?}", give_number("5")?);
     Ok(())
 }</code></pre></pre>
 <p>Don't forget the <code>Ok(())</code> at the end: this is very common in Rust. It means <code>Ok</code>, inside of which is <code>()</code>, which is our return value. Now it prints:</p>
@@ -263,10 +263,10 @@ fn main() -&gt; Result&lt;(), ParseIntError&gt; {
 use std::io::Write;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
-    let mut file = fs::File::create(&quot;myfilename.txt&quot;)?; // Create a file with this name.
+    let mut file = fs::File::create("myfilename.txt")?; // Create a file with this name.
                                                         // CAREFUL! If you have a file with this name already,
                                                         // it will delete everything in it.
-    file.write_all(b&quot;Let's put this in the file&quot;)?;     // Don't forget the b in front of &quot;. That's because files take bytes.
+    file.write_all(b"Let's put this in the file")?;     // Don't forget the b in front of ". That's because files take bytes.
     Ok(())
 }</code></pre></pre>
 <p>Then if you click on the new file <code>myfilename.txt</code>, it will say <code>Let's put this in the file</code>.</p>
@@ -275,10 +275,10 @@ fn main() -&gt; std::io::Result&lt;()&gt; {
 use std::io::Write;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
-    fs::File::create(&quot;myfilename.txt&quot;)?.write_all(b&quot;Let's put this in the file&quot;)?;
+    fs::File::create("myfilename.txt")?.write_all(b"Let's put this in the file")?;
     Ok(())
 }</code></pre></pre>
-<p>So this is saying &quot;Please try to create a file and check if it worked. If it did, then use <code>.write_all()</code> and then check if that worked.&quot;</p>
+<p>So this is saying "Please try to create a file and check if it worked. If it did, then use <code>.write_all()</code> and then check if that worked."</p>
 <p>And in fact, there is also a function that does both of these things together. It's called <code>std::fs::write</code>. Inside it you give it the file name you want, and the content you want to put inside. Again, careful! It will delete everything in that file if it already exists. Also, it lets you write a <code>&amp;str</code> without <code>b</code> in front, because of this:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -289,11 +289,11 @@ fn main() -&gt; std::io::Result&lt;()&gt; {
 <pre><pre class="playground"><code class="language-rust">use std::fs;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
-    fs::write(&quot;calvin_with_dad.txt&quot;, 
-&quot;Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
+    fs::write("calvin_with_dad.txt", 
+"Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
 Dad: Sure they did. In fact, those photographs *are* in color. It's just the *world* was black and white then.
 Calvin: Really?
-Dad: Yep. The world didn't turn color until sometimes in the 1930s...&quot;)?;
+Dad: Yep. The world didn't turn color until sometimes in the 1930s...")?;
 
     Ok(())
 }</code></pre></pre>
@@ -304,18 +304,18 @@ use std::fs::File;
 use std::io::Read; // this is to use the function .read_to_string()
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
-     fs::write(&quot;calvin_with_dad.txt&quot;, 
-&quot;Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
+     fs::write("calvin_with_dad.txt", 
+"Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
 Dad: Sure they did. In fact, those photographs *are* in color. It's just the *world* was black and white then.
 Calvin: Really?
-Dad: Yep. The world didn't turn color until sometimes in the 1930s...&quot;)?;
+Dad: Yep. The world didn't turn color until sometimes in the 1930s...")?;
 
 
-    let mut calvin_file = File::open(&quot;calvin_with_dad.txt&quot;)?; // Open the file we just made
+    let mut calvin_file = File::open("calvin_with_dad.txt")?; // Open the file we just made
     let mut calvin_string = String::new(); // This String will hold it
     calvin_file.read_to_string(&amp;mut calvin_string)?; // Read the file into it
 
-    calvin_string.split_whitespace().for_each(|word| print!(&quot;{} &quot;, word.to_uppercase())); // Do things with the String now
+    calvin_string.split_whitespace().for_each(|word| print!("{} ", word.to_uppercase())); // Do things with the String now
 
     Ok(())
 }</code></pre></pre>
@@ -341,7 +341,7 @@ FACT, THOSE PHOTOGRAPHS *ARE* IN COLOR. IT'S JUST THE *WORLD* WAS BLACK AND WHIT
 <span class="boring">}</span></code></pre></pre>
 <p>If you go to <a href="https://doc.rust-lang.org/std/fs/struct.OpenOptions.html">the page for OpenOptions</a>, you can see all the methods that you can choose from. Most take a <code>bool</code>:</p>
 <ul>
-<li><code>append()</code>: This means &quot;add to the content that's already there instead of deleting&quot;.</li>
+<li><code>append()</code>: This means "add to the content that's already there instead of deleting".</li>
 <li><code>create()</code>: This lets <code>OpenOptions</code> create a file.</li>
 <li><code>create_new()</code>: This means it will only create a file if it's not there already.</li>
 <li><code>read()</code>: Set this to <code>true</code> if you want it to be able to read a file.</li>
@@ -354,18 +354,18 @@ use std::fs;
 use std::fs::OpenOptions;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
-     fs::write(&quot;calvin_with_dad.txt&quot;, 
-&quot;Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
+     fs::write("calvin_with_dad.txt", 
+"Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
 Dad: Sure they did. In fact, those photographs *are* in color. It's just the *world* was black and white then.
 Calvin: Really?
-Dad: Yep. The world didn't turn color until sometimes in the 1930s...&quot;)?;
+Dad: Yep. The world didn't turn color until sometimes in the 1930s...")?;
 
-    let calvin_file = OpenOptions::new().write(true).create_new(true).open(&quot;calvin_with_dad.txt&quot;)?;
+    let calvin_file = OpenOptions::new().write(true).create_new(true).open("calvin_with_dad.txt")?;
 
     Ok(())
 }</code></pre></pre>
 <p>First we made an <code>OpenOptions</code> with <code>new</code> (always start with <code>new</code>). Then we gave it the ability to <code>write</code>. After that we set <code>create_new()</code> to <code>true</code>, and tried to open the file we made. It won't work, which is what we want:</p>
-<pre><code class="language-text">Error: Os { code: 80, kind: AlreadyExists, message: &quot;The file exists.&quot; }
+<pre><code class="language-text">Error: Os { code: 80, kind: AlreadyExists, message: "The file exists." }
 </code></pre>
 <p>Let's try using <code>.append()</code> so we can write to a file. To write to the file we can use <code>.write_all()</code>, which is a method that tries to write in everything you give it.</p>
 <p>Also, we will use the <code>write!</code> macro to do the same thing. You will remember this macro from when we did <code>impl Display</code> for our structs. This time we are using it on a file though instead of a buffer.</p>
@@ -374,21 +374,21 @@ use std::fs::OpenOptions;
 use std::io::Write;
 
 fn main() -&gt; std::io::Result&lt;()&gt; {
-    fs::write(&quot;calvin_with_dad.txt&quot;, 
-&quot;Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
+    fs::write("calvin_with_dad.txt", 
+"Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
 Dad: Sure they did. In fact, those photographs *are* in color. It's just the *world* was black and white then.
 Calvin: Really?
-Dad: Yep. The world didn't turn color until sometimes in the 1930s...&quot;)?;
+Dad: Yep. The world didn't turn color until sometimes in the 1930s...")?;
 
     let mut calvin_file = OpenOptions::new()
         .append(true) // Now we can write without deleting it
         .read(true)
-        .open(&quot;calvin_with_dad.txt&quot;)?;
-    calvin_file.write_all(b&quot;And it was a pretty grainy color for a while too.\n&quot;)?;
-    write!(&amp;mut calvin_file, &quot;That's really weird.\n&quot;)?;
-    write!(&amp;mut calvin_file, &quot;Well, truth is stranger than fiction.&quot;)?;
+        .open("calvin_with_dad.txt")?;
+    calvin_file.write_all(b"And it was a pretty grainy color for a while too.\n")?;
+    write!(&amp;mut calvin_file, "That's really weird.\n")?;
+    write!(&amp;mut calvin_file, "Well, truth is stranger than fiction.")?;
 
-    println!(&quot;{}&quot;, fs::read_to_string(&quot;calvin_with_dad.txt&quot;)?);
+    println!("{}", fs::read_to_string("calvin_with_dad.txt")?);
 
     Ok(())
 }</code></pre></pre>

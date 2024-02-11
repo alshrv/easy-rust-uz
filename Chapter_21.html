@@ -182,19 +182,19 @@
 <li>must only contain the same type.</li>
 </ul>
 <p>They are very fast, however.</p>
-<p>The type of an array is: <code>[type; number]</code>. For example, the type of <code>[&quot;One&quot;, &quot;Two&quot;]</code> is <code>[&amp;str; 2]</code>. This means that even these two arrays have different types:</p>
+<p>The type of an array is: <code>[type; number]</code>. For example, the type of <code>["One", "Two"]</code> is <code>[&amp;str; 2]</code>. This means that even these two arrays have different types:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let array1 = [&quot;One&quot;, &quot;Two&quot;]; // This one is type [&amp;str; 2]
-    let array2 = [&quot;One&quot;, &quot;Two&quot;, &quot;Five&quot;]; // But this one is type [&amp;str; 3]. Different type!
+    let array1 = ["One", "Two"]; // This one is type [&amp;str; 2]
+    let array2 = ["One", "Two", "Five"]; // But this one is type [&amp;str; 3]. Different type!
 }</code></pre></pre>
-<p>Here is a good tip: to know the type of a variable, you can &quot;ask&quot; the compiler by giving it bad instructions. For example:</p>
+<p>Here is a good tip: to know the type of a variable, you can "ask" the compiler by giving it bad instructions. For example:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let seasons = [&quot;Spring&quot;, &quot;Summer&quot;, &quot;Autumn&quot;, &quot;Winter&quot;];
-    let seasons2 = [&quot;Spring&quot;, &quot;Summer&quot;, &quot;Fall&quot;, &quot;Autumn&quot;, &quot;Winter&quot;];
+    let seasons = ["Spring", "Summer", "Autumn", "Winter"];
+    let seasons2 = ["Spring", "Summer", "Fall", "Autumn", "Winter"];
     seasons.ddd(); // ⚠️
     seasons2.thd(); // ⚠️ as well
 }</code></pre></pre>
-<p>The compiler says, &quot;What? There's no <code>.ddd()</code> method for seasons and no <code>.thd()</code> method for seasons 2 either!!&quot; as you can see:</p>
+<p>The compiler says, "What? There's no <code>.ddd()</code> method for seasons and no <code>.thd()</code> method for seasons 2 either!!" as you can see:</p>
 <pre><code class="language-text">error[E0599]: no method named `ddd` found for array `[&amp;str; 4]` in the current scope
  --&gt; src\main.rs:4:13
   |
@@ -210,15 +210,15 @@ error[E0599]: no method named `thd` found for array `[&amp;str; 5]` in the curre
 <p>So it tells you <code>method not found in `[&amp;str; 4]`</code>, which is the type.</p>
 <p>If you want an array with all the same value, you can declare it like this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_array = [&quot;a&quot;; 10];
-    println!(&quot;{:?}&quot;, my_array);
+    let my_array = ["a"; 10];
+    println!("{:?}", my_array);
 }</code></pre></pre>
-<p>This prints <code>[&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;]</code>.</p>
+<p>This prints <code>["a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]</code>.</p>
 <p>This method is used a lot to create buffers. For example, <code>let mut buffer = [0; 640]</code> creates an array of 640 zeroes. Then we can change zero to other numbers in order to add data.</p>
 <p>You can index (get) entries in an array with []. The first entry is [0], the second is [1], and so on.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_numbers = [0, 10, -20];
-    println!(&quot;{}&quot;, my_numbers[1]); // prints 10
+    println!("{}", my_numbers[1]); // prints 10
 }</code></pre></pre>
 <p>You can get a slice (a piece) of an array. First you need a &amp;, because the compiler doesn't know the size. Then you can use <code>..</code> to show the range.</p>
 <p>For example, let's use this array: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>.</p>
@@ -230,14 +230,14 @@ error[E0599]: no method named `thd` found for array `[&amp;str; 5]` in the curre
     let end_at_five = &amp;array_of_ten[..5];
     let everything = &amp;array_of_ten[..];
 
-    println!(&quot;Three to five: {:?}, start at two: {:?}, end at five: {:?}, everything: {:?}&quot;, three_to_five, start_at_two, end_at_five, everything);
+    println!("Three to five: {:?}, start at two: {:?}, end at five: {:?}, everything: {:?}", three_to_five, start_at_two, end_at_five, everything);
 }</code></pre></pre>
 <p>Remember that:</p>
 <ul>
 <li>Index numbers start at 0 (not 1)</li>
 <li>Index ranges are <strong>exclusive</strong> (they do not include the last number)</li>
 </ul>
-<p>So <code>[0..2]</code> means the first index and the second index (0 and 1). Or you can call it the &quot;zeroth and first&quot; index. It doesn't have the third item, which is index 2.</p>
+<p>So <code>[0..2]</code> means the first index and the second index (0 and 1). Or you can call it the "zeroth and first" index. It doesn't have the third item, which is index 2.</p>
 <p>You can also have an <strong>inclusive</strong> range, which means it includes the last number too. To do this, add <code>=</code> to write <code>..=</code> instead of <code>..</code>. So instead of <code>[0..2]</code> you can write <code>[0..=2]</code> if you want the first, second, and third item.</p>
 
                     </main>

@@ -174,7 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="-operatori"><a class="header" href="#-operatori">? operatori</a></h2>
-<p>There is an even shorter way to deal with <code>Result</code> (and <code>Option</code>), shorter than <code>match</code> and even shorter than <code>if let</code>. It is called the &quot;question mark operator&quot;, and is just <code>?</code>. After a function that returns a result, you can add <code>?</code>. This will:</p>
+<p>There is an even shorter way to deal with <code>Result</code> (and <code>Option</code>), shorter than <code>match</code> and even shorter than <code>if let</code>. It is called the "question mark operator", and is just <code>?</code>. After a function that returns a result, you can add <code>?</code>. This will:</p>
 <ul>
 <li>return what is inside the <code>Result</code> if it is <code>Ok</code></li>
 <li>pass the error back if it is <code>Err</code></li>
@@ -189,7 +189,7 @@ fn parse_str(input: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
 }
 
 fn main() {}</code></pre></pre>
-<p>This function takes a <code>&amp;str</code>. If it is <code>Ok</code>, it gives an <code>i32</code> wrapped in <code>Ok</code>. If it is an <code>Err</code>, it returns a <code>ParseIntError</code>. Then we try to parse the number, and add <code>?</code>. That means &quot;check if it is an error, and give what is inside the Result if it is okay&quot;. If it is not okay, it will return the error and end. But if it is okay, it will go to the next line. On the next line is the number inside of <code>Ok()</code>. We need to wrap it in <code>Ok</code> because the return is <code>Result&lt;i32, ParseIntError&gt;</code>, not <code>i32</code>.</p>
+<p>This function takes a <code>&amp;str</code>. If it is <code>Ok</code>, it gives an <code>i32</code> wrapped in <code>Ok</code>. If it is an <code>Err</code>, it returns a <code>ParseIntError</code>. Then we try to parse the number, and add <code>?</code>. That means "check if it is an error, and give what is inside the Result if it is okay". If it is not okay, it will return the error and end. But if it is okay, it will go to the next line. On the next line is the number inside of <code>Ok()</code>. We need to wrap it in <code>Ok</code> because the return is <code>Result&lt;i32, ParseIntError&gt;</code>, not <code>i32</code>.</p>
 <p>Now, we can try out our function. Let's see what it does with a vec of <code>&amp;str</code>s.</p>
 <pre><pre class="playground"><code class="language-rust">fn parse_str(input: &amp;str) -&gt; Result&lt;i32, std::num::ParseIntError&gt; {
     let parsed_number = input.parse::&lt;i32&gt;()?;
@@ -197,10 +197,10 @@ fn main() {}</code></pre></pre>
 }
 
 fn main() {
-    let str_vec = vec![&quot;Seven&quot;, &quot;8&quot;, &quot;9.0&quot;, &quot;nice&quot;, &quot;6060&quot;];
+    let str_vec = vec!["Seven", "8", "9.0", "nice", "6060"];
     for item in str_vec {
         let parsed = parse_str(item);
-        println!(&quot;{:?}&quot;, parsed);
+        println!("{:?}", parsed);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -210,10 +210,10 @@ Err(ParseIntError { kind: InvalidDigit })
 Err(ParseIntError { kind: InvalidDigit })
 Ok(6060)
 </code></pre>
-<p>How did we find <code>std::num::ParseIntError</code>? One easy way is to &quot;ask&quot; the compiler again.</p>
+<p>How did we find <code>std::num::ParseIntError</code>? One easy way is to "ask" the compiler again.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let failure = &quot;Not a number&quot;.parse::&lt;i32&gt;();
-    failure.rbrbrb(); // ⚠️ Compiler: &quot;What is rbrbrb()???&quot;
+    let failure = "Not a number".parse::&lt;i32&gt;();
+    failure.rbrbrb(); // ⚠️ Compiler: "What is rbrbrb()???"
 }</code></pre></pre>
 <p>The compiler doesn't understand, and says:</p>
 <pre><code class="language-text">error[E0599]: no method named `rbrbrb` found for enum `std::result::Result&lt;i32, std::num::ParseIntError&gt;` in the current scope
@@ -223,7 +223,7 @@ Ok(6060)
   |             ^^^^^^ method not found in `std::result::Result&lt;i32, std::num::ParseIntError&gt;`
 </code></pre>
 <p>So <code>std::result::Result&lt;i32, std::num::ParseIntError&gt;</code> is the signature we need.</p>
-<p>We don't need to write <code>std::result::Result</code> because <code>Result</code> is always &quot;in scope&quot; (in scope = ready to use). Rust does this for all the types we use a lot so we don't have to write <code>std::result::Result</code>, <code>std::collections::Vec</code>, etc.</p>
+<p>We don't need to write <code>std::result::Result</code> because <code>Result</code> is always "in scope" (in scope = ready to use). Rust does this for all the types we use a lot so we don't have to write <code>std::result::Result</code>, <code>std::collections::Vec</code>, etc.</p>
 <p>We aren't working with things like files yet, so the ? operator doesn't look too useful yet. But here is a useless but quick example that shows how you can use it on a single line. Instead of making an <code>i32</code> with <code>.parse()</code>, we'll do a lot more. We'll make an <code>u16</code>, then turn it to a <code>String</code>, then a <code>u32</code>, then to a <code>String</code> again, and finally to a <code>i32</code>.</p>
 <pre><pre class="playground"><code class="language-rust">use std::num::ParseIntError;
 
@@ -233,10 +233,10 @@ fn parse_str(input: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
 }
 
 fn main() {
-    let str_vec = vec![&quot;Seven&quot;, &quot;8&quot;, &quot;9.0&quot;, &quot;nice&quot;, &quot;6060&quot;];
+    let str_vec = vec!["Seven", "8", "9.0", "nice", "6060"];
     for item in str_vec {
         let parsed = parse_str(item);
-        println!(&quot;{:?}&quot;, parsed);
+        println!("{:?}", parsed);
     }
 }</code></pre></pre>
 <p>This prints the same thing, but this time we handled three <code>Result</code>s in a single line. Later on we will do this with files, because they always return <code>Result</code>s because many things can go wrong.</p>
@@ -244,13 +244,13 @@ fn main() {
 <h3 id="qachon-panic-va-unwrap-lar-yaxshi"><a class="header" href="#qachon-panic-va-unwrap-lar-yaxshi">Qachon panic va unwrap lar yaxshi</a></h3>
 <p>Rust has a <code>panic!</code> macro that you can use to make it panic. It is easy to use:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    panic!(&quot;Time to panic!&quot;);
+    panic!("Time to panic!");
 }</code></pre></pre>
-<p>The message <code>&quot;Time to panic!&quot;</code> displays when you run the program: <code>thread 'main' panicked at 'Time to panic!', src\main.rs:2:3</code></p>
+<p>The message <code>"Time to panic!"</code> displays when you run the program: <code>thread 'main' panicked at 'Time to panic!', src\main.rs:2:3</code></p>
 <p>You will remember that <code>src\main.rs</code> is the directory and file name, and <code>2:3</code> are the line and column numbers. With this information, you can find the code and fix it.</p>
 <p><code>panic!</code> is a good macro to use to make sure that you know when something changes. For example, this function called <code>prints_three_things</code> always prints index [0], [1], and [2] from a vector. It is okay because we always give it a vector with three items:</p>
 <pre><pre class="playground"><code class="language-rust">fn prints_three_things(vector: Vec&lt;i32&gt;) {
-    println!(&quot;{}, {}, {}&quot;, vector[0], vector[1], vector[2]);
+    println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
 
 fn main() {
@@ -260,7 +260,7 @@ fn main() {
 <p>It prints <code>8, 9, 10</code> and everything is fine.</p>
 <p>But imagine that later on we write more and more code, and forget that <code>my_vec</code> can only be three things. Now <code>my_vec</code> in this part has six things:</p>
 <pre><pre class="playground"><code class="language-rust">fn prints_three_things(vector: Vec&lt;i32&gt;) {
-  println!(&quot;{}, {}, {}&quot;, vector[0], vector[1], vector[2]);
+  println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
 
 fn main() {
@@ -270,9 +270,9 @@ fn main() {
 <p>No error happens, because [0] and [1] and [2] are all inside this longer <code>Vec</code>. But what if it was really important to only have three things? We wouldn't know that there was a problem because the program doesn't panic. We should have done this instead:</p>
 <pre><pre class="playground"><code class="language-rust">fn prints_three_things(vector: Vec&lt;i32&gt;) {
     if vector.len() != 3 {
-        panic!(&quot;my_vec must always have three items&quot;) // will panic if the length is not 3
+        panic!("my_vec must always have three items") // will panic if the length is not 3
     }
-    println!(&quot;{}, {}, {}&quot;, vector[0], vector[1], vector[2]);
+    println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
 
 fn main() {
@@ -283,9 +283,9 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust">    // ⚠️
 fn prints_three_things(vector: Vec&lt;i32&gt;) {
     if vector.len() != 3 {
-        panic!(&quot;my_vec must always have three items&quot;)
+        panic!("my_vec must always have three items")
     }
-    println!(&quot;{}, {}, {}&quot;, vector[0], vector[1], vector[2]);
+    println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
 
 fn main() {
@@ -302,51 +302,51 @@ fn main() {
 </ul>
 <p>Some examples:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_name = &quot;Loki Laufeyson&quot;;
+    let my_name = "Loki Laufeyson";
 
-    assert!(my_name == &quot;Loki Laufeyson&quot;);
-    assert_eq!(my_name, &quot;Loki Laufeyson&quot;);
-    assert_ne!(my_name, &quot;Mithridates&quot;);
+    assert!(my_name == "Loki Laufeyson");
+    assert_eq!(my_name, "Loki Laufeyson");
+    assert_ne!(my_name, "Mithridates");
 }</code></pre></pre>
 <p>This will do nothing, because all three assert macros are okay. (This is what we want)</p>
 <p>You can also add a message if you want.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_name = &quot;Loki Laufeyson&quot;;
+    let my_name = "Loki Laufeyson";
 
     assert!(
-        my_name == &quot;Loki Laufeyson&quot;,
-        &quot;{} should be Loki Laufeyson&quot;,
+        my_name == "Loki Laufeyson",
+        "{} should be Loki Laufeyson",
         my_name
     );
     assert_eq!(
-        my_name, &quot;Loki Laufeyson&quot;,
-        &quot;{} and Loki Laufeyson should be equal&quot;,
+        my_name, "Loki Laufeyson",
+        "{} and Loki Laufeyson should be equal",
         my_name
     );
     assert_ne!(
-        my_name, &quot;Mithridates&quot;,
-        &quot;You entered {}. Input must not equal Mithridates&quot;,
+        my_name, "Mithridates",
+        "You entered {}. Input must not equal Mithridates",
         my_name
     );
 }</code></pre></pre>
 <p>These messages will only display if the program panics. So if you run this:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_name = &quot;Mithridates&quot;;
+    let my_name = "Mithridates";
 
     assert_ne!(
-        my_name, &quot;Mithridates&quot;,
-        &quot;You enter {}. Input must not equal Mithridates&quot;,
+        my_name, "Mithridates",
+        "You enter {}. Input must not equal Mithridates",
         my_name
     );
 }</code></pre></pre>
 <p>It will display:</p>
 <pre><code class="language-text">thread 'main' panicked at 'assertion failed: `(left != right)`
-  left: `&quot;Mithridates&quot;`,
- right: `&quot;Mithridates&quot;`: You entered Mithridates. Input must not equal Mithridates', src\main.rs:4:5
+  left: `"Mithridates"`,
+ right: `"Mithridates"`: You entered Mithridates. Input must not equal Mithridates', src\main.rs:4:5
 </code></pre>
-<p>So it is saying &quot;you said that left != right, but left == right&quot;. And it displays our message that says <code>You entered Mithridates. Input must not equal Mithridates</code>.</p>
+<p>So it is saying "you said that left != right, but left == right". And it displays our message that says <code>You entered Mithridates. Input must not equal Mithridates</code>.</p>
 <p><code>unwrap</code> is also good when you are writing your program and you want it to crash when there is a problem. Later, when your code is finished it is good to change <code>unwrap</code> to something else that won't crash.</p>
-<p>You can also use <code>expect</code>, which is like <code>unwrap</code> but a bit better because you give it your own message. Textbooks usually give this advice: &quot;If you use <code>.unwrap()</code> a lot, at least use <code>.expect()</code> for better error messages.&quot;</p>
+<p>You can also use <code>expect</code>, which is like <code>unwrap</code> but a bit better because you give it your own message. Textbooks usually give this advice: "If you use <code>.unwrap()</code> a lot, at least use <code>.expect()</code> for better error messages."</p>
 <p>This will crash:</p>
 <pre><pre class="playground"><code class="language-rust">   // ⚠️
 fn get_fourth(input: &amp;Vec&lt;i32&gt;) -&gt; i32 {
@@ -362,7 +362,7 @@ fn main() {
 <p>Now we write our own message with <code>expect</code>:</p>
 <pre><pre class="playground"><code class="language-rust">   // ⚠️
 fn get_fourth(input: &amp;Vec&lt;i32&gt;) -&gt; i32 {
-    let fourth = input.get(3).expect(&quot;Input vector needs at least 4 items&quot;);
+    let fourth = input.get(3).expect("Input vector needs at least 4 items");
     *fourth
 }
 
@@ -372,8 +372,8 @@ fn main() {
 }</code></pre></pre>
 <p>It crashes again, but the error is better: <code>thread 'main' panicked at 'Input vector needs at least 4 items', src\main.rs:7:18</code>. <code>.expect()</code> is a little better than <code>.unwrap()</code> because of this, but it will still panic on <code>None</code>. Now here is an example of a bad practice, a function that tries to unwrap two times. It takes a <code>Vec&lt;Option&lt;i32&gt;&gt;</code>, so maybe each part will have a <code>Some&lt;i32&gt;</code> or maybe a <code>None</code>.</p>
 <pre><pre class="playground"><code class="language-rust">fn try_two_unwraps(input: Vec&lt;Option&lt;i32&gt;&gt;) {
-    println!(&quot;Index 0 is: {}&quot;, input[0].unwrap());
-    println!(&quot;Index 1 is: {}&quot;, input[1].unwrap());
+    println!("Index 0 is: {}", input[0].unwrap());
+    println!("Index 1 is: {}", input[1].unwrap());
 }
 
 fn main() {
@@ -382,8 +382,8 @@ fn main() {
 }</code></pre></pre>
 <p>The message is: <code>thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', src\main.rs:2:32</code>. We're not sure if it was the first <code>.unwrap()</code> or the second <code>.unwrap()</code> until we check the line. It would be better to check the length and also to not unwrap. But with <code>.expect()</code> at least it will be a <em>little</em> better. Here it is with <code>.expect()</code>:</p>
 <pre><pre class="playground"><code class="language-rust">fn try_two_unwraps(input: Vec&lt;Option&lt;i32&gt;&gt;) {
-    println!(&quot;Index 0 is: {}&quot;, input[0].expect(&quot;The first unwrap had a None!&quot;));
-    println!(&quot;Index 1 is: {}&quot;, input[1].expect(&quot;The second unwrap had a None!&quot;));
+    println!("Index 0 is: {}", input[0].expect("The first unwrap had a None!"));
+    println!("Index 1 is: {}", input[1].expect("The second unwrap had a None!"));
 }
 
 fn main() {
@@ -410,10 +410,10 @@ fn main() {
 
     let fourth = my_vec.get(3).unwrap_or(&amp;0); // If .get doesn't work, we will make the value &amp;0.
                                               // .get returns a reference, so we need &amp;0 and not 0
-                                              // You can write &quot;let *fourth&quot; with a * if you want fourth to be
+                                              // You can write "let *fourth" with a * if you want fourth to be
                                               // a 0 and not a &amp;0, but here we just print so it doesn't matter
 
-    println!(&quot;{}&quot;, fourth);
+    println!("{}", fourth);
 }</code></pre></pre>
 <p>This prints <code>0</code> because <code>.unwrap_or(&amp;0)</code> gives a 0 even if it is a <code>None</code>.</p>
 

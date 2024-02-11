@@ -206,8 +206,8 @@ fn create_skystate(time: i32) -&gt; ThingsInTheSky {
 // With this function we can match against the two choices in ThingsInTheSky.
 fn check_skystate(state: &amp;ThingsInTheSky) {
     match state {
-        ThingsInTheSky::Sun =&gt; println!(&quot;I can see the sun!&quot;),
-        ThingsInTheSky::Stars =&gt; println!(&quot;I can see the stars!&quot;)
+        ThingsInTheSky::Sun =&gt; println!("I can see the sun!"),
+        ThingsInTheSky::Stars =&gt; println!("I can see the stars!")
     }
 }
 
@@ -225,15 +225,15 @@ fn main() {
 
 fn create_skystate(time: i32) -&gt; ThingsInTheSky {
     match time {
-        6..=18 =&gt; ThingsInTheSky::Sun(String::from(&quot;I can see the sun!&quot;)), // Write the strings here
-        _ =&gt; ThingsInTheSky::Stars(String::from(&quot;I can see the stars!&quot;)),
+        6..=18 =&gt; ThingsInTheSky::Sun(String::from("I can see the sun!")), // Write the strings here
+        _ =&gt; ThingsInTheSky::Stars(String::from("I can see the stars!")),
     }
 }
 
 fn check_skystate(state: &amp;ThingsInTheSky) {
     match state {
-        ThingsInTheSky::Sun(description) =&gt; println!(&quot;{}&quot;, description), // Give the string the name description so we can use it
-        ThingsInTheSky::Stars(n) =&gt; println!(&quot;{}&quot;, n), // Or you can name it n. Or anything else - it doesn't matter
+        ThingsInTheSky::Sun(description) =&gt; println!("{}", description), // Give the string the name description so we can use it
+        ThingsInTheSky::Stars(n) =&gt; println!("{}", n), // Or you can name it n. Or anything else - it doesn't matter
     }
 }
 
@@ -243,7 +243,7 @@ fn main() {
     check_skystate(&amp;skystate); // Give it a reference so it can read the variable skystate
 }</code></pre></pre>
 <p>This prints the same thing: <code>I can see the sun!</code></p>
-<p>You can also &quot;import&quot; an enum so you don't have to type so much. Here's an example where we have to type <code>Mood::</code> every time we match on our mood:</p>
+<p>You can also "import" an enum so you don't have to type so much. Here's an example where we have to type <code>Mood::</code> every time we match on our mood:</p>
 <pre><pre class="playground"><code class="language-rust">enum Mood {
     Happy,
     Sleepy,
@@ -264,7 +264,7 @@ fn match_mood(mood: &amp;Mood) -&gt; i32 {
 fn main() {
     let my_mood = Mood::NotBad;
     let happiness_level = match_mood(&amp;my_mood);
-    println!(&quot;Out of 1 to 10, my happiness is {}&quot;, happiness_level);
+    println!("Out of 1 to 10, my happiness is {}", happiness_level);
 }</code></pre></pre>
 <p>It prints <code>Out of 1 to 10, my happiness is 7</code>. Let's import so we can type less. To import everything, write <code>*</code>. Note: it's the same key as <code>*</code> for dereferencing but is completely different.</p>
 <pre><pre class="playground"><code class="language-rust">enum Mood {
@@ -288,7 +288,7 @@ fn match_mood(mood: &amp;Mood) -&gt; i32 {
 fn main() {
     let my_mood = Mood::Happy;
     let happiness_level = match_mood(&amp;my_mood);
-    println!(&quot;Out of 1 to 10, my happiness is {}&quot;, happiness_level);
+    println!("Out of 1 to 10, my happiness is {}", happiness_level);
 }</code></pre></pre>
 <p>Parts of an <code>enum</code> can also be turned into an integer. That's because Rust gives each arm of an <code>enum</code> a number that starts with 0 for its own use. You can do things with it if your enum doesn't have any other data in it.</p>
 <pre><pre class="playground"><code class="language-rust">enum Season {
@@ -302,7 +302,7 @@ fn main() {
     use Season::*;
     let four_seasons = vec![Spring, Summer, Autumn, Winter];
     for season in four_seasons {
-        println!(&quot;{}&quot;, season as u32);
+        println!("{}", season as u32);
     }
 }</code></pre></pre>
 <p>This prints:</p>
@@ -325,12 +325,12 @@ fn main() {
     let starvec = vec![BrownDwarf, RedDwarf, YellowStar, RedGiant];
     for star in starvec {
         match star as u32 {
-            size if size &lt;= 80 =&gt; println!(&quot;Not the biggest star.&quot;), // Remember: size doesn't mean anything. It's just a name we chose so we can print it
-            size if size &gt;= 80 =&gt; println!(&quot;This is a good-sized star.&quot;),
-            _ =&gt; println!(&quot;That star is pretty big!&quot;),
+            size if size &lt;= 80 =&gt; println!("Not the biggest star."), // Remember: size doesn't mean anything. It's just a name we chose so we can print it
+            size if size &gt;= 80 =&gt; println!("This is a good-sized star."),
+            _ =&gt; println!("That star is pretty big!"),
         }
     }
-    println!(&quot;What about DeadStar? It's the number {}.&quot;, DeadStar as u32);
+    println!("What about DeadStar? It's the number {}.", DeadStar as u32);
 }</code></pre></pre>
 <p>This prints:</p>
 <pre><code class="language-text">Not the biggest star.
@@ -370,8 +370,8 @@ fn main() {
 
     for item in my_vec {
         match item {
-            Number::U32(number) =&gt; println!(&quot;It's a u32 with the value {}&quot;, number),
-            Number::I32(number) =&gt; println!(&quot;It's an i32 with the value {}&quot;, number),
+            Number::U32(number) =&gt; println!("It's a u32 with the value {}", number),
+            Number::I32(number) =&gt; println!("It's an i32 with the value {}", number),
         }
     }
 }</code></pre></pre>
