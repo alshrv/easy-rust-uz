@@ -175,80 +175,80 @@
                     <main>
                         <h2 id="tur-interfacelari"><a class="header" href="#tur-interfacelari">Tur interfacelari</a></h2>
 <p><strong><a href="https://youtu.be/q1D2vpy3kEI">Bu bobni YouTubeda tomosha qiling</a></strong></p>
-<p>Type inference means that if you don't tell the compiler the type, but it can decide by itself, it will decide. The compiler always needs to know the type of the variables, but you don’t always need to tell it. Actually, usually you don't need to tell it. For example, for <code>let my_number = 8</code>, <code>my_number</code> will be an <code>i32</code>. That is because the compiler chooses i32 for integers if you don't tell it. But if you say <code>let my_number: u8 = 8</code>, it will make <code>my_number</code> a <code>u8</code>, because you told it <code>u8</code>.</p>
-<p>So usually the compiler can guess. But sometimes you need to tell it, for two reasons:</p>
+<p>Tur inference shuni anglatadiki agar siz kompilerga o'zgaruvchi qanday turda ekanligini aytmasangiz, uning o'zi qanday tur ekanligiga qaror qabul qiladi. Compiler har doim o'zgaruvchi qanday turda ekanligini bilishi lozim, ammo siz uni har doim aytib o'tishingiz shart emas. Aslida, odatda siz aytishingiz kerak emas. Misol uchun, <code>let my_number = 8</code>, <code>my_number</code> uchun <code>i32</code> tanlanadi. Chunki compiler raqamlar uchun <code>i32</code> turini tanlaydi agar siz aytib o'tmasangiz. Lekin agar siz <code>let my_number: u8 = 8</code> yozsangiz u <code>u8</code> bo'ladi, chunki siz <code>u8</code> deb aytdingiz.</p>
+<p>Shunday qilib compiler odatda taxmin qiladi. Lekin bir xilda siz aytishingiz shart bo'ladi, buning uchun 2 sabab bor:</p>
 <ol>
-<li>You are doing something very complex and the compiler doesn't know the type you want.</li>
-<li>You want a different type (for example, you want an <code>i128</code>, not an <code>i32</code>).</li>
+<li>Siz juda ham murakkab narsa qilayotgan bo'lsangiz va compiler sizga kerakli tur qaysi ekanligini bilmasa.</li>
+<li>Siz boshqa turni xohlasangiz (misol uchun, siz <code>i128</code> bo'lishini xohlasangiz, <code>i32</code> emas).</li>
 </ol>
-<p>To specify a type, add a colon after the variable name.</p>
+<p>Turni belgilash uchun, o'zgaruvchidan so'ng ikki nuqta qoying.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let small_number: u8 = 10;
 }</code></pre></pre>
-<p>For numbers, you can say the type after the number. You don't need a space - just type it right after the number.</p>
+<p>Raqamlar uchun, siz raqamdan so'ng turni aytishingiz mumkin. Sizga bosh joylar kerak emas - shunchaki raqamdan keyin turni yozing.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let small_number = 10u8; // 10u8 = 10 of type u8
+    let small_number = 10u8; // 10u8 = 10 ning turi bu u8
 }</code></pre></pre>
-<p>You can also add <code>_</code> if you want to make the number easy to read.</p>
+<p>Siz yana yaxshi o'qilishi uchun <code>_</code> qoyishingiz mumkin.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let small_number = 10_u8; // This is easier to read
-    let big_number = 100_000_000_i32; // 100 million is easy to read with _
+    let small_number = 10_u8; // Bu o'qish uchun osonroq
+    let big_number = 100_000_000_i32; // 100 million _ bilan o'qish osonroq.
 }</code></pre></pre>
-<p>The <code>_</code> does not change the number. It is only to make it easy for you to read. And it doesn't matter how many <code>_</code> you use:</p>
+<p><code>_</code> raqamga hech qanday ta'sir qilmaydi. Bu shunchaki siz o'qishingiz uchun osonroq qilib beradi holos. Siz qancha <code>_</code> ishlatishingizning ahamiyati yo'q:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let number = 0________u8;
     let number2 = 1___6______2____4______i32;
     println!("{}, {}", number, number2);
 }</code></pre></pre>
-<p>This prints <code>0, 1624</code>.</p>
+<p><code>0, 1624</code> degan javoblar ekranga chiqadi.</p>
 <h3 id="floatlar"><a class="header" href="#floatlar">Floatlar</a></h3>
-<p>Floats are numbers with decimal points. 5.5 is a float, and 6 is an integer. 5.0 is also a float, and even 5. is a float.</p>
+<p>Float - bu kasr sonlar. 5.5 bu float, va 6 esa integer. 5.0 ham float, hattoki 5. ham float.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_float = 5.; // Rust sees . and knows that it is a float
+    let my_float = 5.; // Rust . ko'rishi bilan float deb qabul qiladi
 }</code></pre></pre>
-<p>But the types are not called <code>float</code>, they are called <code>f32</code> and <code>f64</code>. It is the same as integers: the number after <code>f</code> shows the number of bits. If you don't write the type, Rust will choose <code>f64</code>.</p>
-<p>Of course, only floats of the same type can be used together. So you can't add an <code>f32</code> to an <code>f64</code>.</p>
+<p>Ammo ular <code>float</code> deb atalmaydi, ular <code>f32</code> va <code>f64</code> deb ataladi. Ular integerlar bilan bir xil: <code>f</code>dan keyingi raqamlar necha bitlarni ifodalaydi. Agar siz turni yozmasangiz, Rust <code>f64</code>ni tanlaydi.</p>
+<p>Albatta, faqat bir xil turdagi floatlarni birgalikda ishlatish mumkin. Shunday qilib siz <code>f32</code>ni <code>f64</code>ga qo'sha olmaysiz.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_float: f64 = 5.0; // This is an f64
-    let my_other_float: f32 = 8.5; // This is an f32
+    let my_float: f64 = 5.0; // Bu f64 turidagi float
+    let my_other_float: f32 = 8.5; // Bu f32 turidagi float
 
     let third_float = my_float + my_other_float; // ⚠️
 }</code></pre></pre>
-<p>When you try to run this, Rust will say:</p>
+<p>Qachonki siz buni ishga tushirmoqchi bo'lganingizda, Rust shunday deydi:</p>
 <pre><code class="language-text">error[E0308]: mismatched types
  --&gt; src\main.rs:5:34
   |
 5 |     let third_float = my_float + my_other_float;
   |                                  ^^^^^^^^^^^^^^ expected `f64`, found `f32`
 </code></pre>
-<p>The compiler writes "expected (type), found (type)" when you use the wrong type. It reads your code like this:</p>
+<p>Compiler "expected (type), found (type)" (kutilgandi (tur), topildi (tur)) deb yozadi qachonki siz xato turni ishlatmoqchi bo'lganingizda. U kodni shunday o'qiydi:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_float: f64 = 5.0; // The compiler sees an f64
-    let my_other_float: f32 = 8.5; // The compiler sees an f32. It is a different type.
-    let third_float = my_float + // You want to add my_float to something, so it must be an f64 plus another f64. Now it expects an f64...
-    let third_float = my_float + my_other_float;  // ⚠️ but it found an f32. It can't add them.
+    let my_float: f64 = 5.0; // Compiler f64 ni ko'radi
+    let my_other_float: f32 = 8.5; // Compiler f32 ni ko'radi. Bu boshqa tur.
+    let third_float = my_float + // Siz my_float ni nimagadur qoshmoqchisiz, shunday uchun u `f64` va boshqa f64 bo'lishi kerak. Hozir u f64 ni kutadi...
+    let third_float = my_float + my_other_float;  // ⚠️ ammo u f32 topdi . u unga qosha olmaydi.
 }</code></pre></pre>
-<p>So when you see "expected (type), found (type)", you must find why the compiler expected a different type.</p>
-<p>Of course, with simple numbers it is easy to fix. You can cast the <code>f32</code> to an <code>f64</code> with <code>as</code>:</p>
+<p>Shunday qilib "expected (type), found (type)" ko'rganingizda, compiler nima uchun boshqa turni kutganini topishingiz kerak.</p>
+<p>Albatta, uning oddiy raqamlar bilan to'girlash mumkin. Siz <code>f32</code>ni <code>f64</code>ga <code>as</code> cast qilishingiz mumkin:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_float: f64 = 5.0;
     let my_other_float: f32 = 8.5;
 
-    let third_float = my_float + my_other_float as f64; // my_other_float as f64 = use my_other_float like an f64
+    let third_float = my_float + my_other_float as f64; // my_other_float as f64 =  my_other_float ni f64 dek foydalanish
 }</code></pre></pre>
-<p>Or even more simply, remove the type declarations. ("to declare a type" = "to tell Rust to use the type") Rust will choose types that can add together.</p>
+<p>Yoki oddiyroq, turdagi dekloratsiyani olib tashlang. ("turni elon qilish" = "Rustga turni ishlatishni aytish") Rust qo'shilishi mumkin bo'lgan turni tanlaydi.</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
-    let my_float = 5.0; // Rust will choose f64
-    let my_other_float = 8.5; // Here again it will choose f64
+    let my_float = 5.0; // Rust f64 ni tanlaydi
+    let my_other_float = 8.5; // Bu yerda yana f64 ni tanlaydi
 
     let third_float = my_float + my_other_float;
 }</code></pre></pre>
-<p>The Rust compiler is smart and will not choose f64 if you need f32:</p>
+<p>Rust compiler aqilli u hech qachon f64ni tanlamaydi agar sizga f32 kerak bo'lsa:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let my_float: f32 = 5.0;
-    let my_other_float = 8.5; // Usually Rust would choose f64,
+    let my_other_float = 8.5; // odatda Rust f64 ni tanlaydi,
 
-    let third_float = my_float + my_other_float; // but now it knows that you need to add it to an f32. So it chooses f32 for my_other_float too
+    let third_float = my_float + my_other_float; // lekin hozir u biladiki siz if32 ga qoshish kerakligini biladi. Shuning uchun u my_other_float uchun ham f32 ni tanlaydi
 }</code></pre></pre>
 
                     </main>
