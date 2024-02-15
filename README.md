@@ -380,7 +380,7 @@ Slice bu 6 byte va 6ta belgi..
 Slice2 bu 7 byte lekin faqatgina 3ta belgi.
 ```
 
-## Tur interfacelari
+## Tur inference
 **[Bu bobni YouTubeda tomosha qiling](https://youtu.be/q1D2vpy3kEI)**
 
 Tur inference shuni anglatadiki agar siz kompilerga o'zgaruvchi qanday turda ekanligini aytmasangiz, uning o'zi qanday tur ekanligiga qaror qabul qiladi. Compiler har doim o'zgaruvchi qanday turda ekanligini bilishi lozim, ammo siz uni har doim aytib o'tishingiz shart emas. Aslida, odatda siz aytishingiz kerak emas. Misol uchun, `let my_number = 8`, `my_number` uchun `i32` tanlanadi. Chunki compiler raqamlar uchun `i32` turini tanlaydi agar siz aytib o'tmasangiz. Lekin agar siz `let my_number: u8 = 8` yozsangiz u `u8` bo'ladi, chunki siz `u8` deb aytdingiz.
