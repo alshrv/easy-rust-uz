@@ -383,14 +383,14 @@ Slice2 bu 7 byte lekin faqatgina 3ta belgi.
 ## Tur interfacelari
 **[Bu bobni YouTubeda tomosha qiling](https://youtu.be/q1D2vpy3kEI)**
 
-Type inference means that if you don't tell the compiler the type, but it can decide by itself, it will decide. The compiler always needs to know the type of the variables, but you don’t always need to tell it. Actually, usually you don't need to tell it. For example, for `let my_number = 8`, `my_number` will be an `i32`. That is because the compiler chooses i32 for integers if you don't tell it. But if you say `let my_number: u8 = 8`, it will make `my_number` a `u8`, because you told it `u8`.
+Tur inference shuni anglatadiki agar siz kompilerga o'zgaruvchi qanday turda ekanligini aytmasangiz, uning o'zi qanday tur ekanligiga qaror qabul qiladi. Compiler har doim o'zgaruvchi qanday turda ekanligini bilishi lozim, ammo siz uni har doim aytib o'tishingiz shart emas. Aslida, odatda siz aytishingiz kerak emas. Misol uchun, `let my_number = 8`, `my_number` uchun `i32` tanlanadi. Chunki compiler raqamlar uchun `i32` turini tanlaydi agar siz aytib o'tmasangiz. Lekin agar siz `let my_number: u8 = 8` yozsangiz u `u8` bo'ladi, chunki siz `u8` deb aytdingiz.
 
-So usually the compiler can guess. But sometimes you need to tell it, for two reasons:
+Shunday qilib compiler odatda taxmin qiladi. Lekin bir xilda siz aytishingiz shart bo'ladi, buning uchun 2 sabab bor:
 
-1) You are doing something very complex and the compiler doesn't know the type you want.
-2) You want a different type (for example, you want an `i128`, not an `i32`).
+1) Siz juda ham murakkab narsa qilayotgan bo'lsangiz va compiler sizga kerakli tur qaysi ekanligini bilmasa.
+2) Siz boshqa turni xohlasangiz (misol uchun, siz `i128` bo'lishini xohlasangiz, `i32` emas).
 
-To specify a type, add a colon after the variable name.
+Turni belgilash uchun, o'zgaruvchidan so'ng ikki nuqta qoying.
 
 ```rust
 fn main() {
@@ -398,24 +398,24 @@ fn main() {
 }
 ```
 
-For numbers, you can say the type after the number. You don't need a space - just type it right after the number.
+Raqamlar uchun, siz raqamdan so'ng turni aytishingiz mumkin. Sizga bosh joylar kerak emas - shunchaki raqamdan keyin turni yozing.
 
 ```rust
 fn main() {
-    let small_number = 10u8; // 10u8 = 10 of type u8
+    let small_number = 10u8; // 10u8 = 10 ning turi bu u8
 }
 ```
 
-You can also add `_` if you want to make the number easy to read.
+Siz yana yaxshi o'qilishi uchun `_` qoyishingiz mumkin.
 
 ```rust
 fn main() {
-    let small_number = 10_u8; // This is easier to read
-    let big_number = 100_000_000_i32; // 100 million is easy to read with _
+    let small_number = 10_u8; // Bu o'qish uchun osonroq
+    let big_number = 100_000_000_i32; // 100 million _ bilan o'qish osonroq.
 }
 ```
 
-The `_` does not change the number. It is only to make it easy for you to read. And it doesn't matter how many `_` you use:
+`_` raqamga hech qanday ta'sir qilmaydi. Bu shunchaki siz o'qishingiz uchun osonroq qilib beradi holos. Siz qancha `_` ishlatishingizning ahamiyati yo'q:
 
 ```rust
 fn main() {
@@ -425,32 +425,32 @@ fn main() {
 }
 ```
 
-This prints `0, 1624`.
+`0, 1624` degan javoblar ekranga chiqadi.
 
 ### Floatlar
 
-Floats are numbers with decimal points. 5.5 is a float, and 6 is an integer. 5.0 is also a float, and even 5. is a float.
+Float - bu kasr sonlar. 5.5 bu float, va 6 esa integer. 5.0 ham float, hattoki 5. ham float.
 
 ```rust
 fn main() {
-    let my_float = 5.; // Rust sees . and knows that it is a float
+    let my_float = 5.; // Rust . ko'rishi bilan float deb qabul qiladi
 }
 ```
 
-But the types are not called `float`, they are called `f32` and `f64`. It is the same as integers: the number after `f` shows the number of bits. If you don't write the type, Rust will choose `f64`.
+Ammo ular `float` deb atalmaydi, ular `f32` va `f64` deb ataladi. Ular integerlar bilan bir xil: `f`dan keyingi raqamlar necha bitlarni ifodalaydi. Agar siz turni yozmasangiz, Rust `f64`ni tanlaydi.
 
-Of course, only floats of the same type can be used together. So you can't add an `f32` to an `f64`.
+Albatta, faqat bir xil turdagi floatlarni birgalikda ishlatish mumkin. Shunday qilib siz `f32`ni `f64`ga qo'sha olmaysiz.
 
 ```rust
 fn main() {
-    let my_float: f64 = 5.0; // This is an f64
-    let my_other_float: f32 = 8.5; // This is an f32
+    let my_float: f64 = 5.0; // Bu f64 turidagi float
+    let my_other_float: f32 = 8.5; // Bu f32 turidagi float
 
     let third_float = my_float + my_other_float; // ⚠️
 }
 ```
 
-When you try to run this, Rust will say:
+Qachonki siz buni ishga tushirmoqchi bo'lganingizda, Rust shunday deydi:
 
 ```text
 error[E0308]: mismatched types
@@ -460,49 +460,49 @@ error[E0308]: mismatched types
   |                                  ^^^^^^^^^^^^^^ expected `f64`, found `f32`
 ```
 
-The compiler writes "expected (type), found (type)" when you use the wrong type. It reads your code like this:
+Compiler "expected (type), found (type)" (kutilgandi (tur), topildi (tur)) deb yozadi qachonki siz xato turni ishlatmoqchi bo'lganingizda. U kodni shunday o'qiydi:
 
 ```rust
 fn main() {
-    let my_float: f64 = 5.0; // The compiler sees an f64
-    let my_other_float: f32 = 8.5; // The compiler sees an f32. It is a different type.
-    let third_float = my_float + // You want to add my_float to something, so it must be an f64 plus another f64. Now it expects an f64...
-    let third_float = my_float + my_other_float;  // ⚠️ but it found an f32. It can't add them.
+    let my_float: f64 = 5.0; // Compiler f64 ni ko'radi
+    let my_other_float: f32 = 8.5; // Compiler f32 ni ko'radi. Bu boshqa tur.
+    let third_float = my_float + // Siz my_float ni nimagadur qoshmoqchisiz, shunday uchun u `f64` va boshqa f64 bo'lishi kerak. Hozir u f64 ni kutadi...
+    let third_float = my_float + my_other_float;  // ⚠️ ammo u f32 topdi . u unga qosha olmaydi.
 }
 ```
 
-So when you see "expected (type), found (type)", you must find why the compiler expected a different type.
+Shunday qilib "expected (type), found (type)" ko'rganingizda, compiler nima uchun boshqa turni kutganini topishingiz kerak.
 
-Of course, with simple numbers it is easy to fix. You can cast the `f32` to an `f64` with `as`:
+Albatta, uning oddiy raqamlar bilan to'girlash mumkin. Siz `f32`ni `f64`ga `as` cast qilishingiz mumkin:
 
 ```rust
 fn main() {
     let my_float: f64 = 5.0;
     let my_other_float: f32 = 8.5;
 
-    let third_float = my_float + my_other_float as f64; // my_other_float as f64 = use my_other_float like an f64
+    let third_float = my_float + my_other_float as f64; // my_other_float as f64 =  my_other_float ni f64 dek foydalanish
 }
 ```
 
-Or even more simply, remove the type declarations. ("to declare a type" = "to tell Rust to use the type") Rust will choose types that can add together.
+Yoki oddiyroq, turdagi dekloratsiyani olib tashlang. ("turni elon qilish" = "Rustga turni ishlatishni aytish") Rust qo'shilishi mumkin bo'lgan turni tanlaydi.
 
 ```rust
 fn main() {
-    let my_float = 5.0; // Rust will choose f64
-    let my_other_float = 8.5; // Here again it will choose f64
+    let my_float = 5.0; // Rust f64 ni tanlaydi
+    let my_other_float = 8.5; // Bu yerda yana f64 ni tanlaydi
 
     let third_float = my_float + my_other_float;
 }
 ```
 
-The Rust compiler is smart and will not choose f64 if you need f32:
+Rust compiler aqilli u hech qachon f64ni tanlamaydi agar sizga f32 kerak bo'lsa:
 
 ```rust
 fn main() {
     let my_float: f32 = 5.0;
-    let my_other_float = 8.5; // Usually Rust would choose f64,
+    let my_other_float = 8.5; // odatda Rust f64 ni tanlaydi,
 
-    let third_float = my_float + my_other_float; // but now it knows that you need to add it to an f32. So it chooses f32 for my_other_float too
+    let third_float = my_float + my_other_float; // lekin hozir u biladiki siz if32 ga qoshish kerakligini biladi. Shuning uchun u my_other_float uchun ham f32 ni tanlaydi
 }
 ```
 
